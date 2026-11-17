@@ -1,31 +1,54 @@
-# 统一企业数据模型（正式资源4.0.0）
+# 六套业务数据集及任务规范
 
-本文件为唯一有效的业务数据库规范。原课堂小型夹具不改。实际以对应数据库 schema.json 和 DATA_DICTIONARY.md 为准。
+下列为开发建议数据字典，是将历史图中不一致字段统一后的基线。正式种子尚未创建。所有表/字段使用英文小写蛇形命名；业务展示中文名。数据为虚构，不使用真实客户数据。金额以马币为例、DECIMAL(12,2)；本地执行需验证定点或舍入语义。整数主键，外键类型一致；日期 ISO 格式，时间固定时区。数据生成用固定随机种子，涵盖边界、空值、重复非主键、无匹配及并列，主外键有效，保留独立测试夹具。建议每库核心表几十到几百行，交易明细数百至数千行，手机性能实测调整，不预设固定行数。
 
-## 企业与口径
-虚构马来西亚多渠道零售企业，历史2023-01-01至2025-12-31，所有金额为马币整数分（`_cents`），展示除100；汇率不涉及。日期为日粒度，不含时区时间戳。12门店共用3配送仓，门店编号按 `(store_id-1)%3+1` 对应仓，线上从仓1发货；因此库存只能按仓库分析，不能伪造门店库存。订单有效状态 completed；退款截至2025年底追溯原订单日期，退货恢复原数量成本；毛利不是净利润。商品价格/合同成本有年度历史；库存价值用期末标准成本估算，FIFO库龄是数量假设，非实际批次会计估价。
+## 1 零售销售 retail
+- stores(store_id PK, store_name, city)
+- products(product_id PK, product_name, category, unit_cost, list_price)
+- customers(customer_id PK, customer_name, signup_date)
+- orders(order_id PK, store_id FK, customer_id FK nullable, order_date, status)
+- order_items(order_item_id PK, order_id FK, product_id FK, quantity, unit_price, discount_amount)
+关系：stores/customers→orders→order_items；products→order_items，一对多。完成订单口径 status='completed'；净销售额=quantity*unit_price-discount_amount（整行折扣），折扣不能超过金额。
+五任务：门店销售总额；类别销售表现（分组筛选）；月度销售增长率（上月为0或缺失返回NULL）；各门店销售额前三商品（明确并列使用排名或确定性前三行）；类别销售贡献率（分母全体有效销售，零分母NULL）。
 
-采购以订单行连接多批收货和发票明细；质量拒收不进入可售库存；一单一正常发票是本模拟约束，发票业务编号可重复（异常）。采购承诺、费用、付款不同，不能直接当成利润。费用账簿用于费用与银行对账，非完整总账；销售支付和供应商付款独立，不能称完整财务报表。员工历史岗位左闭右开，月薪归属当月最后在职岗位，按每月176小时和1.5倍时薪估算加班，非实际法定薪酬。营销按会话渠道归因，广告与财务分录不做强制关联。
+## 2 库存 inventory
+- products(product_id PK, product_name, category, unit_cost, reorder_level)
+- warehouses(warehouse_id PK, warehouse_name)
+- stock_snapshots(snapshot_id PK, product_id FK, warehouse_id FK, snapshot_date, quantity; 唯一组合 product/warehouse/date)
+- stock_movements(movement_id PK, product_id FK, warehouse_id FK, movement_date, movement_type, quantity, unit_cost)
+关系：products/warehouses→snapshots/movements。movement_type 为入库、销售出库、其他出库等固定枚举，quantity为正。五任务：库存积压（题目给阈值）；低库存预警（按指定日期快照）；库存周转率（指定期间销售出库成本/期初期末平均库存成本）；滞销（期间无销售出库及期末有库存）；库存金额（指定快照数量×单位成本）。
 
-## 数据与关联
-六个独立库从同一综合库复制必要的完整表及关联依赖表，主键和数据完全一致；综合库是内部执行资源，不增加第七个业务项目入口。所有表、字段、类型、索引、约束及视图见数据库目录内的数据字典。CSV 为权威结构化导出，UTF-8，首行为字段；字面 `\N` 表示 NULL，空字符串不是NULL。导入脚本在空 MySQL 8.4 库执行。
+## 3 电商 ecommerce
+- customers(customer_id PK, customer_name, signup_date, region)
+- products(product_id PK, product_name, category)
+- orders(order_id PK, customer_id FK, order_date, status)
+- order_items(order_item_id PK, order_id FK, product_id FK, quantity, unit_price, discount_amount)
+- payments(payment_id PK, order_id FK, payment_date, amount, status)
+关系：customers→orders→items/payments；products→items。避免明细及付款直接多对多相乘。五任务：客单价（有效订单净额/有效订单数）；复购率（指定窗口购买≥2次客户/至少购买1次客户）；客户消费分层（给阈值）；月度新客次月留存（首购月份 cohort，次月有效订单客户数/首购客户数）；消费排名（明确并列）。
 
-## 各库规模
-| 数据库 | 基础表 | 视图 | 行数（含共享） |
-|---|---:|---:|---:|
-| retail | 15 | 1 | 216708 |
-| inventory | 22 | 1 | 376190 |
-| ecommerce | 14 | 2 | 214956 |
-| finance | 18 | 3 | 119827 |
-| hr | 8 | 1 | 111397 |
-| procurement | 10 | 1 | 43598 |
-| enterprise | 39 | 6 | 601339 |
+## 4 财务 finance
+- accounts(account_id PK, account_name, account_type)
+- transactions(transaction_id PK, account_id FK, transaction_date, amount, direction, reference_no)
+- invoices(invoice_id PK, account_id FK, invoice_date, due_date, amount)
+- payments(payment_id PK, invoice_id FK, payment_date, amount)
+- budgets(budget_id PK, account_id FK, budget_month, budget_amount; 唯一账户月份)
+关系：accounts→transactions/invoices/budgets；invoices→payments。金额正数，方向定义借贷或收入/支出，题目明确取值；不可将发票未付同交易金额直接重复计算。五任务：费用分类汇总；收入月度增长；发票未付金额（截止日）；异常金额（给业务阈值或比较基准）；预算与实际差异（账户/月）。
 
-## 数据质量
-正式表维持主外键、非负库存、借贷平衡及合理日期；原始导入表独立保存重复参考号、日期和金额格式问题、空字符串与NULL。正式业务异常包括部分退款、拆分付款、取消订单、部分交货、拒收、超付款、重复发票业务编号、银行差异、员工调动。生成器采用固定种子20261117。
+## 5 人力资源 hr
+- departments(department_id PK, department_name)
+- employees(employee_id PK, department_id FK, employee_name, hire_date, termination_date nullable)
+- salaries(salary_id PK, employee_id FK, salary_month, base_salary, bonus; 唯一员工月份)
+- attendance(attendance_id PK, employee_id FK, attendance_date, status)
+关系：departments→employees→salaries/attendance。五任务：部门薪资排名；指定日期在职人数；期间离职率（离职数/期初期末平均人数，明确口径与零分母）；部门薪资对比；员工任职时长（固定统计日期）。员工终止日期边界明确，不按当前日期计算测试。
 
-## 分析任务
-第19章30项，第20章20项，完整业务口径及结果列见 business_tasks。六个派生库各自执行对应5项，综合库执行全部50项用于统一对照。原300题总量不变。SQLite 已真实运行，MySQL 原生待验证。
+## 6 采购 procurement
+- suppliers(supplier_id PK, supplier_name, region)
+- products(product_id PK, product_name, category)
+- purchase_orders(po_id PK, supplier_id FK, order_date, promised_date, status)
+- purchase_items(po_item_id PK, po_id FK, product_id FK, quantity_ordered, unit_price)
+- receipts(receipt_id PK, po_item_id FK, receipt_date, quantity_received)
+- supplier_invoices(invoice_id PK, po_id FK, invoice_date, amount)
+关系：suppliers→orders→items→receipts；products→items；orders→invoices。五任务：采购成本（有效订单）；供应商履约率（按订单或明细，题目明确）；订购与累计收货差异；交付延误（到齐日期或截至日，未到齐标明）；采购发票核对（订单金额对累计发票，避免连接膨胀）。
 
-## 实际接入
-读取 `CONTENT/question_resource/databases/manifest.json`，路径相对于 `CONTENT/question_resource/`；七个 SQLite 种子仅此一份。数据字典、schema.json 与 MySQL 脚本在各库目录。企业 CSV 与任务档案见 `CONTENT/enterprise_reference/`，仅开发审计使用。BP10、BP44等以审核后题库为准，详见 `CONTENT/BUSINESS_REVIEW.md`。六库入口不变，综合库仅用于第20章及跨域执行，不能作为第七项目。单库按需载入，释放连接与内存；离线就绪前须缓存全部核心种子。
+## 字典/生成/维护
+每表补齐字段类型、长度、可空、默认、唯一/检查约束、索引、主外键、单位、枚举及中文解释；图中字段不一致以此为准。所有任务给定统计截止日、状态定义与边界，数据字典与应用真实 schema 同步生成。生成 MySQL DDL/种子及等价 SQLite 版本；数据行数、项目表数量、图中关系从元数据读取。禁止破坏内置模板。课程小型演示可有独立 fixture（不是新增第7套项目），课堂/练习数据与实验室个人库隔离。所有项目任务以多组夹具和双引擎参考查询验证后发布。

@@ -1,7 +1,7 @@
 # 题库生成及判题内容规范
 
 ## 题量（同一题库的不同维度）
-CURRICULUM各章题量合计300；第19章30个实战任务包含在内。题型：选择30、代码填空35、独立编写120、代码纠错30、结果预测25、业务情景60。难度：入门60、简单90、中等90、困难45、挑战15。第19章30题与第20章20题均归入业务情景60；前18章另10道业务情景题。保留现有分配，不重新生成。
+CURRICULUM各章题量合计300；第19章30个实战任务包含在内。题型：选择30、代码填空35、独立编写120、代码纠错30、结果预测25、业务情景60。难度：入门60、简单90、中等90、困难45、挑战15。业务项目的30个任务归入业务情景60；其余30为普通情景练习。先建立三维分配表校验每一维边际总数，再生成实际内容；不重复计数。
 
 ## 数据结构
 每题稳定 id、chapterId、knowledgePointIds、type、difficulty、title、context、requirements、datasetId或专用fixtureId、schemaVersion、initialCode、options（选择）、acceptedBlanks（填空，说明等价形式）、expectedOutput、referenceSolutions、hints（三层，非编程可缩减）、explanation、commonErrors、testFixtureIds、orderPolicy、columnPolicy、numericTolerance、requiredAstFeatures（可选）、supportStatus、interviewTag、projectId/taskId（可选）、contentVersion。明确输入表、输出列/别名/顺序、排序/并列、NULL与精度、计量单位、时间范围、是否含边界。不要求题目未给的条件。
@@ -17,5 +17,15 @@ CURRICULUM各章题量合计300；第19章30个实战任务包含在内。题型
 ## 三层提示及反馈
 第一级提示思路不送答案；第二级提示语法/关系；第三级给局部结构。答案解析说明为什么、执行过程、易错区及可选替代解。提交后展示通过/未通过、实际结果、预期结果/可安全公开的差异、影响字段，中文提示+原始错误。使用提示、查看答案、独立答对分开记。运行不正式计分。自动判题细节见 TECHNICAL。
 
-## 正式资源与验收
-读取 `CONTENT/question_resource/questions/ch01.json` 至 `ch20.json`，以实际 JSON 字段为准。q0001–q0300，BP01–BP50 对应 q0251–q0300，不重复新增。每题 testFixtures[].path 相对题库资源根，expectedOutputPath 的 #expected 是字段片段。776份夹具包括选择题答案键；270道可执行题实际运行，30道选择题按答案键。结果预测仅比较手工输入的结果，禁止提交前执行；填空补全后真实执行。企业题按数据变体在隔离副本运行。具体列、排序、容差、状态及专项约束按题目字段，不得擅改。无序结果用保留重复行的绝对容差一对一匹配，不使用舍入桶；复用验证器七项回归语义。14道专项语法或计划题需解析结构或可靠执行计划核验，不能用关键词冒充。原生MySQL与手机兼容层均未验收。见 `CONTENT/AUDIT_REPORT.md`、`CONTENT/question_resource/validation/verify_bank.py`。发布前完整复验参考解、等价解、典型错误及业务口径；不得重生成正式内容。
+## 最小验证样例（规范示例，非已完成题库）
+题：按 category 汇总 orders.sales，仅保留总额>1000的类别，输出 category,total_sales，不要求排序。公开夹具见 CURRICULUM 第07章；预期护肤品1400、日用品1500（无序）。参考：
+```sql
+SELECT category, SUM(sales) AS total_sales
+FROM orders
+GROUP BY category
+HAVING SUM(sales)>1000;
+```
+隐藏夹具示例：A 500/500（不通过阈值）、B 1000/1（通过1001）、C NULL（不通过）、D 600/600（通过1200，重复记录必计），空表。需另测正确等价子查询、错误 WHERE SUM、漏 HAVING、硬编码结果、重复行与列不符。该示例编写后仍需真实双引擎验证，不能直接标为验证通过。
+
+## 开发期生产与校验
+人工智能逐章生成JSON，人工或审查代理检查业务、语言、真正难度、重复知识目标；解析校验 schema、ID唯一、交叉引用；实际 MySQL 8.4 与离线兼容引擎跑每个可执行参考解、公开/隐藏夹具并比对语义；造一条典型错误解确保拒绝，一条可行等价解确保接受（适用时）。理论题用事实审查，不伪造执行结果。每道题保存验证记录：运行环境版本、fixture哈希、参考解、结果/状态、日期；发布前失败数必须为0，理论题正确标记。不得运行时调用AI、不创建自定义题目功能。新增题目随版本发布且稳定ID，保留原进度。
