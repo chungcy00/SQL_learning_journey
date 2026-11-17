@@ -1,0 +1,78 @@
+{
+  "projectId": "procurement",
+  "title": "供应商准时、完整交付与质量",
+  "context": "采购经理比较供应商2025年到期采购行表现。",
+  "requirements": "按2025年承诺到期日且非取消采购行；准时足量=截止承诺日接受数量≥订购量；完整=截至年底接受数量≥订购量；质量合格率=接受件数/实际收货件数；输出供应商及分母。",
+  "grain": "供应商",
+  "commonError": "有任意一批准时到货并不等于整行准时足量。",
+  "executionSteps": [
+    "按采购行预聚合收货",
+    "筛已到期",
+    "分别计算两种件数履约和质量指标"
+  ],
+  "difficulty": "困难",
+  "mysqlSql": "SELECT supplier_id,COUNT(*) due_lines,ROUND(100.0*SUM(CASE WHEN on_time>=quantity_ordered THEN 1 ELSE 0 END)/COUNT(*),2) ontime_pct,ROUND(100.0*SUM(CASE WHEN accepted>=quantity_ordered THEN 1 ELSE 0 END)/COUNT(*),2) complete_pct,ROUND(100.0*SUM(accepted)/NULLIF(SUM(received),0),2) quality_pct FROM v_po_lines WHERE promised_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY supplier_id ORDER BY supplier_id",
+  "sqliteSql": "SELECT supplier_id,COUNT(*) due_lines,ROUND(100.0*SUM(CASE WHEN on_time>=quantity_ordered THEN 1 ELSE 0 END)/COUNT(*),2) ontime_pct,ROUND(100.0*SUM(CASE WHEN accepted>=quantity_ordered THEN 1 ELSE 0 END)/COUNT(*),2) complete_pct,ROUND(100.0*SUM(accepted)/NULLIF(SUM(received),0),2) quality_pct FROM v_po_lines WHERE promised_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY supplier_id ORDER BY supplier_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "supplier_id",
+    "due_lines",
+    "ontime_pct",
+    "complete_pct",
+    "quality_pct"
+  ],
+  "id": "BP27",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-57"
+  ],
+  "datasetId": "procurement-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP27.json",
+  "expectedRowCount": 60,
+  "expectedColumns": [
+    "supplier_id",
+    "due_lines",
+    "ontime_pct",
+    "complete_pct",
+    "quality_pct"
+  ],
+  "sourceTables": [
+    "v_po_lines"
+  ],
+  "dependencyTables": [
+    "categories",
+    "goods_receipts",
+    "products",
+    "purchase_order_items",
+    "purchase_orders",
+    "supplier_contracts",
+    "supplier_invoice_items",
+    "supplier_invoices",
+    "suppliers",
+    "v_po_lines",
+    "warehouses"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "SELECT supplier_id,COUNT(*) due_lines,ROUND(100.0*SUM(CASE WHEN on_time>=quantity_ordered THEN 1 ELSE 0 END)/COUNT(*),2) ontime_pct,ROUND(100.0*SUM(CASE WHEN accepted>=quantity_ordered THEN 1 ELSE 0 END)/COUNT(*),2) complete_pct,ROUND(100.0*SUM(accepted)/NULLIF(SUM(received),0),2) quality_pct FROM v_po_lines WHERE promised_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY supplier_id ORDER BY supplier_id",
+      "sqliteSql": "SELECT supplier_id,COUNT(*) due_lines,ROUND(100.0*SUM(CASE WHEN on_time>=quantity_ordered THEN 1 ELSE 0 END)/COUNT(*),2) ontime_pct,ROUND(100.0*SUM(CASE WHEN accepted>=quantity_ordered THEN 1 ELSE 0 END)/COUNT(*),2) complete_pct,ROUND(100.0*SUM(accepted)/NULLIF(SUM(received),0),2) quality_pct FROM v_po_lines WHERE promised_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY supplier_id ORDER BY supplier_id"
+    }
+  ],
+  "hints": [
+    "按采购行预聚合收货",
+    "按采购行预聚合收货；筛已到期",
+    "重点核对输出粒度：供应商"
+  ],
+  "explanation": "按采购行预聚合收货；筛已到期；分别计算两种件数履约和质量指标。有任意一批准时到货并不等于整行准时足量。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 28.1
+}

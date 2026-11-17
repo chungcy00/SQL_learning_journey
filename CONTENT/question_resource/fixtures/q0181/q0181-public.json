@@ -1,0 +1,75 @@
+{
+  "visibility": "public",
+  "variant": "public",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "new_customers",
+      "columns": [
+        {
+          "name": "customer_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ]
+      ]
+    },
+    {
+      "name": "old_customers",
+      "columns": [
+        {
+          "name": "customer_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ]
+    }
+  ],
+  "id": "q0181-public",
+  "questionId": "q0181",
+  "datasetId": "q0181-lesson",
+  "expected": {
+    "columns": [
+      "n"
+    ],
+    "rows": [
+      [
+        4
+      ]
+    ]
+  },
+  "orderPolicy": "unordered_multiset",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

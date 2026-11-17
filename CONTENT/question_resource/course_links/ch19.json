@@ -1,0 +1,525 @@
+{
+  "chapterId": "ch19",
+  "contentVersion": "3.0.0",
+  "knowledgePointUpdates": [
+    {
+      "id": "kp19-01",
+      "relatedQuestionIds": [
+        "q0251",
+        "q0254",
+        "q0288",
+        "q0296"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-02",
+      "relatedQuestionIds": [
+        "q0257",
+        "q0284"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-03",
+      "relatedQuestionIds": [
+        "q0261",
+        "q0263"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-04",
+      "relatedQuestionIds": [
+        "q0267",
+        "q0268",
+        "q0289",
+        "q0291",
+        "q0293"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-05",
+      "relatedQuestionIds": [
+        "q0271",
+        "q0297",
+        "q0298"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-06",
+      "relatedQuestionIds": [
+        "q0278",
+        "q0286"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-07",
+      "relatedQuestionIds": [
+        "q0253",
+        "q0282"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-08",
+      "relatedQuestionIds": [
+        "q0252"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-09",
+      "relatedQuestionIds": [
+        "q0253",
+        "q0255"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-10",
+      "relatedQuestionIds": [
+        "q0282",
+        "q0284"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-11",
+      "relatedQuestionIds": [
+        "q0256",
+        "q0259",
+        "q0281"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-12",
+      "relatedQuestionIds": [
+        "q0258",
+        "q0260",
+        "q0281",
+        "q0283"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-13",
+      "relatedQuestionIds": [
+        "q0256",
+        "q0260"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-14",
+      "relatedQuestionIds": [
+        "q0256",
+        "q0257",
+        "q0259"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-15",
+      "relatedQuestionIds": [
+        "q0261",
+        "q0264",
+        "q0294"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-16",
+      "relatedQuestionIds": [
+        "q0262",
+        "q0265"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-17",
+      "relatedQuestionIds": [
+        "q0263",
+        "q0295"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-18",
+      "relatedQuestionIds": [
+        "q0262",
+        "q0265"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-19",
+      "relatedQuestionIds": [
+        "q0266",
+        "q0269"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-20",
+      "relatedQuestionIds": [
+        "q0252",
+        "q0290",
+        "q0299"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-21",
+      "relatedQuestionIds": [
+        "q0270"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-22",
+      "relatedQuestionIds": [
+        "q0266"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-23",
+      "relatedQuestionIds": [
+        "q0273"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-24",
+      "relatedQuestionIds": [
+        "q0272"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-25",
+      "relatedQuestionIds": [
+        "q0273",
+        "q0274"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-26",
+      "relatedQuestionIds": [
+        "q0275"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-27",
+      "relatedQuestionIds": [
+        "q0276",
+        "q0279",
+        "q0291"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-28",
+      "relatedQuestionIds": [
+        "q0277",
+        "q0280",
+        "q0293"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-29",
+      "relatedQuestionIds": [
+        "q0277",
+        "q0285",
+        "q0287"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-30",
+      "relatedQuestionIds": [
+        "q0278",
+        "q0292"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp19-31",
+      "relatedQuestionIds": [
+        "q0251"
+      ],
+      "primaryQuestionIds": [
+        "q0251"
+      ]
+    },
+    {
+      "id": "kp19-32",
+      "relatedQuestionIds": [
+        "q0252"
+      ],
+      "primaryQuestionIds": [
+        "q0252"
+      ]
+    },
+    {
+      "id": "kp19-33",
+      "relatedQuestionIds": [
+        "q0253"
+      ],
+      "primaryQuestionIds": [
+        "q0253"
+      ]
+    },
+    {
+      "id": "kp19-34",
+      "relatedQuestionIds": [
+        "q0254"
+      ],
+      "primaryQuestionIds": [
+        "q0254"
+      ]
+    },
+    {
+      "id": "kp19-35",
+      "relatedQuestionIds": [
+        "q0255"
+      ],
+      "primaryQuestionIds": [
+        "q0255"
+      ]
+    },
+    {
+      "id": "kp19-36",
+      "relatedQuestionIds": [
+        "q0256"
+      ],
+      "primaryQuestionIds": [
+        "q0256"
+      ]
+    },
+    {
+      "id": "kp19-37",
+      "relatedQuestionIds": [
+        "q0257"
+      ],
+      "primaryQuestionIds": [
+        "q0257"
+      ]
+    },
+    {
+      "id": "kp19-38",
+      "relatedQuestionIds": [
+        "q0258"
+      ],
+      "primaryQuestionIds": [
+        "q0258"
+      ]
+    },
+    {
+      "id": "kp19-39",
+      "relatedQuestionIds": [
+        "q0259"
+      ],
+      "primaryQuestionIds": [
+        "q0259"
+      ]
+    },
+    {
+      "id": "kp19-40",
+      "relatedQuestionIds": [
+        "q0260"
+      ],
+      "primaryQuestionIds": [
+        "q0260"
+      ]
+    },
+    {
+      "id": "kp19-41",
+      "relatedQuestionIds": [
+        "q0261"
+      ],
+      "primaryQuestionIds": [
+        "q0261"
+      ]
+    },
+    {
+      "id": "kp19-42",
+      "relatedQuestionIds": [
+        "q0262"
+      ],
+      "primaryQuestionIds": [
+        "q0262"
+      ]
+    },
+    {
+      "id": "kp19-43",
+      "relatedQuestionIds": [
+        "q0263"
+      ],
+      "primaryQuestionIds": [
+        "q0263"
+      ]
+    },
+    {
+      "id": "kp19-44",
+      "relatedQuestionIds": [
+        "q0264"
+      ],
+      "primaryQuestionIds": [
+        "q0264"
+      ]
+    },
+    {
+      "id": "kp19-45",
+      "relatedQuestionIds": [
+        "q0265"
+      ],
+      "primaryQuestionIds": [
+        "q0265"
+      ]
+    },
+    {
+      "id": "kp19-46",
+      "relatedQuestionIds": [
+        "q0266"
+      ],
+      "primaryQuestionIds": [
+        "q0266"
+      ]
+    },
+    {
+      "id": "kp19-47",
+      "relatedQuestionIds": [
+        "q0267"
+      ],
+      "primaryQuestionIds": [
+        "q0267"
+      ]
+    },
+    {
+      "id": "kp19-48",
+      "relatedQuestionIds": [
+        "q0268"
+      ],
+      "primaryQuestionIds": [
+        "q0268"
+      ]
+    },
+    {
+      "id": "kp19-49",
+      "relatedQuestionIds": [
+        "q0269"
+      ],
+      "primaryQuestionIds": [
+        "q0269"
+      ]
+    },
+    {
+      "id": "kp19-50",
+      "relatedQuestionIds": [
+        "q0270"
+      ],
+      "primaryQuestionIds": [
+        "q0270"
+      ]
+    },
+    {
+      "id": "kp19-51",
+      "relatedQuestionIds": [
+        "q0271"
+      ],
+      "primaryQuestionIds": [
+        "q0271"
+      ]
+    },
+    {
+      "id": "kp19-52",
+      "relatedQuestionIds": [
+        "q0272"
+      ],
+      "primaryQuestionIds": [
+        "q0272"
+      ]
+    },
+    {
+      "id": "kp19-53",
+      "relatedQuestionIds": [
+        "q0273"
+      ],
+      "primaryQuestionIds": [
+        "q0273"
+      ]
+    },
+    {
+      "id": "kp19-54",
+      "relatedQuestionIds": [
+        "q0274"
+      ],
+      "primaryQuestionIds": [
+        "q0274"
+      ]
+    },
+    {
+      "id": "kp19-55",
+      "relatedQuestionIds": [
+        "q0275"
+      ],
+      "primaryQuestionIds": [
+        "q0275"
+      ]
+    },
+    {
+      "id": "kp19-56",
+      "relatedQuestionIds": [
+        "q0276"
+      ],
+      "primaryQuestionIds": [
+        "q0276"
+      ]
+    },
+    {
+      "id": "kp19-57",
+      "relatedQuestionIds": [
+        "q0277"
+      ],
+      "primaryQuestionIds": [
+        "q0277"
+      ]
+    },
+    {
+      "id": "kp19-58",
+      "relatedQuestionIds": [
+        "q0278"
+      ],
+      "primaryQuestionIds": [
+        "q0278"
+      ]
+    },
+    {
+      "id": "kp19-59",
+      "relatedQuestionIds": [
+        "q0279"
+      ],
+      "primaryQuestionIds": [
+        "q0279"
+      ]
+    },
+    {
+      "id": "kp19-60",
+      "relatedQuestionIds": [
+        "q0280"
+      ],
+      "primaryQuestionIds": [
+        "q0280"
+      ]
+    }
+  ]
+}

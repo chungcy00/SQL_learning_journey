@@ -1,0 +1,3970 @@
+{
+  "chapterId": "ch19",
+  "title": "业务数据分析",
+  "count": 38,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "cards": [
+    {
+      "id": "fc0141",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-03"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0261",
+        "q0263"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "中等",
+      "front": {
+        "question": "复购率的分母是所有注册客户还是观察期内的购买客户？分子是什么？",
+        "dataNote": "口径记忆卡；不要求执行企业库查询。涉及的数值为独立教学假设。"
+      },
+      "back": {
+        "answer": "按本课程口径，分母是期间至少有一次有效购买的不同客户，分子是期间有效订单不少于2笔的不同客户。",
+        "explanation": "先按客户统计有效订单数。不要以订单明细行数充当购买次数，也别把未购买注册客户无条件纳入分母。"
+      },
+      "tags": [
+        "电商：复购率和客户粒度",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "电商：复购率和客户粒度"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0142",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-27",
+        "kp19-06",
+        "kp19-30"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-27"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp19-06",
+        "kp19-30"
+      ],
+      "relatedQuestionIds": [
+        "q0276",
+        "q0278",
+        "q0279",
+        "q0286",
+        "q0292"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "中等",
+      "front": {
+        "question": "为什么采购订单金额不能直接当成本费用或已付现金？",
+        "dataNote": "口径记忆卡；不要求执行企业库查询。涉及的数值为独立教学假设。"
+      },
+      "back": {
+        "answer": "采购订单金额代表采购承诺口径：有效采购数量×约定单价。",
+        "explanation": "订单、实际收货、发票及付款分别属于不同阶段，本企业案例不将采购承诺直接计入期间利润。"
+      },
+      "tags": [
+        "采购：订单采购成本",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "采购：订单采购成本"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0143",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-09"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-09"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0253",
+        "q0255"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "困难",
+      "front": {
+        "question": "每店取严格前三种商品，销售额并列时按商品编号决胜。回忆先排名再限行的窗口结构。",
+        "sourceTables": [
+          {
+            "name": "store_products",
+            "columns": [
+              {
+                "name": "store_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "product_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "net_cents",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                800
+              ],
+              [
+                1,
+                2,
+                800
+              ],
+              [
+                1,
+                3,
+                600
+              ],
+              [
+                1,
+                4,
+                300
+              ],
+              [
+                2,
+                1,
+                100
+              ],
+              [
+                2,
+                2,
+                200
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "独立微型教学数据，不是完整企业数据库查询结果。"
+      },
+      "back": {
+        "answer": "在每店分区内 ROW_NUMBER()，外层筛 rn<=3",
+        "explanation": "输入已是门店×商品净销售汇总，每店不足三种则如实返回。",
+        "code": "WITH r AS (SELECT store_id,product_id,ROW_NUMBER() OVER(PARTITION BY store_id ORDER BY net_cents DESC,product_id) AS rn FROM store_products) SELECT store_id,product_id FROM r WHERE rn<=3 ORDER BY store_id,rn",
+        "sqliteCode": "WITH r AS (SELECT store_id,product_id,ROW_NUMBER() OVER(PARTITION BY store_id ORDER BY net_cents DESC,product_id) AS rn FROM store_products) SELECT store_id,product_id FROM r WHERE rn<=3 ORDER BY store_id,rn",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "store_id",
+            "product_id"
+          ],
+          "rows": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              1
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "零售：各店前三畅销商品",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "c7cdb916209eb9a4b7306533e0f32b2da1c6695fde1016a4685b8f81fe0aa948",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0143-demo"
+      ],
+      "fixturePath": "fixtures/fc0143.json",
+      "referenceTopicNames": [
+        "零售：各店前三畅销商品"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0143.sql"
+    },
+    {
+      "id": "fc0144",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-19",
+        "kp19-20"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-19",
+        "kp19-20"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0252",
+        "q0266",
+        "q0269",
+        "q0290"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "中等",
+      "front": {
+        "question": "费用分类汇总与收入月度增长，需要采用相同的统计维度吗？",
+        "dataNote": "口径记忆卡；不要求执行企业库查询。涉及的数值为独立教学假设。"
+      },
+      "back": {
+        "answer": "不是。费用分类按科目和指定期间汇总；收入增长按连续月份聚合后比较上月。",
+        "explanation": "费用与收入应分别定义有效方向；先补齐月份轴再算增长，缺失与零值口径要区分。"
+      },
+      "tags": [
+        "财务：费用分类汇总",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "财务：费用分类汇总",
+        "财务：收入月度增长"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0145",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-25"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-25"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0273",
+        "q0274"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "中等",
+      "front": {
+        "question": "部门平均薪酬的分母是部门全部员工还是当期有工资记录的员工？",
+        "dataNote": "口径记忆卡；不要求执行企业库查询。涉及的数值为独立教学假设。"
+      },
+      "back": {
+        "answer": "本课程平均薪酬示例以固定月份有薪资记录的员工数为分母。",
+        "explanation": "期末人数、历史人员和有工资记录的人数并不必然一致；奖金缺失也不可默认为零，除非业务已明确。"
+      },
+      "tags": [
+        "人力资源：部门平均薪酬",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "人力资源：部门平均薪酬"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0146",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-07",
+        "kp19-10"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-07",
+        "kp19-10"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0253",
+        "q0282",
+        "q0284"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "中等",
+      "front": {
+        "question": "类别净销售贡献率＝类别净销售÷总体净销售。输入已是完整类别汇总，补齐全体窗口，保留全部类别。",
+        "code": "SELECT category_id,100.0*net_cents/NULLIF(SUM(net_cents) □,0) AS pct FROM category_sales ORDER BY category_id",
+        "sourceTables": [
+          {
+            "name": "category_sales",
+            "columns": [
+              {
+                "name": "category_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "net_cents",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                300
+              ],
+              [
+                2,
+                100
+              ],
+              [
+                3,
+                100
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "独立微型教学数据，不是完整企业数据库查询结果。"
+      },
+      "back": {
+        "answer": "OVER()",
+        "explanation": "分母来自同口径全部类别；如只展示一个类别，应在外层过滤，不能改变总体分母。",
+        "acceptedBlanks": [
+          "OVER()"
+        ],
+        "code": "SELECT category_id,100.0*net_cents/NULLIF(SUM(net_cents) OVER(),0) AS pct FROM category_sales ORDER BY category_id",
+        "sqliteCode": "SELECT category_id,100.0*net_cents/NULLIF(SUM(net_cents) OVER(),0) AS pct FROM category_sales ORDER BY category_id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "category_id",
+            "pct"
+          ],
+          "rows": [
+            [
+              1,
+              60.0
+            ],
+            [
+              2,
+              20.0
+            ],
+            [
+              3,
+              20.0
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "零售：类别销售表现",
+        "代码填空"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "93c4e2ef4068db261231802b1d59a92708a873e346df9b7b86365143a0f865f5",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0146-demo"
+      ],
+      "fixturePath": "fixtures/fc0146.json",
+      "referenceTopicNames": [
+        "零售：类别销售表现",
+        "零售：类别销售贡献率"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0146.sql"
+    },
+    {
+      "id": "fc0147",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-26"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-26"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0275"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "结果预测",
+      "difficulty": "中等",
+      "front": {
+        "question": "截至2025-12-31，任职天数按截止日或更早离职日减入职日，不含首尾额外一天。预测结果。",
+        "code": "SELECT employee_id,DATEDIFF(COALESCE(termination_date,'2025-12-31'),hire_date) AS days FROM tenure_mini ORDER BY employee_id",
+        "sourceTables": [
+          {
+            "name": "tenure_mini",
+            "columns": [
+              {
+                "name": "employee_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "hire_date",
+                "type": "TEXT"
+              },
+              {
+                "name": "termination_date",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "2025-12-01",
+                null
+              ],
+              [
+                2,
+                "2025-12-01",
+                "2025-12-11"
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "独立微型教学数据，不是完整企业数据库查询结果。"
+      },
+      "back": {
+        "answer": "返回以下结果。",
+        "explanation": "在职使用统计日，离职使用终止日；样本均已入职且终止日不晚于截止日。",
+        "code": "SELECT employee_id,DATEDIFF(COALESCE(termination_date,'2025-12-31'),hire_date) AS days FROM tenure_mini ORDER BY employee_id",
+        "sqliteCode": "SELECT employee_id,CAST(julianday(COALESCE(termination_date,'2025-12-31'))-julianday(hire_date) AS INTEGER) AS days FROM tenure_mini ORDER BY employee_id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "employee_id",
+            "days"
+          ],
+          "rows": [
+            [
+              1,
+              30
+            ],
+            [
+              2,
+              10
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "人力资源：任职时长",
+        "结果预测"
+      ],
+      "supportStatus": "转换执行",
+      "compatibility": "本示例使用SQLite对应写法或注册兼容函数；MySQL 8.4原生尚未执行。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "dddcf4227299066196a698b76141f397576019b4234a29d5f7199bf6dafb5cea",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0147-demo"
+      ],
+      "fixturePath": "fixtures/fc0147.json",
+      "referenceTopicNames": [
+        "人力资源：任职时长"
+      ],
+      "supportStatusLabel": "使用本地等价转换",
+      "mysqlVerificationScript": "validation/mysql/fc0147.sql"
+    },
+    {
+      "id": "fc0148",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-13",
+        "kp19-11"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-13",
+        "kp19-11"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0256",
+        "q0259",
+        "q0260"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "错误纠正",
+      "difficulty": "中等",
+      "front": {
+        "question": "期内无销售且期末库存正数是滞销候选。输入销售表已按商品汇总，缺行约定为无销售。修正遗漏缺行商品的查询。",
+        "code": "SELECT s.product_id FROM stock_last s LEFT JOIN sale_qty q ON s.product_id=q.product_id WHERE s.quantity>0 AND q.qty=0 ORDER BY s.product_id",
+        "sourceTables": [
+          {
+            "name": "stock_last",
+            "columns": [
+              {
+                "name": "product_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "quantity",
+                "type": "INTEGER"
+              },
+              {
+                "name": "unit_cost_cents",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                12,
+                1000
+              ],
+              [
+                2,
+                6,
+                2000
+              ],
+              [
+                3,
+                5,
+                500
+              ]
+            ],
+            "constraints": ""
+          },
+          {
+            "name": "sale_qty",
+            "columns": [
+              {
+                "name": "product_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "qty",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                7
+              ],
+              [
+                3,
+                0
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "独立微型教学数据，不是完整企业数据库查询结果。"
+      },
+      "back": {
+        "answer": "改用背面的修正语句。",
+        "explanation": "无销量可能有零记录或无记录。本例已确认事实记录完整；缺行可填0，未知销量数据不能一律填0。",
+        "code": "SELECT s.product_id FROM stock_last s LEFT JOIN sale_qty q ON s.product_id=q.product_id WHERE s.quantity>0 AND COALESCE(q.qty,0)=0 ORDER BY s.product_id",
+        "sqliteCode": "SELECT s.product_id FROM stock_last s LEFT JOIN sale_qty q ON s.product_id=q.product_id WHERE s.quantity>0 AND COALESCE(q.qty,0)=0 ORDER BY s.product_id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "product_id"
+          ],
+          "rows": [
+            [
+              2
+            ],
+            [
+              3
+            ]
+          ]
+        },
+        "wrongResult": {
+          "kind": "result",
+          "columns": [
+            "product_id"
+          ],
+          "rows": [
+            [
+              3
+            ]
+          ]
+        },
+        "correctionReason": "无销量可能有零记录或无记录。本例已确认事实记录完整；缺行可填0，未知销量数据不能一律填0。"
+      },
+      "tags": [
+        "库存：滞销商品",
+        "错误纠正"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "1d1ea1b1d3dbadbc1cf2f4fddfaeedced1b831ebee684c57cb154d38ab43c198",
+        "mysqlNative": "未执行",
+        "wrongRejected": true,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0148-demo"
+      ],
+      "fixturePath": "fixtures/fc0148.json",
+      "referenceTopicNames": [
+        "库存：滞销商品",
+        "库存：积压候选"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0148.sql"
+    },
+    {
+      "id": "fc0149",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-31",
+        "kp19-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-31",
+        "kp19-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0251",
+        "q0254"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "结果预测",
+      "difficulty": "中等",
+      "front": {
+        "question": "口径：gross为退款前且折扣前销售；cost为退货冲减后的成本。预测每店净销售、毛利、目标达成率（金额分；比例%）。",
+        "code": "SELECT store_id,gross_cents-discount_cents-refund_cents AS net_cents,gross_cents-discount_cents-refund_cents-cost_after_returns_cents AS profit_cents,100.0*(gross_cents-discount_cents-refund_cents)/NULLIF(target_cents,0) AS target_pct FROM shop_totals ORDER BY store_id",
+        "sourceTables": [
+          {
+            "name": "shop_totals",
+            "columns": [
+              {
+                "name": "store_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "gross_cents",
+                "type": "INTEGER"
+              },
+              {
+                "name": "discount_cents",
+                "type": "INTEGER"
+              },
+              {
+                "name": "refund_cents",
+                "type": "INTEGER"
+              },
+              {
+                "name": "cost_after_returns_cents",
+                "type": "INTEGER"
+              },
+              {
+                "name": "target_cents",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                120000,
+                10000,
+                20000,
+                54000,
+                100000
+              ],
+              [
+                2,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "独立微型教学数据，不是完整企业数据库查询结果。"
+      },
+      "back": {
+        "answer": "返回以下结果。",
+        "explanation": "甲店净销售90000分，毛利36000分；目标为零的乙店达成率未定义。",
+        "code": "SELECT store_id,gross_cents-discount_cents-refund_cents AS net_cents,gross_cents-discount_cents-refund_cents-cost_after_returns_cents AS profit_cents,100.0*(gross_cents-discount_cents-refund_cents)/NULLIF(target_cents,0) AS target_pct FROM shop_totals ORDER BY store_id",
+        "sqliteCode": "SELECT store_id,gross_cents-discount_cents-refund_cents AS net_cents,gross_cents-discount_cents-refund_cents-cost_after_returns_cents AS profit_cents,100.0*(gross_cents-discount_cents-refund_cents)/NULLIF(target_cents,0) AS target_pct FROM shop_totals ORDER BY store_id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "store_id",
+            "net_cents",
+            "profit_cents",
+            "target_pct"
+          ],
+          "rows": [
+            [
+              1,
+              90000,
+              36000,
+              90.0
+            ],
+            [
+              2,
+              0,
+              0,
+              null
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "门店净销售、利润与目标达成",
+        "结果预测"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "6ae68d1a338330444d21c430b49ab91bc3acd123c33a0b61a8a615c3495cff8c",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "businessTaskId": "BP01",
+      "databaseRef": "retail",
+      "businessQuestionId": "q0251",
+      "fixtureIds": [
+        "fc0149-demo"
+      ],
+      "fixturePath": "fixtures/fc0149.json",
+      "referenceTopicNames": [
+        "门店净销售、利润与目标达成",
+        "零售：净销售额与门店汇总"
+      ],
+      "businessResource": {
+        "id": "BP01",
+        "title": "门店净销售、利润与目标达成",
+        "projectId": "retail",
+        "datasetId": "retail-v2",
+        "taskQuestionId": "q0251",
+        "taskDifficulty": "中等",
+        "sourceTables": [
+          "sales_targets",
+          "stores",
+          "v_sales_lines"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0149.sql"
+    },
+    {
+      "id": "fc0150",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-32",
+        "kp19-08",
+        "kp20-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-32",
+        "kp19-08"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp20-02"
+      ],
+      "relatedQuestionIds": [
+        "q0252",
+        "q0290"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "困难",
+      "front": {
+        "question": "月份已补齐，计算3月环比前需取得准确上月金额。补齐读取上一行的窗口函数。",
+        "code": "SELECT month_key,amount_prev FROM (SELECT month_key,□(net_cents) OVER(ORDER BY month_key) AS amount_prev FROM store_month) m ORDER BY month_key",
+        "sourceTables": [
+          {
+            "name": "store_month",
+            "columns": [
+              {
+                "name": "month_key",
+                "type": "TEXT"
+              },
+              {
+                "name": "net_cents",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                "2025-01",
+                10000
+              ],
+              [
+                "2025-02",
+                0
+              ],
+              [
+                "2025-03",
+                20000
+              ],
+              [
+                "2025-04",
+                15000
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "独立微型教学数据，不是完整企业数据库查询结果。"
+      },
+      "back": {
+        "answer": "LAG",
+        "explanation": "必须保留零销售月份；3月上月为0而不是跳到1月，增长率应为NULL。",
+        "acceptedBlanks": [
+          "LAG"
+        ],
+        "code": "SELECT month_key,amount_prev FROM (SELECT month_key,LAG(net_cents) OVER(ORDER BY month_key) AS amount_prev FROM store_month) m ORDER BY month_key",
+        "sqliteCode": "SELECT month_key,amount_prev FROM (SELECT month_key,LAG(net_cents) OVER(ORDER BY month_key) AS amount_prev FROM store_month) m ORDER BY month_key",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "month_key",
+            "amount_prev"
+          ],
+          "rows": [
+            [
+              "2025-01",
+              null
+            ],
+            [
+              "2025-02",
+              10000
+            ],
+            [
+              "2025-03",
+              0
+            ],
+            [
+              "2025-04",
+              20000
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "门店月度环比同比与持续下滑",
+        "代码填空"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "f2705fc8912bb006698a90888ca7b33ffbef5d00283d735a9221ff58d2cf02f1",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "businessTaskId": "BP02",
+      "databaseRef": "retail",
+      "businessQuestionId": "q0252",
+      "fixtureIds": [
+        "fc0150-demo"
+      ],
+      "fixturePath": "fixtures/fc0150.json",
+      "referenceTopicNames": [
+        "门店月度环比同比与持续下滑",
+        "零售：月度净销售增长率"
+      ],
+      "businessResource": {
+        "id": "BP02",
+        "title": "门店月度环比同比与持续下滑",
+        "projectId": "retail",
+        "datasetId": "retail-v2",
+        "taskQuestionId": "q0252",
+        "taskDifficulty": "困难",
+        "sourceTables": [
+          "calendar_days",
+          "stores",
+          "v_sales_lines"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0150.sql"
+    },
+    {
+      "id": "fc0151",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-33",
+        "kp19-07"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-33"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp19-07"
+      ],
+      "relatedQuestionIds": [
+        "q0253",
+        "q0282"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "困难",
+      "front": {
+        "question": "要按净销售额将商品分四组，最高组定义为前四分之一；并列编号决胜。回忆 MySQL 窗口分桶写法。",
+        "sourceTables": [
+          {
+            "name": "sku_totals",
+            "columns": [
+              {
+                "name": "product_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "net_cents",
+                "type": "INTEGER"
+              },
+              {
+                "name": "profit_cents",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                9000,
+                1800
+              ],
+              [
+                2,
+                9000,
+                3600
+              ],
+              [
+                3,
+                8000,
+                2000
+              ],
+              [
+                4,
+                7000,
+                3500
+              ],
+              [
+                5,
+                6000,
+                1200
+              ],
+              [
+                6,
+                5000,
+                2000
+              ],
+              [
+                7,
+                4000,
+                1000
+              ],
+              [
+                8,
+                3000,
+                1500
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "独立微型教学数据，不是完整企业数据库查询结果。"
+      },
+      "back": {
+        "answer": "NTILE(4) OVER(ORDER BY 净销售额 DESC,商品编号)",
+        "explanation": "先在所有有效商品算分桶，再筛最高组且毛利率低于30%；不能先筛低毛利再排名。",
+        "code": "SELECT product_id,NTILE(4) OVER(ORDER BY net_cents DESC,product_id) AS quartile FROM sku_totals ORDER BY product_id",
+        "sqliteCode": "SELECT product_id,NTILE(4) OVER(ORDER BY net_cents DESC,product_id) AS quartile FROM sku_totals ORDER BY product_id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "product_id",
+            "quartile"
+          ],
+          "rows": [
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              5,
+              3
+            ],
+            [
+              6,
+              3
+            ],
+            [
+              7,
+              4
+            ],
+            [
+              8,
+              4
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "高销售低毛利商品诊断",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "4b5bb1dfa1818f5bc2c0b71ae8b8558cc662b0fde60602d98b5e38bebf1ea3d6",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "businessTaskId": "BP03",
+      "databaseRef": "retail",
+      "businessQuestionId": "q0253",
+      "fixtureIds": [
+        "fc0151-demo"
+      ],
+      "fixturePath": "fixtures/fc0151.json",
+      "referenceTopicNames": [
+        "高销售低毛利商品诊断"
+      ],
+      "businessResource": {
+        "id": "BP03",
+        "title": "高销售低毛利商品诊断",
+        "projectId": "retail",
+        "datasetId": "retail-v2",
+        "taskQuestionId": "q0253",
+        "taskDifficulty": "困难",
+        "sourceTables": [
+          "v_sales_lines"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0151.sql"
+    },
+    {
+      "id": "fc0152",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-34"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-34"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0254"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "困难",
+      "front": {
+        "question": "促销期间总销售12万元、非促销期间总销售20万元，能直接判断非促销效果更好吗？",
+        "dataNote": "口径记忆卡；不要求执行企业库查询。涉及的数值为独立教学假设。"
+      },
+      "back": {
+        "answer": "不能。应按完整日历分别求日均净销售、日均净件数和毛利率。",
+        "explanation": "期间长短不同，必须计入零销售日；即使日均差异明显也只能说明关联，非因果证据。"
+      },
+      "tags": [
+        "促销与非促销的日均表现",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "businessTaskId": "BP04",
+      "databaseRef": "retail",
+      "businessQuestionId": "q0254",
+      "referenceTopicNames": [
+        "促销与非促销的日均表现"
+      ],
+      "businessResource": {
+        "id": "BP04",
+        "title": "促销与非促销的日均表现",
+        "projectId": "retail",
+        "datasetId": "retail-v2",
+        "taskQuestionId": "q0254",
+        "taskDifficulty": "困难",
+        "sourceTables": [
+          "calendar_days",
+          "promotions",
+          "v_sales_lines"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0153",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-35"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-35"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0255"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "挑战",
+      "front": {
+        "question": "为何综合经营看板的退款率、目标达成率和毛利率应分别标记异常？",
+        "dataNote": "口径记忆卡；不要求执行企业库查询。涉及的数值为独立教学假设。"
+      },
+      "back": {
+        "answer": "三个指标使用不同分母，分别反映售后、计划达成及销售盈利质量。",
+        "explanation": "退款率分母为退款前折后销售；目标达成率分母为目标；毛利率分母为净销售。零分母为NULL，不虚构正常或异常分值。"
+      },
+      "tags": [
+        "门店综合经营异常看板",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "businessTaskId": "BP05",
+      "databaseRef": "retail",
+      "businessQuestionId": "q0255",
+      "referenceTopicNames": [
+        "门店综合经营异常看板"
+      ],
+      "businessResource": {
+        "id": "BP05",
+        "title": "门店综合经营异常看板",
+        "projectId": "retail",
+        "datasetId": "retail-v2",
+        "taskQuestionId": "q0255",
+        "taskDifficulty": "挑战",
+        "sourceTables": [
+          "sales_targets",
+          "stores",
+          "v_sales_lines"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0154",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-36",
+        "kp19-14"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-36",
+        "kp19-14"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0256",
+        "q0257"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "错误纠正",
+      "difficulty": "困难",
+      "front": {
+        "question": "90日销量低于20且库存价值超过500000分。输入为有效商品期末快照及已汇总销量；缺行代表无销售。修正遗漏零销售商品的分析。",
+        "code": "SELECT s.product_id FROM snap s LEFT JOIN outbound o ON s.warehouse_id=o.warehouse_id AND s.product_id=o.product_id WHERE s.quantity*s.unit_cost_cents>500000 AND o.quantity<20 ORDER BY s.product_id",
+        "sourceTables": [
+          {
+            "name": "snap",
+            "columns": [
+              {
+                "name": "warehouse_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "product_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "quantity",
+                "type": "INTEGER"
+              },
+              {
+                "name": "unit_cost_cents",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                80,
+                10000
+              ],
+              [
+                1,
+                2,
+                120,
+                5000
+              ],
+              [
+                1,
+                3,
+                100,
+                7000
+              ]
+            ],
+            "constraints": ""
+          },
+          {
+            "name": "outbound",
+            "columns": [
+              {
+                "name": "warehouse_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "product_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "quantity",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                30
+              ],
+              [
+                1,
+                3,
+                10
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "独立微型教学数据，不是完整企业数据库查询结果。"
+      },
+      "back": {
+        "answer": "改用背面的修正语句。",
+        "explanation": "无销量商品2仍占用600000分库存；业务确认缺行表示无销售后，用COALESCE保留它。",
+        "code": "SELECT s.product_id FROM snap s LEFT JOIN outbound o ON s.warehouse_id=o.warehouse_id AND s.product_id=o.product_id WHERE s.quantity*s.unit_cost_cents>500000 AND COALESCE(o.quantity,0)<20 ORDER BY s.product_id",
+        "sqliteCode": "SELECT s.product_id FROM snap s LEFT JOIN outbound o ON s.warehouse_id=o.warehouse_id AND s.product_id=o.product_id WHERE s.quantity*s.unit_cost_cents>500000 AND COALESCE(o.quantity,0)<20 ORDER BY s.product_id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "product_id"
+          ],
+          "rows": [
+            [
+              2
+            ],
+            [
+              3
+            ]
+          ]
+        },
+        "wrongResult": {
+          "kind": "result",
+          "columns": [
+            "product_id"
+          ],
+          "rows": [
+            [
+              3
+            ]
+          ]
+        },
+        "correctionReason": "无销量商品2仍占用600000分库存；业务确认缺行表示无销售后，用COALESCE保留它。"
+      },
+      "tags": [
+        "低销量高库存诊断",
+        "错误纠正"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "21206cc47a3785d064cc7e81ccaa8acf892c48d1e3ace97794890425f441cd39",
+        "mysqlNative": "未执行",
+        "wrongRejected": true,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "businessTaskId": "BP06",
+      "databaseRef": "inventory",
+      "businessQuestionId": "q0256",
+      "fixtureIds": [
+        "fc0154-demo"
+      ],
+      "fixturePath": "fixtures/fc0154.json",
+      "referenceTopicNames": [
+        "低销量高库存诊断",
+        "库存：库存金额"
+      ],
+      "businessResource": {
+        "id": "BP06",
+        "title": "低销量高库存诊断",
+        "projectId": "inventory",
+        "datasetId": "inventory-v2",
+        "taskQuestionId": "q0256",
+        "taskDifficulty": "中等",
+        "sourceTables": [
+          "inventory_snapshots",
+          "products",
+          "stock_movements"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0154.sql"
+    },
+    {
+      "id": "fc0155",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-37",
+        "kp19-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-37",
+        "kp19-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0257",
+        "q0284"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "结果预测",
+      "difficulty": "困难",
+      "front": {
+        "question": "已知年初、年末库存价值和期间净销售成本（分）。预测周转率及周转天数，分母无效时NULL。",
+        "code": "SELECT category_id,ROUND(1.0*sales_cost_cents/NULLIF((opening_cents+closing_cents)/2.0,0),2) AS turnover,ROUND(365.0/NULLIF(1.0*sales_cost_cents/NULLIF((opening_cents+closing_cents)/2.0,0),0),2) AS days FROM inv_cost ORDER BY category_id",
+        "sourceTables": [
+          {
+            "name": "inv_cost",
+            "columns": [
+              {
+                "name": "category_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "opening_cents",
+                "type": "INTEGER"
+              },
+              {
+                "name": "closing_cents",
+                "type": "INTEGER"
+              },
+              {
+                "name": "sales_cost_cents",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                100000,
+                200000,
+                450000
+              ],
+              [
+                2,
+                0,
+                0,
+                1000
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "独立微型教学数据，不是完整企业数据库查询结果。"
+      },
+      "back": {
+        "answer": "返回以下结果。",
+        "explanation": "平均库存150000分，周转3次，365÷3≈121.67天。该例成本均为正。",
+        "code": "SELECT category_id,ROUND(1.0*sales_cost_cents/NULLIF((opening_cents+closing_cents)/2.0,0),2) AS turnover,ROUND(365.0/NULLIF(1.0*sales_cost_cents/NULLIF((opening_cents+closing_cents)/2.0,0),0),2) AS days FROM inv_cost ORDER BY category_id",
+        "sqliteCode": "SELECT category_id,ROUND(1.0*sales_cost_cents/NULLIF((opening_cents+closing_cents)/2.0,0),2) AS turnover,ROUND(365.0/NULLIF(1.0*sales_cost_cents/NULLIF((opening_cents+closing_cents)/2.0,0),0),2) AS days FROM inv_cost ORDER BY category_id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "category_id",
+            "turnover",
+            "days"
+          ],
+          "rows": [
+            [
+              1,
+              3.0,
+              121.67
+            ],
+            [
+              2,
+              null,
+              null
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "类别库存周转率及周转天数",
+        "结果预测"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "619009619f6662b53534c93c7b3f56927baae947f0aaf6ad34a09a4efaf0ecec",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "businessTaskId": "BP07",
+      "databaseRef": "inventory",
+      "businessQuestionId": "q0257",
+      "fixtureIds": [
+        "fc0155-demo"
+      ],
+      "fixturePath": "fixtures/fc0155.json",
+      "referenceTopicNames": [
+        "类别库存周转率及周转天数",
+        "库存：快照与周转率"
+      ],
+      "businessResource": {
+        "id": "BP07",
+        "title": "类别库存周转率及周转天数",
+        "projectId": "inventory",
+        "datasetId": "inventory-v2",
+        "taskQuestionId": "q0257",
+        "taskDifficulty": "困难",
+        "sourceTables": [
+          "inventory_snapshots",
+          "products",
+          "stock_movements"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0155.sql"
+    },
+    {
+      "id": "fc0156",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-38",
+        "kp19-12"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-38",
+        "kp19-12"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0258",
+        "q0260"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "困难",
+      "front": {
+        "question": "当日库存为15件，近30日销售60件，历史合格收货加权周期10天，为什么可能缺货？",
+        "dataNote": "口径记忆卡；不要求执行企业库查询。涉及的数值为独立教学假设。"
+      },
+      "back": {
+        "answer": "日均2件×10天需20件，库存15件不足。",
+        "explanation": "应以仓库×商品为粒度；无历史收货的任务约定14天，不能将没有周期记录当作即时到货。"
+      },
+      "tags": [
+        "销售速度与采购周期缺货风险",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "businessTaskId": "BP08",
+      "databaseRef": "inventory",
+      "businessQuestionId": "q0258",
+      "referenceTopicNames": [
+        "销售速度与采购周期缺货风险",
+        "库存：低库存预警"
+      ],
+      "businessResource": {
+        "id": "BP08",
+        "title": "销售速度与采购周期缺货风险",
+        "projectId": "inventory",
+        "datasetId": "inventory-v2",
+        "taskQuestionId": "q0258",
+        "taskDifficulty": "困难",
+        "sourceTables": [
+          "calendar_days",
+          "goods_receipts",
+          "inventory_snapshots",
+          "products",
+          "purchase_order_items",
+          "purchase_orders",
+          "stock_movements"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0157",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-39"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-39"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0259"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "困难",
+      "front": {
+        "question": "先进先出假设推算库龄，与直接使用某商品最早入库日期有什么区别？",
+        "dataNote": "口径记忆卡；不要求执行企业库查询。涉及的数值为独立教学假设。"
+      },
+      "back": {
+        "answer": "前者扣除被销售消耗的最早批次，后者可能给仍在库的商品错误贴上陈旧标签。",
+        "explanation": "本企业模拟无完整真实批次追踪：用累计流入、流出推算剩余批次数量，再与期末标准成本结合。"
+      },
+      "tags": [
+        "按先进先出假设推算库存库龄",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "businessTaskId": "BP09",
+      "databaseRef": "inventory",
+      "businessQuestionId": "q0259",
+      "referenceTopicNames": [
+        "按先进先出假设推算库存库龄"
+      ],
+      "businessResource": {
+        "id": "BP09",
+        "title": "按先进先出假设推算库存库龄",
+        "projectId": "inventory",
+        "datasetId": "inventory-v2",
+        "taskQuestionId": "q0259",
+        "taskDifficulty": "困难",
+        "sourceTables": [
+          "inventory_opening",
+          "inventory_snapshots",
+          "stock_movements"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0158",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-40",
+        "kp19-12",
+        "kp19-28"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-40"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp19-12",
+        "kp19-28"
+      ],
+      "relatedQuestionIds": [
+        "q0258",
+        "q0260",
+        "q0277",
+        "q0280"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "挑战",
+      "front": {
+        "question": "预计需求100、当前库存50、未逾期未完成采购30、逾期未收20件。补货估算应自动把全部50件在途视为按时可用吗？",
+        "dataNote": "口径记忆卡；不要求执行企业库查询。涉及的数值为独立教学假设。"
+      },
+      "back": {
+        "answer": "不应。按任务口径，未到期在途30纳入，已逾期20单独反映供应风险。",
+        "explanation": "有效库存与可预期到货分别核算，缺口还应结合商品历史准时足量率。"
+      },
+      "tags": [
+        "补货优先级与供应商风险",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "businessTaskId": "BP10",
+      "databaseRef": "inventory",
+      "businessQuestionId": "q0260",
+      "referenceTopicNames": [
+        "补货优先级与供应商风险"
+      ],
+      "businessResource": {
+        "id": "BP10",
+        "title": "补货优先级与供应商风险",
+        "projectId": "inventory",
+        "datasetId": "inventory-v2",
+        "taskQuestionId": "q0260",
+        "taskDifficulty": "挑战",
+        "sourceTables": [
+          "inventory_snapshots",
+          "products",
+          "stock_movements",
+          "v_po_lines"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0159",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-41",
+        "kp19-15"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-41",
+        "kp19-15"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0261",
+        "q0264"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "困难",
+      "front": {
+        "question": "新客与老客订单分析中：同一客户2025年首购1次，之后又买2次。应把这3笔订单都归为新客订单吗？",
+        "dataNote": "口径记忆卡；不要求执行企业库查询。涉及的数值为独立教学假设。"
+      },
+      "back": {
+        "answer": "不应。只有历史第一笔有效线上订单是首购，后两笔属于非首购。",
+        "explanation": "本任务按订单分组，首购由日期和订单编号决定；客单价是组内净收入÷有效订单数。"
+      },
+      "tags": [
+        "新老客户净收入及客单价",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "businessTaskId": "BP11",
+      "databaseRef": "ecommerce",
+      "businessQuestionId": "q0261",
+      "referenceTopicNames": [
+        "新老客户净收入及客单价",
+        "电商：客单价"
+      ],
+      "businessResource": {
+        "id": "BP11",
+        "title": "新老客户净收入及客单价",
+        "projectId": "ecommerce",
+        "datasetId": "ecommerce-v2",
+        "taskQuestionId": "q0261",
+        "taskDifficulty": "中等",
+        "sourceTables": [
+          "v_order_net"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0160",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-42",
+        "kp19-16"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-42",
+        "kp19-16"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0262",
+        "q0265"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "困难",
+      "front": {
+        "question": "最近消费时间越近分数越高，频次与金额越大分数越高。回忆分五组时让最优组得到5分的写法，以最近日期为例。",
+        "sourceTables": [
+          {
+            "name": "rfm_score",
+            "columns": [
+              {
+                "name": "customer_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "last_day",
+                "type": "TEXT"
+              },
+              {
+                "name": "frequency",
+                "type": "INTEGER"
+              },
+              {
+                "name": "net_cents",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "2025-12-01",
+                4,
+                4000
+              ],
+              [
+                2,
+                "2025-12-31",
+                1,
+                1000
+              ],
+              [
+                3,
+                "2025-12-31",
+                5,
+                3000
+              ],
+              [
+                4,
+                "2025-11-01",
+                6,
+                5000
+              ],
+              [
+                5,
+                "2025-10-01",
+                3,
+                2000
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "独立微型教学数据，不是完整企业数据库查询结果。"
+      },
+      "back": {
+        "answer": "6 - NTILE(5) OVER(ORDER BY 最近日期 DESC,客户编号)",
+        "explanation": "显式编号决胜，三项分数分别排序后合计；同一天不能依赖数据库默认返回顺序。",
+        "code": "SELECT customer_id,6-NTILE(5) OVER(ORDER BY last_day DESC,customer_id) AS r_score FROM rfm_score ORDER BY customer_id",
+        "sqliteCode": "SELECT customer_id,6-NTILE(5) OVER(ORDER BY last_day DESC,customer_id) AS r_score FROM rfm_score ORDER BY customer_id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "customer_id",
+            "r_score"
+          ],
+          "rows": [
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              5,
+              1
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "最近消费、频率、金额客户分层",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "2591e9be9a2697a2306755dea36fb73e718e0f25567b25b42199513129538936",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "businessTaskId": "BP12",
+      "databaseRef": "ecommerce",
+      "businessQuestionId": "q0262",
+      "fixtureIds": [
+        "fc0160-demo"
+      ],
+      "fixturePath": "fixtures/fc0160.json",
+      "referenceTopicNames": [
+        "最近消费、频率、金额客户分层",
+        "电商：消费分层"
+      ],
+      "businessResource": {
+        "id": "BP12",
+        "title": "最近消费、频率、金额客户分层",
+        "projectId": "ecommerce",
+        "datasetId": "ecommerce-v2",
+        "taskQuestionId": "q0262",
+        "taskDifficulty": "困难",
+        "sourceTables": [
+          "calendar_days",
+          "v_order_net"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0160.sql"
+    },
+    {
+      "id": "fc0161",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-43",
+        "kp19-17"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-43",
+        "kp19-17"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0263",
+        "q0295"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "困难",
+      "front": {
+        "question": "某首购同期群的第5月没有回购，与第5月尚未到观察截止日期，有何区别？",
+        "dataNote": "口径记忆卡；不要求执行企业库查询。涉及的数值为独立教学假设。"
+      },
+      "back": {
+        "answer": "已经观察但无回购为0%；尚未进入观察期不输出该月份。",
+        "explanation": "同期群留存分母固定为该首购月客户数；不能用尚未成熟的未来月份人为拉低留存。"
+      },
+      "tags": [
+        "首购月份留存矩阵",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "businessTaskId": "BP13",
+      "databaseRef": "ecommerce",
+      "businessQuestionId": "q0263",
+      "referenceTopicNames": [
+        "首购月份留存矩阵",
+        "电商：首购次月留存"
+      ],
+      "businessResource": {
+        "id": "BP13",
+        "title": "首购月份留存矩阵",
+        "projectId": "ecommerce",
+        "datasetId": "ecommerce-v2",
+        "taskQuestionId": "q0263",
+        "taskDifficulty": "困难",
+        "sourceTables": [
+          "calendar_days",
+          "v_order_net"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0162",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-44"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-44"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0264"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "困难",
+      "front": {
+        "question": "已按访问渠道汇总会话及转化会话。计算转化率时除数应使用总会话数，并防御0。",
+        "code": "SELECT source_id,100.0*converted_sessions/NULLIF(□,0) AS conversion_pct FROM channel_totals ORDER BY source_id",
+        "sourceTables": [
+          {
+            "name": "channel_totals",
+            "columns": [
+              {
+                "name": "source_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "sessions",
+                "type": "INTEGER"
+              },
+              {
+                "name": "converted_sessions",
+                "type": "INTEGER"
+              },
+              {
+                "name": "new_customers",
+                "type": "INTEGER"
+              },
+              {
+                "name": "spend_cents",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                100,
+                12,
+                4,
+                20000
+              ],
+              [
+                2,
+                10,
+                0,
+                0,
+                1000
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "独立微型教学数据，不是完整企业数据库查询结果。"
+      },
+      "back": {
+        "answer": "sessions",
+        "explanation": "一个会话有多笔订单仍只算一个转化会话；获客成本另用广告支出除历史新客数。",
+        "acceptedBlanks": [
+          "sessions"
+        ],
+        "code": "SELECT source_id,100.0*converted_sessions/NULLIF(sessions,0) AS conversion_pct FROM channel_totals ORDER BY source_id",
+        "sqliteCode": "SELECT source_id,100.0*converted_sessions/NULLIF(sessions,0) AS conversion_pct FROM channel_totals ORDER BY source_id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "source_id",
+            "conversion_pct"
+          ],
+          "rows": [
+            [
+              1,
+              12.0
+            ],
+            [
+              2,
+              0.0
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "营销渠道转化与获客成本",
+        "代码填空"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "03b698e8f004e266e9e1db5f9cda2c21b450b909d7f566c6f4961207010719bc",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "businessTaskId": "BP14",
+      "databaseRef": "ecommerce",
+      "businessQuestionId": "q0264",
+      "fixtureIds": [
+        "fc0162-demo"
+      ],
+      "fixturePath": "fixtures/fc0162.json",
+      "referenceTopicNames": [
+        "营销渠道转化与获客成本"
+      ],
+      "businessResource": {
+        "id": "BP14",
+        "title": "营销渠道转化与获客成本",
+        "projectId": "ecommerce",
+        "datasetId": "ecommerce-v2",
+        "taskQuestionId": "q0264",
+        "taskDifficulty": "困难",
+        "sourceTables": [
+          "customer_sessions",
+          "marketing_campaigns",
+          "traffic_sources",
+          "v_order_net"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0162.sql"
+    },
+    {
+      "id": "fc0163",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-45",
+        "kp19-18"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-45",
+        "kp19-18"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0262",
+        "q0265"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "挑战",
+      "front": {
+        "question": "为什么高价值流失风险不能只按当前年度订单金额排名？",
+        "dataNote": "口径记忆卡；不要求执行企业库查询。涉及的数值为独立教学假设。"
+      },
+      "back": {
+        "answer": "任务用历史有效订单数、历史净消费分位与最近消费间隔共同定义候选。",
+        "explanation": "历史购买需≥3次、净额位于前20%、近90日无购买，再按历史毛利决定优先级。仅当业务口径规定才更换时间窗。"
+      },
+      "tags": [
+        "高价值流失风险客户",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "businessTaskId": "BP15",
+      "databaseRef": "ecommerce",
+      "businessQuestionId": "q0265",
+      "referenceTopicNames": [
+        "高价值流失风险客户",
+        "电商：客户消费排名"
+      ],
+      "businessResource": {
+        "id": "BP15",
+        "title": "高价值流失风险客户",
+        "projectId": "ecommerce",
+        "datasetId": "ecommerce-v2",
+        "taskQuestionId": "q0265",
+        "taskDifficulty": "挑战",
+        "sourceTables": [
+          "calendar_days",
+          "v_order_net"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0164",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-46",
+        "kp19-22",
+        "kp19-19"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-46",
+        "kp19-22"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp19-19"
+      ],
+      "relatedQuestionIds": [
+        "q0266",
+        "q0269"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "错误纠正",
+      "difficulty": "困难",
+      "front": {
+        "question": "要求保留有预算而未发生费用的项目；费用已经先按部门×科目聚合。修正丢失零发生额项目的连接。",
+        "code": "WITH a AS (SELECT department_id,account_id,SUM(expense_cents) AS actual FROM expense_mini GROUP BY department_id,account_id) SELECT b.department_id,b.account_id,a.actual-b.budget_cents AS variance FROM budget_mini b JOIN a ON b.department_id=a.department_id AND b.account_id=a.account_id ORDER BY b.department_id,b.account_id",
+        "sourceTables": [
+          {
+            "name": "budget_mini",
+            "columns": [
+              {
+                "name": "department_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "account_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "budget_cents",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                10000
+              ],
+              [
+                1,
+                2,
+                5000
+              ],
+              [
+                2,
+                1,
+                0
+              ]
+            ],
+            "constraints": ""
+          },
+          {
+            "name": "expense_mini",
+            "columns": [
+              {
+                "name": "department_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "account_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "expense_cents",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                8000
+              ],
+              [
+                1,
+                1,
+                3500
+              ],
+              [
+                2,
+                1,
+                1000
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "独立微型教学数据，不是完整企业数据库查询结果。"
+      },
+      "back": {
+        "answer": "改用背面的修正语句。",
+        "explanation": "从预算出发保留未发生费用项目；零预算的差额仍有效，但百分比偏差未定义。",
+        "code": "WITH a AS (SELECT department_id,account_id,SUM(expense_cents) AS actual FROM expense_mini GROUP BY department_id,account_id) SELECT b.department_id,b.account_id,COALESCE(a.actual,0)-b.budget_cents AS variance FROM budget_mini b LEFT JOIN a ON b.department_id=a.department_id AND b.account_id=a.account_id ORDER BY b.department_id,b.account_id",
+        "sqliteCode": "WITH a AS (SELECT department_id,account_id,SUM(expense_cents) AS actual FROM expense_mini GROUP BY department_id,account_id) SELECT b.department_id,b.account_id,COALESCE(a.actual,0)-b.budget_cents AS variance FROM budget_mini b LEFT JOIN a ON b.department_id=a.department_id AND b.account_id=a.account_id ORDER BY b.department_id,b.account_id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "department_id",
+            "account_id",
+            "variance"
+          ],
+          "rows": [
+            [
+              1,
+              1,
+              1500
+            ],
+            [
+              1,
+              2,
+              -5000
+            ],
+            [
+              2,
+              1,
+              1000
+            ]
+          ]
+        },
+        "wrongResult": {
+          "kind": "result",
+          "columns": [
+            "department_id",
+            "account_id",
+            "variance"
+          ],
+          "rows": [
+            [
+              1,
+              1,
+              1500
+            ],
+            [
+              2,
+              1,
+              1000
+            ]
+          ]
+        },
+        "correctionReason": "从预算出发保留未发生费用项目；零预算的差额仍有效，但百分比偏差未定义。"
+      },
+      "tags": [
+        "预算与实际费用差异",
+        "错误纠正"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "28d0a6303d6132fe145226f5da74e3aee767087a147147bfb9b517b3081681a8",
+        "mysqlNative": "未执行",
+        "wrongRejected": true,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "businessTaskId": "BP16",
+      "databaseRef": "finance",
+      "businessQuestionId": "q0266",
+      "fixtureIds": [
+        "fc0164-demo"
+      ],
+      "fixturePath": "fixtures/fc0164.json",
+      "referenceTopicNames": [
+        "预算与实际费用差异",
+        "财务：预算与实际差异"
+      ],
+      "businessResource": {
+        "id": "BP16",
+        "title": "预算与实际费用差异",
+        "projectId": "finance",
+        "datasetId": "finance-v2",
+        "taskQuestionId": "q0266",
+        "taskDifficulty": "中等",
+        "sourceTables": [
+          "budgets",
+          "v_expenses"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0164.sql"
+    },
+    {
+      "id": "fc0165",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-47",
+        "kp19-04"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-47",
+        "kp19-04"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0267",
+        "q0268"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "结果预测",
+      "difficulty": "困难",
+      "front": {
+        "question": "截至2025-12-31，预测每张发票未付余额（分），允许负值标记超额付款。",
+        "code": "WITH p AS (SELECT invoice_id,SUM(amount_cents) AS paid FROM pay_mini WHERE payment_date<='2025-12-31' GROUP BY invoice_id) SELECT i.invoice_id,i.billed_cents-COALESCE(p.paid,0) AS balance FROM invoice_mini i LEFT JOIN p ON i.invoice_id=p.invoice_id ORDER BY i.invoice_id",
+        "sourceTables": [
+          {
+            "name": "invoice_mini",
+            "columns": [
+              {
+                "name": "invoice_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "billed_cents",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                10000
+              ],
+              [
+                2,
+                5000
+              ],
+              [
+                3,
+                5000
+              ]
+            ],
+            "constraints": ""
+          },
+          {
+            "name": "pay_mini",
+            "columns": [
+              {
+                "name": "invoice_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "payment_date",
+                "type": "TEXT"
+              },
+              {
+                "name": "amount_cents",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "2025-12-10",
+                4000
+              ],
+              [
+                1,
+                "2026-01-02",
+                6000
+              ],
+              [
+                3,
+                "2025-12-20",
+                5500
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "独立微型教学数据，不是完整企业数据库查询结果。"
+      },
+      "back": {
+        "answer": "返回以下结果。",
+        "explanation": "跨截止日付款不能提前冲销；无付款为0，而超额付款导致负余额。",
+        "code": "WITH p AS (SELECT invoice_id,SUM(amount_cents) AS paid FROM pay_mini WHERE payment_date<='2025-12-31' GROUP BY invoice_id) SELECT i.invoice_id,i.billed_cents-COALESCE(p.paid,0) AS balance FROM invoice_mini i LEFT JOIN p ON i.invoice_id=p.invoice_id ORDER BY i.invoice_id",
+        "sqliteCode": "WITH p AS (SELECT invoice_id,SUM(amount_cents) AS paid FROM pay_mini WHERE payment_date<='2025-12-31' GROUP BY invoice_id) SELECT i.invoice_id,i.billed_cents-COALESCE(p.paid,0) AS balance FROM invoice_mini i LEFT JOIN p ON i.invoice_id=p.invoice_id ORDER BY i.invoice_id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "invoice_id",
+            "balance"
+          ],
+          "rows": [
+            [
+              1,
+              6000
+            ],
+            [
+              2,
+              5000
+            ],
+            [
+              3,
+              -500
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "供应商发票与付款核对",
+        "结果预测"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "7ec706801eaf0b035f9901585a882d603b8dec708f7aa7641d87ae6152ef7904",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "businessTaskId": "BP17",
+      "databaseRef": "finance",
+      "businessQuestionId": "q0267",
+      "fixtureIds": [
+        "fc0165-demo"
+      ],
+      "fixturePath": "fixtures/fc0165.json",
+      "referenceTopicNames": [
+        "供应商发票与付款核对",
+        "财务：截止日未付金额"
+      ],
+      "businessResource": {
+        "id": "BP17",
+        "title": "供应商发票与付款核对",
+        "projectId": "finance",
+        "datasetId": "finance-v2",
+        "taskQuestionId": "q0267",
+        "taskDifficulty": "困难",
+        "sourceTables": [
+          "v_invoice_balance"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0165.sql"
+    },
+    {
+      "id": "fc0166",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-48",
+        "kp19-04"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-48"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp19-04"
+      ],
+      "relatedQuestionIds": [
+        "q0267",
+        "q0268"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "困难",
+      "front": {
+        "question": "只对正余额发票作账龄分析。0天及未来到期为未逾期，1—30日为首档。填入首档区间。",
+        "code": "SELECT invoice_id,CASE WHEN days_overdue<=0 THEN '未逾期' WHEN days_overdue □ THEN '1—30' WHEN days_overdue<=60 THEN '31—60' WHEN days_overdue<=90 THEN '61—90' ELSE '90以上' END AS band FROM aging_mini WHERE balance_cents>0 ORDER BY invoice_id",
+        "sourceTables": [
+          {
+            "name": "aging_mini",
+            "columns": [
+              {
+                "name": "invoice_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "days_overdue",
+                "type": "INTEGER"
+              },
+              {
+                "name": "balance_cents",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                -1,
+                1000
+              ],
+              [
+                2,
+                0,
+                1000
+              ],
+              [
+                3,
+                30,
+                1000
+              ],
+              [
+                4,
+                31,
+                1000
+              ],
+              [
+                5,
+                91,
+                1000
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "独立微型教学数据，不是完整企业数据库查询结果。"
+      },
+      "back": {
+        "answer": "BETWEEN 1 AND 30",
+        "explanation": "到期当天不算逾期；先处理未到期与边界，不能将贷项当未付余额。",
+        "acceptedBlanks": [
+          "BETWEEN 1 AND 30"
+        ],
+        "code": "SELECT invoice_id,CASE WHEN days_overdue<=0 THEN '未逾期' WHEN days_overdue BETWEEN 1 AND 30 THEN '1—30' WHEN days_overdue<=60 THEN '31—60' WHEN days_overdue<=90 THEN '61—90' ELSE '90以上' END AS band FROM aging_mini WHERE balance_cents>0 ORDER BY invoice_id",
+        "sqliteCode": "SELECT invoice_id,CASE WHEN days_overdue<=0 THEN '未逾期' WHEN days_overdue BETWEEN 1 AND 30 THEN '1—30' WHEN days_overdue<=60 THEN '31—60' WHEN days_overdue<=90 THEN '61—90' ELSE '90以上' END AS band FROM aging_mini WHERE balance_cents>0 ORDER BY invoice_id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "invoice_id",
+            "band"
+          ],
+          "rows": [
+            [
+              1,
+              "未逾期"
+            ],
+            [
+              2,
+              "未逾期"
+            ],
+            [
+              3,
+              "1—30"
+            ],
+            [
+              4,
+              "31—60"
+            ],
+            [
+              5,
+              "90以上"
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "应付账款账龄",
+        "代码填空"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "ab39d642c974906a4d521b79dcc27b5b3719f000f5221068012019f90effd98c",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "businessTaskId": "BP18",
+      "databaseRef": "finance",
+      "businessQuestionId": "q0268",
+      "fixtureIds": [
+        "fc0166-demo"
+      ],
+      "fixturePath": "fixtures/fc0166.json",
+      "referenceTopicNames": [
+        "应付账款账龄"
+      ],
+      "businessResource": {
+        "id": "BP18",
+        "title": "应付账款账龄",
+        "projectId": "finance",
+        "datasetId": "finance-v2",
+        "taskQuestionId": "q0268",
+        "taskDifficulty": "困难",
+        "sourceTables": [
+          "v_invoice_balance"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0166.sql"
+    },
+    {
+      "id": "fc0167",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-49"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-49"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0269"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "困难",
+      "front": {
+        "question": "银行流水与费用凭证对账时，只以账簿为主表做左连接为什么不够？",
+        "dataNote": "口径记忆卡；不要求执行企业库查询。涉及的数值为独立教学假设。"
+      },
+      "back": {
+        "answer": "会遗漏仅存在于银行侧的记录。",
+        "explanation": "分别按参考号汇总，使用两侧完整键集合再关联；空参考号要保留独立交易键，不能将未知键视为同一个业务事件。"
+      },
+      "tags": [
+        "银行流水与凭证全量对账",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "businessTaskId": "BP19",
+      "databaseRef": "finance",
+      "businessQuestionId": "q0269",
+      "referenceTopicNames": [
+        "银行流水与凭证全量对账"
+      ],
+      "businessResource": {
+        "id": "BP19",
+        "title": "银行流水与凭证全量对账",
+        "projectId": "finance",
+        "datasetId": "finance-v2",
+        "taskQuestionId": "q0269",
+        "taskDifficulty": "困难",
+        "sourceTables": [
+          "bank_transactions",
+          "v_expenses"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0168",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-50",
+        "kp19-21"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-50",
+        "kp19-21"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0270"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "挑战",
+      "front": {
+        "question": "重复发票编号、异常大额、超额付款被同一记录触发时，能说明一定舞弊吗？",
+        "dataNote": "口径记忆卡；不要求执行企业库查询。涉及的数值为独立教学假设。"
+      },
+      "back": {
+        "answer": "不能，只表示命中多个复核规则。",
+        "explanation": "同供应商同编号重复可能是导入问题；阈值偏差需结合审批、合同与凭证核实，输出标志及异常数。"
+      },
+      "tags": [
+        "多规则异常交易筛查",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "businessTaskId": "BP20",
+      "databaseRef": "finance",
+      "businessQuestionId": "q0270",
+      "referenceTopicNames": [
+        "多规则异常交易筛查",
+        "财务：金额异常候选"
+      ],
+      "businessResource": {
+        "id": "BP20",
+        "title": "多规则异常交易筛查",
+        "projectId": "finance",
+        "datasetId": "finance-v2",
+        "taskQuestionId": "q0270",
+        "taskDifficulty": "挑战",
+        "sourceTables": [
+          "v_invoice_balance",
+          "v_po_lines"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0169",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-51",
+        "kp19-05"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-51",
+        "kp19-05"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0271",
+        "q0297"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "困难",
+      "front": {
+        "question": "统计2025-12-31每名员工所处部门；任职区间左闭右开，填入结束日期上的严格比较符。",
+        "code": "SELECT employee_id,department_id FROM job_mini WHERE start_date<='2025-12-31' AND (end_date IS NULL OR end_date □ '2025-12-31') ORDER BY employee_id",
+        "sourceTables": [
+          {
+            "name": "job_mini",
+            "columns": [
+              {
+                "name": "employee_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "department_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "start_date",
+                "type": "TEXT"
+              },
+              {
+                "name": "end_date",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                "2024-01-01",
+                "2025-12-31"
+              ],
+              [
+                1,
+                2,
+                "2025-12-31",
+                null
+              ],
+              [
+                2,
+                1,
+                "2025-01-01",
+                null
+              ],
+              [
+                3,
+                2,
+                "2026-01-01",
+                null
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "独立微型教学数据，不是完整企业数据库查询结果。"
+      },
+      "back": {
+        "answer": ">",
+        "explanation": "调动当天已结束的旧部门不能重复算；未入职人员排除。",
+        "acceptedBlanks": [
+          ">"
+        ],
+        "code": "SELECT employee_id,department_id FROM job_mini WHERE start_date<='2025-12-31' AND (end_date IS NULL OR end_date > '2025-12-31') ORDER BY employee_id",
+        "sqliteCode": "SELECT employee_id,department_id FROM job_mini WHERE start_date<='2025-12-31' AND (end_date IS NULL OR end_date > '2025-12-31') ORDER BY employee_id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "employee_id",
+            "department_id"
+          ],
+          "rows": [
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              1
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "月末人员规模与变动",
+        "代码填空"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "deac1fbbec74a750417d2c4bd6ce2831d032c763f8e9e6beec7b44fd617baf4c",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "businessTaskId": "BP21",
+      "databaseRef": "hr",
+      "businessQuestionId": "q0271",
+      "fixtureIds": [
+        "fc0169-demo"
+      ],
+      "fixturePath": "fixtures/fc0169.json",
+      "referenceTopicNames": [
+        "月末人员规模与变动",
+        "人力资源：指定日期在职人数"
+      ],
+      "businessResource": {
+        "id": "BP21",
+        "title": "月末人员规模与变动",
+        "projectId": "hr",
+        "datasetId": "hr-v2",
+        "taskQuestionId": "q0271",
+        "taskDifficulty": "中等",
+        "sourceTables": [
+          "calendar_days",
+          "departments",
+          "employment_history"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0169.sql"
+    },
+    {
+      "id": "fc0170",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-52",
+        "kp19-24"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-52",
+        "kp19-24"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0272"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "困难",
+      "front": {
+        "question": "三个月离职人数分别1、2、0，月平均在职人数10、20、30。滚动三月率为何不是直接平均单月离职率？",
+        "dataNote": "口径记忆卡；不要求执行企业库查询。涉及的数值为独立教学假设。"
+      },
+      "back": {
+        "answer": "按本任务口径，滚动三月率是(1+2+0)/(10+20+30)=5%。",
+        "explanation": "单月比例的分母不同，简单平均会给不同人数的月份相同权重。期初期末平均人数口径需固定。"
+      },
+      "tags": [
+        "月度离职率与趋势",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "businessTaskId": "BP22",
+      "databaseRef": "hr",
+      "businessQuestionId": "q0272",
+      "referenceTopicNames": [
+        "月度离职率与趋势",
+        "人力资源：期间离职率"
+      ],
+      "businessResource": {
+        "id": "BP22",
+        "title": "月度离职率与趋势",
+        "projectId": "hr",
+        "datasetId": "hr-v2",
+        "taskQuestionId": "q0272",
+        "taskDifficulty": "困难",
+        "sourceTables": [
+          "calendar_days",
+          "departments",
+          "employees",
+          "employment_history"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0171",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-53",
+        "kp19-23"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-53",
+        "kp19-23"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0273"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "困难",
+      "front": {
+        "question": "回忆在部门×岗位分区内计算薪资组均值的窗口结构。样本为同月基础薪资，只输出部门1岗位1。",
+        "sourceTables": [
+          {
+            "name": "salary_mini",
+            "columns": [
+              {
+                "name": "employee_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "department_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "position_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "base_cents",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                1,
+                100000
+              ],
+              [
+                2,
+                1,
+                1,
+                120000
+              ],
+              [
+                3,
+                1,
+                1,
+                140000
+              ],
+              [
+                4,
+                1,
+                2,
+                300000
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "独立微型教学数据，不是完整企业数据库查询结果。"
+      },
+      "back": {
+        "answer": "AVG(base_cents) OVER(PARTITION BY department_id,position_id)",
+        "explanation": "同岗位可比较组至少3人；异常是偏离组均值的候选，非不公平或违规结论。",
+        "code": "SELECT employee_id,AVG(base_cents) OVER(PARTITION BY department_id,position_id) AS group_mean FROM salary_mini WHERE department_id=1 AND position_id=1 ORDER BY employee_id",
+        "sqliteCode": "SELECT employee_id,AVG(base_cents) OVER(PARTITION BY department_id,position_id) AS group_mean FROM salary_mini WHERE department_id=1 AND position_id=1 ORDER BY employee_id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "employee_id",
+            "group_mean"
+          ],
+          "rows": [
+            [
+              1,
+              120000.0
+            ],
+            [
+              2,
+              120000.0
+            ],
+            [
+              3,
+              120000.0
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "同岗位薪资分布与异常",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "bd7ec78ea296791188c53c5e1687c2a502f1a920aca913b2753c4079f5215cfc",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "businessTaskId": "BP23",
+      "databaseRef": "hr",
+      "businessQuestionId": "q0273",
+      "fixtureIds": [
+        "fc0171-demo"
+      ],
+      "fixturePath": "fixtures/fc0171.json",
+      "referenceTopicNames": [
+        "同岗位薪资分布与异常",
+        "人力资源：部门内薪资排名"
+      ],
+      "businessResource": {
+        "id": "BP23",
+        "title": "同岗位薪资分布与异常",
+        "projectId": "hr",
+        "datasetId": "hr-v2",
+        "taskQuestionId": "q0273",
+        "taskDifficulty": "困难",
+        "sourceTables": [
+          "v_staff_month"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0171.sql"
+    },
+    {
+      "id": "fc0172",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-54"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-54"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0274"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "困难",
+      "front": {
+        "question": "任务中的估算加班成本为什么先按员工月舍入到分，再按部门求和？",
+        "dataNote": "口径记忆卡；不要求执行企业库查询。涉及的数值为独立教学假设。"
+      },
+      "back": {
+        "answer": "避免不同员工成本计算与舍入粒度不一致。",
+        "explanation": "基础时薪按月薪/176小时估算，加班1.5倍、按分钟换算，逐员工月舍入后汇总。本案例并非实际法定工资规则。"
+      },
+      "tags": [
+        "部门人力成本与加班",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "businessTaskId": "BP24",
+      "databaseRef": "hr",
+      "businessQuestionId": "q0274",
+      "referenceTopicNames": [
+        "部门人力成本与加班"
+      ],
+      "businessResource": {
+        "id": "BP24",
+        "title": "部门人力成本与加班",
+        "projectId": "hr",
+        "datasetId": "hr-v2",
+        "taskQuestionId": "q0274",
+        "taskDifficulty": "困难",
+        "sourceTables": [
+          "v_staff_month"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0173",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-55",
+        "kp19-26"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-55"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp19-26"
+      ],
+      "relatedQuestionIds": [
+        "q0275"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "挑战",
+      "front": {
+        "question": "90日留任率与180日留任率可以直接共用同一入职人数分母吗？",
+        "dataNote": "口径记忆卡；不要求执行企业库查询。涉及的数值为独立教学假设。"
+      },
+      "back": {
+        "answer": "不一定。各自只纳入达到该完整观察窗口的人。",
+        "explanation": "终止日在观察日等于已不在职；分母需分别限制90日和180日成熟人群，按首次任职部门归属。"
+      },
+      "tags": [
+        "入职同期群90及180日留任",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "businessTaskId": "BP25",
+      "databaseRef": "hr",
+      "businessQuestionId": "q0275",
+      "referenceTopicNames": [
+        "入职同期群90及180日留任"
+      ],
+      "businessResource": {
+        "id": "BP25",
+        "title": "入职同期群90及180日留任",
+        "projectId": "hr",
+        "datasetId": "hr-v2",
+        "taskQuestionId": "q0275",
+        "taskDifficulty": "挑战",
+        "sourceTables": [
+          "calendar_days",
+          "employees",
+          "employment_history"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0174",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-56"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-56"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0276"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "错误纠正",
+      "difficulty": "困难",
+      "front": {
+        "question": "要求获取同供应商、同商品的上一笔采购价格。修正把所有供应商混在同一个窗口的写法。",
+        "code": "SELECT po_item_id,LAG(unit_price_cents) OVER(PARTITION BY product_id ORDER BY order_date,po_item_id) AS prev FROM price_history ORDER BY po_item_id",
+        "sourceTables": [
+          {
+            "name": "price_history",
+            "columns": [
+              {
+                "name": "po_item_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "supplier_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "product_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "order_date",
+                "type": "TEXT"
+              },
+              {
+                "name": "unit_price_cents",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                1,
+                "2025-01-01",
+                100
+              ],
+              [
+                2,
+                2,
+                1,
+                "2025-01-02",
+                130
+              ],
+              [
+                3,
+                1,
+                1,
+                "2025-01-03",
+                110
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "独立微型教学数据，不是完整企业数据库查询结果。"
+      },
+      "back": {
+        "answer": "改用背面的修正语句。",
+        "explanation": "供应商不同不属于同一历史价格系列；日期和采购行编号共同保证顺序。",
+        "code": "SELECT po_item_id,LAG(unit_price_cents) OVER(PARTITION BY supplier_id,product_id ORDER BY order_date,po_item_id) AS prev FROM price_history ORDER BY po_item_id",
+        "sqliteCode": "SELECT po_item_id,LAG(unit_price_cents) OVER(PARTITION BY supplier_id,product_id ORDER BY order_date,po_item_id) AS prev FROM price_history ORDER BY po_item_id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "po_item_id",
+            "prev"
+          ],
+          "rows": [
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              3,
+              100
+            ]
+          ]
+        },
+        "wrongResult": {
+          "kind": "result",
+          "columns": [
+            "po_item_id",
+            "prev"
+          ],
+          "rows": [
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              100
+            ],
+            [
+              3,
+              130
+            ]
+          ]
+        },
+        "correctionReason": "供应商不同不属于同一历史价格系列；日期和采购行编号共同保证顺序。"
+      },
+      "tags": [
+        "采购价格与合同、历史价格比较",
+        "错误纠正"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "5f9e128046e8638925b337a233250ec0cb880f76710445dc0f1600795e985a55",
+        "mysqlNative": "未执行",
+        "wrongRejected": true,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "businessTaskId": "BP26",
+      "databaseRef": "procurement",
+      "businessQuestionId": "q0276",
+      "fixtureIds": [
+        "fc0174-demo"
+      ],
+      "fixturePath": "fixtures/fc0174.json",
+      "referenceTopicNames": [
+        "采购价格与合同、历史价格比较"
+      ],
+      "businessResource": {
+        "id": "BP26",
+        "title": "采购价格与合同、历史价格比较",
+        "projectId": "procurement",
+        "datasetId": "procurement-v2",
+        "taskQuestionId": "q0276",
+        "taskDifficulty": "中等",
+        "sourceTables": [
+          "purchase_order_items",
+          "purchase_orders",
+          "supplier_contracts"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0174.sql"
+    },
+    {
+      "id": "fc0175",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-57",
+        "kp19-28",
+        "kp19-29"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-57",
+        "kp19-28",
+        "kp19-29"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0277",
+        "q0280",
+        "q0285"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "困难",
+      "front": {
+        "question": "供应商某采购行订购10件，承诺日之前收8件，其中拒收1件，年底再合格收3件。准时足量与最终完整分别如何判断？",
+        "dataNote": "口径记忆卡；不要求执行企业库查询。涉及的数值为独立教学假设。"
+      },
+      "back": {
+        "answer": "准时足量=否（7件）；最终完整=是（10件合格）。",
+        "explanation": "拒收量不能计入合格收货。准时与完整分别使用承诺日和年底截点；质量合格率另用合格件数/真实收货件数。"
+      },
+      "tags": [
+        "供应商准时、完整交付与质量",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "businessTaskId": "BP27",
+      "databaseRef": "procurement",
+      "businessQuestionId": "q0277",
+      "referenceTopicNames": [
+        "供应商准时、完整交付与质量",
+        "采购：供应商履约率",
+        "采购：交付延误与未到齐"
+      ],
+      "businessResource": {
+        "id": "BP27",
+        "title": "供应商准时、完整交付与质量",
+        "projectId": "procurement",
+        "datasetId": "procurement-v2",
+        "taskQuestionId": "q0277",
+        "taskDifficulty": "困难",
+        "sourceTables": [
+          "v_po_lines"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0176",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-58",
+        "kp19-06",
+        "kp19-30"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-58",
+        "kp19-06",
+        "kp19-30"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0278",
+        "q0286",
+        "q0292"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "错误纠正",
+      "difficulty": "困难",
+      "front": {
+        "question": "每采购行分别比较合格收货量和开票量。修正两张明细直接连接造成的数量放大。",
+        "code": "SELECT p.po_item_id,SUM(r.quantity_received-r.quantity_rejected) AS accepted,SUM(b.quantity_billed) AS billed FROM po_mini p LEFT JOIN delivery_mini r ON r.po_item_id=p.po_item_id LEFT JOIN bill_mini b ON b.po_item_id=p.po_item_id GROUP BY p.po_item_id ORDER BY p.po_item_id",
+        "sourceTables": [
+          {
+            "name": "po_mini",
+            "columns": [
+              {
+                "name": "po_item_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "quantity_ordered",
+                "type": "INTEGER"
+              },
+              {
+                "name": "unit_price_cents",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                10,
+                100
+              ],
+              [
+                2,
+                4,
+                200
+              ]
+            ],
+            "constraints": ""
+          },
+          {
+            "name": "delivery_mini",
+            "columns": [
+              {
+                "name": "receipt_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "po_item_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "quantity_received",
+                "type": "INTEGER"
+              },
+              {
+                "name": "quantity_rejected",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                4,
+                0
+              ],
+              [
+                2,
+                1,
+                5,
+                1
+              ],
+              [
+                3,
+                2,
+                4,
+                0
+              ]
+            ],
+            "constraints": ""
+          },
+          {
+            "name": "bill_mini",
+            "columns": [
+              {
+                "name": "bill_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "po_item_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "quantity_billed",
+                "type": "INTEGER"
+              },
+              {
+                "name": "unit_price_cents",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                3,
+                100
+              ],
+              [
+                2,
+                1,
+                5,
+                110
+              ],
+              [
+                3,
+                2,
+                4,
+                200
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "独立微型教学数据，不是完整企业数据库查询结果。"
+      },
+      "back": {
+        "answer": "改用背面的修正语句。",
+        "explanation": "收货和开票均为一对多，先按采购行独立汇总。数量一致仍需核对金额：示例行1发票价格有差异。",
+        "code": "WITH r AS (SELECT po_item_id,SUM(quantity_received-quantity_rejected) AS accepted FROM delivery_mini GROUP BY po_item_id),b AS (SELECT po_item_id,SUM(quantity_billed) AS billed FROM bill_mini GROUP BY po_item_id) SELECT p.po_item_id,COALESCE(r.accepted,0) AS accepted,COALESCE(b.billed,0) AS billed FROM po_mini p LEFT JOIN r ON r.po_item_id=p.po_item_id LEFT JOIN b ON b.po_item_id=p.po_item_id ORDER BY p.po_item_id",
+        "sqliteCode": "WITH r AS (SELECT po_item_id,SUM(quantity_received-quantity_rejected) AS accepted FROM delivery_mini GROUP BY po_item_id),b AS (SELECT po_item_id,SUM(quantity_billed) AS billed FROM bill_mini GROUP BY po_item_id) SELECT p.po_item_id,COALESCE(r.accepted,0) AS accepted,COALESCE(b.billed,0) AS billed FROM po_mini p LEFT JOIN r ON r.po_item_id=p.po_item_id LEFT JOIN b ON b.po_item_id=p.po_item_id ORDER BY p.po_item_id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "po_item_id",
+            "accepted",
+            "billed"
+          ],
+          "rows": [
+            [
+              1,
+              8,
+              8
+            ],
+            [
+              2,
+              4,
+              4
+            ]
+          ]
+        },
+        "wrongResult": {
+          "kind": "result",
+          "columns": [
+            "po_item_id",
+            "accepted",
+            "billed"
+          ],
+          "rows": [
+            [
+              1,
+              16,
+              16
+            ],
+            [
+              2,
+              4,
+              4
+            ]
+          ]
+        },
+        "correctionReason": "收货和开票均为一对多，先按采购行独立汇总。数量一致仍需核对金额：示例行1发票价格有差异。"
+      },
+      "tags": [
+        "采购、收货、发票三方核对",
+        "错误纠正"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "4588ab62a1e07d11018bdd77409efd2790b55436da7e32590f7e7bcf61cb3fe0",
+        "mysqlNative": "未执行",
+        "wrongRejected": true,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "businessTaskId": "BP28",
+      "databaseRef": "procurement",
+      "businessQuestionId": "q0278",
+      "fixtureIds": [
+        "fc0176-demo"
+      ],
+      "fixturePath": "fixtures/fc0176.json",
+      "referenceTopicNames": [
+        "采购、收货、发票三方核对",
+        "采购：订购与收货差异",
+        "采购：发票与订单金额核对"
+      ],
+      "businessResource": {
+        "id": "BP28",
+        "title": "采购、收货、发票三方核对",
+        "projectId": "procurement",
+        "datasetId": "procurement-v2",
+        "taskQuestionId": "q0278",
+        "taskDifficulty": "困难",
+        "sourceTables": [
+          "v_po_lines"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0176.sql"
+    },
+    {
+      "id": "fc0177",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-59"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-59"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0279"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "困难",
+      "front": {
+        "question": "比较供应商采购单价时，一笔买1件单价100，另一笔买9件单价80，应使用简单平均90吗？",
+        "dataNote": "口径记忆卡；不要求执行企业库查询。涉及的数值为独立教学假设。"
+      },
+      "back": {
+        "answer": "不应；采购数量加权平均为(1×100+9×80)/10=82。",
+        "explanation": "实际采购金额除订购数量才反映总体单价。仅比较同商品至少两家供应商，并以最低加权价为基准。"
+      },
+      "tags": [
+        "同商品跨供应商采购价差",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "businessTaskId": "BP29",
+      "databaseRef": "procurement",
+      "businessQuestionId": "q0279",
+      "referenceTopicNames": [
+        "同商品跨供应商采购价差"
+      ],
+      "businessResource": {
+        "id": "BP29",
+        "title": "同商品跨供应商采购价差",
+        "projectId": "procurement",
+        "datasetId": "procurement-v2",
+        "taskQuestionId": "q0279",
+        "taskDifficulty": "困难",
+        "sourceTables": [
+          "v_po_lines"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0178",
+      "chapterId": "ch19",
+      "knowledgePointIds": [
+        "kp19-60"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp19-60"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0280"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "挑战",
+      "front": {
+        "question": "供应商综合评价为何要设置最低到期采购行数，并保留缺失质量指标？",
+        "dataNote": "口径记忆卡；不要求执行企业库查询。涉及的数值为独立教学假设。"
+      },
+      "back": {
+        "answer": "避免极少样本造成不稳定排名；没有收货时合格率分母为零。",
+        "explanation": "本任务至少10行，权重为准时足量40%、完整25%、质量20%、合同价格达标15%；质量未知时总分NULL，不擅自补0。"
+      },
+      "tags": [
+        "供应商多指标综合评价",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "businessTaskId": "BP30",
+      "databaseRef": "procurement",
+      "businessQuestionId": "q0280",
+      "referenceTopicNames": [
+        "供应商多指标综合评价"
+      ],
+      "businessResource": {
+        "id": "BP30",
+        "title": "供应商多指标综合评价",
+        "projectId": "procurement",
+        "datasetId": "procurement-v2",
+        "taskQuestionId": "q0280",
+        "taskDifficulty": "挑战",
+        "sourceTables": [
+          "purchase_order_items",
+          "supplier_contracts",
+          "v_po_lines"
+        ],
+        "note": "正式业务数据库关联资源；本卡为口径或微型隔离示例，不直接运行完整实战查询。"
+      },
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    }
+  ]
+}

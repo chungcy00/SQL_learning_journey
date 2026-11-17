@@ -1,0 +1,155 @@
+{
+  "id": "fc0054-demo",
+  "tables": [
+    {
+      "name": "clients",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "name",
+          "type": "TEXT"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "林"
+        ],
+        [
+          2,
+          "陈"
+        ],
+        [
+          3,
+          "周"
+        ],
+        [
+          4,
+          "王"
+        ]
+      ],
+      "constraints": ""
+    },
+    {
+      "name": "sales",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "client_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "store_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "amount",
+          "type": "INTEGER"
+        },
+        {
+          "name": "day",
+          "type": "TEXT"
+        },
+        {
+          "name": "status",
+          "type": "TEXT"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          1,
+          1,
+          40,
+          "2025-01-02",
+          "completed"
+        ],
+        [
+          2,
+          1,
+          1,
+          60,
+          "2025-01-15",
+          "completed"
+        ],
+        [
+          3,
+          2,
+          2,
+          30,
+          "2025-02-01",
+          "completed"
+        ],
+        [
+          4,
+          null,
+          2,
+          0,
+          "2025-02-02",
+          "completed"
+        ],
+        [
+          5,
+          3,
+          1,
+          100,
+          "2025-03-01",
+          "cancelled"
+        ],
+        [
+          6,
+          2,
+          1,
+          60,
+          "2025-03-05",
+          "completed"
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT c.id,s.id AS sale_id FROM clients c LEFT JOIN sales s ON c.id=s.client_id ORDER BY c.id,s.id",
+  "mysqlSql": "SELECT c.id,s.id AS sale_id FROM clients c LEFT JOIN sales s ON c.id=s.client_id ORDER BY c.id,s.id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      2,
+      6
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      4,
+      null
+    ]
+  ],
+  "expectedColumns": [
+    "id",
+    "sale_id"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

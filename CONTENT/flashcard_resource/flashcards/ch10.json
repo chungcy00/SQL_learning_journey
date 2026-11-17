@@ -1,0 +1,1146 @@
+{
+  "chapterId": "ch10",
+  "title": "子查询",
+  "count": 9,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "cards": [
+    {
+      "id": "fc0070",
+      "chapterId": "ch10",
+      "knowledgePointIds": [
+        "kp10-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp10-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0132",
+        "q0133",
+        "q0135"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "中等",
+      "front": {
+        "question": "标量子查询对返回列数和行数有什么要求？"
+      },
+      "back": {
+        "answer": "必须一列，至多一行；零行当作NULL。",
+        "explanation": "MySQL 8.4 多行标量子查询报错；SQLite可能取第一行，不能依赖该差异。"
+      },
+      "tags": [
+        "标量子查询",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 多行标量子查询错误；本地必须额外检查。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "标量子查询"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0071",
+      "chapterId": "ch10",
+      "knowledgePointIds": [
+        "kp10-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp10-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0136",
+        "q0137",
+        "q0138",
+        "q0141",
+        "q0143"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "中等",
+      "front": {
+        "question": "回忆按子查询结果集合筛选商品的语法：与类别A任一已知价格相同。",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "字段 IN (SELECT 单列 FROM 表 WHERE 条件)",
+        "explanation": "IN 判断是否属于子查询值集合，不复制外表记录。",
+        "code": "SELECT id FROM items WHERE price IN (SELECT price FROM items WHERE category='A') ORDER BY id",
+        "sqliteCode": "SELECT id FROM items WHERE price IN (SELECT price FROM items WHERE category='A') ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id"
+          ],
+          "rows": [
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              6
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "IN 与多行子查询",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "b01de9ad0ff187ed259894eedda1f0b4dce17346926b79f601af6086cc489647",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0071-demo"
+      ],
+      "fixturePath": "fixtures/fc0071.json",
+      "referenceTopicNames": [
+        "IN 与多行子查询"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0071.sql"
+    },
+    {
+      "id": "fc0072",
+      "chapterId": "ch10",
+      "knowledgePointIds": [
+        "kp10-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp10-03"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0139",
+        "q0140",
+        "q0142",
+        "q0147",
+        "q0149"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "中等",
+      "front": {
+        "question": "回忆相关存在性查询的结构：查有任意订单的客户。",
+        "sourceTables": [
+          {
+            "name": "clients",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "林"
+              ],
+              [
+                2,
+                "陈"
+              ],
+              [
+                3,
+                "周"
+              ],
+              [
+                4,
+                "王"
+              ]
+            ],
+            "constraints": ""
+          },
+          {
+            "name": "sales",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "client_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "store_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "amount",
+                "type": "INTEGER"
+              },
+              {
+                "name": "day",
+                "type": "TEXT"
+              },
+              {
+                "name": "status",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                1,
+                40,
+                "2025-01-02",
+                "completed"
+              ],
+              [
+                2,
+                1,
+                1,
+                60,
+                "2025-01-15",
+                "completed"
+              ],
+              [
+                3,
+                2,
+                2,
+                30,
+                "2025-02-01",
+                "completed"
+              ],
+              [
+                4,
+                null,
+                2,
+                0,
+                "2025-02-02",
+                "completed"
+              ],
+              [
+                5,
+                3,
+                1,
+                100,
+                "2025-03-01",
+                "cancelled"
+              ],
+              [
+                6,
+                2,
+                1,
+                60,
+                "2025-03-05",
+                "completed"
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "WHERE EXISTS (SELECT 1 FROM 内表 WHERE 内键=外键)",
+        "explanation": "每位客户判断至少一笔匹配订单是否存在。",
+        "code": "SELECT c.id FROM clients c WHERE EXISTS (SELECT 1 FROM sales s WHERE s.client_id=c.id) ORDER BY c.id",
+        "sqliteCode": "SELECT c.id FROM clients c WHERE EXISTS (SELECT 1 FROM sales s WHERE s.client_id=c.id) ORDER BY c.id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id"
+          ],
+          "rows": [
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "相关子查询与 EXISTS",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "6644c60a869e226d0ba4e0885e5fab7a0f37fef09631b448b2992083b57c7c62",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0072-demo"
+      ],
+      "fixturePath": "fixtures/fc0072.json",
+      "referenceTopicNames": [
+        "相关子查询与 EXISTS"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0072.sql"
+    },
+    {
+      "id": "fc0073",
+      "chapterId": "ch10",
+      "knowledgePointIds": [
+        "kp10-02",
+        "kp10-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp10-02",
+        "kp10-03"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0136",
+        "q0137",
+        "q0139",
+        "q0140"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "中等",
+      "front": {
+        "question": "IN 与 EXISTS 用于检查是否存在匹配记录时，关注对象有何不同？"
+      },
+      "back": {
+        "answer": "IN 比较一个值与集合；EXISTS 判断子查询是否有行。",
+        "explanation": "EXISTS 的投影常用1，投影内容不决定存在性；注意NULL语义。"
+      },
+      "tags": [
+        "IN 与多行子查询",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "IN 与多行子查询",
+        "相关子查询与 EXISTS"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0074",
+      "chapterId": "ch10",
+      "knowledgePointIds": [
+        "kp10-04"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp10-04"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0131",
+        "q0144",
+        "q0146"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "中等",
+      "front": {
+        "question": "为什么 NOT IN 的子查询包含 NULL 时可能没有任何结果？"
+      },
+      "back": {
+        "answer": "未匹配值仍需与未知值比较，结果可能是UNKNOWN。",
+        "explanation": "NOT EXISTS 使用相关匹配条件，通常适合表达没有匹配记录。"
+      },
+      "tags": [
+        "NOT EXISTS 与 NOT IN",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "NOT EXISTS 与 NOT IN"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0075",
+      "chapterId": "ch10",
+      "knowledgePointIds": [
+        "kp10-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp10-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0132",
+        "q0133",
+        "q0134"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "中等",
+      "front": {
+        "question": "找价格高于全表平均已知价格的商品，填入平均值函数。",
+        "code": "SELECT id FROM items WHERE price>(SELECT □(price) FROM items) ORDER BY id",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "AVG",
+        "explanation": "子查询无分组，返回一个均值18.8；外层逐行比较。",
+        "acceptedBlanks": [
+          "AVG"
+        ],
+        "code": "SELECT id FROM items WHERE price>(SELECT AVG(price) FROM items) ORDER BY id",
+        "sqliteCode": "SELECT id FROM items WHERE price>(SELECT AVG(price) FROM items) ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id"
+          ],
+          "rows": [
+            [
+              2
+            ],
+            [
+              5
+            ],
+            [
+              6
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "标量子查询",
+        "代码填空"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "fd8861266fdac8bd131c6c693b82dc45d83a35753113a17f60a0672187856c9c",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0075-demo"
+      ],
+      "fixturePath": "fixtures/fc0075.json",
+      "referenceTopicNames": [
+        "标量子查询"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0075.sql"
+    },
+    {
+      "id": "fc0076",
+      "chapterId": "ch10",
+      "knowledgePointIds": [
+        "kp10-04"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp10-04"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0131",
+        "q0144",
+        "q0148",
+        "q0150"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "中等",
+      "front": {
+        "question": "查没有有效订单的门店，填入否定存在谓词。",
+        "code": "SELECT t.id FROM stores t WHERE □ (SELECT 1 FROM sales s WHERE s.store_id=t.id AND s.status='completed') ORDER BY t.id",
+        "sourceTables": [
+          {
+            "name": "stores",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "甲店"
+              ],
+              [
+                2,
+                "乙店"
+              ],
+              [
+                3,
+                "丙店"
+              ]
+            ],
+            "constraints": ""
+          },
+          {
+            "name": "sales",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "client_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "store_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "amount",
+                "type": "INTEGER"
+              },
+              {
+                "name": "day",
+                "type": "TEXT"
+              },
+              {
+                "name": "status",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                1,
+                40,
+                "2025-01-02",
+                "completed"
+              ],
+              [
+                2,
+                1,
+                1,
+                60,
+                "2025-01-15",
+                "completed"
+              ],
+              [
+                3,
+                2,
+                2,
+                30,
+                "2025-02-01",
+                "completed"
+              ],
+              [
+                4,
+                null,
+                2,
+                0,
+                "2025-02-02",
+                "completed"
+              ],
+              [
+                5,
+                3,
+                1,
+                100,
+                "2025-03-01",
+                "cancelled"
+              ],
+              [
+                6,
+                2,
+                1,
+                60,
+                "2025-03-05",
+                "completed"
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "NOT EXISTS",
+        "explanation": "不存在匹配有效订单时保留左表门店；不能用右表行数推断全部门店。",
+        "acceptedBlanks": [
+          "NOT EXISTS"
+        ],
+        "code": "SELECT t.id FROM stores t WHERE NOT EXISTS (SELECT 1 FROM sales s WHERE s.store_id=t.id AND s.status='completed') ORDER BY t.id",
+        "sqliteCode": "SELECT t.id FROM stores t WHERE NOT EXISTS (SELECT 1 FROM sales s WHERE s.store_id=t.id AND s.status='completed') ORDER BY t.id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id"
+          ],
+          "rows": [
+            [
+              3
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "NOT EXISTS 与 NOT IN",
+        "代码填空"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "2a430450d92280add9cfc6f3f25c6600c671ef959640df87ecc6361d1d83b571",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0076-demo"
+      ],
+      "fixturePath": "fixtures/fc0076.json",
+      "referenceTopicNames": [
+        "NOT EXISTS 与 NOT IN"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0076.sql"
+    },
+    {
+      "id": "fc0077",
+      "chapterId": "ch10",
+      "knowledgePointIds": [
+        "kp10-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp10-03"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0139",
+        "q0140"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "结果预测",
+      "difficulty": "中等",
+      "front": {
+        "question": "预测是否存在大于当前商品价格的其他商品。",
+        "code": "SELECT a.id FROM items a WHERE a.price IS NOT NULL AND NOT EXISTS (SELECT 1 FROM items b WHERE b.price>a.price) ORDER BY a.id",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "返回以下结果。",
+        "explanation": "对每个已知价格检查有没有更高值。此处30为最大值。",
+        "code": "SELECT a.id FROM items a WHERE a.price IS NOT NULL AND NOT EXISTS (SELECT 1 FROM items b WHERE b.price>a.price) ORDER BY a.id",
+        "sqliteCode": "SELECT a.id FROM items a WHERE a.price IS NOT NULL AND NOT EXISTS (SELECT 1 FROM items b WHERE b.price>a.price) ORDER BY a.id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id"
+          ],
+          "rows": [
+            [
+              5
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "相关子查询与 EXISTS",
+        "结果预测"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "6508a3a6b0bef8e319fdbe87b2dcd551a930ffc8234d645e4e23c3a3bfc9d076",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0077-demo"
+      ],
+      "fixturePath": "fixtures/fc0077.json",
+      "referenceTopicNames": [
+        "相关子查询与 EXISTS"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0077.sql"
+    },
+    {
+      "id": "fc0078",
+      "chapterId": "ch10",
+      "knowledgePointIds": [
+        "kp10-04"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp10-04"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0131",
+        "q0144",
+        "q0145"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "错误纠正",
+      "difficulty": "中等",
+      "front": {
+        "question": "找没有订单的客户。修正含未知客户编号的 NOT IN 写法。",
+        "code": "SELECT id FROM clients WHERE id NOT IN (SELECT client_id FROM sales) ORDER BY id",
+        "sourceTables": [
+          {
+            "name": "clients",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "林"
+              ],
+              [
+                2,
+                "陈"
+              ],
+              [
+                3,
+                "周"
+              ],
+              [
+                4,
+                "王"
+              ]
+            ],
+            "constraints": ""
+          },
+          {
+            "name": "sales",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "client_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "store_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "amount",
+                "type": "INTEGER"
+              },
+              {
+                "name": "day",
+                "type": "TEXT"
+              },
+              {
+                "name": "status",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                1,
+                40,
+                "2025-01-02",
+                "completed"
+              ],
+              [
+                2,
+                1,
+                1,
+                60,
+                "2025-01-15",
+                "completed"
+              ],
+              [
+                3,
+                2,
+                2,
+                30,
+                "2025-02-01",
+                "completed"
+              ],
+              [
+                4,
+                null,
+                2,
+                0,
+                "2025-02-02",
+                "completed"
+              ],
+              [
+                5,
+                3,
+                1,
+                100,
+                "2025-03-01",
+                "cancelled"
+              ],
+              [
+                6,
+                2,
+                1,
+                60,
+                "2025-03-05",
+                "completed"
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "改用背面的修正语句。",
+        "explanation": "子查询有NULL时 NOT IN 可能传播未知；相关 NOT EXISTS 检查实际匹配。",
+        "code": "SELECT c.id FROM clients c WHERE NOT EXISTS (SELECT 1 FROM sales s WHERE s.client_id=c.id) ORDER BY c.id",
+        "sqliteCode": "SELECT c.id FROM clients c WHERE NOT EXISTS (SELECT 1 FROM sales s WHERE s.client_id=c.id) ORDER BY c.id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id"
+          ],
+          "rows": [
+            [
+              4
+            ]
+          ]
+        },
+        "wrongResult": {
+          "kind": "result",
+          "columns": [
+            "id"
+          ],
+          "rows": []
+        },
+        "correctionReason": "子查询有NULL时 NOT IN 可能传播未知；相关 NOT EXISTS 检查实际匹配。"
+      },
+      "tags": [
+        "NOT EXISTS 与 NOT IN",
+        "错误纠正"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "1d7457ca36f6951446d6a97ffaca1b3da9cc35b71b558c6fc46f8f842858a23f",
+        "mysqlNative": "未执行",
+        "wrongRejected": true,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0078-demo"
+      ],
+      "fixturePath": "fixtures/fc0078.json",
+      "referenceTopicNames": [
+        "NOT EXISTS 与 NOT IN"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0078.sql"
+    }
+  ]
+}

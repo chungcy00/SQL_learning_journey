@@ -1,0 +1,33 @@
+{
+  "id": "q0184-key",
+  "questionId": "q0184",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "仅在最终 SELECT 排序",
+      "explanation": "排序不会限制递归成员产生新行。"
+    },
+    {
+      "id": "B",
+      "text": "在最终 SELECT 添加别名",
+      "explanation": "别名不影响递归收敛。"
+    },
+    {
+      "id": "C",
+      "text": "将初始成员删除",
+      "explanation": "没有锚点无法按预期构造递归结果。"
+    },
+    {
+      "id": "D",
+      "text": "设置可达到的递归终止条件并处理循环",
+      "explanation": "递归需要在合理的数据边界结束。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "D"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

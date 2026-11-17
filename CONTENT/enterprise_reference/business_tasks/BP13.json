@@ -1,0 +1,82 @@
+{
+  "projectId": "ecommerce",
+  "title": "首购月份留存矩阵",
+  "context": "业务经理希望观察首购后的月度复购留存。",
+  "requirements": "线上有效订单；首次购买月为同期群，观察第0至第6月；按首购月与月偏移输出同期群规模、活跃客户与留存率；没有活跃但已观察的月份为0，未来月份不输出。",
+  "grain": "首购月×月偏移",
+  "commonError": "直接COUNT订单会把同一客户的多次复购重复计数。",
+  "executionSteps": [
+    "确定首购月份",
+    "构造可观测月份",
+    "去重客户",
+    "计算留存"
+  ],
+  "difficulty": "困难",
+  "mysqlSql": "WITH a AS (SELECT customer_id,MIN(SUBSTR(order_date,1,7)) cohort FROM v_order_net WHERE channel='online' GROUP BY customer_id), b AS (SELECT cohort,COUNT(*) n FROM a GROUP BY cohort), m AS (SELECT DISTINCT month_key FROM calendar_days), x AS (SELECT b.cohort,m.month_key,b.n,(CAST(SUBSTR(m.month_key,1,4) AS SIGNED)-CAST(SUBSTR(b.cohort,1,4) AS SIGNED))*12+CAST(SUBSTR(m.month_key,6,2) AS SIGNED)-CAST(SUBSTR(b.cohort,6,2) AS SIGNED) k FROM b CROSS JOIN m WHERE m.month_key>=b.cohort), y AS (SELECT a.cohort,SUBSTR(o.order_date,1,7) m,COUNT(DISTINCT o.customer_id) active FROM a JOIN v_order_net o ON o.customer_id=a.customer_id AND o.channel='online' GROUP BY a.cohort,SUBSTR(o.order_date,1,7)) SELECT x.cohort,x.k month_offset,x.n cohort_size,COALESCE(y.active,0) active_customers,ROUND(100.0*COALESCE(y.active,0)/x.n,2) retention_pct FROM x LEFT JOIN y ON y.cohort=x.cohort AND y.m=x.month_key WHERE x.k BETWEEN 0 AND 6 ORDER BY x.cohort,x.k",
+  "sqliteSql": "WITH a AS (SELECT customer_id,MIN(SUBSTR(order_date,1,7)) cohort FROM v_order_net WHERE channel='online' GROUP BY customer_id), b AS (SELECT cohort,COUNT(*) n FROM a GROUP BY cohort), m AS (SELECT DISTINCT month_key FROM calendar_days), x AS (SELECT b.cohort,m.month_key,b.n,(CAST(SUBSTR(m.month_key,1,4) AS INTEGER)-CAST(SUBSTR(b.cohort,1,4) AS INTEGER))*12+CAST(SUBSTR(m.month_key,6,2) AS INTEGER)-CAST(SUBSTR(b.cohort,6,2) AS INTEGER) k FROM b CROSS JOIN m WHERE m.month_key>=b.cohort), y AS (SELECT a.cohort,SUBSTR(o.order_date,1,7) m,COUNT(DISTINCT o.customer_id) active FROM a JOIN v_order_net o ON o.customer_id=a.customer_id AND o.channel='online' GROUP BY a.cohort,SUBSTR(o.order_date,1,7)) SELECT x.cohort,x.k month_offset,x.n cohort_size,COALESCE(y.active,0) active_customers,ROUND(100.0*COALESCE(y.active,0)/x.n,2) retention_pct FROM x LEFT JOIN y ON y.cohort=x.cohort AND y.m=x.month_key WHERE x.k BETWEEN 0 AND 6 ORDER BY x.cohort,x.k",
+  "compatibility": "转换执行",
+  "columns": [
+    "cohort",
+    "month_offset",
+    "cohort_size",
+    "active_customers",
+    "retention_pct"
+  ],
+  "id": "BP13",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-43"
+  ],
+  "datasetId": "ecommerce-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP13.json",
+  "expectedRowCount": 231,
+  "expectedColumns": [
+    "cohort",
+    "month_offset",
+    "cohort_size",
+    "active_customers",
+    "retention_pct"
+  ],
+  "sourceTables": [
+    "calendar_days",
+    "v_order_net"
+  ],
+  "dependencyTables": [
+    "calendar_days",
+    "categories",
+    "customer_sessions",
+    "customers",
+    "order_items",
+    "orders",
+    "products",
+    "promotions",
+    "returns",
+    "stores",
+    "traffic_sources",
+    "v_order_net",
+    "v_sales_lines"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH a AS (SELECT customer_id,MIN(SUBSTR(order_date,1,7)) cohort FROM v_order_net WHERE channel='online' GROUP BY customer_id), b AS (SELECT cohort,COUNT(*) n FROM a GROUP BY cohort), m AS (SELECT DISTINCT month_key FROM calendar_days), x AS (SELECT b.cohort,m.month_key,b.n,(CAST(SUBSTR(m.month_key,1,4) AS SIGNED)-CAST(SUBSTR(b.cohort,1,4) AS SIGNED))*12+CAST(SUBSTR(m.month_key,6,2) AS SIGNED)-CAST(SUBSTR(b.cohort,6,2) AS SIGNED) k FROM b CROSS JOIN m WHERE m.month_key>=b.cohort), y AS (SELECT a.cohort,SUBSTR(o.order_date,1,7) m,COUNT(DISTINCT o.customer_id) active FROM a JOIN v_order_net o ON o.customer_id=a.customer_id AND o.channel='online' GROUP BY a.cohort,SUBSTR(o.order_date,1,7)) SELECT x.cohort,x.k month_offset,x.n cohort_size,COALESCE(y.active,0) active_customers,ROUND(100.0*COALESCE(y.active,0)/x.n,2) retention_pct FROM x LEFT JOIN y ON y.cohort=x.cohort AND y.m=x.month_key WHERE x.k BETWEEN 0 AND 6 ORDER BY x.cohort,x.k",
+      "sqliteSql": "WITH a AS (SELECT customer_id,MIN(SUBSTR(order_date,1,7)) cohort FROM v_order_net WHERE channel='online' GROUP BY customer_id), b AS (SELECT cohort,COUNT(*) n FROM a GROUP BY cohort), m AS (SELECT DISTINCT month_key FROM calendar_days), x AS (SELECT b.cohort,m.month_key,b.n,(CAST(SUBSTR(m.month_key,1,4) AS INTEGER)-CAST(SUBSTR(b.cohort,1,4) AS INTEGER))*12+CAST(SUBSTR(m.month_key,6,2) AS INTEGER)-CAST(SUBSTR(b.cohort,6,2) AS INTEGER) k FROM b CROSS JOIN m WHERE m.month_key>=b.cohort), y AS (SELECT a.cohort,SUBSTR(o.order_date,1,7) m,COUNT(DISTINCT o.customer_id) active FROM a JOIN v_order_net o ON o.customer_id=a.customer_id AND o.channel='online' GROUP BY a.cohort,SUBSTR(o.order_date,1,7)) SELECT x.cohort,x.k month_offset,x.n cohort_size,COALESCE(y.active,0) active_customers,ROUND(100.0*COALESCE(y.active,0)/x.n,2) retention_pct FROM x LEFT JOIN y ON y.cohort=x.cohort AND y.m=x.month_key WHERE x.k BETWEEN 0 AND 6 ORDER BY x.cohort,x.k"
+    }
+  ],
+  "hints": [
+    "确定首购月份",
+    "确定首购月份；构造可观测月份",
+    "重点核对输出粒度：首购月×月偏移"
+  ],
+  "explanation": "确定首购月份；构造可观测月份；去重客户；计算留存。直接COUNT订单会把同一客户的多次复购重复计数。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 106.1
+}

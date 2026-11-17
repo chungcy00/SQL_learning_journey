@@ -1,0 +1,7 @@
+-- 低销量高库存诊断
+-- 原生MySQL 8.4未执行。先从第二部分资源导入对应隔离数据库。
+-- 公开基准参考解；独立执行等价解，不得变动原库。
+WITH s AS (SELECT warehouse_id,product_id,SUM(-quantity_delta) sold FROM stock_movements WHERE movement_type='sale' AND movement_date BETWEEN '2025-10-03' AND '2025-12-31' GROUP BY warehouse_id,product_id) SELECT i.warehouse_id,i.product_id,i.quantity,COALESCE(s.sold,0) sold_units,i.quantity*i.unit_cost_cents stock_value_cents,ROUND(90.0*i.quantity/NULLIF(s.sold,0),2) cover_days FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id LEFT JOIN s ON s.warehouse_id=i.warehouse_id AND s.product_id=i.product_id WHERE p.active=1 AND i.snapshot_date='2025-12-31' AND i.quantity*i.unit_cost_cents>500000 AND COALESCE(s.sold,0)<20 ORDER BY stock_value_cents DESC,i.warehouse_id,i.product_id;
+
+-- 等价解（SQLite已验证，MySQL待复验）
+WITH s AS (SELECT warehouse_id,product_id,SUM(-quantity_delta) sold FROM stock_movements WHERE movement_type='sale' AND (movement_date>='2025-10-03' AND movement_date<='2025-12-31') GROUP BY warehouse_id,product_id) SELECT i.warehouse_id,i.product_id,i.quantity,COALESCE(s.sold,0) sold_units,i.quantity*i.unit_cost_cents stock_value_cents,ROUND(90.0*i.quantity/NULLIF(s.sold,0),2) cover_days FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id LEFT JOIN s ON s.warehouse_id=i.warehouse_id AND s.product_id=i.product_id WHERE p.active=1 AND i.snapshot_date='2025-12-31' AND i.quantity*i.unit_cost_cents>500000 AND COALESCE(s.sold,0)<20 ORDER BY stock_value_cents DESC,i.warehouse_id,i.product_id;

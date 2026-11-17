@@ -1,0 +1,33 @@
+{
+  "id": "q0231-key",
+  "questionId": "q0231",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "只要建立约束就一定有唯一库存主键",
+      "explanation": "该约束没有声明主键或唯一性。"
+    },
+    {
+      "id": "B",
+      "text": "自动将负值改成0",
+      "explanation": "约束不会自动修正数据。"
+    },
+    {
+      "id": "C",
+      "text": "允许NULL但禁止负数",
+      "explanation": "NOT NULL明确排除NULL。"
+    },
+    {
+      "id": "D",
+      "text": "禁止NULL及负库存值进入该字段",
+      "explanation": "NOT NULL排除缺失，CHECK排除不满足的数值。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "D"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

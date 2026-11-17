@@ -1,0 +1,20 @@
+{
+  "id": "fc0092-demo",
+  "tables": [],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT CAST(julianday('2025-03-01')-julianday('2025-02-27') AS INTEGER) AS days",
+  "mysqlSql": "SELECT DATEDIFF('2025-03-01','2025-02-27') AS days",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      2
+    ]
+  ],
+  "expectedColumns": [
+    "days"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

@@ -1,0 +1,33 @@
+{
+  "id": "q0007-key",
+  "questionId": "q0007",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "保留两行，只要日期不同",
+      "explanation": "主键单独唯一，不由其他列决定。"
+    },
+    {
+      "id": "B",
+      "text": "自动把两笔交易的金额相加",
+      "explanation": "主键约束不会触发业务合并。"
+    },
+    {
+      "id": "C",
+      "text": "拒绝产生重复主键的插入",
+      "explanation": "主键唯一且非NULL。"
+    },
+    {
+      "id": "D",
+      "text": "把重复记录的主键自动设为NULL",
+      "explanation": "主键不能为NULL，且未规定自动修改。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "C"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

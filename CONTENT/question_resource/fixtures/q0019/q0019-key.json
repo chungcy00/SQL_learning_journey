@@ -1,0 +1,33 @@
+{
+  "id": "q0019-key",
+  "questionId": "q0019",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "给计算表达式的输出列命名",
+      "explanation": "AS提供结果列别名。"
+    },
+    {
+      "id": "B",
+      "text": "声明一个唯一索引",
+      "explanation": "AS并不创建索引。"
+    },
+    {
+      "id": "C",
+      "text": "将 products 表内 price 永久改名",
+      "explanation": "查询别名不修改数据表定义。"
+    },
+    {
+      "id": "D",
+      "text": "把 price 字段的实际数据永久打九折",
+      "explanation": "SELECT不更新表内售价。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "A"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

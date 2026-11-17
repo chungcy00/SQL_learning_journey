@@ -1,0 +1,7 @@
+-- 采购价格与合同、历史价格比较
+-- 原生MySQL 8.4未执行。先从第二部分资源导入对应隔离数据库。
+-- 公开基准参考解；独立执行等价解，不得变动原库。
+WITH a AS (SELECT i.po_item_id,p.supplier_id,i.product_id,p.order_date,i.unit_price_cents,c.unit_price_cents contract_cents,LAG(i.unit_price_cents) OVER(PARTITION BY p.supplier_id,i.product_id ORDER BY p.order_date,i.po_item_id) previous_cents FROM purchase_order_items i JOIN purchase_orders p ON p.po_id=i.po_id JOIN supplier_contracts c ON c.contract_id=i.contract_id WHERE p.status<>'cancelled') SELECT po_item_id,supplier_id,product_id,unit_price_cents,contract_cents,unit_price_cents-contract_cents contract_variance_cents,previous_cents,ROUND(100.0*(unit_price_cents-previous_cents)/NULLIF(previous_cents,0),2) change_pct FROM a WHERE order_date BETWEEN '2025-01-01' AND '2025-12-31' ORDER BY po_item_id;
+
+-- 等价解（SQLite已验证，MySQL待复验）
+WITH a AS (SELECT i.po_item_id,p.supplier_id,i.product_id,p.order_date,i.unit_price_cents,c.unit_price_cents contract_cents,LAG(i.unit_price_cents) OVER(PARTITION BY p.supplier_id,i.product_id ORDER BY p.order_date,i.po_item_id) previous_cents FROM purchase_order_items i JOIN purchase_orders p ON p.po_id=i.po_id JOIN supplier_contracts c ON c.contract_id=i.contract_id WHERE p.status<>'cancelled') SELECT po_item_id,supplier_id,product_id,unit_price_cents,contract_cents,unit_price_cents-contract_cents contract_variance_cents,previous_cents,ROUND(100.0*(unit_price_cents-previous_cents)/NULLIF(previous_cents,0),2) change_pct FROM a WHERE (order_date>='2025-01-01' AND order_date<='2025-12-31') ORDER BY po_item_id;

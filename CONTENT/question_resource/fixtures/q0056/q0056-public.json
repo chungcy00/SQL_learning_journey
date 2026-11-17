@@ -1,0 +1,79 @@
+{
+  "visibility": "public",
+  "variant": "public",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "nullable_values",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "value",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "note",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          null,
+          null
+        ],
+        [
+          2,
+          0,
+          ""
+        ],
+        [
+          3,
+          10,
+          "ok"
+        ],
+        [
+          4,
+          10,
+          "ok"
+        ]
+      ]
+    }
+  ],
+  "id": "q0056-public",
+  "questionId": "q0056",
+  "datasetId": "q0056-lesson",
+  "expected": {
+    "columns": [
+      "id",
+      "note"
+    ],
+    "rows": [
+      [
+        1,
+        null
+      ],
+      [
+        2,
+        ""
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "q0094-key",
+  "questionId": "q0094",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "保留客户，右表金额自动为0",
+      "explanation": "空扩展的右字段为NULL而非0。"
+    },
+    {
+      "id": "B",
+      "text": "保留客户一行，右表字段为NULL",
+      "explanation": "左连接为无匹配左行生成空扩展。"
+    },
+    {
+      "id": "C",
+      "text": "自动为客户生成一笔新订单",
+      "explanation": "查询不向订单表插入记录。"
+    },
+    {
+      "id": "D",
+      "text": "删除该客户",
+      "explanation": "这更符合内连接。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "B"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

@@ -1,0 +1,56 @@
+{
+  "id": "lesson-commerce_orders",
+  "table": "commerce_orders",
+  "columns": [
+    {
+      "name": "order_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "customer_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "order_date",
+      "type": "TEXT",
+      "mysqlType": "DATE",
+      "sqliteType": "TEXT"
+    },
+    {
+      "name": "status",
+      "type": "TEXT",
+      "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+      "sqliteType": "TEXT"
+    }
+  ],
+  "rows": [
+    [
+      1,
+      1,
+      "2026-01-01",
+      "completed"
+    ],
+    [
+      2,
+      1,
+      "2026-02-01",
+      "completed"
+    ],
+    [
+      3,
+      2,
+      "2026-02-01",
+      "completed"
+    ],
+    [
+      4,
+      3,
+      "2026-02-02",
+      "cancelled"
+    ]
+  ]
+}

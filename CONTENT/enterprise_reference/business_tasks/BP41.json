@@ -1,0 +1,85 @@
+{
+  "projectId": "enterprise",
+  "title": "采购承诺、收货、开票及付款敞口",
+  "context": "采购＋财务联合分析：管理层要求以同一企业口径核对业务数据。",
+  "requirements": "截至2025年底每供应商，采购订单金额、实际合格收货计价、发票金额、实付及未付余额；两套数据分别按供应商汇总，保留无采购供应商。",
+  "grain": "供应商",
+  "commonError": "采购行和发票行直接连接会重复计入付款。",
+  "executionSteps": [
+    "聚合采购行和发票余额",
+    "匹配供应商",
+    "形成资金敞口"
+  ],
+  "difficulty": "困难",
+  "crossGroup": "采购＋财务",
+  "mysqlSql": "WITH a AS (SELECT supplier_id,SUM(ordered_cents) ordered,SUM(accepted*unit_price_cents) received FROM v_po_lines GROUP BY supplier_id), b AS (SELECT supplier_id,SUM(billed_cents) billed,SUM(paid_cents) paid,SUM(balance_cents) balance FROM v_invoice_balance GROUP BY supplier_id) SELECT s.supplier_id,COALESCE(a.ordered,0) ordered_cents,COALESCE(a.received,0) received_cents,COALESCE(b.billed,0) billed_cents,COALESCE(b.paid,0) paid_cents,COALESCE(b.balance,0) balance_cents FROM suppliers s LEFT JOIN a ON a.supplier_id=s.supplier_id LEFT JOIN b ON b.supplier_id=s.supplier_id ORDER BY balance_cents DESC,s.supplier_id",
+  "sqliteSql": "WITH a AS (SELECT supplier_id,SUM(ordered_cents) ordered,SUM(accepted*unit_price_cents) received FROM v_po_lines GROUP BY supplier_id), b AS (SELECT supplier_id,SUM(billed_cents) billed,SUM(paid_cents) paid,SUM(balance_cents) balance FROM v_invoice_balance GROUP BY supplier_id) SELECT s.supplier_id,COALESCE(a.ordered,0) ordered_cents,COALESCE(a.received,0) received_cents,COALESCE(b.billed,0) billed_cents,COALESCE(b.paid,0) paid_cents,COALESCE(b.balance,0) balance_cents FROM suppliers s LEFT JOIN a ON a.supplier_id=s.supplier_id LEFT JOIN b ON b.supplier_id=s.supplier_id ORDER BY balance_cents DESC,s.supplier_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "supplier_id",
+    "ordered_cents",
+    "received_cents",
+    "billed_cents",
+    "paid_cents",
+    "balance_cents"
+  ],
+  "id": "BP41",
+  "chapterId": "ch20",
+  "knowledgePointIds": [
+    "kp20-15"
+  ],
+  "datasetId": "enterprise-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP41.json",
+  "expectedRowCount": 60,
+  "expectedColumns": [
+    "supplier_id",
+    "ordered_cents",
+    "received_cents",
+    "billed_cents",
+    "paid_cents",
+    "balance_cents"
+  ],
+  "sourceTables": [
+    "suppliers",
+    "v_invoice_balance",
+    "v_po_lines"
+  ],
+  "dependencyTables": [
+    "categories",
+    "goods_receipts",
+    "products",
+    "purchase_order_items",
+    "purchase_orders",
+    "supplier_contracts",
+    "supplier_invoice_items",
+    "supplier_invoices",
+    "supplier_payments",
+    "suppliers",
+    "v_invoice_balance",
+    "v_po_lines",
+    "warehouses"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH a AS (SELECT supplier_id,SUM(ordered_cents) ordered,SUM(accepted*unit_price_cents) received FROM v_po_lines GROUP BY supplier_id), b AS (SELECT supplier_id,SUM(billed_cents) billed,SUM(paid_cents) paid,SUM(balance_cents) balance FROM v_invoice_balance GROUP BY supplier_id) SELECT s.supplier_id,COALESCE(a.ordered,0) ordered_cents,COALESCE(a.received,0) received_cents,COALESCE(b.billed,0) billed_cents,COALESCE(b.paid,0) paid_cents,COALESCE(b.balance,0) balance_cents FROM suppliers s LEFT JOIN a ON a.supplier_id=s.supplier_id LEFT JOIN b ON b.supplier_id=s.supplier_id ORDER BY balance_cents DESC,s.supplier_id",
+      "sqliteSql": "WITH a AS (SELECT supplier_id,SUM(ordered_cents) ordered,SUM(accepted*unit_price_cents) received FROM v_po_lines GROUP BY supplier_id), b AS (SELECT supplier_id,SUM(billed_cents) billed,SUM(paid_cents) paid,SUM(balance_cents) balance FROM v_invoice_balance GROUP BY supplier_id) SELECT s.supplier_id,COALESCE(a.ordered,0) ordered_cents,COALESCE(a.received,0) received_cents,COALESCE(b.billed,0) billed_cents,COALESCE(b.paid,0) paid_cents,COALESCE(b.balance,0) balance_cents FROM suppliers s LEFT JOIN a ON a.supplier_id=s.supplier_id LEFT JOIN b ON b.supplier_id=s.supplier_id ORDER BY balance_cents DESC,s.supplier_id"
+    }
+  ],
+  "hints": [
+    "聚合采购行和发票余额",
+    "聚合采购行和发票余额；匹配供应商",
+    "重点核对输出粒度：供应商"
+  ],
+  "explanation": "聚合采购行和发票余额；匹配供应商；形成资金敞口。采购行和发票行直接连接会重复计入付款。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 41.5
+}

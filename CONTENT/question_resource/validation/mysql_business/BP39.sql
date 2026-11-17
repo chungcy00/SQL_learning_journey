@@ -1,0 +1,7 @@
+-- 订单结算与收入核对
+-- 原生MySQL 8.4未执行。先从第二部分资源导入对应隔离数据库。
+-- 公开基准参考解；独立执行等价解，不得变动原库。
+WITH a AS (SELECT order_id,SUM(amount_cents) paid FROM payments WHERE status='settled' AND payment_date<='2025-12-31' GROUP BY order_id), b AS (SELECT i.order_id,SUM(r.refund_cents) refunded FROM returns r JOIN order_items i ON i.order_item_id=r.order_item_id WHERE r.return_date<='2025-12-31' GROUP BY i.order_id) SELECT o.order_id,o.net_cents,COALESCE(a.paid,0)-COALESCE(b.refunded,0) cash_net_cents,COALESCE(a.paid,0)-COALESCE(b.refunded,0)-o.net_cents difference_cents FROM v_order_net o LEFT JOIN a ON a.order_id=o.order_id LEFT JOIN b ON b.order_id=o.order_id WHERE o.order_date BETWEEN '2025-01-01' AND '2025-12-31' AND COALESCE(a.paid,0)-COALESCE(b.refunded,0)<>o.net_cents ORDER BY o.order_id;
+
+-- 等价解（SQLite已验证，MySQL待复验）
+WITH a AS (SELECT order_id,SUM(amount_cents) paid FROM payments WHERE status='settled' AND payment_date<='2025-12-31' GROUP BY order_id), b AS (SELECT i.order_id,SUM(r.refund_cents) refunded FROM returns r JOIN order_items i ON i.order_item_id=r.order_item_id WHERE r.return_date<='2025-12-31' GROUP BY i.order_id) SELECT o.order_id,o.net_cents,COALESCE(a.paid,0)-COALESCE(b.refunded,0) cash_net_cents,COALESCE(a.paid,0)-COALESCE(b.refunded,0)-o.net_cents difference_cents FROM v_order_net o LEFT JOIN a ON a.order_id=o.order_id LEFT JOIN b ON b.order_id=o.order_id WHERE (o.order_date>='2025-01-01' AND o.order_date<='2025-12-31') AND COALESCE(a.paid,0)-COALESCE(b.refunded,0)<>o.net_cents ORDER BY o.order_id;

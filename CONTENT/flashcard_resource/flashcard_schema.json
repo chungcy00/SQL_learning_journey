@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "分章节 SQL 闪卡资源",
+  "type": "object",
+  "required": [
+    "chapterId",
+    "title",
+    "count",
+    "schemaVersion",
+    "contentVersion",
+    "cards"
+  ],
+  "properties": {
+    "chapterId": {
+      "type": "string",
+      "pattern": "^ch(0[1-9]|1[0-9]|20)$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "contentVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "chapterId",
+          "knowledgePointIds",
+          "primaryKnowledgePointIds",
+          "relatedQuestionIds",
+          "type",
+          "difficulty",
+          "front",
+          "back",
+          "tags",
+          "supportStatus",
+          "compatibility",
+          "contentVersion",
+          "validation"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^fc[0-9]{4}$"
+          },
+          "chapterId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "knowledgePointIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true,
+            "minItems": 1
+          },
+          "primaryKnowledgePointIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true,
+            "minItems": 1
+          },
+          "relatedQuestionIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true,
+            "minItems": 1
+          },
+          "type": {
+            "enum": [
+              "概念记忆",
+              "语法结构",
+              "用法辨析",
+              "代码填空",
+              "结果预测",
+              "错误纠正"
+            ]
+          },
+          "difficulty": {
+            "enum": [
+              "入门",
+              "简单",
+              "中等",
+              "困难",
+              "挑战"
+            ]
+          },
+          "front": {
+            "type": "object",
+            "required": [
+              "question"
+            ],
+            "properties": {
+              "question": {
+                "type": "string",
+                "minLength": 1
+              },
+              "code": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sourceTables": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "name",
+                    "columns",
+                    "rows"
+                  ]
+                }
+              }
+            }
+          },
+          "back": {
+            "type": "object",
+            "required": [
+              "answer",
+              "explanation"
+            ],
+            "properties": {
+              "answer": {
+                "type": "string",
+                "minLength": 1
+              },
+              "explanation": {
+                "type": "string",
+                "minLength": 1
+              },
+              "code": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sqliteCode": {
+                "type": "string",
+                "minLength": 1
+              },
+              "result": {
+                "type": "object",
+                "required": [
+                  "kind",
+                  "columns",
+                  "rows"
+                ]
+              }
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true,
+            "minItems": 1
+          },
+          "supportStatus": {
+            "enum": [
+              "直接兼容",
+              "转换执行",
+              "仅理论"
+            ]
+          },
+          "compatibility": {
+            "type": "string",
+            "minLength": 1
+          },
+          "contentVersion": {
+            "type": "string",
+            "minLength": 1
+          },
+          "validation": {
+            "type": "object",
+            "required": [
+              "kind",
+              "status",
+              "mysqlNative"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

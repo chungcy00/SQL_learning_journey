@@ -1,0 +1,91 @@
+{
+  "visibility": "hidden",
+  "variant": "empty",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "purchase_items",
+      "columns": [
+        {
+          "name": "po_item_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "po_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "quantity_ordered",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "unit_price",
+          "type": "INTEGER",
+          "mysqlType": "DECIMAL(12,2)",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": []
+    },
+    {
+      "name": "receipts",
+      "columns": [
+        {
+          "name": "receipt_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "po_item_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "receipt_date",
+          "type": "TEXT",
+          "mysqlType": "DATE",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "quantity_received",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": []
+    }
+  ],
+  "id": "q0174-empty",
+  "questionId": "q0174",
+  "datasetId": "q0174-lesson",
+  "expected": {
+    "columns": [
+      "receipt_id",
+      "receipt_ratio"
+    ],
+    "rows": []
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

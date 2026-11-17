@@ -1,0 +1,47 @@
+{
+  "id": "q0261-public",
+  "questionId": "q0261",
+  "visibility": "public",
+  "variant": "public",
+  "kind": "database_delta",
+  "datasetId": "ecommerce-v2",
+  "baseDatabase": "databases/ecommerce/ecommerce.sqlite",
+  "baseSha256": "f5940b0776a7a15f793f1186bb87474a80be94acae79cfc96f7dcfa2f514e279",
+  "patchSql": [],
+  "patchDescription": "不更改上一阶段的正式模拟企业库",
+  "patchRowChanges": 0,
+  "testIsolation": "每次使用全新数据库副本；夹具可故意引入对账差异或改变业务记录，仅用于判题，绝不可写入基准库",
+  "expected": {
+    "columns": [
+      "segment",
+      "customers",
+      "orders",
+      "net_cents",
+      "avg_order_cents"
+    ],
+    "rows": [
+      [
+        "new",
+        766,
+        766,
+        56872765,
+        74246.43
+      ],
+      [
+        "returning",
+        2414,
+        3479,
+        261908145,
+        75282.59
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

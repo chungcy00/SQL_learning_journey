@@ -1,0 +1,74 @@
+{
+  "projectId": "hr",
+  "title": "月末人员规模与变动",
+  "context": "人资经理需要2025年部门月末人数和上月变化。",
+  "requirements": "任职历史使用左闭右开区间；2024-12至2025-12构建部门月末轴，月末人数及净变化；最终输出2025年。调动计入所属部门变化，不等于离职。",
+  "grain": "部门×月",
+  "commonError": "用当前部门回填历史月份会错计调动。",
+  "executionSteps": [
+    "构造月末轴",
+    "匹配生效任职",
+    "计算前月人数",
+    "保留2025"
+  ],
+  "difficulty": "中等",
+  "mysqlSql": "WITH m AS (SELECT month_key,MAX(day) last_day FROM calendar_days WHERE month_key>='2024-12' GROUP BY month_key), a AS (SELECT d.department_id,m.month_key,COUNT(h.employee_id) headcount FROM departments d CROSS JOIN m LEFT JOIN employment_history h ON h.department_id=d.department_id AND h.start_date<=m.last_day AND (h.end_date IS NULL OR h.end_date>m.last_day) GROUP BY d.department_id,m.month_key), b AS (SELECT *,LAG(headcount) OVER(PARTITION BY department_id ORDER BY month_key) prev FROM a) SELECT department_id,month_key,headcount,headcount-prev net_change FROM b WHERE month_key>='2025-01' ORDER BY department_id,month_key",
+  "sqliteSql": "WITH m AS (SELECT month_key,MAX(day) last_day FROM calendar_days WHERE month_key>='2024-12' GROUP BY month_key), a AS (SELECT d.department_id,m.month_key,COUNT(h.employee_id) headcount FROM departments d CROSS JOIN m LEFT JOIN employment_history h ON h.department_id=d.department_id AND h.start_date<=m.last_day AND (h.end_date IS NULL OR h.end_date>m.last_day) GROUP BY d.department_id,m.month_key), b AS (SELECT *,LAG(headcount) OVER(PARTITION BY department_id ORDER BY month_key) prev FROM a) SELECT department_id,month_key,headcount,headcount-prev net_change FROM b WHERE month_key>='2025-01' ORDER BY department_id,month_key",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "department_id",
+    "month_key",
+    "headcount",
+    "net_change"
+  ],
+  "id": "BP21",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-51"
+  ],
+  "datasetId": "hr-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP21.json",
+  "expectedRowCount": 84,
+  "expectedColumns": [
+    "department_id",
+    "month_key",
+    "headcount",
+    "net_change"
+  ],
+  "sourceTables": [
+    "calendar_days",
+    "departments",
+    "employment_history"
+  ],
+  "dependencyTables": [
+    "calendar_days",
+    "departments",
+    "employees",
+    "employment_history",
+    "positions",
+    "stores"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH m AS (SELECT month_key,MAX(day) last_day FROM calendar_days WHERE month_key>='2024-12' GROUP BY month_key), a AS (SELECT d.department_id,m.month_key,COUNT(h.employee_id) headcount FROM departments d CROSS JOIN m LEFT JOIN employment_history h ON h.department_id=d.department_id AND h.start_date<=m.last_day AND (h.end_date IS NULL OR h.end_date>m.last_day) GROUP BY d.department_id,m.month_key), b AS (SELECT *,LAG(headcount) OVER(PARTITION BY department_id ORDER BY month_key) prev FROM a) SELECT department_id,month_key,headcount,headcount-prev net_change FROM b WHERE month_key>='2025-01' ORDER BY department_id,month_key",
+      "sqliteSql": "WITH m AS (SELECT month_key,MAX(day) last_day FROM calendar_days WHERE month_key>='2024-12' GROUP BY month_key), a AS (SELECT d.department_id,m.month_key,COUNT(h.employee_id) headcount FROM departments d CROSS JOIN m LEFT JOIN employment_history h ON h.department_id=d.department_id AND h.start_date<=m.last_day AND (h.end_date IS NULL OR h.end_date>m.last_day) GROUP BY d.department_id,m.month_key), b AS (SELECT *,LAG(headcount) OVER(PARTITION BY department_id ORDER BY month_key) prev FROM a) SELECT department_id,month_key,headcount,headcount-prev net_change FROM b WHERE month_key>='2025-01' ORDER BY department_id,month_key"
+    }
+  ],
+  "hints": [
+    "构造月末轴",
+    "构造月末轴；匹配生效任职",
+    "重点核对输出粒度：部门×月"
+  ],
+  "explanation": "构造月末轴；匹配生效任职；计算前月人数；保留2025。用当前部门回填历史月份会错计调动。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 2.8
+}

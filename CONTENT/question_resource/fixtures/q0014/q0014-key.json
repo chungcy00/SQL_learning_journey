@@ -1,0 +1,33 @@
+{
+  "id": "q0014-key",
+  "questionId": "q0014",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "只读取或计算结果，不改变源表记录",
+      "explanation": "普通查询投影并读取输入关系。"
+    },
+    {
+      "id": "B",
+      "text": "只要使用 AS 就会重命名原表字段",
+      "explanation": "AS只是查询结果或表引用的别名。"
+    },
+    {
+      "id": "C",
+      "text": "必须使用 SELECT * 才能读取数据",
+      "explanation": "也可明确列出需要的字段或表达式。"
+    },
+    {
+      "id": "D",
+      "text": "只要未指定 WHERE 就会删除源表",
+      "explanation": "没有WHERE的SELECT可读取全部记录，不会删除。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "A"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

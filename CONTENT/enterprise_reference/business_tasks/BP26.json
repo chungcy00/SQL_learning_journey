@@ -1,0 +1,82 @@
+{
+  "projectId": "procurement",
+  "title": "采购价格与合同、历史价格比较",
+  "context": "采购人员检查实际采购价是否偏离合同。",
+  "requirements": "2025年非取消采购行；比较合同单价、成交价及同供应商同商品上一采购行的实际单价；上一行按订单日期、行编号；输出合同差价及较上一单变动率。",
+  "grain": "采购行",
+  "commonError": "简单比较未经加权的供应商总价可能混入不同商品。",
+  "executionSteps": [
+    "连接有效合同",
+    "计算历史上一行",
+    "筛年度并比较"
+  ],
+  "difficulty": "中等",
+  "mysqlSql": "WITH a AS (SELECT i.po_item_id,p.supplier_id,i.product_id,p.order_date,i.unit_price_cents,c.unit_price_cents contract_cents,LAG(i.unit_price_cents) OVER(PARTITION BY p.supplier_id,i.product_id ORDER BY p.order_date,i.po_item_id) previous_cents FROM purchase_order_items i JOIN purchase_orders p ON p.po_id=i.po_id JOIN supplier_contracts c ON c.contract_id=i.contract_id WHERE p.status<>'cancelled') SELECT po_item_id,supplier_id,product_id,unit_price_cents,contract_cents,unit_price_cents-contract_cents contract_variance_cents,previous_cents,ROUND(100.0*(unit_price_cents-previous_cents)/NULLIF(previous_cents,0),2) change_pct FROM a WHERE order_date BETWEEN '2025-01-01' AND '2025-12-31' ORDER BY po_item_id",
+  "sqliteSql": "WITH a AS (SELECT i.po_item_id,p.supplier_id,i.product_id,p.order_date,i.unit_price_cents,c.unit_price_cents contract_cents,LAG(i.unit_price_cents) OVER(PARTITION BY p.supplier_id,i.product_id ORDER BY p.order_date,i.po_item_id) previous_cents FROM purchase_order_items i JOIN purchase_orders p ON p.po_id=i.po_id JOIN supplier_contracts c ON c.contract_id=i.contract_id WHERE p.status<>'cancelled') SELECT po_item_id,supplier_id,product_id,unit_price_cents,contract_cents,unit_price_cents-contract_cents contract_variance_cents,previous_cents,ROUND(100.0*(unit_price_cents-previous_cents)/NULLIF(previous_cents,0),2) change_pct FROM a WHERE order_date BETWEEN '2025-01-01' AND '2025-12-31' ORDER BY po_item_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "po_item_id",
+    "supplier_id",
+    "product_id",
+    "unit_price_cents",
+    "contract_cents",
+    "contract_variance_cents",
+    "previous_cents",
+    "change_pct"
+  ],
+  "id": "BP26",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-56"
+  ],
+  "datasetId": "procurement-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP26.json",
+  "expectedRowCount": 3129,
+  "expectedColumns": [
+    "po_item_id",
+    "supplier_id",
+    "product_id",
+    "unit_price_cents",
+    "contract_cents",
+    "contract_variance_cents",
+    "previous_cents",
+    "change_pct"
+  ],
+  "sourceTables": [
+    "purchase_order_items",
+    "purchase_orders",
+    "supplier_contracts"
+  ],
+  "dependencyTables": [
+    "categories",
+    "products",
+    "purchase_order_items",
+    "purchase_orders",
+    "supplier_contracts",
+    "suppliers",
+    "warehouses"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH a AS (SELECT i.po_item_id,p.supplier_id,i.product_id,p.order_date,i.unit_price_cents,c.unit_price_cents contract_cents,LAG(i.unit_price_cents) OVER(PARTITION BY p.supplier_id,i.product_id ORDER BY p.order_date,i.po_item_id) previous_cents FROM purchase_order_items i JOIN purchase_orders p ON p.po_id=i.po_id JOIN supplier_contracts c ON c.contract_id=i.contract_id WHERE p.status<>'cancelled') SELECT po_item_id,supplier_id,product_id,unit_price_cents,contract_cents,unit_price_cents-contract_cents contract_variance_cents,previous_cents,ROUND(100.0*(unit_price_cents-previous_cents)/NULLIF(previous_cents,0),2) change_pct FROM a WHERE order_date BETWEEN '2025-01-01' AND '2025-12-31' ORDER BY po_item_id",
+      "sqliteSql": "WITH a AS (SELECT i.po_item_id,p.supplier_id,i.product_id,p.order_date,i.unit_price_cents,c.unit_price_cents contract_cents,LAG(i.unit_price_cents) OVER(PARTITION BY p.supplier_id,i.product_id ORDER BY p.order_date,i.po_item_id) previous_cents FROM purchase_order_items i JOIN purchase_orders p ON p.po_id=i.po_id JOIN supplier_contracts c ON c.contract_id=i.contract_id WHERE p.status<>'cancelled') SELECT po_item_id,supplier_id,product_id,unit_price_cents,contract_cents,unit_price_cents-contract_cents contract_variance_cents,previous_cents,ROUND(100.0*(unit_price_cents-previous_cents)/NULLIF(previous_cents,0),2) change_pct FROM a WHERE order_date BETWEEN '2025-01-01' AND '2025-12-31' ORDER BY po_item_id"
+    }
+  ],
+  "hints": [
+    "连接有效合同",
+    "连接有效合同；计算历史上一行",
+    "重点核对输出粒度：采购行"
+  ],
+  "explanation": "连接有效合同；计算历史上一行；筛年度并比较。简单比较未经加权的供应商总价可能混入不同商品。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 31.5
+}

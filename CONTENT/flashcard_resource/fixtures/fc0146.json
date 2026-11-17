@@ -1,0 +1,59 @@
+{
+  "id": "fc0146-demo",
+  "tables": [
+    {
+      "name": "category_sales",
+      "columns": [
+        {
+          "name": "category_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "net_cents",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          300
+        ],
+        [
+          2,
+          100
+        ],
+        [
+          3,
+          100
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT category_id,100.0*net_cents/NULLIF(SUM(net_cents) OVER(),0) AS pct FROM category_sales ORDER BY category_id",
+  "mysqlSql": "SELECT category_id,100.0*net_cents/NULLIF(SUM(net_cents) OVER(),0) AS pct FROM category_sales ORDER BY category_id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      60.0
+    ],
+    [
+      2,
+      20.0
+    ],
+    [
+      3,
+      20.0
+    ]
+  ],
+  "expectedColumns": [
+    "category_id",
+    "pct"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

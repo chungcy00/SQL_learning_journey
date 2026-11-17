@@ -1,0 +1,22 @@
+{
+  "id": "fc0084-demo",
+  "tables": [],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT length('茶A') AS chars,length(CAST('茶A' AS BLOB)) AS bytes",
+  "mysqlSql": "SELECT CHAR_LENGTH('茶A') AS chars,LENGTH('茶A') AS bytes",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      2,
+      4
+    ]
+  ],
+  "expectedColumns": [
+    "chars",
+    "bytes"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

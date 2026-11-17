@@ -1,0 +1,75 @@
+{
+  "id": "fc0196-demo",
+  "tables": [
+    {
+      "name": "refund_metric",
+      "columns": [
+        {
+          "name": "source_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "discounted_before_refund_cents",
+          "type": "INTEGER"
+        },
+        {
+          "name": "refund_cents",
+          "type": "INTEGER"
+        },
+        {
+          "name": "after_gross_cents",
+          "type": "INTEGER"
+        },
+        {
+          "name": "returned_cost_cents",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          10000,
+          1500,
+          3000,
+          800
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT source_id,100.0*refund_cents/NULLIF(discounted_before_refund_cents,0) AS refund_pct,after_gross_cents,after_gross_cents+refund_cents-returned_cost_cents AS before_refund_profit FROM refund_metric ORDER BY source_id",
+  "mysqlSql": "SELECT source_id,100.0*refund_cents/NULLIF(discounted_before_refund_cents,0) AS refund_pct,after_gross_cents,after_gross_cents+refund_cents-returned_cost_cents AS before_refund_profit FROM refund_metric ORDER BY source_id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      15.0,
+      3000,
+      3700
+    ],
+    [
+      2,
+      null,
+      0,
+      0
+    ]
+  ],
+  "expectedColumns": [
+    "source_id",
+    "refund_pct",
+    "after_gross_cents",
+    "before_refund_profit"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

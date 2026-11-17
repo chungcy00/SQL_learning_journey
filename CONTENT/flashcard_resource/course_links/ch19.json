@@ -1,0 +1,555 @@
+{
+  "chapterId": "ch19",
+  "contentVersion": "1.0.0",
+  "mergePolicy": "按知识点id只更新relatedFlashcardIds、primaryFlashcardIds，不改课程编号、课文和relatedQuestionIds。",
+  "knowledgePointUpdates": [
+    {
+      "id": "kp19-01",
+      "relatedFlashcardIds": [
+        "fc0149"
+      ],
+      "primaryFlashcardIds": [
+        "fc0149"
+      ]
+    },
+    {
+      "id": "kp19-02",
+      "relatedFlashcardIds": [
+        "fc0155"
+      ],
+      "primaryFlashcardIds": [
+        "fc0155"
+      ]
+    },
+    {
+      "id": "kp19-03",
+      "relatedFlashcardIds": [
+        "fc0141"
+      ],
+      "primaryFlashcardIds": [
+        "fc0141"
+      ]
+    },
+    {
+      "id": "kp19-04",
+      "relatedFlashcardIds": [
+        "fc0165",
+        "fc0166"
+      ],
+      "primaryFlashcardIds": [
+        "fc0165"
+      ]
+    },
+    {
+      "id": "kp19-05",
+      "relatedFlashcardIds": [
+        "fc0169"
+      ],
+      "primaryFlashcardIds": [
+        "fc0169"
+      ]
+    },
+    {
+      "id": "kp19-06",
+      "relatedFlashcardIds": [
+        "fc0142",
+        "fc0176"
+      ],
+      "primaryFlashcardIds": [
+        "fc0176"
+      ]
+    },
+    {
+      "id": "kp19-07",
+      "relatedFlashcardIds": [
+        "fc0146",
+        "fc0151"
+      ],
+      "primaryFlashcardIds": [
+        "fc0146"
+      ]
+    },
+    {
+      "id": "kp19-08",
+      "relatedFlashcardIds": [
+        "fc0150"
+      ],
+      "primaryFlashcardIds": [
+        "fc0150"
+      ]
+    },
+    {
+      "id": "kp19-09",
+      "relatedFlashcardIds": [
+        "fc0143"
+      ],
+      "primaryFlashcardIds": [
+        "fc0143"
+      ]
+    },
+    {
+      "id": "kp19-10",
+      "relatedFlashcardIds": [
+        "fc0146"
+      ],
+      "primaryFlashcardIds": [
+        "fc0146"
+      ]
+    },
+    {
+      "id": "kp19-11",
+      "relatedFlashcardIds": [
+        "fc0148"
+      ],
+      "primaryFlashcardIds": [
+        "fc0148"
+      ]
+    },
+    {
+      "id": "kp19-12",
+      "relatedFlashcardIds": [
+        "fc0156",
+        "fc0158"
+      ],
+      "primaryFlashcardIds": [
+        "fc0156"
+      ]
+    },
+    {
+      "id": "kp19-13",
+      "relatedFlashcardIds": [
+        "fc0148"
+      ],
+      "primaryFlashcardIds": [
+        "fc0148"
+      ]
+    },
+    {
+      "id": "kp19-14",
+      "relatedFlashcardIds": [
+        "fc0154"
+      ],
+      "primaryFlashcardIds": [
+        "fc0154"
+      ]
+    },
+    {
+      "id": "kp19-15",
+      "relatedFlashcardIds": [
+        "fc0159"
+      ],
+      "primaryFlashcardIds": [
+        "fc0159"
+      ]
+    },
+    {
+      "id": "kp19-16",
+      "relatedFlashcardIds": [
+        "fc0160"
+      ],
+      "primaryFlashcardIds": [
+        "fc0160"
+      ]
+    },
+    {
+      "id": "kp19-17",
+      "relatedFlashcardIds": [
+        "fc0161"
+      ],
+      "primaryFlashcardIds": [
+        "fc0161"
+      ]
+    },
+    {
+      "id": "kp19-18",
+      "relatedFlashcardIds": [
+        "fc0163"
+      ],
+      "primaryFlashcardIds": [
+        "fc0163"
+      ]
+    },
+    {
+      "id": "kp19-19",
+      "relatedFlashcardIds": [
+        "fc0144",
+        "fc0164"
+      ],
+      "primaryFlashcardIds": [
+        "fc0144"
+      ]
+    },
+    {
+      "id": "kp19-20",
+      "relatedFlashcardIds": [
+        "fc0144"
+      ],
+      "primaryFlashcardIds": [
+        "fc0144"
+      ]
+    },
+    {
+      "id": "kp19-21",
+      "relatedFlashcardIds": [
+        "fc0168"
+      ],
+      "primaryFlashcardIds": [
+        "fc0168"
+      ]
+    },
+    {
+      "id": "kp19-22",
+      "relatedFlashcardIds": [
+        "fc0164"
+      ],
+      "primaryFlashcardIds": [
+        "fc0164"
+      ]
+    },
+    {
+      "id": "kp19-23",
+      "relatedFlashcardIds": [
+        "fc0171"
+      ],
+      "primaryFlashcardIds": [
+        "fc0171"
+      ]
+    },
+    {
+      "id": "kp19-24",
+      "relatedFlashcardIds": [
+        "fc0170"
+      ],
+      "primaryFlashcardIds": [
+        "fc0170"
+      ]
+    },
+    {
+      "id": "kp19-25",
+      "relatedFlashcardIds": [
+        "fc0145"
+      ],
+      "primaryFlashcardIds": [
+        "fc0145"
+      ]
+    },
+    {
+      "id": "kp19-26",
+      "relatedFlashcardIds": [
+        "fc0147",
+        "fc0173"
+      ],
+      "primaryFlashcardIds": [
+        "fc0147"
+      ]
+    },
+    {
+      "id": "kp19-27",
+      "relatedFlashcardIds": [
+        "fc0142"
+      ],
+      "primaryFlashcardIds": [
+        "fc0142"
+      ]
+    },
+    {
+      "id": "kp19-28",
+      "relatedFlashcardIds": [
+        "fc0158",
+        "fc0175"
+      ],
+      "primaryFlashcardIds": [
+        "fc0175"
+      ]
+    },
+    {
+      "id": "kp19-29",
+      "relatedFlashcardIds": [
+        "fc0175"
+      ],
+      "primaryFlashcardIds": [
+        "fc0175"
+      ]
+    },
+    {
+      "id": "kp19-30",
+      "relatedFlashcardIds": [
+        "fc0142",
+        "fc0176"
+      ],
+      "primaryFlashcardIds": [
+        "fc0176"
+      ]
+    },
+    {
+      "id": "kp19-31",
+      "relatedFlashcardIds": [
+        "fc0149"
+      ],
+      "primaryFlashcardIds": [
+        "fc0149"
+      ]
+    },
+    {
+      "id": "kp19-32",
+      "relatedFlashcardIds": [
+        "fc0150"
+      ],
+      "primaryFlashcardIds": [
+        "fc0150"
+      ]
+    },
+    {
+      "id": "kp19-33",
+      "relatedFlashcardIds": [
+        "fc0151"
+      ],
+      "primaryFlashcardIds": [
+        "fc0151"
+      ]
+    },
+    {
+      "id": "kp19-34",
+      "relatedFlashcardIds": [
+        "fc0152"
+      ],
+      "primaryFlashcardIds": [
+        "fc0152"
+      ]
+    },
+    {
+      "id": "kp19-35",
+      "relatedFlashcardIds": [
+        "fc0153"
+      ],
+      "primaryFlashcardIds": [
+        "fc0153"
+      ]
+    },
+    {
+      "id": "kp19-36",
+      "relatedFlashcardIds": [
+        "fc0154"
+      ],
+      "primaryFlashcardIds": [
+        "fc0154"
+      ]
+    },
+    {
+      "id": "kp19-37",
+      "relatedFlashcardIds": [
+        "fc0155"
+      ],
+      "primaryFlashcardIds": [
+        "fc0155"
+      ]
+    },
+    {
+      "id": "kp19-38",
+      "relatedFlashcardIds": [
+        "fc0156"
+      ],
+      "primaryFlashcardIds": [
+        "fc0156"
+      ]
+    },
+    {
+      "id": "kp19-39",
+      "relatedFlashcardIds": [
+        "fc0157"
+      ],
+      "primaryFlashcardIds": [
+        "fc0157"
+      ]
+    },
+    {
+      "id": "kp19-40",
+      "relatedFlashcardIds": [
+        "fc0158"
+      ],
+      "primaryFlashcardIds": [
+        "fc0158"
+      ]
+    },
+    {
+      "id": "kp19-41",
+      "relatedFlashcardIds": [
+        "fc0159"
+      ],
+      "primaryFlashcardIds": [
+        "fc0159"
+      ]
+    },
+    {
+      "id": "kp19-42",
+      "relatedFlashcardIds": [
+        "fc0160"
+      ],
+      "primaryFlashcardIds": [
+        "fc0160"
+      ]
+    },
+    {
+      "id": "kp19-43",
+      "relatedFlashcardIds": [
+        "fc0161"
+      ],
+      "primaryFlashcardIds": [
+        "fc0161"
+      ]
+    },
+    {
+      "id": "kp19-44",
+      "relatedFlashcardIds": [
+        "fc0162"
+      ],
+      "primaryFlashcardIds": [
+        "fc0162"
+      ]
+    },
+    {
+      "id": "kp19-45",
+      "relatedFlashcardIds": [
+        "fc0163"
+      ],
+      "primaryFlashcardIds": [
+        "fc0163"
+      ]
+    },
+    {
+      "id": "kp19-46",
+      "relatedFlashcardIds": [
+        "fc0164"
+      ],
+      "primaryFlashcardIds": [
+        "fc0164"
+      ]
+    },
+    {
+      "id": "kp19-47",
+      "relatedFlashcardIds": [
+        "fc0165"
+      ],
+      "primaryFlashcardIds": [
+        "fc0165"
+      ]
+    },
+    {
+      "id": "kp19-48",
+      "relatedFlashcardIds": [
+        "fc0166"
+      ],
+      "primaryFlashcardIds": [
+        "fc0166"
+      ]
+    },
+    {
+      "id": "kp19-49",
+      "relatedFlashcardIds": [
+        "fc0167"
+      ],
+      "primaryFlashcardIds": [
+        "fc0167"
+      ]
+    },
+    {
+      "id": "kp19-50",
+      "relatedFlashcardIds": [
+        "fc0168"
+      ],
+      "primaryFlashcardIds": [
+        "fc0168"
+      ]
+    },
+    {
+      "id": "kp19-51",
+      "relatedFlashcardIds": [
+        "fc0169"
+      ],
+      "primaryFlashcardIds": [
+        "fc0169"
+      ]
+    },
+    {
+      "id": "kp19-52",
+      "relatedFlashcardIds": [
+        "fc0170"
+      ],
+      "primaryFlashcardIds": [
+        "fc0170"
+      ]
+    },
+    {
+      "id": "kp19-53",
+      "relatedFlashcardIds": [
+        "fc0171"
+      ],
+      "primaryFlashcardIds": [
+        "fc0171"
+      ]
+    },
+    {
+      "id": "kp19-54",
+      "relatedFlashcardIds": [
+        "fc0172"
+      ],
+      "primaryFlashcardIds": [
+        "fc0172"
+      ]
+    },
+    {
+      "id": "kp19-55",
+      "relatedFlashcardIds": [
+        "fc0173"
+      ],
+      "primaryFlashcardIds": [
+        "fc0173"
+      ]
+    },
+    {
+      "id": "kp19-56",
+      "relatedFlashcardIds": [
+        "fc0174"
+      ],
+      "primaryFlashcardIds": [
+        "fc0174"
+      ]
+    },
+    {
+      "id": "kp19-57",
+      "relatedFlashcardIds": [
+        "fc0175"
+      ],
+      "primaryFlashcardIds": [
+        "fc0175"
+      ]
+    },
+    {
+      "id": "kp19-58",
+      "relatedFlashcardIds": [
+        "fc0176"
+      ],
+      "primaryFlashcardIds": [
+        "fc0176"
+      ]
+    },
+    {
+      "id": "kp19-59",
+      "relatedFlashcardIds": [
+        "fc0177"
+      ],
+      "primaryFlashcardIds": [
+        "fc0177"
+      ]
+    },
+    {
+      "id": "kp19-60",
+      "relatedFlashcardIds": [
+        "fc0178"
+      ],
+      "primaryFlashcardIds": [
+        "fc0178"
+      ]
+    }
+  ]
+}

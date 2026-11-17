@@ -1,0 +1,9367 @@
+[
+  {
+    "id": "kp01-01",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0001",
+      "q0006"
+    ]
+  },
+  {
+    "id": "kp01-01",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0001",
+      "q0006"
+    ]
+  },
+  {
+    "id": "kp01-01",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0001",
+      "fc0006",
+      "fc0007"
+    ]
+  },
+  {
+    "id": "kp01-01",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0001",
+      "fc0006",
+      "fc0007"
+    ]
+  },
+  {
+    "id": "kp01-02",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0003",
+      "q0004",
+      "q0005"
+    ]
+  },
+  {
+    "id": "kp01-02",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0003",
+      "q0004",
+      "q0005"
+    ]
+  },
+  {
+    "id": "kp01-02",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0002"
+    ]
+  },
+  {
+    "id": "kp01-02",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0002"
+    ]
+  },
+  {
+    "id": "kp01-03",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0007",
+      "q0008"
+    ]
+  },
+  {
+    "id": "kp01-03",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0007",
+      "q0008"
+    ]
+  },
+  {
+    "id": "kp01-03",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0003",
+      "fc0004"
+    ]
+  },
+  {
+    "id": "kp01-03",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0003",
+      "fc0004"
+    ]
+  },
+  {
+    "id": "kp01-04",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0002"
+    ]
+  },
+  {
+    "id": "kp01-04",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0002"
+    ]
+  },
+  {
+    "id": "kp01-04",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0005",
+      "fc0007"
+    ]
+  },
+  {
+    "id": "kp01-04",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0005",
+      "fc0007"
+    ]
+  },
+  {
+    "id": "kp02-01",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0011",
+      "q0013",
+      "q0014",
+      "q0015"
+    ]
+  },
+  {
+    "id": "kp02-01",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0011",
+      "q0013",
+      "q0014",
+      "q0015"
+    ]
+  },
+  {
+    "id": "kp02-01",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0008",
+      "fc0009"
+    ]
+  },
+  {
+    "id": "kp02-01",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0008",
+      "fc0009"
+    ]
+  },
+  {
+    "id": "kp02-02",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0009",
+      "q0012",
+      "q0016"
+    ]
+  },
+  {
+    "id": "kp02-02",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0009",
+      "q0012",
+      "q0016"
+    ]
+  },
+  {
+    "id": "kp02-02",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0010",
+      "fc0012"
+    ]
+  },
+  {
+    "id": "kp02-02",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0010",
+      "fc0012"
+    ]
+  },
+  {
+    "id": "kp02-03",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0010",
+      "q0017",
+      "q0018",
+      "q0019",
+      "q0020"
+    ]
+  },
+  {
+    "id": "kp02-03",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0010",
+      "q0017",
+      "q0018",
+      "q0019",
+      "q0020"
+    ]
+  },
+  {
+    "id": "kp02-03",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0009",
+      "fc0011",
+      "fc0013"
+    ]
+  },
+  {
+    "id": "kp02-03",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0009",
+      "fc0011",
+      "fc0013"
+    ]
+  },
+  {
+    "id": "kp03-01",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0021",
+      "q0024",
+      "q0025",
+      "q0028",
+      "q0030"
+    ]
+  },
+  {
+    "id": "kp03-01",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0021",
+      "q0024",
+      "q0025",
+      "q0028",
+      "q0030"
+    ]
+  },
+  {
+    "id": "kp03-01",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0014",
+      "fc0015"
+    ]
+  },
+  {
+    "id": "kp03-01",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0014",
+      "fc0015"
+    ]
+  },
+  {
+    "id": "kp03-02",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0027",
+      "q0029",
+      "q0031",
+      "q0035",
+      "q0038",
+      "q0040"
+    ]
+  },
+  {
+    "id": "kp03-02",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0027",
+      "q0029",
+      "q0031",
+      "q0035",
+      "q0038",
+      "q0040"
+    ]
+  },
+  {
+    "id": "kp03-02",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0018",
+      "fc0020",
+      "fc0022"
+    ]
+  },
+  {
+    "id": "kp03-02",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0018",
+      "fc0020",
+      "fc0022"
+    ]
+  },
+  {
+    "id": "kp03-03",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0022",
+      "q0034",
+      "q0037",
+      "q0039",
+      "q0042"
+    ]
+  },
+  {
+    "id": "kp03-03",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0022",
+      "q0034",
+      "q0037",
+      "q0039",
+      "q0042"
+    ]
+  },
+  {
+    "id": "kp03-03",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0017",
+      "fc0019",
+      "fc0023"
+    ]
+  },
+  {
+    "id": "kp03-03",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0017",
+      "fc0019",
+      "fc0023"
+    ]
+  },
+  {
+    "id": "kp03-04",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0023",
+      "q0026",
+      "q0032",
+      "q0033",
+      "q0036",
+      "q0041"
+    ]
+  },
+  {
+    "id": "kp03-04",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0023",
+      "q0026",
+      "q0032",
+      "q0033",
+      "q0036",
+      "q0041"
+    ]
+  },
+  {
+    "id": "kp03-04",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0016",
+      "fc0021"
+    ]
+  },
+  {
+    "id": "kp03-04",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0016",
+      "fc0021"
+    ]
+  },
+  {
+    "id": "kp04-01",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0045",
+      "q0047",
+      "q0048"
+    ]
+  },
+  {
+    "id": "kp04-01",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0045",
+      "q0047",
+      "q0048"
+    ]
+  },
+  {
+    "id": "kp04-01",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0024",
+      "fc0026",
+      "fc0027"
+    ]
+  },
+  {
+    "id": "kp04-01",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0024",
+      "fc0026",
+      "fc0027"
+    ]
+  },
+  {
+    "id": "kp04-02",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0043",
+      "q0044",
+      "q0046",
+      "q0049",
+      "q0050"
+    ]
+  },
+  {
+    "id": "kp04-02",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0043",
+      "q0044",
+      "q0046",
+      "q0049",
+      "q0050"
+    ]
+  },
+  {
+    "id": "kp04-02",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0025",
+      "fc0028",
+      "fc0029"
+    ]
+  },
+  {
+    "id": "kp04-02",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0025",
+      "fc0028",
+      "fc0029"
+    ]
+  },
+  {
+    "id": "kp05-01",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0051",
+      "q0052",
+      "q0053",
+      "q0055",
+      "q0056",
+      "q0059"
+    ]
+  },
+  {
+    "id": "kp05-01",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0051",
+      "q0052",
+      "q0053",
+      "q0055",
+      "q0056",
+      "q0059"
+    ]
+  },
+  {
+    "id": "kp05-01",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0030",
+      "fc0033",
+      "fc0035"
+    ]
+  },
+  {
+    "id": "kp05-01",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0030",
+      "fc0033",
+      "fc0035"
+    ]
+  },
+  {
+    "id": "kp05-02",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0054",
+      "q0057",
+      "q0058",
+      "q0060"
+    ]
+  },
+  {
+    "id": "kp05-02",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0054",
+      "q0057",
+      "q0058",
+      "q0060"
+    ]
+  },
+  {
+    "id": "kp05-02",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0031",
+      "fc0032",
+      "fc0034"
+    ]
+  },
+  {
+    "id": "kp05-02",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0031",
+      "fc0032",
+      "fc0034"
+    ]
+  },
+  {
+    "id": "kp06-01",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0061",
+      "q0065",
+      "q0069",
+      "q0070",
+      "q0074"
+    ]
+  },
+  {
+    "id": "kp06-01",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0061",
+      "q0065",
+      "q0069",
+      "q0070",
+      "q0074"
+    ]
+  },
+  {
+    "id": "kp06-01",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0036",
+      "fc0040",
+      "fc0042"
+    ]
+  },
+  {
+    "id": "kp06-01",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0036",
+      "fc0040",
+      "fc0042"
+    ]
+  },
+  {
+    "id": "kp06-02",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0062",
+      "q0066",
+      "q0068",
+      "q0071",
+      "q0072",
+      "q0075"
+    ]
+  },
+  {
+    "id": "kp06-02",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0062",
+      "q0066",
+      "q0068",
+      "q0071",
+      "q0072",
+      "q0075"
+    ]
+  },
+  {
+    "id": "kp06-02",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0037",
+      "fc0039",
+      "fc0041",
+      "fc0043"
+    ]
+  },
+  {
+    "id": "kp06-02",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0037",
+      "fc0039",
+      "fc0041",
+      "fc0043"
+    ]
+  },
+  {
+    "id": "kp06-03",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0063",
+      "q0064",
+      "q0067",
+      "q0073"
+    ]
+  },
+  {
+    "id": "kp06-03",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0063",
+      "q0064",
+      "q0067",
+      "q0073"
+    ]
+  },
+  {
+    "id": "kp06-03",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0038"
+    ]
+  },
+  {
+    "id": "kp06-03",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0038"
+    ]
+  },
+  {
+    "id": "kp07-01",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0078",
+      "q0079",
+      "q0081",
+      "q0082",
+      "q0083",
+      "q0088"
+    ]
+  },
+  {
+    "id": "kp07-01",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0078",
+      "q0079",
+      "q0081",
+      "q0082",
+      "q0083",
+      "q0088"
+    ]
+  },
+  {
+    "id": "kp07-01",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0044",
+      "fc0045",
+      "fc0049"
+    ]
+  },
+  {
+    "id": "kp07-01",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0044",
+      "fc0045",
+      "fc0049"
+    ]
+  },
+  {
+    "id": "kp07-02",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0076",
+      "q0084",
+      "q0087",
+      "q0089",
+      "q0090",
+      "q0093"
+    ]
+  },
+  {
+    "id": "kp07-02",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0076",
+      "q0084",
+      "q0087",
+      "q0089",
+      "q0090",
+      "q0093"
+    ]
+  },
+  {
+    "id": "kp07-02",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0046",
+      "fc0047"
+    ]
+  },
+  {
+    "id": "kp07-02",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0046",
+      "fc0047"
+    ]
+  },
+  {
+    "id": "kp07-03",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0077",
+      "q0080",
+      "q0085",
+      "q0086",
+      "q0091",
+      "q0092"
+    ]
+  },
+  {
+    "id": "kp07-03",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0077",
+      "q0080",
+      "q0085",
+      "q0086",
+      "q0091",
+      "q0092"
+    ]
+  },
+  {
+    "id": "kp07-03",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0048",
+      "fc0050"
+    ]
+  },
+  {
+    "id": "kp07-03",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0048",
+      "fc0050"
+    ]
+  },
+  {
+    "id": "kp08-01",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0097",
+      "q0098",
+      "q0105",
+      "q0106"
+    ]
+  },
+  {
+    "id": "kp08-01",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0097",
+      "q0098",
+      "q0105",
+      "q0106"
+    ]
+  },
+  {
+    "id": "kp08-01",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0051",
+      "fc0053"
+    ]
+  },
+  {
+    "id": "kp08-01",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0051",
+      "fc0053"
+    ]
+  },
+  {
+    "id": "kp08-02",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0094",
+      "q0099",
+      "q0101",
+      "q0107",
+      "q0109"
+    ]
+  },
+  {
+    "id": "kp08-02",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0094",
+      "q0099",
+      "q0101",
+      "q0107",
+      "q0109"
+    ]
+  },
+  {
+    "id": "kp08-02",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0054"
+    ]
+  },
+  {
+    "id": "kp08-02",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0054"
+    ]
+  },
+  {
+    "id": "kp08-03",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0112",
+      "q0113",
+      "q0115"
+    ]
+  },
+  {
+    "id": "kp08-03",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0112",
+      "q0113",
+      "q0115"
+    ]
+  },
+  {
+    "id": "kp08-03",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0055",
+      "fc0061"
+    ]
+  },
+  {
+    "id": "kp08-03",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0055",
+      "fc0061"
+    ]
+  },
+  {
+    "id": "kp08-04",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0108",
+      "q0110",
+      "q0111"
+    ]
+  },
+  {
+    "id": "kp08-04",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0108",
+      "q0110",
+      "q0111"
+    ]
+  },
+  {
+    "id": "kp08-04",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0058",
+      "fc0059"
+    ]
+  },
+  {
+    "id": "kp08-04",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0058",
+      "fc0059"
+    ]
+  },
+  {
+    "id": "kp08-05",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0095",
+      "q0114",
+      "q0116",
+      "q0117",
+      "q0118"
+    ]
+  },
+  {
+    "id": "kp08-05",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0095",
+      "q0114",
+      "q0116",
+      "q0117",
+      "q0118"
+    ]
+  },
+  {
+    "id": "kp08-05",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0056",
+      "fc0060"
+    ]
+  },
+  {
+    "id": "kp08-05",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0056",
+      "fc0060"
+    ]
+  },
+  {
+    "id": "kp08-06",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0102",
+      "q0104"
+    ]
+  },
+  {
+    "id": "kp08-06",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0102",
+      "q0104"
+    ]
+  },
+  {
+    "id": "kp08-06",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0057"
+    ]
+  },
+  {
+    "id": "kp08-06",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0057"
+    ]
+  },
+  {
+    "id": "kp08-07",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0096",
+      "q0100",
+      "q0103"
+    ]
+  },
+  {
+    "id": "kp08-07",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0096",
+      "q0100",
+      "q0103"
+    ]
+  },
+  {
+    "id": "kp08-07",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0052",
+      "fc0058"
+    ]
+  },
+  {
+    "id": "kp08-07",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0052",
+      "fc0058"
+    ]
+  },
+  {
+    "id": "kp09-01",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0120",
+      "q0123",
+      "q0125",
+      "q0128",
+      "q0129"
+    ]
+  },
+  {
+    "id": "kp09-01",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0120",
+      "q0123",
+      "q0125",
+      "q0128",
+      "q0129"
+    ]
+  },
+  {
+    "id": "kp09-01",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0062",
+      "fc0063",
+      "fc0068",
+      "fc0069"
+    ]
+  },
+  {
+    "id": "kp09-01",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0062",
+      "fc0063",
+      "fc0068",
+      "fc0069"
+    ]
+  },
+  {
+    "id": "kp09-02",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0126",
+      "q0127",
+      "q0130"
+    ]
+  },
+  {
+    "id": "kp09-02",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0126",
+      "q0127",
+      "q0130"
+    ]
+  },
+  {
+    "id": "kp09-02",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0065",
+      "fc0066"
+    ]
+  },
+  {
+    "id": "kp09-02",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0065",
+      "fc0066"
+    ]
+  },
+  {
+    "id": "kp09-03",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0119",
+      "q0121"
+    ]
+  },
+  {
+    "id": "kp09-03",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0119",
+      "q0121"
+    ]
+  },
+  {
+    "id": "kp09-03",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0067"
+    ]
+  },
+  {
+    "id": "kp09-03",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0067"
+    ]
+  },
+  {
+    "id": "kp09-04",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0122",
+      "q0124"
+    ]
+  },
+  {
+    "id": "kp09-04",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0122",
+      "q0124"
+    ]
+  },
+  {
+    "id": "kp09-04",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0064"
+    ]
+  },
+  {
+    "id": "kp09-04",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0064"
+    ]
+  },
+  {
+    "id": "kp10-01",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0132",
+      "q0133",
+      "q0134",
+      "q0135"
+    ]
+  },
+  {
+    "id": "kp10-01",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0132",
+      "q0133",
+      "q0134",
+      "q0135"
+    ]
+  },
+  {
+    "id": "kp10-01",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0070",
+      "fc0075"
+    ]
+  },
+  {
+    "id": "kp10-01",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0070",
+      "fc0075"
+    ]
+  },
+  {
+    "id": "kp10-02",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0136",
+      "q0137",
+      "q0138",
+      "q0141",
+      "q0143"
+    ]
+  },
+  {
+    "id": "kp10-02",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0136",
+      "q0137",
+      "q0138",
+      "q0141",
+      "q0143"
+    ]
+  },
+  {
+    "id": "kp10-02",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0071",
+      "fc0073"
+    ]
+  },
+  {
+    "id": "kp10-02",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0071",
+      "fc0073"
+    ]
+  },
+  {
+    "id": "kp10-03",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0139",
+      "q0140",
+      "q0142",
+      "q0147",
+      "q0149"
+    ]
+  },
+  {
+    "id": "kp10-03",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0139",
+      "q0140",
+      "q0142",
+      "q0147",
+      "q0149"
+    ]
+  },
+  {
+    "id": "kp10-03",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0072",
+      "fc0073",
+      "fc0077"
+    ]
+  },
+  {
+    "id": "kp10-03",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0072",
+      "fc0073",
+      "fc0077"
+    ]
+  },
+  {
+    "id": "kp10-04",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0131",
+      "q0144",
+      "q0145",
+      "q0146",
+      "q0148",
+      "q0150"
+    ]
+  },
+  {
+    "id": "kp10-04",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0131",
+      "q0144",
+      "q0145",
+      "q0146",
+      "q0148",
+      "q0150"
+    ]
+  },
+  {
+    "id": "kp10-04",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0074",
+      "fc0076",
+      "fc0078"
+    ]
+  },
+  {
+    "id": "kp10-04",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0074",
+      "fc0076",
+      "fc0078"
+    ]
+  },
+  {
+    "id": "kp11-01",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0157",
+      "q0158"
+    ]
+  },
+  {
+    "id": "kp11-01",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0157",
+      "q0158"
+    ]
+  },
+  {
+    "id": "kp11-01",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0080"
+    ]
+  },
+  {
+    "id": "kp11-01",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0080"
+    ]
+  },
+  {
+    "id": "kp11-02",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0153",
+      "q0155"
+    ]
+  },
+  {
+    "id": "kp11-02",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0153",
+      "q0155"
+    ]
+  },
+  {
+    "id": "kp11-02",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0081"
+    ]
+  },
+  {
+    "id": "kp11-02",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0081"
+    ]
+  },
+  {
+    "id": "kp11-03",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0151",
+      "q0154",
+      "q0159"
+    ]
+  },
+  {
+    "id": "kp11-03",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0151",
+      "q0154",
+      "q0159"
+    ]
+  },
+  {
+    "id": "kp11-03",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0082",
+      "fc0083",
+      "fc0085"
+    ]
+  },
+  {
+    "id": "kp11-03",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0082",
+      "fc0083",
+      "fc0085"
+    ]
+  },
+  {
+    "id": "kp11-04",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0152",
+      "q0156",
+      "q0160"
+    ]
+  },
+  {
+    "id": "kp11-04",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0152",
+      "q0156",
+      "q0160"
+    ]
+  },
+  {
+    "id": "kp11-04",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0079",
+      "fc0084"
+    ]
+  },
+  {
+    "id": "kp11-04",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0079",
+      "fc0084"
+    ]
+  },
+  {
+    "id": "kp12-01",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0163",
+      "q0166",
+      "q0167"
+    ]
+  },
+  {
+    "id": "kp12-01",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0163",
+      "q0166",
+      "q0167"
+    ]
+  },
+  {
+    "id": "kp12-01",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0087",
+      "fc0094"
+    ]
+  },
+  {
+    "id": "kp12-01",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0087",
+      "fc0094"
+    ]
+  },
+  {
+    "id": "kp12-02",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0161",
+      "q0162",
+      "q0171"
+    ]
+  },
+  {
+    "id": "kp12-02",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0161",
+      "q0162",
+      "q0171"
+    ]
+  },
+  {
+    "id": "kp12-02",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0088",
+      "fc0091"
+    ]
+  },
+  {
+    "id": "kp12-02",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0088",
+      "fc0091"
+    ]
+  },
+  {
+    "id": "kp12-03",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0169",
+      "q0170",
+      "q0175"
+    ]
+  },
+  {
+    "id": "kp12-03",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0169",
+      "q0170",
+      "q0175"
+    ]
+  },
+  {
+    "id": "kp12-03",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0089",
+      "fc0092"
+    ]
+  },
+  {
+    "id": "kp12-03",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0089",
+      "fc0092"
+    ]
+  },
+  {
+    "id": "kp12-04",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0164",
+      "q0172",
+      "q0173"
+    ]
+  },
+  {
+    "id": "kp12-04",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0164",
+      "q0172",
+      "q0173"
+    ]
+  },
+  {
+    "id": "kp12-04",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0090",
+      "fc0095"
+    ]
+  },
+  {
+    "id": "kp12-04",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0090",
+      "fc0095"
+    ]
+  },
+  {
+    "id": "kp12-05",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0165",
+      "q0168",
+      "q0174"
+    ]
+  },
+  {
+    "id": "kp12-05",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0165",
+      "q0168",
+      "q0174"
+    ]
+  },
+  {
+    "id": "kp12-05",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0086",
+      "fc0093"
+    ]
+  },
+  {
+    "id": "kp12-05",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0086",
+      "fc0093"
+    ]
+  },
+  {
+    "id": "kp13-01",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0176",
+      "q0179",
+      "q0182"
+    ]
+  },
+  {
+    "id": "kp13-01",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0176",
+      "q0179",
+      "q0182"
+    ]
+  },
+  {
+    "id": "kp13-01",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0097",
+      "fc0098",
+      "fc0102"
+    ]
+  },
+  {
+    "id": "kp13-01",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0097",
+      "fc0098",
+      "fc0102"
+    ]
+  },
+  {
+    "id": "kp13-02",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0177",
+      "q0180"
+    ]
+  },
+  {
+    "id": "kp13-02",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0177",
+      "q0180"
+    ]
+  },
+  {
+    "id": "kp13-02",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0099",
+      "fc0100"
+    ]
+  },
+  {
+    "id": "kp13-02",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0099",
+      "fc0100"
+    ]
+  },
+  {
+    "id": "kp13-03",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0178",
+      "q0183"
+    ]
+  },
+  {
+    "id": "kp13-03",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0178",
+      "q0183"
+    ]
+  },
+  {
+    "id": "kp13-03",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0101"
+    ]
+  },
+  {
+    "id": "kp13-03",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0101"
+    ]
+  },
+  {
+    "id": "kp13-04",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0181"
+    ]
+  },
+  {
+    "id": "kp13-04",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0181"
+    ]
+  },
+  {
+    "id": "kp13-04",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0096"
+    ]
+  },
+  {
+    "id": "kp13-04",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0096"
+    ]
+  },
+  {
+    "id": "kp14-01",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0188",
+      "q0189",
+      "q0190",
+      "q0192",
+      "q0194",
+      "q0195"
+    ]
+  },
+  {
+    "id": "kp14-01",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0188",
+      "q0189",
+      "q0190",
+      "q0192",
+      "q0194",
+      "q0195"
+    ]
+  },
+  {
+    "id": "kp14-01",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0103",
+      "fc0104",
+      "fc0107"
+    ]
+  },
+  {
+    "id": "kp14-01",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0103",
+      "fc0104",
+      "fc0107"
+    ]
+  },
+  {
+    "id": "kp14-02",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0184",
+      "q0185",
+      "q0186",
+      "q0187",
+      "q0191",
+      "q0193"
+    ]
+  },
+  {
+    "id": "kp14-02",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0184",
+      "q0185",
+      "q0186",
+      "q0187",
+      "q0191",
+      "q0193"
+    ]
+  },
+  {
+    "id": "kp14-02",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0105",
+      "fc0106",
+      "fc0108",
+      "fc0109"
+    ]
+  },
+  {
+    "id": "kp14-02",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0105",
+      "fc0106",
+      "fc0108",
+      "fc0109"
+    ]
+  },
+  {
+    "id": "kp15-01",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0199",
+      "q0200",
+      "q0201",
+      "q0204"
+    ]
+  },
+  {
+    "id": "kp15-01",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0199",
+      "q0200",
+      "q0201",
+      "q0204"
+    ]
+  },
+  {
+    "id": "kp15-01",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0110",
+      "fc0112",
+      "fc0119"
+    ]
+  },
+  {
+    "id": "kp15-01",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0110",
+      "fc0112",
+      "fc0119"
+    ]
+  },
+  {
+    "id": "kp15-02",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0196",
+      "q0206",
+      "q0207",
+      "q0216",
+      "q0217",
+      "q0218",
+      "q0219"
+    ]
+  },
+  {
+    "id": "kp15-02",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0196",
+      "q0206",
+      "q0207",
+      "q0216",
+      "q0217",
+      "q0218",
+      "q0219"
+    ]
+  },
+  {
+    "id": "kp15-02",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0114",
+      "fc0115",
+      "fc0119"
+    ]
+  },
+  {
+    "id": "kp15-02",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0114",
+      "fc0115",
+      "fc0119"
+    ]
+  },
+  {
+    "id": "kp15-03",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0197",
+      "q0198",
+      "q0202",
+      "q0209"
+    ]
+  },
+  {
+    "id": "kp15-03",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0197",
+      "q0198",
+      "q0202",
+      "q0209"
+    ]
+  },
+  {
+    "id": "kp15-03",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0113",
+      "fc0120"
+    ]
+  },
+  {
+    "id": "kp15-03",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0113",
+      "fc0120"
+    ]
+  },
+  {
+    "id": "kp15-04",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0205",
+      "q0208",
+      "q0210",
+      "q0211"
+    ]
+  },
+  {
+    "id": "kp15-04",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0205",
+      "q0208",
+      "q0210",
+      "q0211"
+    ]
+  },
+  {
+    "id": "kp15-04",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0116"
+    ]
+  },
+  {
+    "id": "kp15-04",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0116"
+    ]
+  },
+  {
+    "id": "kp15-05",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0203",
+      "q0214",
+      "q0215",
+      "q0220"
+    ]
+  },
+  {
+    "id": "kp15-05",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0203",
+      "q0214",
+      "q0215",
+      "q0220"
+    ]
+  },
+  {
+    "id": "kp15-05",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0111",
+      "fc0118"
+    ]
+  },
+  {
+    "id": "kp15-05",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0111",
+      "fc0118"
+    ]
+  },
+  {
+    "id": "kp15-06",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0212",
+      "q0213"
+    ]
+  },
+  {
+    "id": "kp15-06",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0212",
+      "q0213"
+    ]
+  },
+  {
+    "id": "kp15-06",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0117"
+    ]
+  },
+  {
+    "id": "kp15-06",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0117"
+    ]
+  },
+  {
+    "id": "kp16-01",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0221",
+      "q0227",
+      "q0228",
+      "q0229"
+    ]
+  },
+  {
+    "id": "kp16-01",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0221",
+      "q0227",
+      "q0228",
+      "q0229"
+    ]
+  },
+  {
+    "id": "kp16-01",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0121",
+      "fc0122",
+      "fc0126"
+    ]
+  },
+  {
+    "id": "kp16-01",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0121",
+      "fc0122",
+      "fc0126"
+    ]
+  },
+  {
+    "id": "kp16-02",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0222",
+      "q0223",
+      "q0225"
+    ]
+  },
+  {
+    "id": "kp16-02",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0222",
+      "q0223",
+      "q0225"
+    ]
+  },
+  {
+    "id": "kp16-02",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0123",
+      "fc0127"
+    ]
+  },
+  {
+    "id": "kp16-02",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0123",
+      "fc0127"
+    ]
+  },
+  {
+    "id": "kp16-03",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0224",
+      "q0226",
+      "q0230"
+    ]
+  },
+  {
+    "id": "kp16-03",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0224",
+      "q0226",
+      "q0230"
+    ]
+  },
+  {
+    "id": "kp16-03",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0124",
+      "fc0125"
+    ]
+  },
+  {
+    "id": "kp16-03",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0124",
+      "fc0125"
+    ]
+  },
+  {
+    "id": "kp17-01",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0231",
+      "q0238"
+    ]
+  },
+  {
+    "id": "kp17-01",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0231",
+      "q0238"
+    ]
+  },
+  {
+    "id": "kp17-01",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0128",
+      "fc0130"
+    ]
+  },
+  {
+    "id": "kp17-01",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0128",
+      "fc0130"
+    ]
+  },
+  {
+    "id": "kp17-02",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0234",
+      "q0235",
+      "q0236"
+    ]
+  },
+  {
+    "id": "kp17-02",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0234",
+      "q0235",
+      "q0236"
+    ]
+  },
+  {
+    "id": "kp17-02",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0131",
+      "fc0133"
+    ]
+  },
+  {
+    "id": "kp17-02",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0131",
+      "fc0133"
+    ]
+  },
+  {
+    "id": "kp17-03",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0233",
+      "q0237"
+    ]
+  },
+  {
+    "id": "kp17-03",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0233",
+      "q0237"
+    ]
+  },
+  {
+    "id": "kp17-03",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0132",
+      "fc0134"
+    ]
+  },
+  {
+    "id": "kp17-03",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0132",
+      "fc0134"
+    ]
+  },
+  {
+    "id": "kp17-04",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0232",
+      "q0240"
+    ]
+  },
+  {
+    "id": "kp17-04",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0232",
+      "q0240"
+    ]
+  },
+  {
+    "id": "kp17-04",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0129",
+      "fc0135"
+    ]
+  },
+  {
+    "id": "kp17-04",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0129",
+      "fc0135"
+    ]
+  },
+  {
+    "id": "kp17-05",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0239"
+    ]
+  },
+  {
+    "id": "kp17-05",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0239"
+    ]
+  },
+  {
+    "id": "kp17-05",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0128"
+    ]
+  },
+  {
+    "id": "kp17-05",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0128"
+    ]
+  },
+  {
+    "id": "kp18-01",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0242",
+      "q0244",
+      "q0246"
+    ]
+  },
+  {
+    "id": "kp18-01",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0242",
+      "q0244",
+      "q0246"
+    ]
+  },
+  {
+    "id": "kp18-01",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0136",
+      "fc0138"
+    ]
+  },
+  {
+    "id": "kp18-01",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0136",
+      "fc0138"
+    ]
+  },
+  {
+    "id": "kp18-02",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0243",
+      "q0245",
+      "q0247",
+      "q0248",
+      "q0249",
+      "q0250"
+    ]
+  },
+  {
+    "id": "kp18-02",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0243",
+      "q0245",
+      "q0247",
+      "q0248",
+      "q0249",
+      "q0250"
+    ]
+  },
+  {
+    "id": "kp18-02",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0139",
+      "fc0140"
+    ]
+  },
+  {
+    "id": "kp18-02",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0139",
+      "fc0140"
+    ]
+  },
+  {
+    "id": "kp18-03",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0241"
+    ]
+  },
+  {
+    "id": "kp18-03",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0241"
+    ]
+  },
+  {
+    "id": "kp18-03",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0137"
+    ]
+  },
+  {
+    "id": "kp18-03",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0137"
+    ]
+  },
+  {
+    "id": "kp19-01",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0251",
+      "q0254",
+      "q0288",
+      "q0296"
+    ]
+  },
+  {
+    "id": "kp19-01",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-01",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0149"
+    ]
+  },
+  {
+    "id": "kp19-01",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0149"
+    ]
+  },
+  {
+    "id": "kp19-02",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0257",
+      "q0284"
+    ]
+  },
+  {
+    "id": "kp19-02",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-02",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0155"
+    ]
+  },
+  {
+    "id": "kp19-02",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0155"
+    ]
+  },
+  {
+    "id": "kp19-03",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0261",
+      "q0263"
+    ]
+  },
+  {
+    "id": "kp19-03",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-03",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0141"
+    ]
+  },
+  {
+    "id": "kp19-03",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0141"
+    ]
+  },
+  {
+    "id": "kp19-04",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0267",
+      "q0268",
+      "q0289",
+      "q0291",
+      "q0293"
+    ]
+  },
+  {
+    "id": "kp19-04",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-04",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0165",
+      "fc0166"
+    ]
+  },
+  {
+    "id": "kp19-04",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0165"
+    ]
+  },
+  {
+    "id": "kp19-05",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0271",
+      "q0297",
+      "q0298"
+    ]
+  },
+  {
+    "id": "kp19-05",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-05",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0169"
+    ]
+  },
+  {
+    "id": "kp19-05",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0169"
+    ]
+  },
+  {
+    "id": "kp19-06",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0278",
+      "q0286"
+    ]
+  },
+  {
+    "id": "kp19-06",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-06",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0142",
+      "fc0176"
+    ]
+  },
+  {
+    "id": "kp19-06",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0176"
+    ]
+  },
+  {
+    "id": "kp19-07",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0253",
+      "q0282"
+    ]
+  },
+  {
+    "id": "kp19-07",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-07",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0146",
+      "fc0151"
+    ]
+  },
+  {
+    "id": "kp19-07",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0146"
+    ]
+  },
+  {
+    "id": "kp19-08",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0252"
+    ]
+  },
+  {
+    "id": "kp19-08",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-08",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0150"
+    ]
+  },
+  {
+    "id": "kp19-08",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0150"
+    ]
+  },
+  {
+    "id": "kp19-09",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0253",
+      "q0255"
+    ]
+  },
+  {
+    "id": "kp19-09",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-09",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0143"
+    ]
+  },
+  {
+    "id": "kp19-09",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0143"
+    ]
+  },
+  {
+    "id": "kp19-10",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0282",
+      "q0284"
+    ]
+  },
+  {
+    "id": "kp19-10",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-10",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0146"
+    ]
+  },
+  {
+    "id": "kp19-10",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0146"
+    ]
+  },
+  {
+    "id": "kp19-11",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0256",
+      "q0259",
+      "q0281"
+    ]
+  },
+  {
+    "id": "kp19-11",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-11",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0148"
+    ]
+  },
+  {
+    "id": "kp19-11",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0148"
+    ]
+  },
+  {
+    "id": "kp19-12",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0258",
+      "q0260",
+      "q0281",
+      "q0283"
+    ]
+  },
+  {
+    "id": "kp19-12",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-12",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0156",
+      "fc0158"
+    ]
+  },
+  {
+    "id": "kp19-12",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0156"
+    ]
+  },
+  {
+    "id": "kp19-13",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0256",
+      "q0260"
+    ]
+  },
+  {
+    "id": "kp19-13",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-13",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0148"
+    ]
+  },
+  {
+    "id": "kp19-13",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0148"
+    ]
+  },
+  {
+    "id": "kp19-14",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0256",
+      "q0257",
+      "q0259"
+    ]
+  },
+  {
+    "id": "kp19-14",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-14",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0154"
+    ]
+  },
+  {
+    "id": "kp19-14",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0154"
+    ]
+  },
+  {
+    "id": "kp19-15",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0261",
+      "q0264",
+      "q0294"
+    ]
+  },
+  {
+    "id": "kp19-15",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-15",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0159"
+    ]
+  },
+  {
+    "id": "kp19-15",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0159"
+    ]
+  },
+  {
+    "id": "kp19-16",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0262",
+      "q0265"
+    ]
+  },
+  {
+    "id": "kp19-16",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-16",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0160"
+    ]
+  },
+  {
+    "id": "kp19-16",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0160"
+    ]
+  },
+  {
+    "id": "kp19-17",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0263",
+      "q0295"
+    ]
+  },
+  {
+    "id": "kp19-17",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-17",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0161"
+    ]
+  },
+  {
+    "id": "kp19-17",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0161"
+    ]
+  },
+  {
+    "id": "kp19-18",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0262",
+      "q0265"
+    ]
+  },
+  {
+    "id": "kp19-18",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-18",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0163"
+    ]
+  },
+  {
+    "id": "kp19-18",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0163"
+    ]
+  },
+  {
+    "id": "kp19-19",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0266",
+      "q0269"
+    ]
+  },
+  {
+    "id": "kp19-19",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-19",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0144",
+      "fc0164"
+    ]
+  },
+  {
+    "id": "kp19-19",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0144"
+    ]
+  },
+  {
+    "id": "kp19-20",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0252",
+      "q0290",
+      "q0299"
+    ]
+  },
+  {
+    "id": "kp19-20",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-20",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0144"
+    ]
+  },
+  {
+    "id": "kp19-20",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0144"
+    ]
+  },
+  {
+    "id": "kp19-21",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0270"
+    ]
+  },
+  {
+    "id": "kp19-21",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-21",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0168"
+    ]
+  },
+  {
+    "id": "kp19-21",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0168"
+    ]
+  },
+  {
+    "id": "kp19-22",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0266"
+    ]
+  },
+  {
+    "id": "kp19-22",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-22",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0164"
+    ]
+  },
+  {
+    "id": "kp19-22",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0164"
+    ]
+  },
+  {
+    "id": "kp19-23",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0273"
+    ]
+  },
+  {
+    "id": "kp19-23",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-23",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0171"
+    ]
+  },
+  {
+    "id": "kp19-23",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0171"
+    ]
+  },
+  {
+    "id": "kp19-24",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0272"
+    ]
+  },
+  {
+    "id": "kp19-24",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-24",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0170"
+    ]
+  },
+  {
+    "id": "kp19-24",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0170"
+    ]
+  },
+  {
+    "id": "kp19-25",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0273",
+      "q0274"
+    ]
+  },
+  {
+    "id": "kp19-25",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-25",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0145"
+    ]
+  },
+  {
+    "id": "kp19-25",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0145"
+    ]
+  },
+  {
+    "id": "kp19-26",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0275"
+    ]
+  },
+  {
+    "id": "kp19-26",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-26",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0147",
+      "fc0173"
+    ]
+  },
+  {
+    "id": "kp19-26",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0147"
+    ]
+  },
+  {
+    "id": "kp19-27",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0276",
+      "q0279",
+      "q0291"
+    ]
+  },
+  {
+    "id": "kp19-27",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-27",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0142"
+    ]
+  },
+  {
+    "id": "kp19-27",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0142"
+    ]
+  },
+  {
+    "id": "kp19-28",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0277",
+      "q0280",
+      "q0293"
+    ]
+  },
+  {
+    "id": "kp19-28",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-28",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0158",
+      "fc0175"
+    ]
+  },
+  {
+    "id": "kp19-28",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0175"
+    ]
+  },
+  {
+    "id": "kp19-29",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0277",
+      "q0285",
+      "q0287"
+    ]
+  },
+  {
+    "id": "kp19-29",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-29",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0175"
+    ]
+  },
+  {
+    "id": "kp19-29",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0175"
+    ]
+  },
+  {
+    "id": "kp19-30",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0278",
+      "q0292"
+    ]
+  },
+  {
+    "id": "kp19-30",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp19-30",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0142",
+      "fc0176"
+    ]
+  },
+  {
+    "id": "kp19-30",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0176"
+    ]
+  },
+  {
+    "id": "kp19-31",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0251"
+    ]
+  },
+  {
+    "id": "kp19-31",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0251"
+    ]
+  },
+  {
+    "id": "kp19-31",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0149"
+    ]
+  },
+  {
+    "id": "kp19-31",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0149"
+    ]
+  },
+  {
+    "id": "kp19-32",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0252"
+    ]
+  },
+  {
+    "id": "kp19-32",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0252"
+    ]
+  },
+  {
+    "id": "kp19-32",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0150"
+    ]
+  },
+  {
+    "id": "kp19-32",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0150"
+    ]
+  },
+  {
+    "id": "kp19-33",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0253"
+    ]
+  },
+  {
+    "id": "kp19-33",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0253"
+    ]
+  },
+  {
+    "id": "kp19-33",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0151"
+    ]
+  },
+  {
+    "id": "kp19-33",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0151"
+    ]
+  },
+  {
+    "id": "kp19-34",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0254"
+    ]
+  },
+  {
+    "id": "kp19-34",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0254"
+    ]
+  },
+  {
+    "id": "kp19-34",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0152"
+    ]
+  },
+  {
+    "id": "kp19-34",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0152"
+    ]
+  },
+  {
+    "id": "kp19-35",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0255"
+    ]
+  },
+  {
+    "id": "kp19-35",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0255"
+    ]
+  },
+  {
+    "id": "kp19-35",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0153"
+    ]
+  },
+  {
+    "id": "kp19-35",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0153"
+    ]
+  },
+  {
+    "id": "kp19-36",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0256"
+    ]
+  },
+  {
+    "id": "kp19-36",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0256"
+    ]
+  },
+  {
+    "id": "kp19-36",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0154"
+    ]
+  },
+  {
+    "id": "kp19-36",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0154"
+    ]
+  },
+  {
+    "id": "kp19-37",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0257"
+    ]
+  },
+  {
+    "id": "kp19-37",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0257"
+    ]
+  },
+  {
+    "id": "kp19-37",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0155"
+    ]
+  },
+  {
+    "id": "kp19-37",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0155"
+    ]
+  },
+  {
+    "id": "kp19-38",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0258"
+    ]
+  },
+  {
+    "id": "kp19-38",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0258"
+    ]
+  },
+  {
+    "id": "kp19-38",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0156"
+    ]
+  },
+  {
+    "id": "kp19-38",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0156"
+    ]
+  },
+  {
+    "id": "kp19-39",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0259"
+    ]
+  },
+  {
+    "id": "kp19-39",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0259"
+    ]
+  },
+  {
+    "id": "kp19-39",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0157"
+    ]
+  },
+  {
+    "id": "kp19-39",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0157"
+    ]
+  },
+  {
+    "id": "kp19-40",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0260"
+    ]
+  },
+  {
+    "id": "kp19-40",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0260"
+    ]
+  },
+  {
+    "id": "kp19-40",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0158"
+    ]
+  },
+  {
+    "id": "kp19-40",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0158"
+    ]
+  },
+  {
+    "id": "kp19-41",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0261"
+    ]
+  },
+  {
+    "id": "kp19-41",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0261"
+    ]
+  },
+  {
+    "id": "kp19-41",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0159"
+    ]
+  },
+  {
+    "id": "kp19-41",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0159"
+    ]
+  },
+  {
+    "id": "kp19-42",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0262"
+    ]
+  },
+  {
+    "id": "kp19-42",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0262"
+    ]
+  },
+  {
+    "id": "kp19-42",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0160"
+    ]
+  },
+  {
+    "id": "kp19-42",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0160"
+    ]
+  },
+  {
+    "id": "kp19-43",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0263"
+    ]
+  },
+  {
+    "id": "kp19-43",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0263"
+    ]
+  },
+  {
+    "id": "kp19-43",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0161"
+    ]
+  },
+  {
+    "id": "kp19-43",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0161"
+    ]
+  },
+  {
+    "id": "kp19-44",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0264"
+    ]
+  },
+  {
+    "id": "kp19-44",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0264"
+    ]
+  },
+  {
+    "id": "kp19-44",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0162"
+    ]
+  },
+  {
+    "id": "kp19-44",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0162"
+    ]
+  },
+  {
+    "id": "kp19-45",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0265"
+    ]
+  },
+  {
+    "id": "kp19-45",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0265"
+    ]
+  },
+  {
+    "id": "kp19-45",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0163"
+    ]
+  },
+  {
+    "id": "kp19-45",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0163"
+    ]
+  },
+  {
+    "id": "kp19-46",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0266"
+    ]
+  },
+  {
+    "id": "kp19-46",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0266"
+    ]
+  },
+  {
+    "id": "kp19-46",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0164"
+    ]
+  },
+  {
+    "id": "kp19-46",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0164"
+    ]
+  },
+  {
+    "id": "kp19-47",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0267"
+    ]
+  },
+  {
+    "id": "kp19-47",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0267"
+    ]
+  },
+  {
+    "id": "kp19-47",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0165"
+    ]
+  },
+  {
+    "id": "kp19-47",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0165"
+    ]
+  },
+  {
+    "id": "kp19-48",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0268"
+    ]
+  },
+  {
+    "id": "kp19-48",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0268"
+    ]
+  },
+  {
+    "id": "kp19-48",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0166"
+    ]
+  },
+  {
+    "id": "kp19-48",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0166"
+    ]
+  },
+  {
+    "id": "kp19-49",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0269"
+    ]
+  },
+  {
+    "id": "kp19-49",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0269"
+    ]
+  },
+  {
+    "id": "kp19-49",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0167"
+    ]
+  },
+  {
+    "id": "kp19-49",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0167"
+    ]
+  },
+  {
+    "id": "kp19-50",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0270"
+    ]
+  },
+  {
+    "id": "kp19-50",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0270"
+    ]
+  },
+  {
+    "id": "kp19-50",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0168"
+    ]
+  },
+  {
+    "id": "kp19-50",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0168"
+    ]
+  },
+  {
+    "id": "kp19-51",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0271"
+    ]
+  },
+  {
+    "id": "kp19-51",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0271"
+    ]
+  },
+  {
+    "id": "kp19-51",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0169"
+    ]
+  },
+  {
+    "id": "kp19-51",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0169"
+    ]
+  },
+  {
+    "id": "kp19-52",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0272"
+    ]
+  },
+  {
+    "id": "kp19-52",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0272"
+    ]
+  },
+  {
+    "id": "kp19-52",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0170"
+    ]
+  },
+  {
+    "id": "kp19-52",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0170"
+    ]
+  },
+  {
+    "id": "kp19-53",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0273"
+    ]
+  },
+  {
+    "id": "kp19-53",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0273"
+    ]
+  },
+  {
+    "id": "kp19-53",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0171"
+    ]
+  },
+  {
+    "id": "kp19-53",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0171"
+    ]
+  },
+  {
+    "id": "kp19-54",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0274"
+    ]
+  },
+  {
+    "id": "kp19-54",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0274"
+    ]
+  },
+  {
+    "id": "kp19-54",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0172"
+    ]
+  },
+  {
+    "id": "kp19-54",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0172"
+    ]
+  },
+  {
+    "id": "kp19-55",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0275"
+    ]
+  },
+  {
+    "id": "kp19-55",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0275"
+    ]
+  },
+  {
+    "id": "kp19-55",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0173"
+    ]
+  },
+  {
+    "id": "kp19-55",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0173"
+    ]
+  },
+  {
+    "id": "kp19-56",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0276"
+    ]
+  },
+  {
+    "id": "kp19-56",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0276"
+    ]
+  },
+  {
+    "id": "kp19-56",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0174"
+    ]
+  },
+  {
+    "id": "kp19-56",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0174"
+    ]
+  },
+  {
+    "id": "kp19-57",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0277"
+    ]
+  },
+  {
+    "id": "kp19-57",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0277"
+    ]
+  },
+  {
+    "id": "kp19-57",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0175"
+    ]
+  },
+  {
+    "id": "kp19-57",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0175"
+    ]
+  },
+  {
+    "id": "kp19-58",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0278"
+    ]
+  },
+  {
+    "id": "kp19-58",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0278"
+    ]
+  },
+  {
+    "id": "kp19-58",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0176"
+    ]
+  },
+  {
+    "id": "kp19-58",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0176"
+    ]
+  },
+  {
+    "id": "kp19-59",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0279"
+    ]
+  },
+  {
+    "id": "kp19-59",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0279"
+    ]
+  },
+  {
+    "id": "kp19-59",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0177"
+    ]
+  },
+  {
+    "id": "kp19-59",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0177"
+    ]
+  },
+  {
+    "id": "kp19-60",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0280"
+    ]
+  },
+  {
+    "id": "kp19-60",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0280"
+    ]
+  },
+  {
+    "id": "kp19-60",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0178"
+    ]
+  },
+  {
+    "id": "kp19-60",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0178"
+    ]
+  },
+  {
+    "id": "kp20-01",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0282",
+      "q0283",
+      "q0284",
+      "q0287",
+      "q0288",
+      "q0291",
+      "q0294",
+      "q0297",
+      "q0299",
+      "q0300"
+    ]
+  },
+  {
+    "id": "kp20-01",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp20-01",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0182"
+    ]
+  },
+  {
+    "id": "kp20-01",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0182"
+    ]
+  },
+  {
+    "id": "kp20-02",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0252",
+      "q0290",
+      "q0295",
+      "q0298",
+      "q0299"
+    ]
+  },
+  {
+    "id": "kp20-02",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp20-02",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0150",
+      "fc0180"
+    ]
+  },
+  {
+    "id": "kp20-02",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0180"
+    ]
+  },
+  {
+    "id": "kp20-03",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0253"
+    ]
+  },
+  {
+    "id": "kp20-03",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp20-03",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0179"
+    ]
+  },
+  {
+    "id": "kp20-03",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0179"
+    ]
+  },
+  {
+    "id": "kp20-04",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0255",
+      "q0269",
+      "q0270",
+      "q0281",
+      "q0285",
+      "q0286",
+      "q0289",
+      "q0292",
+      "q0293",
+      "q0296",
+      "q0300"
+    ]
+  },
+  {
+    "id": "kp20-04",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": []
+  },
+  {
+    "id": "kp20-04",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0181"
+    ]
+  },
+  {
+    "id": "kp20-04",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0181"
+    ]
+  },
+  {
+    "id": "kp20-05",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0281"
+    ]
+  },
+  {
+    "id": "kp20-05",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0281"
+    ]
+  },
+  {
+    "id": "kp20-05",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0181"
+    ]
+  },
+  {
+    "id": "kp20-05",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0181"
+    ]
+  },
+  {
+    "id": "kp20-06",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0282"
+    ]
+  },
+  {
+    "id": "kp20-06",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0282"
+    ]
+  },
+  {
+    "id": "kp20-06",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0182"
+    ]
+  },
+  {
+    "id": "kp20-06",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0182"
+    ]
+  },
+  {
+    "id": "kp20-07",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0283"
+    ]
+  },
+  {
+    "id": "kp20-07",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0283"
+    ]
+  },
+  {
+    "id": "kp20-07",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0183"
+    ]
+  },
+  {
+    "id": "kp20-07",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0183"
+    ]
+  },
+  {
+    "id": "kp20-08",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0284"
+    ]
+  },
+  {
+    "id": "kp20-08",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0284"
+    ]
+  },
+  {
+    "id": "kp20-08",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0184"
+    ]
+  },
+  {
+    "id": "kp20-08",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0184"
+    ]
+  },
+  {
+    "id": "kp20-09",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0285"
+    ]
+  },
+  {
+    "id": "kp20-09",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0285"
+    ]
+  },
+  {
+    "id": "kp20-09",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0185"
+    ]
+  },
+  {
+    "id": "kp20-09",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0185"
+    ]
+  },
+  {
+    "id": "kp20-10",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0286"
+    ]
+  },
+  {
+    "id": "kp20-10",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0286"
+    ]
+  },
+  {
+    "id": "kp20-10",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0186"
+    ]
+  },
+  {
+    "id": "kp20-10",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0186"
+    ]
+  },
+  {
+    "id": "kp20-11",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0287"
+    ]
+  },
+  {
+    "id": "kp20-11",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0287"
+    ]
+  },
+  {
+    "id": "kp20-11",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0187"
+    ]
+  },
+  {
+    "id": "kp20-11",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0187"
+    ]
+  },
+  {
+    "id": "kp20-12",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0288"
+    ]
+  },
+  {
+    "id": "kp20-12",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0288"
+    ]
+  },
+  {
+    "id": "kp20-12",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0188"
+    ]
+  },
+  {
+    "id": "kp20-12",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0188"
+    ]
+  },
+  {
+    "id": "kp20-13",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0289"
+    ]
+  },
+  {
+    "id": "kp20-13",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0289"
+    ]
+  },
+  {
+    "id": "kp20-13",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0189"
+    ]
+  },
+  {
+    "id": "kp20-13",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0189"
+    ]
+  },
+  {
+    "id": "kp20-14",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0290"
+    ]
+  },
+  {
+    "id": "kp20-14",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0290"
+    ]
+  },
+  {
+    "id": "kp20-14",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0190"
+    ]
+  },
+  {
+    "id": "kp20-14",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0190"
+    ]
+  },
+  {
+    "id": "kp20-15",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0291"
+    ]
+  },
+  {
+    "id": "kp20-15",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0291"
+    ]
+  },
+  {
+    "id": "kp20-15",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0191"
+    ]
+  },
+  {
+    "id": "kp20-15",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0191"
+    ]
+  },
+  {
+    "id": "kp20-16",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0292"
+    ]
+  },
+  {
+    "id": "kp20-16",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0292"
+    ]
+  },
+  {
+    "id": "kp20-16",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0192"
+    ]
+  },
+  {
+    "id": "kp20-16",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0192"
+    ]
+  },
+  {
+    "id": "kp20-17",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0293"
+    ]
+  },
+  {
+    "id": "kp20-17",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0293"
+    ]
+  },
+  {
+    "id": "kp20-17",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0193"
+    ]
+  },
+  {
+    "id": "kp20-17",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0193"
+    ]
+  },
+  {
+    "id": "kp20-18",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0294"
+    ]
+  },
+  {
+    "id": "kp20-18",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0294"
+    ]
+  },
+  {
+    "id": "kp20-18",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0194"
+    ]
+  },
+  {
+    "id": "kp20-18",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0194"
+    ]
+  },
+  {
+    "id": "kp20-19",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0295"
+    ]
+  },
+  {
+    "id": "kp20-19",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0295"
+    ]
+  },
+  {
+    "id": "kp20-19",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0195"
+    ]
+  },
+  {
+    "id": "kp20-19",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0195"
+    ]
+  },
+  {
+    "id": "kp20-20",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0296"
+    ]
+  },
+  {
+    "id": "kp20-20",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0296"
+    ]
+  },
+  {
+    "id": "kp20-20",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0196"
+    ]
+  },
+  {
+    "id": "kp20-20",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0196"
+    ]
+  },
+  {
+    "id": "kp20-21",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0297"
+    ]
+  },
+  {
+    "id": "kp20-21",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0297"
+    ]
+  },
+  {
+    "id": "kp20-21",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0197"
+    ]
+  },
+  {
+    "id": "kp20-21",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0197"
+    ]
+  },
+  {
+    "id": "kp20-22",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0298"
+    ]
+  },
+  {
+    "id": "kp20-22",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0298"
+    ]
+  },
+  {
+    "id": "kp20-22",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0198"
+    ]
+  },
+  {
+    "id": "kp20-22",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0198"
+    ]
+  },
+  {
+    "id": "kp20-23",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0299"
+    ]
+  },
+  {
+    "id": "kp20-23",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0299"
+    ]
+  },
+  {
+    "id": "kp20-23",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0199"
+    ]
+  },
+  {
+    "id": "kp20-23",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0199"
+    ]
+  },
+  {
+    "id": "kp20-24",
+    "field": "relatedQuestionIds",
+    "before": [],
+    "after": [
+      "q0300"
+    ]
+  },
+  {
+    "id": "kp20-24",
+    "field": "primaryQuestionIds",
+    "before": null,
+    "after": [
+      "q0300"
+    ]
+  },
+  {
+    "id": "kp20-24",
+    "field": "relatedFlashcardIds",
+    "before": [],
+    "after": [
+      "fc0200"
+    ]
+  },
+  {
+    "id": "kp20-24",
+    "field": "primaryFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0200"
+    ]
+  },
+  {
+    "id": "kp10-01",
+    "field": "concept",
+    "before": "标量子查询应返回至多一行一列；空结果通常为 NULL。",
+    "after": "标量子查询必须返回一列、至多一行；零行返回 NULL。MySQL 返回多行时会报错，不能用 SQLite 自动取首行的行为代替。"
+  },
+  {
+    "id": "kp15-03",
+    "field": "notes",
+    "before": "偏移量按行而非按日期差。",
+    "after": "LAG/LEAD 按排序后的行偏移，不保证恰好是上月或下月；日期缺档需先补齐时间轴。并列排序键应增加稳定决胜键。"
+  },
+  {
+    "id": "kp15-05",
+    "field": "concept",
+    "before": "移动平均使用固定行数帧；环比比较当前与上期，分母为上期且不得为零。",
+    "after": "本例移动平均采用最近三行（含当前行），不足三行取现有行；仅在连续月份数据中才能解释为三个月移动平均。环比仅在上一行确为上月时成立，分母不得为零。"
+  },
+  {
+    "id": "kp19-20",
+    "field": "concept",
+    "before": "先按月汇总收入方向的交易，再以紧邻上月金额计算增长率。",
+    "after": "先按月汇总收入，再用 LAG 取得上一条月度记录。本课堂数据月份连续；实际月份缺档时必须先补齐月份轴，或明确标记同比/环比缺失。"
+  },
+  {
+    "id": "kp19-15",
+    "field": "notes",
+    "before": "本例每笔有效订单均有明细；缺明细订单应检查数据质量。课堂 commerce_items 对应正式 order_items。",
+    "after": "本课堂金额为折扣后订单金额，未包含独立退款表；正式企业净收入需按约定截止日扣除退款。每笔有效订单须有有效明细，分母按订单计。"
+  },
+  {
+    "id": "kp19-28",
+    "field": "notes",
+    "before": "取消订单排除；未到期的明细不进入分母。",
+    "after": "课堂以收货数量衡量按期履约，未提供质检数据；正式企业任务 BP27、BP30 使用合格收货量，不可直接比较两个口径。"
+  },
+  {
+    "id": "kp18-03",
+    "field": "notes",
+    "before": "原生执行计划只做理论；EXPLAIN ANALYZE 会实际执行。",
+    "after": "原生执行计划只做理论；EXPLAIN ANALYZE 会实际执行查询，不适合作为无副作用的预览。不得在生产或个人数据库直接运行未知查询。"
+  },
+  {
+    "id": "kp19-31",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP01.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP01.sql"
+  },
+  {
+    "id": "kp19-31/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP01.json",
+    "after": "../enterprise_reference/business_tasks/results/BP01.json"
+  },
+  {
+    "id": "kp19-31",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP01.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP01.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-32",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP02.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP02.sql"
+  },
+  {
+    "id": "kp19-32/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP02.json",
+    "after": "../enterprise_reference/business_tasks/results/BP02.json"
+  },
+  {
+    "id": "kp19-32",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP02.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP02.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-33",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP03.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP03.sql"
+  },
+  {
+    "id": "kp19-33/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP03.json",
+    "after": "../enterprise_reference/business_tasks/results/BP03.json"
+  },
+  {
+    "id": "kp19-33",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP03.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP03.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-34",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP04.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP04.sql"
+  },
+  {
+    "id": "kp19-34/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP04.json",
+    "after": "../enterprise_reference/business_tasks/results/BP04.json"
+  },
+  {
+    "id": "kp19-34",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP04.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP04.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-35",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP05.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP05.sql"
+  },
+  {
+    "id": "kp19-35/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP05.json",
+    "after": "../enterprise_reference/business_tasks/results/BP05.json"
+  },
+  {
+    "id": "kp19-35",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP05.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP05.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-36",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP06.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP06.sql"
+  },
+  {
+    "id": "kp19-36/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP06.json",
+    "after": "../enterprise_reference/business_tasks/results/BP06.json"
+  },
+  {
+    "id": "kp19-36",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP06.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP06.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-37",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP07.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP07.sql"
+  },
+  {
+    "id": "kp19-37/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP07.json",
+    "after": "../enterprise_reference/business_tasks/results/BP07.json"
+  },
+  {
+    "id": "kp19-37",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP07.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP07.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-38",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP08.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP08.sql"
+  },
+  {
+    "id": "kp19-38/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP08.json",
+    "after": "../enterprise_reference/business_tasks/results/BP08.json"
+  },
+  {
+    "id": "kp19-38",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP08.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP08.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-39",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP09.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP09.sql"
+  },
+  {
+    "id": "kp19-39/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP09.json",
+    "after": "../enterprise_reference/business_tasks/results/BP09.json"
+  },
+  {
+    "id": "kp19-39",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP09.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP09.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "BP10",
+    "field": "requirements",
+    "before": "期末，未来30天需求=近30天实际销售出库量；在途=未取消且承诺日未到年底的未完成采购数量；履约风险用对应商品历史采购准时足量率（承诺日已到且非取消），缺失NULL；对有效商品计算缺口、库存金额、供应商风险，按缺口降序。",
+    "after": "期末，未来30天需求=近30天实际销售出库量；在途=未取消且承诺日严格晚于2025-12-31、且未完成采购的剩余数量；履约风险用对应商品历史采购准时足量率（承诺日已到且非取消），缺失NULL；对有效商品计算缺口、库存金额、供应商风险，按缺口降序。"
+  },
+  {
+    "id": "kp19-40",
+    "field": "concept",
+    "before": "期末，未来30天需求=近30天实际销售出库量；在途=未取消且承诺日未到年底的未完成采购数量；履约风险用对应商品历史采购准时足量率（承诺日已到且非取消），缺失NULL；对有效商品计算缺口、库存金额、供应商风险，按缺口降序。",
+    "after": "期末，未来30天需求=近30天实际销售出库量；在途=未取消且承诺日严格晚于2025-12-31、且未完成采购的剩余数量；履约风险用对应商品历史采购准时足量率（承诺日已到且非取消），缺失NULL；对有效商品计算缺口、库存金额、供应商风险，按缺口降序。"
+  },
+  {
+    "id": "kp19-40",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP10.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP10.sql"
+  },
+  {
+    "id": "kp19-40/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP10.json",
+    "after": "../enterprise_reference/business_tasks/results/BP10.json"
+  },
+  {
+    "id": "kp19-40",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP10.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP10.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-41",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP11.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP11.sql"
+  },
+  {
+    "id": "kp19-41/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP11.json",
+    "after": "../enterprise_reference/business_tasks/results/BP11.json"
+  },
+  {
+    "id": "kp19-41",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP11.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP11.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-42",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP12.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP12.sql"
+  },
+  {
+    "id": "kp19-42/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP12.json",
+    "after": "../enterprise_reference/business_tasks/results/BP12.json"
+  },
+  {
+    "id": "kp19-42",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP12.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP12.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-43",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP13.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP13.sql"
+  },
+  {
+    "id": "kp19-43/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP13.json",
+    "after": "../enterprise_reference/business_tasks/results/BP13.json"
+  },
+  {
+    "id": "kp19-43",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP13.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP13.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-44",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP14.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP14.sql"
+  },
+  {
+    "id": "kp19-44/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP14.json",
+    "after": "../enterprise_reference/business_tasks/results/BP14.json"
+  },
+  {
+    "id": "kp19-44",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP14.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP14.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-45",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP15.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP15.sql"
+  },
+  {
+    "id": "kp19-45/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP15.json",
+    "after": "../enterprise_reference/business_tasks/results/BP15.json"
+  },
+  {
+    "id": "kp19-45",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP15.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP15.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-46",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP16.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP16.sql"
+  },
+  {
+    "id": "kp19-46/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP16.json",
+    "after": "../enterprise_reference/business_tasks/results/BP16.json"
+  },
+  {
+    "id": "kp19-46",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP16.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP16.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-47",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP17.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP17.sql"
+  },
+  {
+    "id": "kp19-47/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP17.json",
+    "after": "../enterprise_reference/business_tasks/results/BP17.json"
+  },
+  {
+    "id": "kp19-47",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP17.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP17.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-48",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP18.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP18.sql"
+  },
+  {
+    "id": "kp19-48/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP18.json",
+    "after": "../enterprise_reference/business_tasks/results/BP18.json"
+  },
+  {
+    "id": "kp19-48",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP18.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP18.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-49",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP19.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP19.sql"
+  },
+  {
+    "id": "kp19-49/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP19.json",
+    "after": "../enterprise_reference/business_tasks/results/BP19.json"
+  },
+  {
+    "id": "kp19-49",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP19.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP19.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-50",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP20.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP20.sql"
+  },
+  {
+    "id": "kp19-50/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP20.json",
+    "after": "../enterprise_reference/business_tasks/results/BP20.json"
+  },
+  {
+    "id": "kp19-50",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP20.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP20.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-51",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP21.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP21.sql"
+  },
+  {
+    "id": "kp19-51/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP21.json",
+    "after": "../enterprise_reference/business_tasks/results/BP21.json"
+  },
+  {
+    "id": "kp19-51",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP21.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP21.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-52",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP22.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP22.sql"
+  },
+  {
+    "id": "kp19-52/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP22.json",
+    "after": "../enterprise_reference/business_tasks/results/BP22.json"
+  },
+  {
+    "id": "kp19-52",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP22.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP22.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-53",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP23.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP23.sql"
+  },
+  {
+    "id": "kp19-53/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP23.json",
+    "after": "../enterprise_reference/business_tasks/results/BP23.json"
+  },
+  {
+    "id": "kp19-53",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP23.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP23.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-54",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP24.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP24.sql"
+  },
+  {
+    "id": "kp19-54/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP24.json",
+    "after": "../enterprise_reference/business_tasks/results/BP24.json"
+  },
+  {
+    "id": "kp19-54",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP24.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP24.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-55",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP25.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP25.sql"
+  },
+  {
+    "id": "kp19-55/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP25.json",
+    "after": "../enterprise_reference/business_tasks/results/BP25.json"
+  },
+  {
+    "id": "kp19-55",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP25.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP25.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-56",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP26.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP26.sql"
+  },
+  {
+    "id": "kp19-56/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP26.json",
+    "after": "../enterprise_reference/business_tasks/results/BP26.json"
+  },
+  {
+    "id": "kp19-56",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP26.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP26.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-57",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP27.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP27.sql"
+  },
+  {
+    "id": "kp19-57/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP27.json",
+    "after": "../enterprise_reference/business_tasks/results/BP27.json"
+  },
+  {
+    "id": "kp19-57",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP27.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP27.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-58",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP28.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP28.sql"
+  },
+  {
+    "id": "kp19-58/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP28.json",
+    "after": "../enterprise_reference/business_tasks/results/BP28.json"
+  },
+  {
+    "id": "kp19-58",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP28.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP28.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-59",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP29.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP29.sql"
+  },
+  {
+    "id": "kp19-59/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP29.json",
+    "after": "../enterprise_reference/business_tasks/results/BP29.json"
+  },
+  {
+    "id": "kp19-59",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP29.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP29.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp19-60",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP30.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP30.sql"
+  },
+  {
+    "id": "kp19-60/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP30.json",
+    "after": "../enterprise_reference/business_tasks/results/BP30.json"
+  },
+  {
+    "id": "kp19-60",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP30.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP30.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp20-05",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP31.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP31.sql"
+  },
+  {
+    "id": "kp20-05/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP31.json",
+    "after": "../enterprise_reference/business_tasks/results/BP31.json"
+  },
+  {
+    "id": "kp20-05",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP31.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP31.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp20-06",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP32.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP32.sql"
+  },
+  {
+    "id": "kp20-06/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP32.json",
+    "after": "../enterprise_reference/business_tasks/results/BP32.json"
+  },
+  {
+    "id": "kp20-06",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP32.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP32.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp20-07",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP33.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP33.sql"
+  },
+  {
+    "id": "kp20-07/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP33.json",
+    "after": "../enterprise_reference/business_tasks/results/BP33.json"
+  },
+  {
+    "id": "kp20-07",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP33.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP33.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp20-08",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP34.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP34.sql"
+  },
+  {
+    "id": "kp20-08/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP34.json",
+    "after": "../enterprise_reference/business_tasks/results/BP34.json"
+  },
+  {
+    "id": "kp20-08",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP34.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP34.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp20-09",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP35.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP35.sql"
+  },
+  {
+    "id": "kp20-09/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP35.json",
+    "after": "../enterprise_reference/business_tasks/results/BP35.json"
+  },
+  {
+    "id": "kp20-09",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP35.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP35.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp20-10",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP36.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP36.sql"
+  },
+  {
+    "id": "kp20-10/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP36.json",
+    "after": "../enterprise_reference/business_tasks/results/BP36.json"
+  },
+  {
+    "id": "kp20-10",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP36.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP36.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp20-11",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP37.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP37.sql"
+  },
+  {
+    "id": "kp20-11/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP37.json",
+    "after": "../enterprise_reference/business_tasks/results/BP37.json"
+  },
+  {
+    "id": "kp20-11",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP37.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP37.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp20-12",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP38.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP38.sql"
+  },
+  {
+    "id": "kp20-12/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP38.json",
+    "after": "../enterprise_reference/business_tasks/results/BP38.json"
+  },
+  {
+    "id": "kp20-12",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP38.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP38.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp20-13",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP39.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP39.sql"
+  },
+  {
+    "id": "kp20-13/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP39.json",
+    "after": "../enterprise_reference/business_tasks/results/BP39.json"
+  },
+  {
+    "id": "kp20-13",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP39.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP39.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp20-14",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP40.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP40.sql"
+  },
+  {
+    "id": "kp20-14/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP40.json",
+    "after": "../enterprise_reference/business_tasks/results/BP40.json"
+  },
+  {
+    "id": "kp20-14",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP40.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP40.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp20-15",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP41.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP41.sql"
+  },
+  {
+    "id": "kp20-15/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP41.json",
+    "after": "../enterprise_reference/business_tasks/results/BP41.json"
+  },
+  {
+    "id": "kp20-15",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP41.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP41.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp20-16",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP42.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP42.sql"
+  },
+  {
+    "id": "kp20-16/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP42.json",
+    "after": "../enterprise_reference/business_tasks/results/BP42.json"
+  },
+  {
+    "id": "kp20-16",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP42.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP42.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp20-17",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP43.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP43.sql"
+  },
+  {
+    "id": "kp20-17/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP43.json",
+    "after": "../enterprise_reference/business_tasks/results/BP43.json"
+  },
+  {
+    "id": "kp20-17",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP43.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP43.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp20-18",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP44.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP44.sql"
+  },
+  {
+    "id": "kp20-18/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP44.json",
+    "after": "../enterprise_reference/business_tasks/results/BP44.json"
+  },
+  {
+    "id": "kp20-18",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP44.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP44.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp20-19",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP45.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP45.sql"
+  },
+  {
+    "id": "kp20-19/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP45.json",
+    "after": "../enterprise_reference/business_tasks/results/BP45.json"
+  },
+  {
+    "id": "kp20-19",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP45.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP45.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp20-20",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP46.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP46.sql"
+  },
+  {
+    "id": "kp20-20/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP46.json",
+    "after": "../enterprise_reference/business_tasks/results/BP46.json"
+  },
+  {
+    "id": "kp20-20",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP46.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP46.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp20-21",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP47.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP47.sql"
+  },
+  {
+    "id": "kp20-21/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP47.json",
+    "after": "../enterprise_reference/business_tasks/results/BP47.json"
+  },
+  {
+    "id": "kp20-21",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP47.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP47.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp20-22",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP48.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP48.sql"
+  },
+  {
+    "id": "kp20-22/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP48.json",
+    "after": "../enterprise_reference/business_tasks/results/BP48.json"
+  },
+  {
+    "id": "kp20-22",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP48.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP48.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp20-23",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP49.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP49.sql"
+  },
+  {
+    "id": "kp20-23/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP49.json",
+    "after": "../enterprise_reference/business_tasks/results/BP49.json"
+  },
+  {
+    "id": "kp20-23",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP49.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP49.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "kp20-24",
+    "field": "mysqlVerificationScript",
+    "before": "business_tasks/mysql_queries/BP50.sql",
+    "after": "../enterprise_reference/business_tasks/mysql_queries/BP50.sql"
+  },
+  {
+    "id": "kp20-24/result",
+    "field": "fullResultPath",
+    "before": "business_tasks/results/BP50.json",
+    "after": "../enterprise_reference/business_tasks/results/BP50.json"
+  },
+  {
+    "id": "kp20-24",
+    "field": "notes",
+    "before": "完整输出见 business_tasks/results/BP50.json；本节展示前12行。主库参考结果仅为公开基准，后续判题仍需独立隐藏夹具。",
+    "after": "完整输出见 ../enterprise_reference/business_tasks/results/BP50.json；本节展示前12行。主库参考结果为公开基准；正式题库已有独立隐藏夹具。"
+  },
+  {
+    "id": "q0001",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0001",
+      "fc0006",
+      "fc0007"
+    ]
+  },
+  {
+    "id": "q0002",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0005",
+      "fc0007"
+    ]
+  },
+  {
+    "id": "q0003",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0002"
+    ]
+  },
+  {
+    "id": "q0004",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0002"
+    ]
+  },
+  {
+    "id": "q0005",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0002"
+    ]
+  },
+  {
+    "id": "q0006",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0001",
+      "fc0006",
+      "fc0007"
+    ]
+  },
+  {
+    "id": "q0007",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0003",
+      "fc0004"
+    ]
+  },
+  {
+    "id": "q0008",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0003",
+      "fc0004"
+    ]
+  },
+  {
+    "id": "q0009",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0010",
+      "fc0012"
+    ]
+  },
+  {
+    "id": "q0010",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0009",
+      "fc0011",
+      "fc0013"
+    ]
+  },
+  {
+    "id": "q0011",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0008",
+      "fc0009"
+    ]
+  },
+  {
+    "id": "q0012",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0010",
+      "fc0012"
+    ]
+  },
+  {
+    "id": "q0013",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0008",
+      "fc0009"
+    ]
+  },
+  {
+    "id": "q0014",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0008"
+    ]
+  },
+  {
+    "id": "q0015",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0009"
+    ]
+  },
+  {
+    "id": "q0016",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0010"
+    ]
+  },
+  {
+    "id": "q0017",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0009",
+      "fc0011",
+      "fc0013"
+    ]
+  },
+  {
+    "id": "q0018",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0013"
+    ]
+  },
+  {
+    "id": "q0019",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0011"
+    ]
+  },
+  {
+    "id": "q0020",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0011"
+    ]
+  },
+  {
+    "id": "q0021",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0014",
+      "fc0015"
+    ]
+  },
+  {
+    "id": "q0022",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0017",
+      "fc0019",
+      "fc0023"
+    ]
+  },
+  {
+    "id": "q0023",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0016",
+      "fc0021"
+    ]
+  },
+  {
+    "id": "q0024",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0014",
+      "fc0015"
+    ]
+  },
+  {
+    "id": "q0025",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0014"
+    ]
+  },
+  {
+    "id": "q0026",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0016",
+      "fc0021"
+    ]
+  },
+  {
+    "id": "q0027",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0018",
+      "fc0020",
+      "fc0022"
+    ]
+  },
+  {
+    "id": "q0028",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0015"
+    ]
+  },
+  {
+    "id": "q0029",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0018",
+      "fc0020",
+      "fc0022"
+    ]
+  },
+  {
+    "id": "q0030",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0014"
+    ]
+  },
+  {
+    "id": "q0031",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0022"
+    ]
+  },
+  {
+    "id": "q0032",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0016"
+    ]
+  },
+  {
+    "id": "q0033",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0016"
+    ]
+  },
+  {
+    "id": "q0034",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0017",
+      "fc0019",
+      "fc0023"
+    ]
+  },
+  {
+    "id": "q0035",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0018"
+    ]
+  },
+  {
+    "id": "q0036",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0016"
+    ]
+  },
+  {
+    "id": "q0037",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0019"
+    ]
+  },
+  {
+    "id": "q0038",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0018"
+    ]
+  },
+  {
+    "id": "q0039",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0017"
+    ]
+  },
+  {
+    "id": "q0040",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0020"
+    ]
+  },
+  {
+    "id": "q0041",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0016"
+    ]
+  },
+  {
+    "id": "q0042",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0023"
+    ]
+  },
+  {
+    "id": "q0043",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0025",
+      "fc0028",
+      "fc0029"
+    ]
+  },
+  {
+    "id": "q0044",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0025",
+      "fc0028",
+      "fc0029"
+    ]
+  },
+  {
+    "id": "q0045",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0024",
+      "fc0026",
+      "fc0027"
+    ]
+  },
+  {
+    "id": "q0046",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0025"
+    ]
+  },
+  {
+    "id": "q0047",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0024",
+      "fc0026",
+      "fc0027"
+    ]
+  },
+  {
+    "id": "q0048",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0024"
+    ]
+  },
+  {
+    "id": "q0049",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0028"
+    ]
+  },
+  {
+    "id": "q0050",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0029"
+    ]
+  },
+  {
+    "id": "q0051",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0030",
+      "fc0033",
+      "fc0035"
+    ]
+  },
+  {
+    "id": "q0052",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0030",
+      "fc0033",
+      "fc0035"
+    ]
+  },
+  {
+    "id": "q0053",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0030"
+    ]
+  },
+  {
+    "id": "q0054",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0031",
+      "fc0032",
+      "fc0034"
+    ]
+  },
+  {
+    "id": "q0055",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0033"
+    ]
+  },
+  {
+    "id": "q0056",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0035"
+    ]
+  },
+  {
+    "id": "q0057",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0031",
+      "fc0032",
+      "fc0034"
+    ]
+  },
+  {
+    "id": "q0058",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0031"
+    ]
+  },
+  {
+    "id": "q0059",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0033"
+    ]
+  },
+  {
+    "id": "q0060",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0034"
+    ]
+  },
+  {
+    "id": "q0061",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0036",
+      "fc0040",
+      "fc0042"
+    ]
+  },
+  {
+    "id": "q0062",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0037",
+      "fc0039",
+      "fc0041",
+      "fc0043"
+    ]
+  },
+  {
+    "id": "q0063",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0038"
+    ]
+  },
+  {
+    "id": "q0064",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0038"
+    ]
+  },
+  {
+    "id": "q0065",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0036",
+      "fc0040",
+      "fc0042"
+    ]
+  },
+  {
+    "id": "q0066",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0037",
+      "fc0039",
+      "fc0041",
+      "fc0043"
+    ]
+  },
+  {
+    "id": "q0067",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0038"
+    ]
+  },
+  {
+    "id": "q0068",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0037"
+    ]
+  },
+  {
+    "id": "q0069",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0040"
+    ]
+  },
+  {
+    "id": "q0070",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0036"
+    ]
+  },
+  {
+    "id": "q0071",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0039"
+    ]
+  },
+  {
+    "id": "q0072",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0041"
+    ]
+  },
+  {
+    "id": "q0073",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0038"
+    ]
+  },
+  {
+    "id": "q0074",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0036"
+    ]
+  },
+  {
+    "id": "q0075",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0039"
+    ]
+  },
+  {
+    "id": "q0076",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0046",
+      "fc0047"
+    ]
+  },
+  {
+    "id": "q0077",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0048",
+      "fc0050"
+    ]
+  },
+  {
+    "id": "q0078",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0044",
+      "fc0045",
+      "fc0049"
+    ]
+  },
+  {
+    "id": "q0079",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0044",
+      "fc0045",
+      "fc0049"
+    ]
+  },
+  {
+    "id": "q0080",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0048",
+      "fc0050"
+    ]
+  },
+  {
+    "id": "q0081",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0045"
+    ]
+  },
+  {
+    "id": "q0082",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0044"
+    ]
+  },
+  {
+    "id": "q0083",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0049"
+    ]
+  },
+  {
+    "id": "q0084",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0046",
+      "fc0047"
+    ]
+  },
+  {
+    "id": "q0085",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0048"
+    ]
+  },
+  {
+    "id": "q0086",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0050"
+    ]
+  },
+  {
+    "id": "q0087",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0046"
+    ]
+  },
+  {
+    "id": "q0088",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0044"
+    ]
+  },
+  {
+    "id": "q0089",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0046"
+    ]
+  },
+  {
+    "id": "q0090",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0047"
+    ]
+  },
+  {
+    "id": "q0091",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0048"
+    ]
+  },
+  {
+    "id": "q0092",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0050"
+    ]
+  },
+  {
+    "id": "q0093",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0046"
+    ]
+  },
+  {
+    "id": "q0094",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0054"
+    ]
+  },
+  {
+    "id": "q0095",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0056",
+      "fc0060"
+    ]
+  },
+  {
+    "id": "q0096",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0052",
+      "fc0058"
+    ]
+  },
+  {
+    "id": "q0097",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0051",
+      "fc0053"
+    ]
+  },
+  {
+    "id": "q0098",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0051",
+      "fc0053"
+    ]
+  },
+  {
+    "id": "q0099",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0054"
+    ]
+  },
+  {
+    "id": "q0100",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0052",
+      "fc0058"
+    ]
+  },
+  {
+    "id": "q0101",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0054"
+    ]
+  },
+  {
+    "id": "q0102",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0057"
+    ]
+  },
+  {
+    "id": "q0103",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0052"
+    ]
+  },
+  {
+    "id": "q0104",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0057"
+    ]
+  },
+  {
+    "id": "q0105",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0053"
+    ]
+  },
+  {
+    "id": "q0106",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0053"
+    ]
+  },
+  {
+    "id": "q0107",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0054"
+    ]
+  },
+  {
+    "id": "q0108",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0058",
+      "fc0059"
+    ]
+  },
+  {
+    "id": "q0109",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0054"
+    ]
+  },
+  {
+    "id": "q0110",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0058",
+      "fc0059"
+    ]
+  },
+  {
+    "id": "q0111",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0059"
+    ]
+  },
+  {
+    "id": "q0112",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0055",
+      "fc0061"
+    ]
+  },
+  {
+    "id": "q0113",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0055",
+      "fc0061"
+    ]
+  },
+  {
+    "id": "q0114",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0056",
+      "fc0060"
+    ]
+  },
+  {
+    "id": "q0115",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0061"
+    ]
+  },
+  {
+    "id": "q0116",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0056"
+    ]
+  },
+  {
+    "id": "q0117",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0060"
+    ]
+  },
+  {
+    "id": "q0118",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0056"
+    ]
+  },
+  {
+    "id": "q0119",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0067"
+    ]
+  },
+  {
+    "id": "q0120",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0062",
+      "fc0063",
+      "fc0068",
+      "fc0069"
+    ]
+  },
+  {
+    "id": "q0121",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0067"
+    ]
+  },
+  {
+    "id": "q0122",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0064"
+    ]
+  },
+  {
+    "id": "q0123",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0062",
+      "fc0063",
+      "fc0068",
+      "fc0069"
+    ]
+  },
+  {
+    "id": "q0124",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0064"
+    ]
+  },
+  {
+    "id": "q0125",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0063"
+    ]
+  },
+  {
+    "id": "q0126",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0065",
+      "fc0066"
+    ]
+  },
+  {
+    "id": "q0127",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0065",
+      "fc0066"
+    ]
+  },
+  {
+    "id": "q0128",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0069"
+    ]
+  },
+  {
+    "id": "q0129",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0063"
+    ]
+  },
+  {
+    "id": "q0130",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0065"
+    ]
+  },
+  {
+    "id": "q0131",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0074",
+      "fc0076",
+      "fc0078"
+    ]
+  },
+  {
+    "id": "q0132",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0070",
+      "fc0075"
+    ]
+  },
+  {
+    "id": "q0133",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0070",
+      "fc0075"
+    ]
+  },
+  {
+    "id": "q0134",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0075"
+    ]
+  },
+  {
+    "id": "q0135",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0070"
+    ]
+  },
+  {
+    "id": "q0136",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0071",
+      "fc0073"
+    ]
+  },
+  {
+    "id": "q0137",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0071",
+      "fc0073"
+    ]
+  },
+  {
+    "id": "q0138",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0071"
+    ]
+  },
+  {
+    "id": "q0139",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0072",
+      "fc0073",
+      "fc0077"
+    ]
+  },
+  {
+    "id": "q0140",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0072",
+      "fc0073",
+      "fc0077"
+    ]
+  },
+  {
+    "id": "q0141",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0071"
+    ]
+  },
+  {
+    "id": "q0142",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0072"
+    ]
+  },
+  {
+    "id": "q0143",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0071"
+    ]
+  },
+  {
+    "id": "q0144",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0074",
+      "fc0076",
+      "fc0078"
+    ]
+  },
+  {
+    "id": "q0145",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0078"
+    ]
+  },
+  {
+    "id": "q0146",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0074"
+    ]
+  },
+  {
+    "id": "q0147",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0072"
+    ]
+  },
+  {
+    "id": "q0148",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0076"
+    ]
+  },
+  {
+    "id": "q0149",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0072"
+    ]
+  },
+  {
+    "id": "q0150",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0076"
+    ]
+  },
+  {
+    "id": "q0151",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0082",
+      "fc0083",
+      "fc0085"
+    ]
+  },
+  {
+    "id": "q0152",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0079",
+      "fc0084"
+    ]
+  },
+  {
+    "id": "q0153",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0081"
+    ]
+  },
+  {
+    "id": "q0154",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0082",
+      "fc0083",
+      "fc0085"
+    ]
+  },
+  {
+    "id": "q0155",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0081"
+    ]
+  },
+  {
+    "id": "q0156",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0079",
+      "fc0084"
+    ]
+  },
+  {
+    "id": "q0157",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0080"
+    ]
+  },
+  {
+    "id": "q0158",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0080"
+    ]
+  },
+  {
+    "id": "q0159",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0082"
+    ]
+  },
+  {
+    "id": "q0160",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0079"
+    ]
+  },
+  {
+    "id": "q0161",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0088",
+      "fc0091"
+    ]
+  },
+  {
+    "id": "q0162",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0088",
+      "fc0091"
+    ]
+  },
+  {
+    "id": "q0163",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0087",
+      "fc0094"
+    ]
+  },
+  {
+    "id": "q0164",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0090",
+      "fc0095"
+    ]
+  },
+  {
+    "id": "q0165",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0086",
+      "fc0093"
+    ]
+  },
+  {
+    "id": "q0166",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0087",
+      "fc0094"
+    ]
+  },
+  {
+    "id": "q0167",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0087"
+    ]
+  },
+  {
+    "id": "q0168",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0086",
+      "fc0093"
+    ]
+  },
+  {
+    "id": "q0169",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0089",
+      "fc0092"
+    ]
+  },
+  {
+    "id": "q0170",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0089",
+      "fc0092"
+    ]
+  },
+  {
+    "id": "q0171",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0088"
+    ]
+  },
+  {
+    "id": "q0172",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0090",
+      "fc0095"
+    ]
+  },
+  {
+    "id": "q0173",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0090"
+    ]
+  },
+  {
+    "id": "q0174",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0086"
+    ]
+  },
+  {
+    "id": "q0175",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0089"
+    ]
+  },
+  {
+    "id": "q0176",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0097",
+      "fc0098",
+      "fc0102"
+    ]
+  },
+  {
+    "id": "q0177",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0099",
+      "fc0100"
+    ]
+  },
+  {
+    "id": "q0178",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0101"
+    ]
+  },
+  {
+    "id": "q0179",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0097",
+      "fc0098",
+      "fc0102"
+    ]
+  },
+  {
+    "id": "q0180",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0099",
+      "fc0100"
+    ]
+  },
+  {
+    "id": "q0181",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0096"
+    ]
+  },
+  {
+    "id": "q0182",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0097"
+    ]
+  },
+  {
+    "id": "q0183",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0101"
+    ]
+  },
+  {
+    "id": "q0184",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0105",
+      "fc0106",
+      "fc0108",
+      "fc0109"
+    ]
+  },
+  {
+    "id": "q0185",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0105",
+      "fc0106",
+      "fc0108",
+      "fc0109"
+    ]
+  },
+  {
+    "id": "q0186",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0105"
+    ]
+  },
+  {
+    "id": "q0187",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0105"
+    ]
+  },
+  {
+    "id": "q0188",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0103",
+      "fc0104",
+      "fc0107"
+    ]
+  },
+  {
+    "id": "q0189",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0103",
+      "fc0104",
+      "fc0107"
+    ]
+  },
+  {
+    "id": "q0190",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0104"
+    ]
+  },
+  {
+    "id": "q0191",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0109"
+    ]
+  },
+  {
+    "id": "q0192",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0107"
+    ]
+  },
+  {
+    "id": "q0193",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0108"
+    ]
+  },
+  {
+    "id": "q0194",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0103"
+    ]
+  },
+  {
+    "id": "q0195",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0104"
+    ]
+  },
+  {
+    "id": "q0196",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0114",
+      "fc0115",
+      "fc0119"
+    ]
+  },
+  {
+    "id": "q0197",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0113",
+      "fc0120"
+    ]
+  },
+  {
+    "id": "q0198",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0113",
+      "fc0120"
+    ]
+  },
+  {
+    "id": "q0199",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0110",
+      "fc0112",
+      "fc0119"
+    ]
+  },
+  {
+    "id": "q0200",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0110",
+      "fc0112",
+      "fc0119"
+    ]
+  },
+  {
+    "id": "q0201",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0112"
+    ]
+  },
+  {
+    "id": "q0202",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0120"
+    ]
+  },
+  {
+    "id": "q0203",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0111",
+      "fc0118"
+    ]
+  },
+  {
+    "id": "q0204",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0110"
+    ]
+  },
+  {
+    "id": "q0205",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0116"
+    ]
+  },
+  {
+    "id": "q0206",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0114",
+      "fc0115",
+      "fc0119"
+    ]
+  },
+  {
+    "id": "q0207",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0115"
+    ]
+  },
+  {
+    "id": "q0208",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0116"
+    ]
+  },
+  {
+    "id": "q0209",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0113"
+    ]
+  },
+  {
+    "id": "q0210",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0116"
+    ]
+  },
+  {
+    "id": "q0211",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0116"
+    ]
+  },
+  {
+    "id": "q0212",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0117"
+    ]
+  },
+  {
+    "id": "q0213",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0117"
+    ]
+  },
+  {
+    "id": "q0214",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0111",
+      "fc0118"
+    ]
+  },
+  {
+    "id": "q0215",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0111"
+    ]
+  },
+  {
+    "id": "q0216",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0114"
+    ]
+  },
+  {
+    "id": "q0217",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0114"
+    ]
+  },
+  {
+    "id": "q0218",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0115"
+    ]
+  },
+  {
+    "id": "q0219",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0114"
+    ]
+  },
+  {
+    "id": "q0220",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0118"
+    ]
+  },
+  {
+    "id": "q0221",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0121",
+      "fc0122",
+      "fc0126"
+    ]
+  },
+  {
+    "id": "q0222",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0123",
+      "fc0127"
+    ]
+  },
+  {
+    "id": "q0223",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0123",
+      "fc0127"
+    ]
+  },
+  {
+    "id": "q0224",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0124",
+      "fc0125"
+    ]
+  },
+  {
+    "id": "q0225",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0127"
+    ]
+  },
+  {
+    "id": "q0226",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0124",
+      "fc0125"
+    ]
+  },
+  {
+    "id": "q0227",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0121",
+      "fc0122",
+      "fc0126"
+    ]
+  },
+  {
+    "id": "q0228",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0126"
+    ]
+  },
+  {
+    "id": "q0229",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0122"
+    ]
+  },
+  {
+    "id": "q0230",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0124"
+    ]
+  },
+  {
+    "id": "q0231",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0128",
+      "fc0130"
+    ]
+  },
+  {
+    "id": "q0232",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0129",
+      "fc0135"
+    ]
+  },
+  {
+    "id": "q0233",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0132",
+      "fc0134"
+    ]
+  },
+  {
+    "id": "q0234",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0131",
+      "fc0133"
+    ]
+  },
+  {
+    "id": "q0235",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0131",
+      "fc0133"
+    ]
+  },
+  {
+    "id": "q0236",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0131"
+    ]
+  },
+  {
+    "id": "q0237",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0132",
+      "fc0134"
+    ]
+  },
+  {
+    "id": "q0238",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0128",
+      "fc0130"
+    ]
+  },
+  {
+    "id": "q0239",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0128"
+    ]
+  },
+  {
+    "id": "q0240",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0129",
+      "fc0135"
+    ]
+  },
+  {
+    "id": "q0241",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0137"
+    ]
+  },
+  {
+    "id": "q0242",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0136",
+      "fc0138"
+    ]
+  },
+  {
+    "id": "q0243",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0139",
+      "fc0140"
+    ]
+  },
+  {
+    "id": "q0244",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0136",
+      "fc0138"
+    ]
+  },
+  {
+    "id": "q0245",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0139",
+      "fc0140"
+    ]
+  },
+  {
+    "id": "q0246",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0138"
+    ]
+  },
+  {
+    "id": "q0247",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0139"
+    ]
+  },
+  {
+    "id": "q0248",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0140"
+    ]
+  },
+  {
+    "id": "q0249",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0139"
+    ]
+  },
+  {
+    "id": "q0250",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0140"
+    ]
+  },
+  {
+    "id": "q0251",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0149"
+    ]
+  },
+  {
+    "id": "q0252",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0144",
+      "fc0150",
+      "fc0180"
+    ]
+  },
+  {
+    "id": "q0253",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0143",
+      "fc0146",
+      "fc0151",
+      "fc0179"
+    ]
+  },
+  {
+    "id": "q0254",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0149",
+      "fc0152"
+    ]
+  },
+  {
+    "id": "q0255",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0143",
+      "fc0153",
+      "fc0181"
+    ]
+  },
+  {
+    "id": "q0256",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0148",
+      "fc0154"
+    ]
+  },
+  {
+    "id": "q0257",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0154",
+      "fc0155"
+    ]
+  },
+  {
+    "id": "q0258",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0156",
+      "fc0158"
+    ]
+  },
+  {
+    "id": "q0259",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0148",
+      "fc0157"
+    ]
+  },
+  {
+    "id": "q0260",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0148",
+      "fc0156",
+      "fc0158"
+    ]
+  },
+  {
+    "id": "q0261",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0141",
+      "fc0159"
+    ]
+  },
+  {
+    "id": "q0262",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0160",
+      "fc0163"
+    ]
+  },
+  {
+    "id": "q0263",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0141",
+      "fc0161"
+    ]
+  },
+  {
+    "id": "q0264",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0159",
+      "fc0162"
+    ]
+  },
+  {
+    "id": "q0265",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0160",
+      "fc0163"
+    ]
+  },
+  {
+    "id": "q0266",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0144",
+      "fc0164"
+    ]
+  },
+  {
+    "id": "q0267",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0165",
+      "fc0166"
+    ]
+  },
+  {
+    "id": "q0268",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0165",
+      "fc0166"
+    ]
+  },
+  {
+    "id": "q0269",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0144",
+      "fc0164",
+      "fc0167",
+      "fc0181"
+    ]
+  },
+  {
+    "id": "q0270",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0168"
+    ]
+  },
+  {
+    "id": "q0271",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0169"
+    ]
+  },
+  {
+    "id": "q0272",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0170"
+    ]
+  },
+  {
+    "id": "q0273",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0145",
+      "fc0171"
+    ]
+  },
+  {
+    "id": "q0274",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0145",
+      "fc0172"
+    ]
+  },
+  {
+    "id": "q0275",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0147",
+      "fc0173"
+    ]
+  },
+  {
+    "id": "q0276",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0142",
+      "fc0174"
+    ]
+  },
+  {
+    "id": "q0277",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0158",
+      "fc0175"
+    ]
+  },
+  {
+    "id": "q0278",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0142",
+      "fc0176"
+    ]
+  },
+  {
+    "id": "q0279",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0142",
+      "fc0177"
+    ]
+  },
+  {
+    "id": "q0280",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0158",
+      "fc0175",
+      "fc0178"
+    ]
+  },
+  {
+    "id": "q0281",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0181"
+    ]
+  },
+  {
+    "id": "q0282",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0146",
+      "fc0151",
+      "fc0182"
+    ]
+  },
+  {
+    "id": "q0283",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0182",
+      "fc0183"
+    ]
+  },
+  {
+    "id": "q0284",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0146",
+      "fc0155",
+      "fc0184"
+    ]
+  },
+  {
+    "id": "q0285",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0175",
+      "fc0185"
+    ]
+  },
+  {
+    "id": "q0286",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0142",
+      "fc0176",
+      "fc0186"
+    ]
+  },
+  {
+    "id": "q0287",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0187"
+    ]
+  },
+  {
+    "id": "q0288",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0188"
+    ]
+  },
+  {
+    "id": "q0289",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0189"
+    ]
+  },
+  {
+    "id": "q0290",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0144",
+      "fc0150",
+      "fc0180",
+      "fc0190"
+    ]
+  },
+  {
+    "id": "q0291",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0191"
+    ]
+  },
+  {
+    "id": "q0292",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0142",
+      "fc0176",
+      "fc0192"
+    ]
+  },
+  {
+    "id": "q0293",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0193"
+    ]
+  },
+  {
+    "id": "q0294",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0194"
+    ]
+  },
+  {
+    "id": "q0295",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0161",
+      "fc0195"
+    ]
+  },
+  {
+    "id": "q0296",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0196"
+    ]
+  },
+  {
+    "id": "q0297",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0169",
+      "fc0197"
+    ]
+  },
+  {
+    "id": "q0298",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0198"
+    ]
+  },
+  {
+    "id": "q0299",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0199"
+    ]
+  },
+  {
+    "id": "q0300",
+    "field": "relatedFlashcardIds",
+    "before": null,
+    "after": [
+      "fc0200"
+    ]
+  },
+  {
+    "id": "course-manifest/retail",
+    "field": "path",
+    "before": "../databases/retail/retail.sqlite",
+    "after": "../question_resource/databases/retail/retail.sqlite"
+  },
+  {
+    "id": "course-manifest/inventory",
+    "field": "path",
+    "before": "../databases/inventory/inventory.sqlite",
+    "after": "../question_resource/databases/inventory/inventory.sqlite"
+  },
+  {
+    "id": "course-manifest/ecommerce",
+    "field": "path",
+    "before": "../databases/ecommerce/ecommerce.sqlite",
+    "after": "../question_resource/databases/ecommerce/ecommerce.sqlite"
+  },
+  {
+    "id": "course-manifest/finance",
+    "field": "path",
+    "before": "../databases/finance/finance.sqlite",
+    "after": "../question_resource/databases/finance/finance.sqlite"
+  },
+  {
+    "id": "course-manifest/hr",
+    "field": "path",
+    "before": "../databases/hr/hr.sqlite",
+    "after": "../question_resource/databases/hr/hr.sqlite"
+  },
+  {
+    "id": "course-manifest/procurement",
+    "field": "path",
+    "before": "../databases/procurement/procurement.sqlite",
+    "after": "../question_resource/databases/procurement/procurement.sqlite"
+  },
+  {
+    "id": "course-manifest/enterprise",
+    "field": "path",
+    "before": "../databases/enterprise/enterprise.sqlite",
+    "after": "../question_resource/databases/enterprise/enterprise.sqlite"
+  },
+  {
+    "id": "course-manifest",
+    "field": "enterpriseResourceRoot",
+    "before": "..",
+    "after": "../enterprise_reference"
+  },
+  {
+    "id": "enterprise-manifest",
+    "field": "datasets.enterprise.sha256",
+    "before": "a52dd78178eb0caec9b62dc2ffab1dbfa28ba7c670fbbd1f37c76dec12d3acd5",
+    "after": "bc4bd510731d3a3ef45f5bd5227349b37e59535322ba85afb28bcc0a4093ab2e"
+  },
+  {
+    "id": "verify_bank.py",
+    "field": "equal()",
+    "before": "def equal(a,b,ordered):\n if a.get('columns')!=b.get('columns') or len(a['rows'])!=len(b['rows']):return False\n if ordered:return all(all(closeval(x,y) for x,y in zip(l,r)) for l,r in zip(a['rows'],b['rows']))\n # canonicalization handles same numeric values of int/float and duplicate rows; exact NULL/text.\n def key(row):return tuple(('n',round(v,6)) if isinstance(v,(int,float)) else ('null',None) if v is None else ('s',v) for v in row)\n return collections.Counter(key(x) for x in a['rows'])==collections.Counter(key(x) for x in b['rows'])\n",
+    "after": "def equal(a,b,ordered):\n if a.get('columns')!=b.get('columns') or len(a['rows'])!=len(b['rows']):return False\n def row_equal(x,y):return len(x)==len(y) and all(closeval(u,v) for u,v in zip(x,y))\n if ordered:return all(row_equal(x,y) for x,y in zip(a['rows'],b['rows']))\n # Exact multiset fast path. Otherwise use one-to-one matching within nonnumeric buckets.\n def exactkey(row):return tuple(('n',v) if isinstance(v,(int,float)) else ('null',None) if v is None else ('s',v) for v in row)\n if collections.Counter(map(exactkey,a['rows']))==collections.Counter(map(exactkey,b['rows'])):return True\n def bucket(row):return tuple(('n',None) if isinstance(v,(int,float)) else ('null',None) if v is None else ('s',v) for v in row)\n aa=collections.defaultdict(list);bb=collections.defaultdict(list)\n for row in a['rows']:aa[bucket(row)].append(row)\n for row in b['rows']:bb[bucket(row)].append(row)\n if aa.keys()!=bb.keys():return False\n for key,xs in aa.items():\n  ys=bb[key]\n  if len(xs)!=len(ys):return False\n  adj=[[j for j,y in enumerate(ys) if row_equal(x,y)] for x in xs]\n  match={}\n  def augment(i,seen):\n   for j in adj[i]:\n    if j in seen:continue\n    seen.add(j)\n    if j not in match or augment(match[j],seen):match[j]=i;return True\n   return False\n  if any(not augment(i,set()) for i in sorted(range(len(xs)),key=lambda i:len(adj[i]))):return False\n return True\n",
+    "reason": "修复无序结果的绝对容差与舍入桶不一致问题。"
+  },
+  {
+    "id": "BP44",
+    "field": "requirements",
+    "before": "2025年线上订单归因会话渠道，净销售、毛利减广告支出为广告后贡献；未分摊管理、人力或配送费用；按贡献率输出。",
+    "after": "2025年线上订单归因会话渠道，净销售、毛利减广告支出为广告后贡献；未分摊管理、人力或配送费用；输出贡献率；按广告后贡献金额降序、渠道编号升序排列。"
+  },
+  {
+    "id": "q0294",
+    "field": "requirements",
+    "before": "2025年线上订单归因会话渠道，净销售、毛利减广告支出为广告后贡献；未分摊管理、人力或配送费用；按贡献率输出。\n输出字段名称及顺序：source_id, net_cents, gross_cents, spend_cents, contribution_cents, contribution_pct。输出顺序（含决胜键）：contribution_cents DESC,t.source_id。 除明确为件、日、小时、计数、比例或百分比字段外，金额字段统一以整数马币分计；按题设保留小数位，零分母或未知比率按定义返回NULL。",
+    "after": "2025年线上订单归因会话渠道，净销售、毛利减广告支出为广告后贡献；未分摊管理、人力或配送费用；输出贡献率；按广告后贡献金额降序、渠道编号升序排列。\n输出字段名称及顺序：source_id, net_cents, gross_cents, spend_cents, contribution_cents, contribution_pct。输出顺序（含决胜键）：contribution_cents DESC,t.source_id。 除明确为件、日、小时、计数、比例或百分比字段外，金额字段统一以整数马币分计；按题设保留小数位，零分母或未知比率按定义返回NULL。"
+  },
+  {
+    "id": "kp20-18",
+    "field": "concept",
+    "before": "2025年线上订单归因会话渠道，净销售、毛利减广告支出为广告后贡献；未分摊管理、人力或配送费用；按贡献率输出。",
+    "after": "2025年线上订单归因会话渠道，净销售、毛利减广告支出为广告后贡献；未分摊管理、人力或配送费用；输出贡献率；按广告后贡献金额降序、渠道编号升序排列。"
+  },
+  {
+    "id": "q0186",
+    "field": "完整题目及夹具",
+    "before": {
+      "id": "q0186",
+      "chapterId": "ch14",
+      "knowledgePointIds": [
+        "kp14-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp14-02"
+      ],
+      "difficulty": "简单",
+      "type": "独立编写",
+      "title": "生成每隔三天的编号",
+      "context": "使用课程中小型计算数据练习生成每隔三天的编号。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "生成 n=0、3、6、9、12，使用递归步长3，按 n 升序。\n输出列名称及顺序：n。按题设排序；参考排序键：n。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0186-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "n"
+        ],
+        "rows": [
+          [
+            0
+          ],
+          [
+            3
+          ],
+          [
+            6
+          ],
+          [
+            9
+          ],
+          [
+            12
+          ]
+        ],
+        "rowCount": 5
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "WITH RECURSIVE seq(n) AS (SELECT 0 UNION ALL SELECT n+3 FROM seq WHERE n<12) SELECT n FROM seq ORDER BY n",
+          "sqliteSql": "WITH RECURSIVE seq(n) AS (SELECT 0 UNION ALL SELECT n+3 FROM seq WHERE n<12) SELECT n FROM seq ORDER BY n"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "WITH RECURSIVE seq(n) AS (SELECT 0 UNION ALL SELECT n+3 FROM seq WHERE NOT (n>=12)) SELECT n FROM seq ORDER BY n",
+          "sqliteSql": "WITH RECURSIVE seq(n) AS (SELECT 0 UNION ALL SELECT n+3 FROM seq WHERE NOT (n>=12)) SELECT n FROM seq ORDER BY n",
+          "explanation": "用反向比较并取 NOT 表达相同三值逻辑。"
+        }
+      ],
+      "hints": [
+        "将要求拆成可独立核对的中间集合，并为递归确定起点与终点。",
+        "结合《递归 CTE 与层级》：递归表达式包含起始查询与递归查询；通过终止条件避免无限展开。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nWITH RECURSIVE seq(n) AS (SELECT 0 UNION ALL SELECT □□□ FROM seq WHERE n<12) SELECT n FROM seq ORDER BY n"
+      ],
+      "explanation": "递归成员的步长控制序列间距，不是终止条件控制。\n执行思路：先明确公用表表达式的中间数据及其粒度；按筛选条件保留符合要求的记录，并考虑空值；输出n列；遵循题设排序和并列规则。\n公开夹具实际返回 5 行、1 列；完整结果见 expectedOutput。\n另一种可用写法：用反向比较并取 NOT 表达相同三值逻辑。",
+      "commonErrors": [
+        {
+          "sql": "WITH RECURSIVE seq(n) AS (SELECT 0 UNION ALL SELECT n+2 FROM seq WHERE n<12) SELECT n FROM seq ORDER BY n",
+          "reason": "递归成员的步长控制序列间距，不是终止条件控制。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0186-public"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0186-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0186/q0186-public.json",
+          "sha256": "ff3dbeae65e5b5d2517829e557ffe9c04c71e2603433774ac14fd32cce5c11d3"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [
+        {
+          "kind": "recursive_cte",
+          "status": "需运行时语法树核查；不以关键词匹配判分",
+          "requirement": "生成 n=0、3、6、9、12，使用递归步长3，按 n 升序。"
+        }
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "递归 CTE 与层级",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0186-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "ebc1d895745d8949a538f126b9a044e57570d62e557531bc9df57e4dbea0e851",
+              "rowCount": 5
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "ebc1d895745d8949a538f126b9a044e57570d62e557531bc9df57e4dbea0e851",
+              "rows": 5
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "86f4b3c8f767c35a2d8edd04682d97bceb10e53414bac339c35cf7e500d3961a",
+              "rows": 7
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/with.html",
+        "independentPythonAssertions": [
+          {
+            "fixtureId": "q0186-public",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          }
+        ]
+      },
+      "relatedFlashcardIds": [
+        "fc0105"
+      ]
+    },
+    "after": {
+      "id": "q0186",
+      "chapterId": "ch14",
+      "knowledgePointIds": [
+        "kp14-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp14-02"
+      ],
+      "difficulty": "简单",
+      "type": "独立编写",
+      "title": "生成不越过截止日的巡检计划",
+      "context": "仓库每隔若干天巡检一次，实际间隔和截止日由配置表决定。日编号是相对起点的整数，不是日期字符串。",
+      "requirements": "从 schedule_bounds 的唯一一行读取起始日编号、正整数间隔天数和截止日编号。使用递归 CTE 生成所有不超过截止日的计划编号（包含起点），不得写死参数；起点不晚于截止日。输出 n，按 n 升序。\n输出列名称及顺序：n。按 n 升序。",
+      "datasetId": "q0186-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "schedule_bounds"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "n"
+        ],
+        "rows": [
+          [
+            0
+          ],
+          [
+            3
+          ],
+          [
+            6
+          ],
+          [
+            9
+          ]
+        ],
+        "rowCount": 4
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "WITH RECURSIVE schedule(n,step_days,max_day) AS (SELECT start_day,step_days,max_day FROM schedule_bounds UNION ALL SELECT n+step_days,step_days,max_day FROM schedule WHERE n+step_days<=max_day) SELECT n FROM schedule ORDER BY n",
+          "sqliteSql": "WITH RECURSIVE schedule(n,step_days,max_day) AS (SELECT start_day,step_days,max_day FROM schedule_bounds UNION ALL SELECT n+step_days,step_days,max_day FROM schedule WHERE n+step_days<=max_day) SELECT n FROM schedule ORDER BY n"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "WITH RECURSIVE schedule(n,step_days,max_day) AS (SELECT start_day,step_days,max_day FROM schedule_bounds UNION ALL SELECT n+step_days,step_days,max_day FROM schedule WHERE n<=max_day-step_days) SELECT n FROM schedule ORDER BY n",
+          "sqliteSql": "WITH RECURSIVE schedule(n,step_days,max_day) AS (SELECT start_day,step_days,max_day FROM schedule_bounds UNION ALL SELECT n+step_days,step_days,max_day FROM schedule WHERE n<=max_day-step_days) SELECT n FROM schedule ORDER BY n",
+          "explanation": "将下一编号≤截止日改写为当前编号≤截止日−步长。"
+        }
+      ],
+      "hints": [
+        "找到起点、步长和截止日三个参数；递归每轮需要继续携带哪些字段？",
+        "输出的最后一项不一定等于截止日；检查生成下一项的条件。",
+        "递归成员生成 n+step_days，只有下一项不超过 max_day 时才能继续。"
+      ],
+      "explanation": "递归起点与步长均从参数表读取。递归前检查下一编号是否超过截止日，而非只检查当前编号。公开参数为起点0、步长3、截止10，输出0、3、6、9；如果只检查当前编号小于10，将错误生成12。等价解将下一编号的条件移项到右边，适用于本题的小整数参数。",
+      "commonErrors": [
+        {
+          "sql": "WITH RECURSIVE schedule(n,step_days,max_day) AS (SELECT start_day,step_days,max_day FROM schedule_bounds UNION ALL SELECT n+step_days,step_days,max_day FROM schedule WHERE n<max_day) SELECT n FROM schedule ORDER BY n",
+          "reason": "仅检查当前编号是否小于截止日，会让下一编号跨越边界。",
+          "validation": "公开和隐藏数据均拒绝越界错误。"
+        }
+      ],
+      "testFixtureIds": [
+        "q0186-public",
+        "q0186-boundary"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0186-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0186/q0186-public.json",
+          "sha256": "9ff813db25009040506e694183185564dc5c80bedfc28d121073e0d4143c81f9"
+        },
+        {
+          "id": "q0186-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0186/q0186-boundary.json",
+          "sha256": "8d5d3dc65117aabdd97f40eb7b8fda4b818a28254691d85dfe7ab9b1687c2031"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [
+        {
+          "kind": "recursive_cte",
+          "status": "需运行时语法树核查；不以关键词匹配判分",
+          "requirement": "从 schedule_bounds 的唯一一行读取起始日编号、正整数间隔天数和截止日编号。使用递归 CTE 生成所有不超过截止日的计划编号（包含起点），不得写死参数；起点不晚于截止日。输出 n，按 n 升序。"
+        }
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "递归 CTE 与层级",
+      "validationStatus": "SQLite公开与隐藏参考解、等价解及越界错误复验通过；原生和手机待验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0186-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "e2ac4a14b1b2026bb5168ea5fad277aaa8cbd52b7e47e3344840f3008654c163",
+              "rowCount": 4
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "e2ac4a14b1b2026bb5168ea5fad277aaa8cbd52b7e47e3344840f3008654c163",
+              "rows": 4
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "ebc1d895745d8949a538f126b9a044e57570d62e557531bc9df57e4dbea0e851",
+              "rows": 5
+            }
+          },
+          {
+            "fixtureId": "q0186-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "06312383567e302bd1bf8b73ded50f120f95c5cf90c156a78f51b2c3099a9648",
+              "rowCount": 3
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "06312383567e302bd1bf8b73ded50f120f95c5cf90c156a78f51b2c3099a9648",
+              "rows": 3
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "b61afa8fcf069e427ae6ac822774613baf64b2d998e8828ebd0327d20173d5e0",
+              "rows": 4
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/with.html",
+        "independentPythonAssertions": [
+          {
+            "fixtureId": "q0186-public",
+            "description": "使用Python range 独立计算截止前所有编号",
+            "passed": true
+          },
+          {
+            "fixtureId": "q0186-boundary",
+            "description": "使用Python range 独立计算截止前所有编号",
+            "passed": true
+          }
+        ]
+      },
+      "relatedFlashcardIds": [
+        "fc0105"
+      ]
+    },
+    "reason": "与q0185共享相同递归骨架，仅常量不同；升级为读取配置及防越界，保留题号、难度、题型和知识点。"
+  },
+  {
+    "id": "fc0082",
+    "field": "back",
+    "before": {
+      "answer": "TRIM 清除指定的首尾字符（默认空格）；REPLACE 替换全部匹配子串。",
+      "explanation": "清洗名称时不要默认删除有意义的内部空格。"
+    },
+    "after": {
+      "answer": "TRIM 默认去除首尾空格；REPLACE 替换所有匹配子串。",
+      "explanation": "清洗名称时不要删除有意义的内部空格。MySQL 可指定重复移除的完整首尾子串；SQLite trim(X,Y) 将 Y 理解为待移除的字符集合，两者自定义参数语义不同。"
+    },
+    "reason": "区分MySQL指定首尾子串与SQLite字符集合。"
+  }
+]

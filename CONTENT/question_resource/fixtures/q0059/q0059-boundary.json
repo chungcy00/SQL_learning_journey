@@ -1,0 +1,106 @@
+{
+  "visibility": "hidden",
+  "variant": "boundary",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "nullable_values",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "value",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "note",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        }
+      ],
+      "rows": [
+        [
+          11,
+          null,
+          null
+        ],
+        [
+          12,
+          0,
+          ""
+        ],
+        [
+          13,
+          10,
+          "ok"
+        ],
+        [
+          14,
+          10,
+          "ok"
+        ],
+        [
+          15,
+          -5,
+          " "
+        ],
+        [
+          16,
+          42,
+          null
+        ],
+        [
+          17,
+          null,
+          "存在"
+        ]
+      ]
+    }
+  ],
+  "id": "q0059-boundary",
+  "questionId": "q0059",
+  "datasetId": "q0059-lesson",
+  "expected": {
+    "columns": [
+      "id",
+      "value"
+    ],
+    "rows": [
+      [
+        11,
+        null
+      ],
+      [
+        12,
+        0
+      ],
+      [
+        15,
+        -5
+      ],
+      [
+        16,
+        42
+      ],
+      [
+        17,
+        null
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

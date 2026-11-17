@@ -1,0 +1,764 @@
+{
+  "chapterId": "ch02",
+  "title": "基础查询",
+  "count": 6,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "cards": [
+    {
+      "id": "fc0008",
+      "chapterId": "ch02",
+      "knowledgePointIds": [
+        "kp02-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp02-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0011",
+        "q0013",
+        "q0014"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "入门",
+      "front": {
+        "question": "查询只需要两列时，为何尽量不要在正式分析中写 SELECT *？"
+      },
+      "back": {
+        "answer": "明确列名可稳定输出契约，并避免读取无关或敏感列。",
+        "explanation": "表新增列时 SELECT * 的结果会变化；连接时也可能出现同名列。"
+      },
+      "tags": [
+        "SELECT 与 FROM",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "SELECT 与 FROM"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0009",
+      "chapterId": "ch02",
+      "knowledgePointIds": [
+        "kp02-01",
+        "kp02-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp02-01",
+        "kp02-03"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0010",
+        "q0011",
+        "q0013",
+        "q0015",
+        "q0017"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "入门",
+      "front": {
+        "question": "写出投影字段及派生金额的别名结构。对商品展示编号及价格的两倍。",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "SELECT 字段, 表达式 AS 别名 FROM 表",
+        "explanation": "别名改变结果列的名称，不修改原表，也不将未知数变成零。",
+        "code": "SELECT id,price*2 AS double_price FROM items ORDER BY id",
+        "sqliteCode": "SELECT id,price*2 AS double_price FROM items ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "double_price"
+          ],
+          "rows": [
+            [
+              1,
+              24
+            ],
+            [
+              2,
+              40
+            ],
+            [
+              3,
+              24
+            ],
+            [
+              4,
+              null
+            ],
+            [
+              5,
+              60
+            ],
+            [
+              6,
+              40
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "SELECT 与 FROM",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "17363c9f7317b587aaa0991b9467c7a1d7bf6ae64eba1c6e6ff01e0b3db976bb",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0009-demo"
+      ],
+      "fixturePath": "fixtures/fc0009.json",
+      "referenceTopicNames": [
+        "SELECT 与 FROM",
+        "表达式与 AS 别名"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0009.sql"
+    },
+    {
+      "id": "fc0010",
+      "chapterId": "ch02",
+      "knowledgePointIds": [
+        "kp02-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp02-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0009",
+        "q0012",
+        "q0016"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "入门",
+      "front": {
+        "question": "SELECT DISTINCT category 与 SELECT DISTINCT category,price 的去重粒度相同吗？"
+      },
+      "back": {
+        "answer": "不同。前者按类别；后者按类别与价格的整行组合。",
+        "explanation": "同一类别下不同价格仍是不同组合；不能把多列 DISTINCT 理解为只去重第一列。"
+      },
+      "tags": [
+        "DISTINCT 去重",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "DISTINCT 去重"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0011",
+      "chapterId": "ch02",
+      "knowledgePointIds": [
+        "kp02-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp02-03"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0010",
+        "q0017",
+        "q0019",
+        "q0020"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "入门",
+      "front": {
+        "question": "将结果中的商品名称显示为 item_name，填入标准别名关键字。",
+        "code": "SELECT name □ item_name FROM items ORDER BY id",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "AS",
+        "explanation": "AS 仅为本次结果列命名，名称不是新建的物理字段。",
+        "acceptedBlanks": [
+          "AS"
+        ],
+        "code": "SELECT name AS item_name FROM items ORDER BY id",
+        "sqliteCode": "SELECT name AS item_name FROM items ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "item_name"
+          ],
+          "rows": [
+            [
+              "Tea"
+            ],
+            [
+              "Rice"
+            ],
+            [
+              "Soap"
+            ],
+            [
+              "Milk"
+            ],
+            [
+              "Bag"
+            ],
+            [
+              "Tea_2"
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "表达式与 AS 别名",
+        "代码填空"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "0bc9e10011085f618afc8c3abcbc5ad8b01c96e1234eff0935be4c2454e5da78",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0011-demo"
+      ],
+      "fixturePath": "fixtures/fc0011.json",
+      "referenceTopicNames": [
+        "表达式与 AS 别名"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0011.sql"
+    },
+    {
+      "id": "fc0012",
+      "chapterId": "ch02",
+      "knowledgePointIds": [
+        "kp02-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp02-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0009",
+        "q0012"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "结果预测",
+      "difficulty": "入门",
+      "front": {
+        "question": "预测不同类别的列表，保留查询的排序。",
+        "code": "SELECT DISTINCT category FROM items ORDER BY category",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "返回以下结果。",
+        "explanation": "重复类别被消除；与 COUNT(DISTINCT category) 返回单个数字不同。",
+        "code": "SELECT DISTINCT category FROM items ORDER BY category",
+        "sqliteCode": "SELECT DISTINCT category FROM items ORDER BY category",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "category"
+          ],
+          "rows": [
+            [
+              "A"
+            ],
+            [
+              "B"
+            ],
+            [
+              "C"
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "DISTINCT 去重",
+        "结果预测"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "a1088015e614cf305d2534ab14cf83458a3ced864be86a27df13d6fd0acb3e0e",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0012-demo"
+      ],
+      "fixturePath": "fixtures/fc0012.json",
+      "referenceTopicNames": [
+        "DISTINCT 去重"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0012.sql"
+    },
+    {
+      "id": "fc0013",
+      "chapterId": "ch02",
+      "knowledgePointIds": [
+        "kp02-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp02-03"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0010",
+        "q0017",
+        "q0018"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "错误纠正",
+      "difficulty": "入门",
+      "front": {
+        "question": "要求显示商品每件加价3后的价格，不改动表。现有代码将 price 改名为 new_price，已经完成计算了吗？",
+        "code": "SELECT id,price AS new_price FROM items ORDER BY id",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "改用背面的修正语句。",
+        "explanation": "仅起别名不会改变原值；应先计算表达式再命名结果。",
+        "code": "SELECT id,price+3 AS new_price FROM items ORDER BY id",
+        "sqliteCode": "SELECT id,price+3 AS new_price FROM items ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "new_price"
+          ],
+          "rows": [
+            [
+              1,
+              15
+            ],
+            [
+              2,
+              23
+            ],
+            [
+              3,
+              15
+            ],
+            [
+              4,
+              null
+            ],
+            [
+              5,
+              33
+            ],
+            [
+              6,
+              23
+            ]
+          ]
+        },
+        "wrongResult": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "new_price"
+          ],
+          "rows": [
+            [
+              1,
+              12
+            ],
+            [
+              2,
+              20
+            ],
+            [
+              3,
+              12
+            ],
+            [
+              4,
+              null
+            ],
+            [
+              5,
+              30
+            ],
+            [
+              6,
+              20
+            ]
+          ]
+        },
+        "correctionReason": "仅起别名不会改变原值；应先计算表达式再命名结果。"
+      },
+      "tags": [
+        "表达式与 AS 别名",
+        "错误纠正"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "54fab9a3c0d58536d487bec69071a647c121af9818f72e9e017f7b27d4e6ac60",
+        "mysqlNative": "未执行",
+        "wrongRejected": true,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0013-demo"
+      ],
+      "fixturePath": "fixtures/fc0013.json",
+      "referenceTopicNames": [
+        "表达式与 AS 别名"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0013.sql"
+    }
+  ]
+}

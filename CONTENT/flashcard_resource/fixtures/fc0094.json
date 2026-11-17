@@ -1,0 +1,24 @@
+{
+  "id": "fc0094-demo",
+  "tables": [],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT ABS(-9) AS a,ROUND(3.146,2) AS r,17%5 AS m",
+  "mysqlSql": "SELECT ABS(-9) AS a,ROUND(3.146,2) AS r,MOD(17,5) AS m",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      9,
+      3.15,
+      2
+    ]
+  ],
+  "expectedColumns": [
+    "a",
+    "r",
+    "m"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

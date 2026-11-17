@@ -1,0 +1,33 @@
+{
+  "id": "q0006-key",
+  "questionId": "q0006",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "数据库实例",
+      "explanation": "实例是运行数据库服务的层级，不是单条订单。"
+    },
+    {
+      "id": "B",
+      "text": "列（字段）",
+      "explanation": "列表示同一个属性在多笔订单中的取值。"
+    },
+    {
+      "id": "C",
+      "text": "索引键",
+      "explanation": "索引用于定位或加速访问，不是整条记录。"
+    },
+    {
+      "id": "D",
+      "text": "记录（行）",
+      "explanation": "行对应一条具有相同字段结构的业务记录。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "D"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

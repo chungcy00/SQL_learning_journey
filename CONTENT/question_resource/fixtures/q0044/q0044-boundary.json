@@ -1,0 +1,185 @@
+{
+  "visibility": "hidden",
+  "variant": "boundary",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "orders",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "category",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "sales",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "store_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "order_date",
+          "type": "TEXT",
+          "mysqlType": "DATE",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "customer_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          11,
+          "护肤品",
+          300,
+          1,
+          "2026-01-31",
+          1
+        ],
+        [
+          12,
+          "化妆品",
+          800,
+          2,
+          "2026-02-01",
+          2
+        ],
+        [
+          13,
+          "护肤品",
+          700,
+          1,
+          "2026-02-01",
+          1
+        ],
+        [
+          14,
+          "日用品",
+          null,
+          3,
+          "2026-03-01",
+          null
+        ],
+        [
+          15,
+          "化妆品",
+          400,
+          2,
+          "2026-02-28",
+          2
+        ],
+        [
+          16,
+          "护肤品",
+          1000,
+          1,
+          "2026-01-01",
+          4
+        ],
+        [
+          17,
+          "日用品",
+          1500,
+          3,
+          "2026-02-20",
+          4
+        ],
+        [
+          18,
+          "护肤品",
+          800,
+          1,
+          "2026-02-28",
+          1
+        ],
+        [
+          19,
+          "化妆品",
+          800,
+          2,
+          "2026-02-25",
+          3
+        ],
+        [
+          20,
+          "日用品",
+          null,
+          3,
+          "2026-02-10",
+          null
+        ],
+        [
+          21,
+          "日用品",
+          100,
+          4,
+          "2026-02-01",
+          null
+        ],
+        [
+          22,
+          "护肤品",
+          0,
+          2,
+          "2026-01-01",
+          5
+        ],
+        [
+          23,
+          "护肤品",
+          100,
+          2,
+          "2026-01-10",
+          5
+        ]
+      ]
+    }
+  ],
+  "id": "q0044-boundary",
+  "questionId": "q0044",
+  "datasetId": "q0044-lesson",
+  "expected": {
+    "columns": [
+      "id",
+      "sales"
+    ],
+    "rows": [
+      [
+        17,
+        1500
+      ],
+      [
+        16,
+        1000
+      ],
+      [
+        12,
+        800
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

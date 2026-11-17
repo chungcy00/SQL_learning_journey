@@ -1,0 +1,793 @@
+{
+  "id": "ch10",
+  "number": 10,
+  "title": "子查询",
+  "stage": "核心",
+  "objective": "掌握标量、集合、相关查询及反连接。",
+  "prerequisites": [
+    "ch09"
+  ],
+  "knowledgePoints": [
+    {
+      "id": "kp10-01",
+      "chapterId": "ch10",
+      "title": "标量子查询",
+      "learningObjective": "能够运用本节知识完成：筛选高于平均价格的商品",
+      "prerequisites": [
+        "ch09"
+      ],
+      "concept": "标量子查询必须返回一列、至多一行；零行返回 NULL。MySQL 返回多行时会报错，不能用 SQLite 自动取首行的行为代替。",
+      "syntax": "WHERE col > (SELECT AVG(col) FROM t)",
+      "parameters": {
+        "AVG": "产生单值的聚合"
+      },
+      "fixtureIds": [
+        "lesson-products"
+      ],
+      "sourceTables": [
+        {
+          "name": "products",
+          "columns": [
+            {
+              "name": "product_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "product_name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "price",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "stock",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "Mask",
+              "护肤品",
+              15,
+              150
+            ],
+            [
+              2,
+              "Serum",
+              "护肤品",
+              89,
+              40
+            ],
+            [
+              3,
+              "Cleanser",
+              "护肤品",
+              35,
+              200
+            ],
+            [
+              4,
+              "Cream",
+              "化妆品",
+              65,
+              180
+            ],
+            [
+              5,
+              "Sunscreen",
+              "化妆品",
+              45,
+              80
+            ],
+            [
+              6,
+              "Soap_1",
+              "日用品",
+              15,
+              0
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT product_id, price FROM products WHERE price > (SELECT AVG(price) FROM products) ORDER BY product_id;",
+      "sqliteSql": "SELECT product_id, price FROM products WHERE price > (SELECT AVG(price) FROM products) ORDER BY product_id;",
+      "executionSteps": [
+        "求整体平均价",
+        "逐行比较",
+        "输出较高价格商品"
+      ],
+      "useCase": "筛选高于平均价格的商品",
+      "comparison": "多行子查询应使用 IN 或其他集合比较。",
+      "commonError": {
+        "example": "WHERE price = (SELECT price FROM products)",
+        "correction": "使用明确聚合或 IN"
+      },
+      "notes": "MySQL 标量多行报错，SQLite 可能取首行；兼容层必须拒绝该差异。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0132",
+        "q0133",
+        "q0134",
+        "q0135"
+      ],
+      "relatedFlashcardIds": [
+        "fc0070",
+        "fc0075"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp03-01",
+        "kp05-01",
+        "kp08-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "product_id",
+          "price"
+        ],
+        "rows": [
+          [
+            2,
+            89
+          ],
+          [
+            4,
+            65
+          ],
+          [
+            5,
+            45
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp10-01.sql",
+      "primaryQuestionIds": [
+        "q0132",
+        "q0133",
+        "q0134",
+        "q0135"
+      ],
+      "primaryFlashcardIds": [
+        "fc0070",
+        "fc0075"
+      ]
+    },
+    {
+      "id": "kp10-02",
+      "chapterId": "ch10",
+      "title": "IN 与多行子查询",
+      "learningObjective": "能够运用本节知识完成：查找有大额消费记录的客户",
+      "prerequisites": [
+        "kp10-01"
+      ],
+      "concept": "IN 可用子查询生成候选集合；子查询列数应与比较表达式一致。",
+      "syntax": "WHERE key IN (SELECT key FROM other WHERE p)",
+      "parameters": {
+        "key": "关联键"
+      },
+      "fixtureIds": [
+        "lesson-customers",
+        "lesson-orders"
+      ],
+      "sourceTables": [
+        {
+          "name": "customers",
+          "columns": [
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "customer_name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "林"
+            ],
+            [
+              2,
+              "陈"
+            ],
+            [
+              3,
+              "王"
+            ],
+            [
+              4,
+              "李"
+            ]
+          ]
+        },
+        {
+          "name": "orders",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "sales",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "store_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "order_date",
+              "type": "TEXT",
+              "mysqlType": "DATE",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "护肤品",
+              800,
+              1,
+              "2026-01-03",
+              1
+            ],
+            [
+              2,
+              "化妆品",
+              400,
+              2,
+              "2026-01-10",
+              2
+            ],
+            [
+              3,
+              "护肤品",
+              600,
+              1,
+              "2026-02-02",
+              1
+            ],
+            [
+              4,
+              "化妆品",
+              300,
+              2,
+              "2026-02-15",
+              null
+            ],
+            [
+              5,
+              "日用品",
+              1500,
+              1,
+              "2026-02-20",
+              3
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT customer_id, customer_name FROM customers WHERE customer_id IN (SELECT customer_id FROM orders WHERE sales >= 600) ORDER BY customer_id;",
+      "sqliteSql": "SELECT customer_id, customer_name FROM customers WHERE customer_id IN (SELECT customer_id FROM orders WHERE sales >= 600) ORDER BY customer_id;",
+      "executionSteps": [
+        "选出金额至少600的订单客户",
+        "检查客户编号是否属于集合"
+      ],
+      "useCase": "查找有大额消费记录的客户",
+      "comparison": "JOIN 可能产生重复客户行，IN 只判断成员资格。",
+      "commonError": {
+        "example": "WHERE customer_id = (SELECT customer_id FROM orders)",
+        "correction": "WHERE customer_id IN (SELECT customer_id FROM orders)"
+      },
+      "notes": "子查询含 NULL 时未匹配值可能产生 UNKNOWN。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0136",
+        "q0137",
+        "q0138",
+        "q0141",
+        "q0143"
+      ],
+      "relatedFlashcardIds": [
+        "fc0071",
+        "fc0073"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp03-01",
+        "kp05-01",
+        "kp08-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "customer_id",
+          "customer_name"
+        ],
+        "rows": [
+          [
+            1,
+            "林"
+          ],
+          [
+            3,
+            "王"
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp10-02.sql",
+      "primaryQuestionIds": [
+        "q0136",
+        "q0137",
+        "q0138",
+        "q0141",
+        "q0143"
+      ],
+      "primaryFlashcardIds": [
+        "fc0071",
+        "fc0073"
+      ]
+    },
+    {
+      "id": "kp10-03",
+      "chapterId": "ch10",
+      "title": "相关子查询与 EXISTS",
+      "learningObjective": "能够运用本节知识完成：识别曾经购买的客户",
+      "prerequisites": [
+        "kp10-02"
+      ],
+      "concept": "相关子查询引用外层行；EXISTS 只检查是否存在结果行，不关心输出值。",
+      "syntax": "WHERE EXISTS (SELECT 1 FROM b WHERE b.key=a.key)",
+      "parameters": {
+        "a.key": "外层相关字段"
+      },
+      "fixtureIds": [
+        "lesson-customers",
+        "lesson-orders"
+      ],
+      "sourceTables": [
+        {
+          "name": "customers",
+          "columns": [
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "customer_name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "林"
+            ],
+            [
+              2,
+              "陈"
+            ],
+            [
+              3,
+              "王"
+            ],
+            [
+              4,
+              "李"
+            ]
+          ]
+        },
+        {
+          "name": "orders",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "sales",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "store_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "order_date",
+              "type": "TEXT",
+              "mysqlType": "DATE",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "护肤品",
+              800,
+              1,
+              "2026-01-03",
+              1
+            ],
+            [
+              2,
+              "化妆品",
+              400,
+              2,
+              "2026-01-10",
+              2
+            ],
+            [
+              3,
+              "护肤品",
+              600,
+              1,
+              "2026-02-02",
+              1
+            ],
+            [
+              4,
+              "化妆品",
+              300,
+              2,
+              "2026-02-15",
+              null
+            ],
+            [
+              5,
+              "日用品",
+              1500,
+              1,
+              "2026-02-20",
+              3
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT c.customer_id FROM customers c WHERE EXISTS (SELECT 1 FROM orders o WHERE o.customer_id=c.customer_id) ORDER BY c.customer_id;",
+      "sqliteSql": "SELECT c.customer_id FROM customers c WHERE EXISTS (SELECT 1 FROM orders o WHERE o.customer_id=c.customer_id) ORDER BY c.customer_id;",
+      "executionSteps": [
+        "对每个客户检查是否存在匹配订单",
+        "存在则保留"
+      ],
+      "useCase": "识别曾经购买的客户",
+      "comparison": "EXISTS 不会因多个匹配而重复外层行。",
+      "commonError": {
+        "example": "EXISTS (SELECT 1 FROM orders) 遗漏相关条件",
+        "correction": "加 WHERE o.customer_id=c.customer_id"
+      },
+      "notes": "优化器可能改写执行方式，不必真的逐行运行。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0139",
+        "q0140",
+        "q0142",
+        "q0147",
+        "q0149"
+      ],
+      "relatedFlashcardIds": [
+        "fc0072",
+        "fc0073",
+        "fc0077"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp03-01",
+        "kp05-01",
+        "kp08-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "customer_id"
+        ],
+        "rows": [
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp10-03.sql",
+      "primaryQuestionIds": [
+        "q0139",
+        "q0140",
+        "q0142",
+        "q0147",
+        "q0149"
+      ],
+      "primaryFlashcardIds": [
+        "fc0072",
+        "fc0073",
+        "fc0077"
+      ]
+    },
+    {
+      "id": "kp10-04",
+      "chapterId": "ch10",
+      "title": "NOT EXISTS 与 NOT IN",
+      "learningObjective": "能够运用本节知识完成：找出从未购买的客户",
+      "prerequisites": [
+        "kp10-03"
+      ],
+      "concept": "若 NOT IN 的候选集合含 NULL，未匹配比较可能变成 UNKNOWN；NOT EXISTS 检测不存在符合条件的行。",
+      "syntax": "WHERE NOT EXISTS (SELECT 1 FROM b WHERE b.key=a.key)",
+      "parameters": {
+        "NOT EXISTS": "反存在判断"
+      },
+      "fixtureIds": [
+        "lesson-customers",
+        "lesson-orders"
+      ],
+      "sourceTables": [
+        {
+          "name": "customers",
+          "columns": [
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "customer_name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "林"
+            ],
+            [
+              2,
+              "陈"
+            ],
+            [
+              3,
+              "王"
+            ],
+            [
+              4,
+              "李"
+            ]
+          ]
+        },
+        {
+          "name": "orders",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "sales",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "store_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "order_date",
+              "type": "TEXT",
+              "mysqlType": "DATE",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "护肤品",
+              800,
+              1,
+              "2026-01-03",
+              1
+            ],
+            [
+              2,
+              "化妆品",
+              400,
+              2,
+              "2026-01-10",
+              2
+            ],
+            [
+              3,
+              "护肤品",
+              600,
+              1,
+              "2026-02-02",
+              1
+            ],
+            [
+              4,
+              "化妆品",
+              300,
+              2,
+              "2026-02-15",
+              null
+            ],
+            [
+              5,
+              "日用品",
+              1500,
+              1,
+              "2026-02-20",
+              3
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT c.customer_id FROM customers c WHERE NOT EXISTS (SELECT 1 FROM orders o WHERE o.customer_id=c.customer_id) ORDER BY c.customer_id;",
+      "sqliteSql": "SELECT c.customer_id FROM customers c WHERE NOT EXISTS (SELECT 1 FROM orders o WHERE o.customer_id=c.customer_id) ORDER BY c.customer_id;",
+      "executionSteps": [
+        "逐一检查是否无匹配订单",
+        "忽略无法匹配的空客户编号"
+      ],
+      "useCase": "找出从未购买的客户",
+      "comparison": "NOT IN 需明确排除候选 NULL，并考虑外层 NULL。",
+      "commonError": {
+        "example": "WHERE customer_id NOT IN (SELECT customer_id FROM orders)",
+        "correction": "用 NOT EXISTS 或过滤子查询 NULL"
+      },
+      "notes": "本例客户4是唯一无订单客户。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0131",
+        "q0144",
+        "q0145",
+        "q0146",
+        "q0148",
+        "q0150"
+      ],
+      "relatedFlashcardIds": [
+        "fc0074",
+        "fc0076",
+        "fc0078"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp03-01",
+        "kp05-01",
+        "kp08-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "customer_id"
+        ],
+        "rows": [
+          [
+            4
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp10-04.sql",
+      "primaryQuestionIds": [
+        "q0131",
+        "q0144",
+        "q0145",
+        "q0146",
+        "q0148",
+        "q0150"
+      ],
+      "primaryFlashcardIds": [
+        "fc0074",
+        "fc0076",
+        "fc0078"
+      ]
+    }
+  ],
+  "plannedQuestionCount": 20,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "dialect": "MySQL 8.4",
+  "summary": "完成本章后：掌握标量、集合、相关查询及反连接。",
+  "sources": [
+    "https://dev.mysql.com/doc/refman/8.4/en/",
+    "https://dev.mysql.com/doc/refman/8.4/en/functions.html"
+  ],
+  "knowledgePointCount": 4
+}

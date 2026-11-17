@@ -1,0 +1,79 @@
+{
+  "projectId": "hr",
+  "title": "部门人力成本与加班",
+  "context": "财务与人资联合分析部门第四季度人工成本。",
+  "requirements": "按员工月薪归属岗位；基础薪资+奖金+估算加班费（每月176小时、1.5倍基础时薪，按分钟；逐员工月四舍五入到分）；统计部门×月成本、工时与加班，成本每出勤小时。",
+  "grain": "部门×月",
+  "commonError": "连接每日考勤后直接求月薪会重复累计；估算工资不代表实际法定工资。",
+  "executionSteps": [
+    "从员工月成本视图核对计算规则",
+    "汇总部門及月份",
+    "按总工时计算成本"
+  ],
+  "difficulty": "困难",
+  "mysqlSql": "SELECT department_id,month_key,SUM(base_cents) base_cents,SUM(bonus_cents) bonus_cents,SUM(overtime_minutes) overtime_minutes,SUM(labor_cents) labor_cents,ROUND(60.0*SUM(labor_cents)/NULLIF(SUM(worked_minutes+overtime_minutes),0),2) cost_per_hour_cents FROM v_staff_month WHERE month_key BETWEEN '2025-10' AND '2025-12' GROUP BY department_id,month_key ORDER BY department_id,month_key",
+  "sqliteSql": "SELECT department_id,month_key,SUM(base_cents) base_cents,SUM(bonus_cents) bonus_cents,SUM(overtime_minutes) overtime_minutes,SUM(labor_cents) labor_cents,ROUND(60.0*SUM(labor_cents)/NULLIF(SUM(worked_minutes+overtime_minutes),0),2) cost_per_hour_cents FROM v_staff_month WHERE month_key BETWEEN '2025-10' AND '2025-12' GROUP BY department_id,month_key ORDER BY department_id,month_key",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "department_id",
+    "month_key",
+    "base_cents",
+    "bonus_cents",
+    "overtime_minutes",
+    "labor_cents",
+    "cost_per_hour_cents"
+  ],
+  "id": "BP24",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-54"
+  ],
+  "datasetId": "hr-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP24.json",
+  "expectedRowCount": 21,
+  "expectedColumns": [
+    "department_id",
+    "month_key",
+    "base_cents",
+    "bonus_cents",
+    "overtime_minutes",
+    "labor_cents",
+    "cost_per_hour_cents"
+  ],
+  "sourceTables": [
+    "v_staff_month"
+  ],
+  "dependencyTables": [
+    "attendance",
+    "departments",
+    "employees",
+    "employment_history",
+    "positions",
+    "salary_history",
+    "stores",
+    "v_staff_month"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "SELECT department_id,month_key,SUM(base_cents) base_cents,SUM(bonus_cents) bonus_cents,SUM(overtime_minutes) overtime_minutes,SUM(labor_cents) labor_cents,ROUND(60.0*SUM(labor_cents)/NULLIF(SUM(worked_minutes+overtime_minutes),0),2) cost_per_hour_cents FROM v_staff_month WHERE month_key BETWEEN '2025-10' AND '2025-12' GROUP BY department_id,month_key ORDER BY department_id,month_key",
+      "sqliteSql": "SELECT department_id,month_key,SUM(base_cents) base_cents,SUM(bonus_cents) bonus_cents,SUM(overtime_minutes) overtime_minutes,SUM(labor_cents) labor_cents,ROUND(60.0*SUM(labor_cents)/NULLIF(SUM(worked_minutes+overtime_minutes),0),2) cost_per_hour_cents FROM v_staff_month WHERE month_key BETWEEN '2025-10' AND '2025-12' GROUP BY department_id,month_key ORDER BY department_id,month_key"
+    }
+  ],
+  "hints": [
+    "从员工月成本视图核对计算规则",
+    "从员工月成本视图核对计算规则；汇总部門及月份",
+    "重点核对输出粒度：部门×月"
+  ],
+  "explanation": "从员工月成本视图核对计算规则；汇总部門及月份；按总工时计算成本。连接每日考勤后直接求月薪会重复累计；估算工资不代表实际法定工资。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 72.4
+}

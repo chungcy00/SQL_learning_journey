@@ -1,0 +1,102 @@
+{
+  "visibility": "public",
+  "variant": "public",
+  "kind": "database_state",
+  "setupSql": "CREATE TABLE practice_stock(product_id INT NOT NULL PRIMARY KEY,qty INT NOT NULL CHECK(qty>=0)); INSERT INTO practice_stock VALUES(1,10),(2,20),(3,0); CREATE TABLE guard(id INT PRIMARY KEY); INSERT INTO guard VALUES(99); CREATE TABLE stale_stock(id INT); INSERT INTO stale_stock VALUES(1);",
+  "probes": [],
+  "id": "q0233-public",
+  "questionId": "q0233",
+  "datasetId": "q0233-lesson",
+  "expected": {
+    "tables": {
+      "guard": {
+        "columns": [
+          [
+            "id",
+            "INT",
+            0,
+            null,
+            1
+          ]
+        ],
+        "foreignKeys": [],
+        "indexes": [
+          {
+            "name": null,
+            "unique": 1,
+            "origin": "pk",
+            "partial": 0,
+            "keys": [
+              [
+                "id",
+                0
+              ]
+            ]
+          }
+        ],
+        "rows": [
+          [
+            99
+          ]
+        ]
+      },
+      "practice_stock": {
+        "columns": [
+          [
+            "product_id",
+            "INT",
+            1,
+            null,
+            1
+          ],
+          [
+            "qty",
+            "INT",
+            1,
+            null,
+            0
+          ]
+        ],
+        "foreignKeys": [],
+        "indexes": [
+          {
+            "name": null,
+            "unique": 1,
+            "origin": "pk",
+            "partial": 0,
+            "keys": [
+              [
+                "product_id",
+                0
+              ]
+            ]
+          }
+        ],
+        "rows": [
+          [
+            1,
+            10
+          ],
+          [
+            2,
+            20
+          ],
+          [
+            3,
+            0
+          ]
+        ]
+      }
+    },
+    "probes": [],
+    "transactionOpen": false
+  },
+  "orderPolicy": "not_applicable",
+  "columnPolicy": "state",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

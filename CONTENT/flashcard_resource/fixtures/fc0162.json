@@ -1,0 +1,69 @@
+{
+  "id": "fc0162-demo",
+  "tables": [
+    {
+      "name": "channel_totals",
+      "columns": [
+        {
+          "name": "source_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sessions",
+          "type": "INTEGER"
+        },
+        {
+          "name": "converted_sessions",
+          "type": "INTEGER"
+        },
+        {
+          "name": "new_customers",
+          "type": "INTEGER"
+        },
+        {
+          "name": "spend_cents",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          100,
+          12,
+          4,
+          20000
+        ],
+        [
+          2,
+          10,
+          0,
+          0,
+          1000
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT source_id,100.0*converted_sessions/NULLIF(sessions,0) AS conversion_pct FROM channel_totals ORDER BY source_id",
+  "mysqlSql": "SELECT source_id,100.0*converted_sessions/NULLIF(sessions,0) AS conversion_pct FROM channel_totals ORDER BY source_id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      12.0
+    ],
+    [
+      2,
+      0.0
+    ]
+  ],
+  "expectedColumns": [
+    "source_id",
+    "conversion_pct"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

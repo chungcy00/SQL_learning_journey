@@ -1,0 +1,179 @@
+{
+  "visibility": "hidden",
+  "variant": "boundary",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "purchase_items",
+      "columns": [
+        {
+          "name": "po_item_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "po_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "quantity_ordered",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "unit_price",
+          "type": "INTEGER",
+          "mysqlType": "DECIMAL(12,2)",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          21,
+          1,
+          11,
+          12,
+          10
+        ],
+        [
+          22,
+          1,
+          12,
+          5,
+          20
+        ],
+        [
+          23,
+          2,
+          13,
+          0,
+          30
+        ],
+        [
+          24,
+          3,
+          15,
+          11,
+          10
+        ],
+        [
+          25,
+          3,
+          18,
+          8,
+          5
+        ]
+      ]
+    },
+    {
+      "name": "receipts",
+      "columns": [
+        {
+          "name": "receipt_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "po_item_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "receipt_date",
+          "type": "TEXT",
+          "mysqlType": "DATE",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "quantity_received",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          11,
+          21,
+          "2026-01-11",
+          4
+        ],
+        [
+          12,
+          21,
+          "2026-01-12",
+          5
+        ],
+        [
+          13,
+          23,
+          "2026-01-31",
+          0
+        ],
+        [
+          14,
+          24,
+          "2026-02-09",
+          6
+        ]
+      ]
+    }
+  ],
+  "id": "q0118-boundary",
+  "questionId": "q0118",
+  "datasetId": "q0118-lesson",
+  "expected": {
+    "columns": [
+      "po_item_id",
+      "quantity_ordered",
+      "received"
+    ],
+    "rows": [
+      [
+        21,
+        12,
+        9
+      ],
+      [
+        22,
+        5,
+        0
+      ],
+      [
+        23,
+        0,
+        0
+      ],
+      [
+        24,
+        11,
+        6
+      ],
+      [
+        25,
+        8,
+        0
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

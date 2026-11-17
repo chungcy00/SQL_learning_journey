@@ -1,0 +1,33 @@
+{
+  "id": "q0156-key",
+  "questionId": "q0156",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "8 与 8",
+      "explanation": "utf8mb4最多四字节，不表示每字符固定四字节。"
+    },
+    {
+      "id": "B",
+      "text": "2 与 6",
+      "explanation": "两个汉字各占UTF-8三字节。"
+    },
+    {
+      "id": "C",
+      "text": "2 与 2",
+      "explanation": "LENGTH返回字节数，不是字符数。"
+    },
+    {
+      "id": "D",
+      "text": "6 与 2",
+      "explanation": "两函数单位被颠倒。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "B"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

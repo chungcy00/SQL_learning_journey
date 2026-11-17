@@ -1,0 +1,59 @@
+{
+  "id": "lesson-stock_snapshots",
+  "table": "stock_snapshots",
+  "columns": [
+    {
+      "name": "snapshot_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "product_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "warehouse_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "snapshot_date",
+      "type": "TEXT",
+      "mysqlType": "DATE",
+      "sqliteType": "TEXT"
+    },
+    {
+      "name": "quantity",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    }
+  ],
+  "rows": [
+    [
+      1,
+      1,
+      1,
+      "2026-01-01",
+      100
+    ],
+    [
+      2,
+      1,
+      1,
+      "2026-01-31",
+      60
+    ],
+    [
+      3,
+      2,
+      1,
+      "2026-01-31",
+      20
+    ]
+  ]
+}

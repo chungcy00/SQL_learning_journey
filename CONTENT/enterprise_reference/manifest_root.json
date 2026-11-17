@@ -1,0 +1,827 @@
+{
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "cutoff": "2025-12-31",
+  "period": [
+    "2023-01-01",
+    "2025-12-31"
+  ],
+  "moneyUnit": "MYR cent",
+  "seed": 20261117,
+  "datasets": {
+    "retail": {
+      "tables": 15,
+      "views": 1,
+      "rows": 216708,
+      "bytes": 13484032,
+      "sha256": "649e1e06b63851702adc525d689d0319e5f10de164733998f9c5ffc81c03cbc8"
+    },
+    "inventory": {
+      "tables": 22,
+      "views": 1,
+      "rows": 376190,
+      "bytes": 28434432,
+      "sha256": "0bf3d7e12be603e8bca9f45225807912f64f8361b82a48b9f9ac04d58be40d0c"
+    },
+    "ecommerce": {
+      "tables": 14,
+      "views": 2,
+      "rows": 214956,
+      "bytes": 13365248,
+      "sha256": "f5940b0776a7a15f793f1186bb87474a80be94acae79cfc96f7dcfa2f514e279"
+    },
+    "finance": {
+      "tables": 18,
+      "views": 3,
+      "rows": 119827,
+      "bytes": 6533120,
+      "sha256": "753f0a32277e2d1eec48c836d6a1ae69756f1cea9766ff7c3b0f2a9bcd911a08"
+    },
+    "hr": {
+      "tables": 8,
+      "views": 1,
+      "rows": 111397,
+      "bytes": 9355264,
+      "sha256": "b8e8328981418fd75b89186eebab0cba47c12e873293f05898769ee0fc625bfa"
+    },
+    "procurement": {
+      "tables": 10,
+      "views": 1,
+      "rows": 43598,
+      "bytes": 2863104,
+      "sha256": "dca13f4d0491909639b3e449e1a6d969ce59f598f87bbee31d46bd0f6ab2d82d"
+    },
+    "enterprise": {
+      "tables": 39,
+      "views": 6,
+      "rows": 601339,
+      "bytes": 44265472,
+      "sha256": "bc4bd510731d3a3ef45f5bd5227349b37e59535322ba85afb28bcc0a4093ab2e"
+    }
+  },
+  "taskSummary": {
+    "difficulty": {
+      "中等": 6,
+      "困难": 29,
+      "挑战": 15
+    },
+    "chapterCounts": {
+      "ch19": 30,
+      "ch20": 20
+    },
+    "projectCounts": {
+      "retail": 5,
+      "inventory": 5,
+      "ecommerce": 5,
+      "finance": 5,
+      "hr": 5,
+      "procurement": 5,
+      "enterprise": 20
+    },
+    "crossCounts": {
+      "销售＋库存": 4,
+      "库存＋采购": 3,
+      "销售＋财务": 3,
+      "采购＋财务": 3,
+      "电商＋财务": 3,
+      "人力＋销售": 2,
+      "企业综合经营": 2
+    },
+    "tasks": [
+      {
+        "id": "BP01",
+        "title": "门店净销售、利润与目标达成",
+        "projectId": "retail",
+        "knowledgePointIds": [
+          "kp19-31"
+        ],
+        "difficulty": "中等",
+        "expectedRowCount": 12,
+        "path": "business_tasks/BP01.json"
+      },
+      {
+        "id": "BP02",
+        "title": "门店月度环比同比与持续下滑",
+        "projectId": "retail",
+        "knowledgePointIds": [
+          "kp19-32"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 144,
+        "path": "business_tasks/BP02.json"
+      },
+      {
+        "id": "BP03",
+        "title": "高销售低毛利商品诊断",
+        "projectId": "retail",
+        "knowledgePointIds": [
+          "kp19-33"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 3,
+        "path": "business_tasks/BP03.json"
+      },
+      {
+        "id": "BP04",
+        "title": "促销与非促销的日均表现",
+        "projectId": "retail",
+        "knowledgePointIds": [
+          "kp19-34"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 2,
+        "path": "business_tasks/BP04.json"
+      },
+      {
+        "id": "BP05",
+        "title": "门店综合经营异常看板",
+        "projectId": "retail",
+        "knowledgePointIds": [
+          "kp19-35"
+        ],
+        "difficulty": "挑战",
+        "expectedRowCount": 12,
+        "path": "business_tasks/BP05.json"
+      },
+      {
+        "id": "BP06",
+        "title": "低销量高库存诊断",
+        "projectId": "inventory",
+        "knowledgePointIds": [
+          "kp19-36"
+        ],
+        "difficulty": "中等",
+        "expectedRowCount": 823,
+        "path": "business_tasks/BP06.json"
+      },
+      {
+        "id": "BP07",
+        "title": "类别库存周转率及周转天数",
+        "projectId": "inventory",
+        "knowledgePointIds": [
+          "kp19-37"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 45,
+        "path": "business_tasks/BP07.json"
+      },
+      {
+        "id": "BP08",
+        "title": "销售速度与采购周期缺货风险",
+        "projectId": "inventory",
+        "knowledgePointIds": [
+          "kp19-38"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 41,
+        "path": "business_tasks/BP08.json"
+      },
+      {
+        "id": "BP09",
+        "title": "按先进先出假设推算库存库龄",
+        "projectId": "inventory",
+        "knowledgePointIds": [
+          "kp19-39"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 1392,
+        "path": "business_tasks/BP09.json"
+      },
+      {
+        "id": "BP10",
+        "title": "补货优先级与供应商风险",
+        "projectId": "inventory",
+        "knowledgePointIds": [
+          "kp19-40"
+        ],
+        "difficulty": "挑战",
+        "expectedRowCount": 68,
+        "path": "business_tasks/BP10.json"
+      },
+      {
+        "id": "BP11",
+        "title": "新老客户净收入及客单价",
+        "projectId": "ecommerce",
+        "knowledgePointIds": [
+          "kp19-41"
+        ],
+        "difficulty": "中等",
+        "expectedRowCount": 2,
+        "path": "business_tasks/BP11.json"
+      },
+      {
+        "id": "BP12",
+        "title": "最近消费、频率、金额客户分层",
+        "projectId": "ecommerce",
+        "knowledgePointIds": [
+          "kp19-42"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 2889,
+        "path": "business_tasks/BP12.json"
+      },
+      {
+        "id": "BP13",
+        "title": "首购月份留存矩阵",
+        "projectId": "ecommerce",
+        "knowledgePointIds": [
+          "kp19-43"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 231,
+        "path": "business_tasks/BP13.json"
+      },
+      {
+        "id": "BP14",
+        "title": "营销渠道转化与获客成本",
+        "projectId": "ecommerce",
+        "knowledgePointIds": [
+          "kp19-44"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 5,
+        "path": "business_tasks/BP14.json"
+      },
+      {
+        "id": "BP15",
+        "title": "高价值流失风险客户",
+        "projectId": "ecommerce",
+        "knowledgePointIds": [
+          "kp19-45"
+        ],
+        "difficulty": "挑战",
+        "expectedRowCount": 547,
+        "path": "business_tasks/BP15.json"
+      },
+      {
+        "id": "BP16",
+        "title": "预算与实际费用差异",
+        "projectId": "finance",
+        "knowledgePointIds": [
+          "kp19-46"
+        ],
+        "difficulty": "中等",
+        "expectedRowCount": 35,
+        "path": "business_tasks/BP16.json"
+      },
+      {
+        "id": "BP17",
+        "title": "供应商发票与付款核对",
+        "projectId": "finance",
+        "knowledgePointIds": [
+          "kp19-47"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 4658,
+        "path": "business_tasks/BP17.json"
+      },
+      {
+        "id": "BP18",
+        "title": "应付账款账龄",
+        "projectId": "finance",
+        "knowledgePointIds": [
+          "kp19-48"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 197,
+        "path": "business_tasks/BP18.json"
+      },
+      {
+        "id": "BP19",
+        "title": "银行流水与凭证全量对账",
+        "projectId": "finance",
+        "knowledgePointIds": [
+          "kp19-49"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 656,
+        "path": "business_tasks/BP19.json"
+      },
+      {
+        "id": "BP20",
+        "title": "多规则异常交易筛查",
+        "projectId": "finance",
+        "knowledgePointIds": [
+          "kp19-50"
+        ],
+        "difficulty": "挑战",
+        "expectedRowCount": 1090,
+        "path": "business_tasks/BP20.json"
+      },
+      {
+        "id": "BP21",
+        "title": "月末人员规模与变动",
+        "projectId": "hr",
+        "knowledgePointIds": [
+          "kp19-51"
+        ],
+        "difficulty": "中等",
+        "expectedRowCount": 84,
+        "path": "business_tasks/BP21.json"
+      },
+      {
+        "id": "BP22",
+        "title": "月度离职率与趋势",
+        "projectId": "hr",
+        "knowledgePointIds": [
+          "kp19-52"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 84,
+        "path": "business_tasks/BP22.json"
+      },
+      {
+        "id": "BP23",
+        "title": "同岗位薪资分布与异常",
+        "projectId": "hr",
+        "knowledgePointIds": [
+          "kp19-53"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 7,
+        "path": "business_tasks/BP23.json"
+      },
+      {
+        "id": "BP24",
+        "title": "部门人力成本与加班",
+        "projectId": "hr",
+        "knowledgePointIds": [
+          "kp19-54"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 21,
+        "path": "business_tasks/BP24.json"
+      },
+      {
+        "id": "BP25",
+        "title": "入职同期群90及180日留任",
+        "projectId": "hr",
+        "knowledgePointIds": [
+          "kp19-55"
+        ],
+        "difficulty": "挑战",
+        "expectedRowCount": 62,
+        "path": "business_tasks/BP25.json"
+      },
+      {
+        "id": "BP26",
+        "title": "采购价格与合同、历史价格比较",
+        "projectId": "procurement",
+        "knowledgePointIds": [
+          "kp19-56"
+        ],
+        "difficulty": "中等",
+        "expectedRowCount": 3129,
+        "path": "business_tasks/BP26.json"
+      },
+      {
+        "id": "BP27",
+        "title": "供应商准时、完整交付与质量",
+        "projectId": "procurement",
+        "knowledgePointIds": [
+          "kp19-57"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 60,
+        "path": "business_tasks/BP27.json"
+      },
+      {
+        "id": "BP28",
+        "title": "采购、收货、发票三方核对",
+        "projectId": "procurement",
+        "knowledgePointIds": [
+          "kp19-58"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 876,
+        "path": "business_tasks/BP28.json"
+      },
+      {
+        "id": "BP29",
+        "title": "同商品跨供应商采购价差",
+        "projectId": "procurement",
+        "knowledgePointIds": [
+          "kp19-59"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 900,
+        "path": "business_tasks/BP29.json"
+      },
+      {
+        "id": "BP30",
+        "title": "供应商多指标综合评价",
+        "projectId": "procurement",
+        "knowledgePointIds": [
+          "kp19-60"
+        ],
+        "difficulty": "挑战",
+        "expectedRowCount": 60,
+        "path": "business_tasks/BP30.json"
+      },
+      {
+        "id": "BP31",
+        "title": "畅销缺货与滞销积压双向筛查",
+        "projectId": "enterprise",
+        "knowledgePointIds": [
+          "kp20-05"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 698,
+        "path": "business_tasks/BP31.json"
+      },
+      {
+        "id": "BP32",
+        "title": "商品销售贡献与库存资金占用错配",
+        "projectId": "enterprise",
+        "knowledgePointIds": [
+          "kp20-06"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 500,
+        "path": "business_tasks/BP32.json"
+      },
+      {
+        "id": "BP33",
+        "title": "跨仓库存调拨候选",
+        "projectId": "enterprise",
+        "knowledgePointIds": [
+          "kp20-07"
+        ],
+        "difficulty": "挑战",
+        "expectedRowCount": 116,
+        "path": "business_tasks/BP33.json"
+      },
+      {
+        "id": "BP34",
+        "title": "销售毛利与库存投资回报",
+        "projectId": "enterprise",
+        "knowledgePointIds": [
+          "kp20-08"
+        ],
+        "difficulty": "挑战",
+        "expectedRowCount": 15,
+        "path": "business_tasks/BP34.json"
+      },
+      {
+        "id": "BP35",
+        "title": "逾期在途与缺货叠加",
+        "projectId": "enterprise",
+        "knowledgePointIds": [
+          "kp20-09"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 32,
+        "path": "business_tasks/BP35.json"
+      },
+      {
+        "id": "BP36",
+        "title": "收货入库完整性核对",
+        "projectId": "enterprise",
+        "knowledgePointIds": [
+          "kp20-10"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 0,
+        "path": "business_tasks/BP36.json"
+      },
+      {
+        "id": "BP37",
+        "title": "供应商延迟与仓库资金压力",
+        "projectId": "enterprise",
+        "knowledgePointIds": [
+          "kp20-11"
+        ],
+        "difficulty": "挑战",
+        "expectedRowCount": 60,
+        "path": "business_tasks/BP37.json"
+      },
+      {
+        "id": "BP38",
+        "title": "门店贡献利润与费用",
+        "projectId": "enterprise",
+        "knowledgePointIds": [
+          "kp20-12"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 12,
+        "path": "business_tasks/BP38.json"
+      },
+      {
+        "id": "BP39",
+        "title": "订单结算与收入核对",
+        "projectId": "enterprise",
+        "knowledgePointIds": [
+          "kp20-13"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 0,
+        "path": "business_tasks/BP39.json"
+      },
+      {
+        "id": "BP40",
+        "title": "门店月度收入与费用偏离",
+        "projectId": "enterprise",
+        "knowledgePointIds": [
+          "kp20-14"
+        ],
+        "difficulty": "挑战",
+        "expectedRowCount": 144,
+        "path": "business_tasks/BP40.json"
+      },
+      {
+        "id": "BP41",
+        "title": "采购承诺、收货、开票及付款敞口",
+        "projectId": "enterprise",
+        "knowledgePointIds": [
+          "kp20-15"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 60,
+        "path": "business_tasks/BP41.json"
+      },
+      {
+        "id": "BP42",
+        "title": "三方不一致且已经付款的发票",
+        "projectId": "enterprise",
+        "knowledgePointIds": [
+          "kp20-16"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 598,
+        "path": "business_tasks/BP42.json"
+      },
+      {
+        "id": "BP43",
+        "title": "供应商资金风险分层",
+        "projectId": "enterprise",
+        "knowledgePointIds": [
+          "kp20-17"
+        ],
+        "difficulty": "挑战",
+        "expectedRowCount": 60,
+        "path": "business_tasks/BP43.json"
+      },
+      {
+        "id": "BP44",
+        "title": "渠道广告后的贡献利润",
+        "projectId": "enterprise",
+        "knowledgePointIds": [
+          "kp20-18"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 5,
+        "path": "business_tasks/BP44.json"
+      },
+      {
+        "id": "BP45",
+        "title": "首购客户90天毛利与获客成本",
+        "projectId": "enterprise",
+        "knowledgePointIds": [
+          "kp20-19"
+        ],
+        "difficulty": "挑战",
+        "expectedRowCount": 169,
+        "path": "business_tasks/BP45.json"
+      },
+      {
+        "id": "BP46",
+        "title": "退款影响与渠道利润风险",
+        "projectId": "enterprise",
+        "knowledgePointIds": [
+          "kp20-20"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 5,
+        "path": "business_tasks/BP46.json"
+      },
+      {
+        "id": "BP47",
+        "title": "门店人效及人工占比",
+        "projectId": "enterprise",
+        "knowledgePointIds": [
+          "kp20-21"
+        ],
+        "difficulty": "困难",
+        "expectedRowCount": 12,
+        "path": "business_tasks/BP47.json"
+      },
+      {
+        "id": "BP48",
+        "title": "门店人员变化与销售变化诊断",
+        "projectId": "enterprise",
+        "knowledgePointIds": [
+          "kp20-22"
+        ],
+        "difficulty": "挑战",
+        "expectedRowCount": 144,
+        "path": "business_tasks/BP48.json"
+      },
+      {
+        "id": "BP49",
+        "title": "月度经营汇总表",
+        "projectId": "enterprise",
+        "knowledgePointIds": [
+          "kp20-23"
+        ],
+        "difficulty": "挑战",
+        "expectedRowCount": 12,
+        "path": "business_tasks/BP49.json"
+      },
+      {
+        "id": "BP50",
+        "title": "跨域季度风险评分与经营报告",
+        "projectId": "enterprise",
+        "knowledgePointIds": [
+          "kp20-24"
+        ],
+        "difficulty": "挑战",
+        "expectedRowCount": 4,
+        "path": "business_tasks/BP50.json"
+      }
+    ]
+  },
+  "knowledgePoints": 152,
+  "files": [
+    {
+      "path": "question_resource/databases/ecommerce/DATA_DICTIONARY.md",
+      "sha256": "ed451ed4936f53fe6d9afc3e72d5c3f1fb3881b23ae8c3192c0c075e28e51a50",
+      "bytes": 12807
+    },
+    {
+      "path": "question_resource/databases/ecommerce/README.md",
+      "sha256": "4461b0b6cc1ba1c473365c46330b3f581e945e03f78a7378b604078c31a31775",
+      "bytes": 446
+    },
+    {
+      "path": "question_resource/databases/ecommerce/ecommerce.sqlite",
+      "sha256": "f5940b0776a7a15f793f1186bb87474a80be94acae79cfc96f7dcfa2f514e279",
+      "bytes": 13365248
+    },
+    {
+      "path": "question_resource/databases/ecommerce/mysql_import.sql",
+      "sha256": "ec5168af6905d95b1d9dc8b03bee79bf404ae611549e37d472ed2544ee6fe298",
+      "bytes": 8410327
+    },
+    {
+      "path": "question_resource/databases/ecommerce/schema.json",
+      "sha256": "b9ad29d84a629188a5344c267ee27cba90774c09dcd83a2f824462bf2035ce42",
+      "bytes": 31421
+    },
+    {
+      "path": "question_resource/databases/enterprise/DATA_DICTIONARY.md",
+      "sha256": "782602abc8e102b23e9c38b764a6345cb84c00b8adf9b56bc8f14cca2c7a470e",
+      "bytes": 40655
+    },
+    {
+      "path": "question_resource/databases/enterprise/README.md",
+      "sha256": "a17af7f9c160c3e504d3b942ea631fcc3765d69d4c523d5dc7121d2f3639b5b3",
+      "bytes": 448
+    },
+    {
+      "path": "question_resource/databases/enterprise/enterprise.sqlite",
+      "sha256": "bc4bd510731d3a3ef45f5bd5227349b37e59535322ba85afb28bcc0a4093ab2e",
+      "bytes": 44265472
+    },
+    {
+      "path": "question_resource/databases/enterprise/mysql_import.sql",
+      "sha256": "647a619f6aa54fcde2d111441923ae850609cf233ce08e8932b9cbbbb2c1707c",
+      "bytes": 24315748
+    },
+    {
+      "path": "question_resource/databases/enterprise/schema.json",
+      "sha256": "7b0b38a226fa0185e76202b8b0845c0c2c00ff331f34f2888d4518eeb04a6763",
+      "bytes": 96548
+    },
+    {
+      "path": "question_resource/databases/finance/DATA_DICTIONARY.md",
+      "sha256": "b978033f141f976d56f00a2608e57b36859b91a0fbe1b43f1f74494363bd85c0",
+      "bytes": 18258
+    },
+    {
+      "path": "question_resource/databases/finance/README.md",
+      "sha256": "da5285b875c845fd833e44a32fd52c64fcd61065cbc753a4bc0a800e5384753c",
+      "bytes": 442
+    },
+    {
+      "path": "question_resource/databases/finance/finance.sqlite",
+      "sha256": "753f0a32277e2d1eec48c836d6a1ae69756f1cea9766ff7c3b0f2a9bcd911a08",
+      "bytes": 6533120
+    },
+    {
+      "path": "question_resource/databases/finance/mysql_import.sql",
+      "sha256": "515edc5b6331ebda8bab57d36e946c1160495e39dbf761d49aa94486c3ed89ad",
+      "bytes": 3942200
+    },
+    {
+      "path": "question_resource/databases/finance/schema.json",
+      "sha256": "53b9d93280d08908950a91f49cb8742c47b1091e4ac5e461b34a624345b99553",
+      "bytes": 42002
+    },
+    {
+      "path": "question_resource/databases/hr/DATA_DICTIONARY.md",
+      "sha256": "87ed08980a7183a90a5407cf4d233d0b7f10bde19580847f18c05e1e067d824a",
+      "bytes": 7319
+    },
+    {
+      "path": "question_resource/databases/hr/README.md",
+      "sha256": "02c4e5809c9a6ba7c3215db70f3fc80e8470c2db267c2bb0b08e1a18c7e67031",
+      "bytes": 431
+    },
+    {
+      "path": "question_resource/databases/hr/hr.sqlite",
+      "sha256": "b8e8328981418fd75b89186eebab0cba47c12e873293f05898769ee0fc625bfa",
+      "bytes": 9355264
+    },
+    {
+      "path": "question_resource/databases/hr/mysql_import.sql",
+      "sha256": "9888065b5e8dc35beb02cc479923c7eb7f6c65fe0b36ed06777f36019c9c77df",
+      "bytes": 4634821
+    },
+    {
+      "path": "question_resource/databases/hr/schema.json",
+      "sha256": "919c3570b1544c3790d9d50ab00b5119b4f2ce264ef3035b20598fb3267c80b3",
+      "bytes": 17461
+    },
+    {
+      "path": "question_resource/databases/inventory/DATA_DICTIONARY.md",
+      "sha256": "8d691c66f9a8426f0d6ad0e9a0fef27e863e2d80975aaed27360de187831f3b7",
+      "bytes": 22756
+    },
+    {
+      "path": "question_resource/databases/inventory/README.md",
+      "sha256": "b5961f0f2262f5e4ea0e7fc21f64b7d0edba49cbc9b756cf27bd2af023209caa",
+      "bytes": 446
+    },
+    {
+      "path": "question_resource/databases/inventory/inventory.sqlite",
+      "sha256": "0bf3d7e12be603e8bca9f45225807912f64f8361b82a48b9f9ac04d58be40d0c",
+      "bytes": 28434432
+    },
+    {
+      "path": "question_resource/databases/inventory/mysql_import.sql",
+      "sha256": "ac84985e575da9b4235076b620461638be5946a806c8d1a04e19fbf59f073427",
+      "bytes": 15664469
+    },
+    {
+      "path": "question_resource/databases/inventory/schema.json",
+      "sha256": "6934103dc46b0b91f93c1825f83ca7a77e35cc09744532fe5907d1a236a713a1",
+      "bytes": 55308
+    },
+    {
+      "path": "question_resource/databases/manifest.json",
+      "sha256": "bb28261298e40be36a7587aa3e99ff23b7f3f7886650cd03e952c8b7e34777a4",
+      "bytes": 1525
+    },
+    {
+      "path": "question_resource/databases/procurement/DATA_DICTIONARY.md",
+      "sha256": "1a2916f1a0d6eab71f19272ac851f3c9f53b6ffc4b77b1f29b20efbdac0e8b47",
+      "bytes": 10874
+    },
+    {
+      "path": "question_resource/databases/procurement/README.md",
+      "sha256": "a13b16e9ac5902f5f5d5fe78a2d4470738f12ee3c23bba0fc1562aa501bbcfff",
+      "bytes": 449
+    },
+    {
+      "path": "question_resource/databases/procurement/mysql_import.sql",
+      "sha256": "de4893100058e27f017bfad525ef3ffeadcf04915939fe4cec9e5621297b8b46",
+      "bytes": 1513244
+    },
+    {
+      "path": "question_resource/databases/procurement/procurement.sqlite",
+      "sha256": "dca13f4d0491909639b3e449e1a6d969ce59f598f87bbee31d46bd0f6ab2d82d",
+      "bytes": 2863104
+    },
+    {
+      "path": "question_resource/databases/procurement/schema.json",
+      "sha256": "532de3ec4aad776b69631039e62e0b29a080197788acd717b976c572981a4818",
+      "bytes": 25193
+    },
+    {
+      "path": "question_resource/databases/retail/DATA_DICTIONARY.md",
+      "sha256": "3cf578d59e7f922c998be35e3053e3e14d421ff31829153a25fd0287eaf06bbb",
+      "bytes": 13290
+    },
+    {
+      "path": "question_resource/databases/retail/README.md",
+      "sha256": "b6b2fd95c097e9ca4a56873dc6938e32145da8d387013e75caecf3abcad27656",
+      "bytes": 440
+    },
+    {
+      "path": "question_resource/databases/retail/mysql_import.sql",
+      "sha256": "a6a1ae0243a128328e55b107c20be422462f0fe24dc3fb8b7669d808f66cf86a",
+      "bytes": 8461443
+    },
+    {
+      "path": "question_resource/databases/retail/retail.sqlite",
+      "sha256": "649e1e06b63851702adc525d689d0319e5f10de164733998f9c5ffc81c03cbc8",
+      "bytes": 13484032
+    },
+    {
+      "path": "question_resource/databases/retail/schema.json",
+      "sha256": "3ce65768ac3bf5d1b45f75e782effd05d1ce3249bdb800e6ed97acc01b21cf54",
+      "bytes": 33177
+    }
+  ],
+  "filePathRoot": "统一资源包根目录"
+}

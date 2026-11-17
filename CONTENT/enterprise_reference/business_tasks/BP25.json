@@ -1,0 +1,77 @@
+{
+  "projectId": "hr",
+  "title": "入职同期群90及180日留任",
+  "context": "人资部门希望判断不同入职部门的新人留任。",
+  "requirements": "以首次任职部门为入职部门；按入职季度与部门分组；只纳入截至2025年底已有90/180日观察期的员工；终止日等于观察日算不在职；返回两个分母和留任率。",
+  "grain": "初始部门×入职季度",
+  "commonError": "把未达到观察期限的员工当作未留任会使新同期群率偏低。",
+  "executionSteps": [
+    "确定首次岗位",
+    "计算观察资格",
+    "在各自分母上计算留任"
+  ],
+  "difficulty": "挑战",
+  "mysqlSql": "WITH a AS (SELECT e.employee_id,h.department_id,e.hire_date,e.termination_date,d.day_index hire_idx,t.day_index term_idx,CONCAT(SUBSTR(e.hire_date,1,4),'-Q',CASE WHEN SUBSTR(e.hire_date,6,2)<='03' THEN '1' WHEN SUBSTR(e.hire_date,6,2)<='06' THEN '2' WHEN SUBSTR(e.hire_date,6,2)<='09' THEN '3' ELSE '4' END) cohort FROM employees e JOIN employment_history h ON h.employee_id=e.employee_id AND h.start_date=e.hire_date JOIN calendar_days d ON d.day=e.hire_date LEFT JOIN calendar_days t ON t.day=e.termination_date), b AS (SELECT department_id,cohort,SUM(CASE WHEN hire_idx+90<=1095 THEN 1 ELSE 0 END) n90,SUM(CASE WHEN hire_idx+90<=1095 AND (term_idx IS NULL OR term_idx>hire_idx+90) THEN 1 ELSE 0 END) r90,SUM(CASE WHEN hire_idx+180<=1095 THEN 1 ELSE 0 END) n180,SUM(CASE WHEN hire_idx+180<=1095 AND (term_idx IS NULL OR term_idx>hire_idx+180) THEN 1 ELSE 0 END) r180 FROM a GROUP BY department_id,cohort) SELECT department_id,cohort,n90,ROUND(100.0*r90/NULLIF(n90,0),2) retention90_pct,n180,ROUND(100.0*r180/NULLIF(n180,0),2) retention180_pct FROM b ORDER BY department_id,cohort",
+  "sqliteSql": "WITH a AS (SELECT e.employee_id,h.department_id,e.hire_date,e.termination_date,d.day_index hire_idx,t.day_index term_idx,CONCAT(SUBSTR(e.hire_date,1,4),'-Q',CASE WHEN SUBSTR(e.hire_date,6,2)<='03' THEN '1' WHEN SUBSTR(e.hire_date,6,2)<='06' THEN '2' WHEN SUBSTR(e.hire_date,6,2)<='09' THEN '3' ELSE '4' END) cohort FROM employees e JOIN employment_history h ON h.employee_id=e.employee_id AND h.start_date=e.hire_date JOIN calendar_days d ON d.day=e.hire_date LEFT JOIN calendar_days t ON t.day=e.termination_date), b AS (SELECT department_id,cohort,SUM(CASE WHEN hire_idx+90<=1095 THEN 1 ELSE 0 END) n90,SUM(CASE WHEN hire_idx+90<=1095 AND (term_idx IS NULL OR term_idx>hire_idx+90) THEN 1 ELSE 0 END) r90,SUM(CASE WHEN hire_idx+180<=1095 THEN 1 ELSE 0 END) n180,SUM(CASE WHEN hire_idx+180<=1095 AND (term_idx IS NULL OR term_idx>hire_idx+180) THEN 1 ELSE 0 END) r180 FROM a GROUP BY department_id,cohort) SELECT department_id,cohort,n90,ROUND(100.0*r90/NULLIF(n90,0),2) retention90_pct,n180,ROUND(100.0*r180/NULLIF(n180,0),2) retention180_pct FROM b ORDER BY department_id,cohort",
+  "compatibility": "转换执行",
+  "columns": [
+    "department_id",
+    "cohort",
+    "n90",
+    "retention90_pct",
+    "n180",
+    "retention180_pct"
+  ],
+  "id": "BP25",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-55"
+  ],
+  "datasetId": "hr-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP25.json",
+  "expectedRowCount": 62,
+  "expectedColumns": [
+    "department_id",
+    "cohort",
+    "n90",
+    "retention90_pct",
+    "n180",
+    "retention180_pct"
+  ],
+  "sourceTables": [
+    "calendar_days",
+    "employees",
+    "employment_history"
+  ],
+  "dependencyTables": [
+    "calendar_days",
+    "departments",
+    "employees",
+    "employment_history",
+    "positions",
+    "stores"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH a AS (SELECT e.employee_id,h.department_id,e.hire_date,e.termination_date,d.day_index hire_idx,t.day_index term_idx,CONCAT(SUBSTR(e.hire_date,1,4),'-Q',CASE WHEN SUBSTR(e.hire_date,6,2)<='03' THEN '1' WHEN SUBSTR(e.hire_date,6,2)<='06' THEN '2' WHEN SUBSTR(e.hire_date,6,2)<='09' THEN '3' ELSE '4' END) cohort FROM employees e JOIN employment_history h ON h.employee_id=e.employee_id AND h.start_date=e.hire_date JOIN calendar_days d ON d.day=e.hire_date LEFT JOIN calendar_days t ON t.day=e.termination_date), b AS (SELECT department_id,cohort,SUM(CASE WHEN hire_idx+90<=1095 THEN 1 ELSE 0 END) n90,SUM(CASE WHEN hire_idx+90<=1095 AND (term_idx IS NULL OR term_idx>hire_idx+90) THEN 1 ELSE 0 END) r90,SUM(CASE WHEN hire_idx+180<=1095 THEN 1 ELSE 0 END) n180,SUM(CASE WHEN hire_idx+180<=1095 AND (term_idx IS NULL OR term_idx>hire_idx+180) THEN 1 ELSE 0 END) r180 FROM a GROUP BY department_id,cohort) SELECT department_id,cohort,n90,ROUND(100.0*r90/NULLIF(n90,0),2) retention90_pct,n180,ROUND(100.0*r180/NULLIF(n180,0),2) retention180_pct FROM b ORDER BY department_id,cohort",
+      "sqliteSql": "WITH a AS (SELECT e.employee_id,h.department_id,e.hire_date,e.termination_date,d.day_index hire_idx,t.day_index term_idx,CONCAT(SUBSTR(e.hire_date,1,4),'-Q',CASE WHEN SUBSTR(e.hire_date,6,2)<='03' THEN '1' WHEN SUBSTR(e.hire_date,6,2)<='06' THEN '2' WHEN SUBSTR(e.hire_date,6,2)<='09' THEN '3' ELSE '4' END) cohort FROM employees e JOIN employment_history h ON h.employee_id=e.employee_id AND h.start_date=e.hire_date JOIN calendar_days d ON d.day=e.hire_date LEFT JOIN calendar_days t ON t.day=e.termination_date), b AS (SELECT department_id,cohort,SUM(CASE WHEN hire_idx+90<=1095 THEN 1 ELSE 0 END) n90,SUM(CASE WHEN hire_idx+90<=1095 AND (term_idx IS NULL OR term_idx>hire_idx+90) THEN 1 ELSE 0 END) r90,SUM(CASE WHEN hire_idx+180<=1095 THEN 1 ELSE 0 END) n180,SUM(CASE WHEN hire_idx+180<=1095 AND (term_idx IS NULL OR term_idx>hire_idx+180) THEN 1 ELSE 0 END) r180 FROM a GROUP BY department_id,cohort) SELECT department_id,cohort,n90,ROUND(100.0*r90/NULLIF(n90,0),2) retention90_pct,n180,ROUND(100.0*r180/NULLIF(n180,0),2) retention180_pct FROM b ORDER BY department_id,cohort"
+    }
+  ],
+  "hints": [
+    "确定首次岗位",
+    "确定首次岗位；计算观察资格",
+    "重点核对输出粒度：初始部门×入职季度"
+  ],
+  "explanation": "确定首次岗位；计算观察资格；在各自分母上计算留任。把未达到观察期限的员工当作未留任会使新同期群率偏低。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 1.3
+}

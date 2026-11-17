@@ -1,0 +1,1760 @@
+{
+  "chapterId": "ch18",
+  "title": "查询优化",
+  "count": 10,
+  "schemaVersion": 3,
+  "contentVersion": "3.0.0",
+  "questions": [
+    {
+      "id": "q0241",
+      "chapterId": "ch18",
+      "knowledgePointIds": [
+        "kp18-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp18-03"
+      ],
+      "difficulty": "简单",
+      "type": "选择",
+      "title": "EXPLAIN 与执行计划 · 学习 MySQL EXPLAIN 时，下面哪个说法准…",
+      "context": "本题考查《EXPLAIN 与执行计划》中实际使用时容易混淆的规则。",
+      "requirements": "学习 MySQL EXPLAIN 时，下面哪个说法准确？",
+      "datasetId": null,
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "initialCode": null,
+      "options": [
+        {
+          "id": "A",
+          "text": "MySQL 执行计划需用原生环境核实；SQLite 计划不能直接当作 MySQL 结果",
+          "explanation": "两者优化器及计划字段不同。"
+        },
+        {
+          "id": "B",
+          "text": "返回正确查询结果即可证明查询使用复合索引",
+          "explanation": "正确性不证明具体访问路径。"
+        },
+        {
+          "id": "C",
+          "text": "SQLite EXPLAIN QUERY PLAN 与 MySQL EXPLAIN 字段完全相同",
+          "explanation": "它们是不同引擎的不同计划接口。"
+        },
+        {
+          "id": "D",
+          "text": "存在索引就无需检查执行计划",
+          "explanation": "仍需观察是否真的使用和访问成本。"
+        }
+      ],
+      "correctOptionId": "A",
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "objective_choice",
+        "correctOptionId": "A"
+      },
+      "referenceSolutions": [
+        {
+          "kind": "choice",
+          "optionId": "A",
+          "answer": "MySQL 执行计划需用原生环境核实；SQLite 计划不能直接当作 MySQL 结果",
+          "explanation": "两者优化器及计划字段不同。"
+        }
+      ],
+      "hints": [
+        "将查询正确性与访问路径分开考量，先确认谓词和索引键是否符合要求。",
+        "回想本章《EXPLAIN 与执行计划》中定义的运算对象和限制，再逐个排除不满足题设的选项。",
+        "将每个候选与题设的明确条件对照，不能把偶然成立的情况当成通用规则。"
+      ],
+      "explanation": "两者优化器及计划字段不同。\nA. 两者优化器及计划字段不同。\nB. 正确性不证明具体访问路径。\nC. 它们是不同引擎的不同计划接口。\nD. 仍需观察是否真的使用和访问成本。",
+      "commonErrors": [
+        {
+          "optionId": "B",
+          "reason": "正确性不证明具体访问路径。"
+        },
+        {
+          "optionId": "C",
+          "reason": "它们是不同引擎的不同计划接口。"
+        },
+        {
+          "optionId": "D",
+          "reason": "仍需观察是否真的使用和访问成本。"
+        }
+      ],
+      "testFixtureIds": [
+        "q0241-key"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0241-key",
+          "visibility": "hidden",
+          "variant": "objective_key",
+          "path": "fixtures/q0241/q0241-key.json",
+          "sha256": "32c001cee6be5ba6febc537785e34a33611f50f6eac59992dbd9d0abaa66f21d"
+        }
+      ],
+      "orderPolicy": "not_applicable",
+      "columnPolicy": "not_applicable",
+      "numericTolerance": null,
+      "requiredAstFeatures": [],
+      "supportStatus": "仅理论",
+      "executionMode": "objective_choice",
+      "interviewTag": "概念辨析",
+      "validationStatus": "客观答案键检查（人工编写事实依据；无原生执行）",
+      "mysqlVerification": "不适用：客观概念题",
+      "validation": {
+        "kind": "objective_key",
+        "options": [
+          {
+            "optionId": "A",
+            "expectedAccepted": true,
+            "passed": true
+          },
+          {
+            "optionId": "B",
+            "expectedAccepted": false,
+            "passed": true
+          },
+          {
+            "optionId": "C",
+            "expectedAccepted": false,
+            "passed": true
+          },
+          {
+            "optionId": "D",
+            "expectedAccepted": false,
+            "passed": true
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/multiple-column-indexes.html"
+      },
+      "relatedFlashcardIds": [
+        "fc0137"
+      ]
+    },
+    {
+      "id": "q0242",
+      "chapterId": "ch18",
+      "knowledgePointIds": [
+        "kp18-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp18-01"
+      ],
+      "difficulty": "简单",
+      "type": "结果预测",
+      "title": "重写简单等值筛选",
+      "context": "使用课程中小型商品数据练习重写简单等值筛选。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "不运行下方SQL，手工推算其在公开夹具中的完整返回结果。保留列名和重复行；明确区分NULL、空字符串和数值。\n将针对售价89的筛选改成直接比较 price 与数值89，不在 price 上执行算术；返回 product_id、price，按编号升序。不要承诺一定使用索引。\n输出列名称及顺序：product_id, price。按题设排序；参考排序键：product_id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0242-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "products"
+      ],
+      "initialCode": "SELECT product_id,price FROM products WHERE price=89 ORDER BY product_id",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "product_id",
+          "price"
+        ],
+        "rows": [
+          [
+            2,
+            89
+          ]
+        ],
+        "rowCount": 1
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT product_id,price FROM products WHERE price=89 ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,price FROM products WHERE price=89 ORDER BY product_id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT product_id,price FROM products WHERE NOT (price<>89) ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,price FROM products WHERE NOT (price<>89) ORDER BY product_id",
+          "explanation": "用反向比较并取 NOT 表达相同三值逻辑。"
+        }
+      ],
+      "hints": [
+        "将查询正确性与访问路径分开考量，先确认谓词和索引键是否符合要求。",
+        "结合《索引与选择性》：索引是辅助访问结构；高选择性条件通常减少候选记录，但优化器仍可能选择扫描小表。",
+        "逐行标记输入是否命中条件，再根据查询的分组、窗口或投影阶段逐一计算；最后按题设顺序整理结果。"
+      ],
+      "explanation": "直接等值谓词便于普通索引搜索；实际计划取决于统计和优化器。\n执行思路：确认products的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出product_id、price列；遵循题设排序和并列规则。\n公开夹具实际返回 1 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：用反向比较并取 NOT 表达相同三值逻辑。",
+      "commonErrors": [
+        {
+          "sql": "SELECT product_id,price FROM products WHERE price=15 ORDER BY product_id",
+          "reason": "直接等值谓词便于普通索引搜索；实际计划取决于统计和优化器。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0242-public",
+        "q0242-boundary",
+        "q0242-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0242-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0242/q0242-public.json",
+          "sha256": "44cc95390f78a0b48069d50e1b41c09e01d2f6d79315afcad3608c70c8a08062"
+        },
+        {
+          "id": "q0242-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0242/q0242-boundary.json",
+          "sha256": "43dbfb98e9e63c34321ca2791753538dcffda076a172d2703bb747c0d0f61b48"
+        },
+        {
+          "id": "q0242-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0242/q0242-empty.json",
+          "sha256": "71cd892c381776ca7b51c831437ff060ad138c98d2d4bd02d743c6910d6c6b3b"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [
+        {
+          "kind": "sargable_predicate",
+          "status": "需运行时语法树核查比较的列侧表达式；本地内容测试仅比对结果",
+          "requirement": "将针对售价89的筛选改成直接比较 price 与数值89，不在 price 上执行算术；返回 product_id、price，按编号升序。不要承诺一定使用索引。"
+        }
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "predict_public_result",
+      "runAllowedBeforeSubmit": false,
+      "hiddenFixturePolicy": "参考逻辑验证；用户只预测公开结果",
+      "interviewTag": "索引与选择性",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0242-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "3475f452f75007e7aeb88748aedcca08c949ceae1295533e1d5d5605ab9ba379",
+              "rowCount": 1
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "3475f452f75007e7aeb88748aedcca08c949ceae1295533e1d5d5605ab9ba379",
+              "rows": 1
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "4ccedb443d23523bea4bef1f02cf96f4207735dfe1107d7a3ab5cbf998553a02",
+              "rows": 2
+            }
+          },
+          {
+            "fixtureId": "q0242-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "68a48cf162c682035e5b9b00f762f8d5e339490ca8a2f2de1add0f6c128d07db",
+              "rowCount": 3
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "68a48cf162c682035e5b9b00f762f8d5e339490ca8a2f2de1add0f6c128d07db",
+              "rows": 3
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "125561f77e9deb6ff353fbcd712331229ce463c873ce35d7ad74f13de3924822",
+              "rows": 3
+            }
+          },
+          {
+            "fixtureId": "q0242-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "a3cda5741886735fb72bf4de410e6e9b87ef5254c2ff9a8a4e68cf8741b576d9",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "a3cda5741886735fb72bf4de410e6e9b87ef5254c2ff9a8a4e68cf8741b576d9",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "a3cda5741886735fb72bf4de410e6e9b87ef5254c2ff9a8a4e68cf8741b576d9",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/multiple-column-indexes.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0136",
+        "fc0138"
+      ]
+    },
+    {
+      "id": "q0243",
+      "chapterId": "ch18",
+      "knowledgePointIds": [
+        "kp18-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp18-02"
+      ],
+      "difficulty": "简单",
+      "type": "独立编写",
+      "title": "投影最小字段集合",
+      "context": "使用课程中小型商品数据练习投影最小字段集合。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "为商品库存查询只返回 product_id、stock，库存大于100，按编号升序；不选无关字段。\n输出列名称及顺序：product_id, stock。按题设排序；参考排序键：product_id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0243-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "products"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "product_id",
+          "stock"
+        ],
+        "rows": [
+          [
+            1,
+            150
+          ],
+          [
+            3,
+            200
+          ],
+          [
+            4,
+            180
+          ]
+        ],
+        "rowCount": 3
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT product_id,stock FROM products WHERE stock>100 ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,stock FROM products WHERE stock>100 ORDER BY product_id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT product_id,stock FROM products WHERE NOT (stock<=100) ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,stock FROM products WHERE NOT (stock<=100) ORDER BY product_id",
+          "explanation": "用反向比较并取 NOT 表达相同三值逻辑。"
+        }
+      ],
+      "hints": [
+        "将查询正确性与访问路径分开考量，先确认谓词和索引键是否符合要求。",
+        "结合《复合索引与可搜索条件》：复合索引按键顺序组织；常见 B 树访问可利用前导列，不能笼统保证任意列都高效。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nSELECT □□□ FROM products WHERE stock>100 ORDER BY product_id"
+      ],
+      "explanation": "减少投影列可降低数据传输，且可能使覆盖索引成为候选，但不保证计划。\n执行思路：确认products的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出product_id、stock列；遵循题设排序和并列规则。\n公开夹具实际返回 3 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：用反向比较并取 NOT 表达相同三值逻辑。",
+      "commonErrors": [
+        {
+          "sql": "SELECT * FROM products WHERE stock>100 ORDER BY product_id",
+          "reason": "减少投影列可降低数据传输，且可能使覆盖索引成为候选，但不保证计划。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0243-public",
+        "q0243-boundary",
+        "q0243-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0243-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0243/q0243-public.json",
+          "sha256": "b86a5084c632d191189a4bf272f355a6914fac487ce9249bdd2c63e2131394de"
+        },
+        {
+          "id": "q0243-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0243/q0243-boundary.json",
+          "sha256": "61cfe3f021ecfbce13f640f172066c54bfeb51e47bc8ca257172f7722c41a35c"
+        },
+        {
+          "id": "q0243-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0243/q0243-empty.json",
+          "sha256": "3542aab806faa8767944ef7d4b3107f754814810ac6a9808d87d0c1e16fd759b"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "复合索引与可搜索条件",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0243-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "a13558da967e0e77d68926be2d8166564f5a6abbc49a189eee68aa719814b173",
+              "rowCount": 3
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "a13558da967e0e77d68926be2d8166564f5a6abbc49a189eee68aa719814b173",
+              "rows": 3
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "4b88c7e0443b7727b8f824d7e48261cd2f7545c0f16e5d8dc005e9b3d5601943",
+              "rows": 3
+            }
+          },
+          {
+            "fixtureId": "q0243-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5e13204485da3391f48e45ea40cb8b154e98de46193720a37fd4315748c4db26",
+              "rowCount": 4
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5e13204485da3391f48e45ea40cb8b154e98de46193720a37fd4315748c4db26",
+              "rows": 4
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "1ff4e33d72a879387103cee409ba15b256da7de44b37b924611faab0b0864b69",
+              "rows": 4
+            }
+          },
+          {
+            "fixtureId": "q0243-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5eab6d96c4ab735c0743959fc735aea45e42daa91559af71d7274594564037ba",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5eab6d96c4ab735c0743959fc735aea45e42daa91559af71d7274594564037ba",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "86c01e9281a4fd62a49de8537f5bcb43ced5718d93ff3e84680104d536bed0bd",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/multiple-column-indexes.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0139",
+        "fc0140"
+      ]
+    },
+    {
+      "id": "q0244",
+      "chapterId": "ch18",
+      "knowledgePointIds": [
+        "kp18-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp18-01"
+      ],
+      "difficulty": "中等",
+      "type": "选择",
+      "title": "索引与选择性 · 在大型商品表上为 price 建立普通索引后，执行 …",
+      "context": "本题考查《索引与选择性》中实际使用时容易混淆的规则。",
+      "requirements": "在大型商品表上为 price 建立普通索引后，执行 WHERE price=89 是否一定使用该索引？",
+      "datasetId": null,
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "initialCode": null,
+      "options": [
+        {
+          "id": "A",
+          "text": "不一定，优化器会根据统计和成本选择",
+          "explanation": "索引存在并不保证访问路径。"
+        },
+        {
+          "id": "B",
+          "text": "只有 SELECT * 时使用索引",
+          "explanation": "投影并不决定是否唯一可用索引。"
+        },
+        {
+          "id": "C",
+          "text": "一定使用，只要有索引",
+          "explanation": "低选择性等因素可能使扫描更便宜。"
+        },
+        {
+          "id": "D",
+          "text": "永远不用，等值条件不能利用索引",
+          "explanation": "等值条件通常是可搜索的索引候选。"
+        }
+      ],
+      "correctOptionId": "A",
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "objective_choice",
+        "correctOptionId": "A"
+      },
+      "referenceSolutions": [
+        {
+          "kind": "choice",
+          "optionId": "A",
+          "answer": "不一定，优化器会根据统计和成本选择",
+          "explanation": "索引存在并不保证访问路径。"
+        }
+      ],
+      "hints": [
+        "将查询正确性与访问路径分开考量，先确认谓词和索引键是否符合要求。",
+        "回想本章《索引与选择性》中定义的运算对象和限制，再逐个排除不满足题设的选项。",
+        "将每个候选与题设的明确条件对照，不能把偶然成立的情况当成通用规则。"
+      ],
+      "explanation": "索引存在并不保证访问路径。\nA. 索引存在并不保证访问路径。\nB. 投影并不决定是否唯一可用索引。\nC. 低选择性等因素可能使扫描更便宜。\nD. 等值条件通常是可搜索的索引候选。",
+      "commonErrors": [
+        {
+          "optionId": "B",
+          "reason": "投影并不决定是否唯一可用索引。"
+        },
+        {
+          "optionId": "C",
+          "reason": "低选择性等因素可能使扫描更便宜。"
+        },
+        {
+          "optionId": "D",
+          "reason": "等值条件通常是可搜索的索引候选。"
+        }
+      ],
+      "testFixtureIds": [
+        "q0244-key"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0244-key",
+          "visibility": "hidden",
+          "variant": "objective_key",
+          "path": "fixtures/q0244/q0244-key.json",
+          "sha256": "57651e580af869c6eade65de4e2b9642c239ab89caed51510f80858f81102dc2"
+        }
+      ],
+      "orderPolicy": "not_applicable",
+      "columnPolicy": "not_applicable",
+      "numericTolerance": null,
+      "requiredAstFeatures": [],
+      "supportStatus": "仅理论",
+      "executionMode": "objective_choice",
+      "interviewTag": "概念辨析",
+      "validationStatus": "客观答案键检查（人工编写事实依据；无原生执行）",
+      "mysqlVerification": "不适用：客观概念题",
+      "validation": {
+        "kind": "objective_key",
+        "options": [
+          {
+            "optionId": "A",
+            "expectedAccepted": true,
+            "passed": true
+          },
+          {
+            "optionId": "B",
+            "expectedAccepted": false,
+            "passed": true
+          },
+          {
+            "optionId": "C",
+            "expectedAccepted": false,
+            "passed": true
+          },
+          {
+            "optionId": "D",
+            "expectedAccepted": false,
+            "passed": true
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/multiple-column-indexes.html"
+      },
+      "relatedFlashcardIds": [
+        "fc0136",
+        "fc0138"
+      ]
+    },
+    {
+      "id": "q0245",
+      "chapterId": "ch18",
+      "knowledgePointIds": [
+        "kp18-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp18-02"
+      ],
+      "difficulty": "中等",
+      "type": "选择",
+      "title": "复合索引与可搜索条件 · MySQL B-tree 复合索引 (store_i…",
+      "context": "本题考查《复合索引与可搜索条件》中实际使用时容易混淆的规则。",
+      "requirements": "MySQL B-tree 复合索引 (store_id,order_date) 的常见高效查询形态是哪一种？",
+      "datasetId": null,
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "initialCode": null,
+      "options": [
+        {
+          "id": "A",
+          "text": "store_id 等值且 order_date 在一个日期范围",
+          "explanation": "等值前缀配合后续范围是典型候选。"
+        },
+        {
+          "id": "B",
+          "text": "只查询不在索引中的商品名称",
+          "explanation": "索引不包含商品名称。"
+        },
+        {
+          "id": "C",
+          "text": "对 order_date 套复杂函数且完全不限制 store_id",
+          "explanation": "缺少前缀且函数可能阻碍普通范围搜索。"
+        },
+        {
+          "id": "D",
+          "text": "不加任何条件就保证按全表任意字段排序",
+          "explanation": "该索引无法保证所有字段的排序，执行仍由优化器决定。"
+        }
+      ],
+      "correctOptionId": "A",
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "objective_choice",
+        "correctOptionId": "A"
+      },
+      "referenceSolutions": [
+        {
+          "kind": "choice",
+          "optionId": "A",
+          "answer": "store_id 等值且 order_date 在一个日期范围",
+          "explanation": "等值前缀配合后续范围是典型候选。"
+        }
+      ],
+      "hints": [
+        "将查询正确性与访问路径分开考量，先确认谓词和索引键是否符合要求。",
+        "回想本章《复合索引与可搜索条件》中定义的运算对象和限制，再逐个排除不满足题设的选项。",
+        "将每个候选与题设的明确条件对照，不能把偶然成立的情况当成通用规则。"
+      ],
+      "explanation": "等值前缀配合后续范围是典型候选。\nA. 等值前缀配合后续范围是典型候选。\nB. 索引不包含商品名称。\nC. 缺少前缀且函数可能阻碍普通范围搜索。\nD. 该索引无法保证所有字段的排序，执行仍由优化器决定。",
+      "commonErrors": [
+        {
+          "optionId": "B",
+          "reason": "索引不包含商品名称。"
+        },
+        {
+          "optionId": "C",
+          "reason": "缺少前缀且函数可能阻碍普通范围搜索。"
+        },
+        {
+          "optionId": "D",
+          "reason": "该索引无法保证所有字段的排序，执行仍由优化器决定。"
+        }
+      ],
+      "testFixtureIds": [
+        "q0245-key"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0245-key",
+          "visibility": "hidden",
+          "variant": "objective_key",
+          "path": "fixtures/q0245/q0245-key.json",
+          "sha256": "a6c283c13e84256d0d9a2633d923f1ae1ca71bb37b637168247426273520d0f3"
+        }
+      ],
+      "orderPolicy": "not_applicable",
+      "columnPolicy": "not_applicable",
+      "numericTolerance": null,
+      "requiredAstFeatures": [],
+      "supportStatus": "仅理论",
+      "executionMode": "objective_choice",
+      "interviewTag": "概念辨析",
+      "validationStatus": "客观答案键检查（人工编写事实依据；无原生执行）",
+      "mysqlVerification": "不适用：客观概念题",
+      "validation": {
+        "kind": "objective_key",
+        "options": [
+          {
+            "optionId": "A",
+            "expectedAccepted": true,
+            "passed": true
+          },
+          {
+            "optionId": "B",
+            "expectedAccepted": false,
+            "passed": true
+          },
+          {
+            "optionId": "C",
+            "expectedAccepted": false,
+            "passed": true
+          },
+          {
+            "optionId": "D",
+            "expectedAccepted": false,
+            "passed": true
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/multiple-column-indexes.html"
+      },
+      "relatedFlashcardIds": [
+        "fc0139",
+        "fc0140"
+      ]
+    },
+    {
+      "id": "q0246",
+      "chapterId": "ch18",
+      "knowledgePointIds": [
+        "kp18-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp18-01"
+      ],
+      "difficulty": "中等",
+      "type": "独立编写",
+      "title": "合适的区间条件",
+      "context": "使用课程中小型商品数据练习合适的区间条件。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "查询库存至少50且低于200的商品，直接对 stock 作区间比较，不在列上应用函数；输出 product_id、stock，按编号升序。\n输出列名称及顺序：product_id, stock。按题设排序；参考排序键：product_id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0246-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "products"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "product_id",
+          "stock"
+        ],
+        "rows": [
+          [
+            1,
+            150
+          ],
+          [
+            4,
+            180
+          ],
+          [
+            5,
+            80
+          ]
+        ],
+        "rowCount": 3
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT product_id,stock FROM products WHERE stock>=50 AND stock<200 ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,stock FROM products WHERE stock>=50 AND stock<200 ORDER BY product_id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT product_id,stock FROM products WHERE NOT (stock<50) AND stock<200 ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,stock FROM products WHERE NOT (stock<50) AND stock<200 ORDER BY product_id",
+          "explanation": "用反向比较并取 NOT 表达相同三值逻辑。"
+        }
+      ],
+      "hints": [
+        "将查询正确性与访问路径分开考量，先确认谓词和索引键是否符合要求。",
+        "结合《索引与选择性》：索引是辅助访问结构；高选择性条件通常减少候选记录，但优化器仍可能选择扫描小表。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nSELECT product_id,stock FROM products WHERE stock>=50 AND □□□ ORDER BY product_id"
+      ],
+      "explanation": "半开范围保持边界明确，同时便于范围索引搜索。\n执行思路：确认products的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出product_id、stock列；遵循题设排序和并列规则。\n公开夹具实际返回 3 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：用反向比较并取 NOT 表达相同三值逻辑。",
+      "commonErrors": [
+        {
+          "sql": "SELECT product_id,stock FROM products WHERE stock>=50 AND stock<=200 ORDER BY product_id",
+          "reason": "半开范围保持边界明确，同时便于范围索引搜索。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0246-public",
+        "q0246-boundary",
+        "q0246-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0246-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0246/q0246-public.json",
+          "sha256": "5c258e78ecbef4fc134919c4165c38a29df67dfd3a452bbff532dd1a04e41935"
+        },
+        {
+          "id": "q0246-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0246/q0246-boundary.json",
+          "sha256": "22a2a1e29a0973b36bce44a74ade9bbc65e3a71c3c624725ad4d0bd628ca7615"
+        },
+        {
+          "id": "q0246-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0246/q0246-empty.json",
+          "sha256": "01b17dc26a5477a8abdb3d5e2e609a5ce382a5d0fd8c3b005058443d1d45bbc2"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [
+        {
+          "kind": "sargable_predicate",
+          "status": "需运行时语法树核查比较的列侧表达式；本地内容测试仅比对结果",
+          "requirement": "查询库存至少50且低于200的商品，直接对 stock 作区间比较，不在列上应用函数；输出 product_id、stock，按编号升序。"
+        }
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "索引与选择性",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0246-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "814ed2410998ebe4c7578f676b227f1b87a821887c8ed281b42c528b1ec95ead",
+              "rowCount": 3
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "814ed2410998ebe4c7578f676b227f1b87a821887c8ed281b42c528b1ec95ead",
+              "rows": 3
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "d0032bcbc99f7fe7f0dd6524e1d428fa01078977305b684a768f0d5d2a0614e9",
+              "rows": 4
+            }
+          },
+          {
+            "fixtureId": "q0246-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "068701a93b36de50adc33b0612688db39c5ec1bcaa1103bb58c436572cad2eec",
+              "rowCount": 9
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "068701a93b36de50adc33b0612688db39c5ec1bcaa1103bb58c436572cad2eec",
+              "rows": 9
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "550b4fa44ec3697abb43184d2f9255d513ddf5cdf54975f5c8bd88aa68677a76",
+              "rows": 10
+            }
+          },
+          {
+            "fixtureId": "q0246-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5eab6d96c4ab735c0743959fc735aea45e42daa91559af71d7274594564037ba",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5eab6d96c4ab735c0743959fc735aea45e42daa91559af71d7274594564037ba",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5eab6d96c4ab735c0743959fc735aea45e42daa91559af71d7274594564037ba",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/multiple-column-indexes.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0138"
+      ]
+    },
+    {
+      "id": "q0247",
+      "chapterId": "ch18",
+      "knowledgePointIds": [
+        "kp18-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp18-02"
+      ],
+      "difficulty": "中等",
+      "type": "独立编写",
+      "title": "复合键前缀和日期范围",
+      "context": "使用课程中小型订单数据练习复合键前缀和日期范围。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "查询门店2在2026年一月的订单，输出 id、sales，按 id 升序；筛选直接使用 store_id 等值及 order_date 半开日期范围。\n输出列名称及顺序：id, sales。按题设排序；参考排序键：id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0247-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "orders"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "id",
+          "sales"
+        ],
+        "rows": [
+          [
+            2,
+            400
+          ]
+        ],
+        "rowCount": 1
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT id,sales FROM orders WHERE store_id=2 AND order_date>='2026-01-01' AND order_date<'2026-02-01' ORDER BY id",
+          "sqliteSql": "SELECT id,sales FROM orders WHERE store_id=2 AND order_date>='2026-01-01' AND order_date<'2026-02-01' ORDER BY id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT id,sales FROM orders WHERE NOT (store_id<>2) AND order_date>='2026-01-01' AND order_date<'2026-02-01' ORDER BY id",
+          "sqliteSql": "SELECT id,sales FROM orders WHERE NOT (store_id<>2) AND order_date>='2026-01-01' AND order_date<'2026-02-01' ORDER BY id",
+          "explanation": "用反向比较并取 NOT 表达相同三值逻辑。"
+        }
+      ],
+      "hints": [
+        "将查询正确性与访问路径分开考量，先确认谓词和索引键是否符合要求。",
+        "结合《复合索引与可搜索条件》：复合索引按键顺序组织；常见 B 树访问可利用前导列，不能笼统保证任意列都高效。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nSELECT id,sales FROM orders WHERE □□□ AND order_date>='2026-01-01' AND order_date<'2026-02-01' ORDER BY id"
+      ],
+      "explanation": "等值门店键加日期范围匹配常见复合索引顺序，结果仍必须符合门店限定。\n执行思路：确认orders的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出id、sales列；遵循题设排序和并列规则。\n公开夹具实际返回 1 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：用反向比较并取 NOT 表达相同三值逻辑。",
+      "commonErrors": [
+        {
+          "sql": "SELECT id,sales FROM orders WHERE store_id=1 AND order_date>='2026-01-01' AND order_date<'2026-02-01' ORDER BY id",
+          "reason": "等值门店键加日期范围匹配常见复合索引顺序，结果仍必须符合门店限定。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0247-public",
+        "q0247-boundary",
+        "q0247-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0247-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0247/q0247-public.json",
+          "sha256": "4d68e0e632f690b94f639abd13907b8db58c700edc6a9669c1ea5901a4ef751e"
+        },
+        {
+          "id": "q0247-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0247/q0247-boundary.json",
+          "sha256": "b2f4b76d17318c94288fb9706913fc6e05c1149ea8a6a4056b193512db05b9b6"
+        },
+        {
+          "id": "q0247-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0247/q0247-empty.json",
+          "sha256": "18f4853d14de13f194ad098f66066cded855b44bc15a6466fbc9578d2acd865f"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [
+        {
+          "kind": "sargable_predicate",
+          "status": "需运行时语法树核查比较的列侧表达式；本地内容测试仅比对结果",
+          "requirement": "查询门店2在2026年一月的订单，输出 id、sales，按 id 升序；筛选直接使用 store_id 等值及 order_date 半开日期范围。"
+        }
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "复合索引与可搜索条件",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0247-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "835e8b4ea7a27508dc6b2c5835aabe1560b64c012e5b1b3cfa1ce274fdcf12d2",
+              "rowCount": 1
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "835e8b4ea7a27508dc6b2c5835aabe1560b64c012e5b1b3cfa1ce274fdcf12d2",
+              "rows": 1
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "f1c6fd9a5160f8f9119fa8bec7a195a054d0f0a86bbd8e6190db26fb787d7a56",
+              "rows": 1
+            }
+          },
+          {
+            "fixtureId": "q0247-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "f9eca3d7a4249a9dad942c58a3add99c69dff591a5b36e51cfdc5913e98251bb",
+              "rowCount": 2
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "f9eca3d7a4249a9dad942c58a3add99c69dff591a5b36e51cfdc5913e98251bb",
+              "rows": 2
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "1ab56f45781e0f9947ac6844d13f0b955969e92f1a6ab165f6a2820df2309812",
+              "rows": 2
+            }
+          },
+          {
+            "fixtureId": "q0247-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5d8c27cf2528c05af4a205484319757b5d174fd49c0f44cbddb556c229dc6cef",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5d8c27cf2528c05af4a205484319757b5d174fd49c0f44cbddb556c229dc6cef",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5d8c27cf2528c05af4a205484319757b5d174fd49c0f44cbddb556c229dc6cef",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/multiple-column-indexes.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0139"
+      ]
+    },
+    {
+      "id": "q0248",
+      "chapterId": "ch18",
+      "knowledgePointIds": [
+        "kp18-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp18-02"
+      ],
+      "difficulty": "中等",
+      "type": "独立编写",
+      "title": "重写月份函数为日期范围",
+      "context": "使用课程中小型订单数据练习重写月份函数为日期范围。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "不要为筛选在 order_date 上套函数；查询2026年二月全部订单 id、order_date，按日期、编号升序。\n输出列名称及顺序：id, order_date。按题设排序；参考排序键：order_date,id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0248-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "orders"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "id",
+          "order_date"
+        ],
+        "rows": [
+          [
+            3,
+            "2026-02-02"
+          ],
+          [
+            4,
+            "2026-02-15"
+          ],
+          [
+            5,
+            "2026-02-20"
+          ]
+        ],
+        "rowCount": 3
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT id,order_date FROM orders WHERE order_date>='2026-02-01' AND order_date<'2026-03-01' ORDER BY order_date,id",
+          "sqliteSql": "SELECT id,order_date FROM orders WHERE order_date>='2026-02-01' AND order_date<'2026-03-01' ORDER BY order_date,id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT id,order_date FROM orders WHERE NOT (order_date<'2026-02-01') AND order_date<'2026-03-01' ORDER BY order_date,id",
+          "sqliteSql": "SELECT id,order_date FROM orders WHERE NOT (order_date<'2026-02-01') AND order_date<'2026-03-01' ORDER BY order_date,id",
+          "explanation": "用反向比较并取 NOT 表达相同三值逻辑。"
+        }
+      ],
+      "hints": [
+        "将查询正确性与访问路径分开考量，先确认谓词和索引键是否符合要求。",
+        "结合《复合索引与可搜索条件》：复合索引按键顺序组织；常见 B 树访问可利用前导列，不能笼统保证任意列都高效。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nSELECT id,order_date FROM orders WHERE order_date>='2026-02-01' AND □□□ ORDER BY order_date,id"
+      ],
+      "explanation": "半开日期范围可直接比较索引键；仍需原生计划判断是否使用索引。\n执行思路：确认orders的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出id、order_date列；遵循题设排序和并列规则。\n公开夹具实际返回 3 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：用反向比较并取 NOT 表达相同三值逻辑。",
+      "commonErrors": [
+        {
+          "sql": "SELECT id,order_date FROM orders WHERE order_date>='2026-02-01' AND order_date<='2026-03-01' ORDER BY order_date,id",
+          "reason": "半开日期范围可直接比较索引键；仍需原生计划判断是否使用索引。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0248-public",
+        "q0248-boundary",
+        "q0248-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0248-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0248/q0248-public.json",
+          "sha256": "e98c1205ac51d0d19451dc739bc1067d91dc647fc78787c4b3c4cb7c4d705973"
+        },
+        {
+          "id": "q0248-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0248/q0248-boundary.json",
+          "sha256": "6cada4c588e3524f3bd8c6fc0079b7dfd5896f9ce75f75c9f1d9f110fcb91ab2"
+        },
+        {
+          "id": "q0248-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0248/q0248-empty.json",
+          "sha256": "9ee275bd5dd93089e4aa0b376b3b240b72c140d8f2b01c5ea0b1efff2f63f4fd"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [
+        {
+          "kind": "sargable_predicate",
+          "status": "需运行时语法树核查比较的列侧表达式；本地内容测试仅比对结果",
+          "requirement": "不要为筛选在 order_date 上套函数；查询2026年二月全部订单 id、order_date，按日期、编号升序。"
+        }
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "复合索引与可搜索条件",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0248-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "c60d1b5505bd99ecaa83cd3dcac712d245ff09fad35ef4a77cf9ac856eb6f63c",
+              "rowCount": 3
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "c60d1b5505bd99ecaa83cd3dcac712d245ff09fad35ef4a77cf9ac856eb6f63c",
+              "rows": 3
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "c60d1b5505bd99ecaa83cd3dcac712d245ff09fad35ef4a77cf9ac856eb6f63c",
+              "rows": 3
+            }
+          },
+          {
+            "fixtureId": "q0248-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "f5d309374abcc41cd1cab00a2e882f0b6fcda071def88350a7ee9038a6fa437e",
+              "rowCount": 8
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "f5d309374abcc41cd1cab00a2e882f0b6fcda071def88350a7ee9038a6fa437e",
+              "rows": 8
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "344ecf4172804ca741ed54f7591309bf4f79e2ced1b228ed613976a3d1dfaf52",
+              "rows": 9
+            }
+          },
+          {
+            "fixtureId": "q0248-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "74e146f757dd07fe91584cfdca88b5067ef733667bab30df829093505459da4c",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "74e146f757dd07fe91584cfdca88b5067ef733667bab30df829093505459da4c",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "74e146f757dd07fe91584cfdca88b5067ef733667bab30df829093505459da4c",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/multiple-column-indexes.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0140"
+      ]
+    },
+    {
+      "id": "q0249",
+      "chapterId": "ch18",
+      "knowledgePointIds": [
+        "kp18-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp18-02"
+      ],
+      "difficulty": "困难",
+      "type": "代码纠错",
+      "title": "创建指定顺序的复合索引",
+      "context": "在独立教学数据库上练习安全的结构与记录修改，不会变动内置企业数据库。",
+      "requirements": "下面提供的初始代码存在逻辑、语法或结构错误。请修改整段代码，使其满足以下要求。\n在已有 orders 表建立名为 idx_store_date 的非唯一索引，键顺序必须为 (store_id,order_date)，不修改记录及其他表。",
+      "datasetId": "q0249-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [],
+      "initialCode": "CREATE INDEX idx_store_date ON orders(order_date,store_id);",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "database_state",
+        "state": {
+          "tables": {
+            "guard": {
+              "columns": [
+                [
+                  "i",
+                  "INT",
+                  0,
+                  null,
+                  0
+                ]
+              ],
+              "foreignKeys": [],
+              "indexes": [],
+              "rows": []
+            },
+            "orders": {
+              "columns": [
+                [
+                  "id",
+                  "INT",
+                  0,
+                  null,
+                  1
+                ],
+                [
+                  "store_id",
+                  "INT",
+                  0,
+                  null,
+                  0
+                ],
+                [
+                  "order_date",
+                  "DATE",
+                  0,
+                  null,
+                  0
+                ]
+              ],
+              "foreignKeys": [],
+              "indexes": [
+                {
+                  "name": "idx_store_date",
+                  "unique": 0,
+                  "origin": "c",
+                  "partial": 0,
+                  "keys": [
+                    [
+                      "store_id",
+                      0
+                    ],
+                    [
+                      "order_date",
+                      0
+                    ]
+                  ]
+                },
+                {
+                  "name": null,
+                  "unique": 1,
+                  "origin": "pk",
+                  "partial": 0,
+                  "keys": [
+                    [
+                      "id",
+                      0
+                    ]
+                  ]
+                }
+              ],
+              "rows": [
+                [
+                  1,
+                  1,
+                  "2026-01-01"
+                ]
+              ]
+            }
+          },
+          "probes": [],
+          "transactionOpen": false
+        }
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "CREATE INDEX idx_store_date ON orders(store_id,order_date);",
+          "sqliteSql": "CREATE INDEX idx_store_date ON orders(store_id,order_date);"
+        },
+        {
+          "kind": "状态等价",
+          "mysqlSql": "CREATE INDEX idx_store_date ON orders (store_id ASC,order_date ASC);",
+          "sqliteSql": "CREATE INDEX idx_store_date ON orders (store_id ASC,order_date ASC);",
+          "explanation": "不同SQL结构或运算次序实现相同目标。"
+        }
+      ],
+      "hints": [
+        "将查询正确性与访问路径分开考量，先确认谓词和索引键是否符合要求。",
+        "结合《复合索引与可搜索条件》：复合索引按键顺序组织；常见 B 树访问可利用前导列，不能笼统保证任意列都高效。",
+        "检查初始代码的 写操作或结构 对应的业务规则。复合索引的顺序改变可用左前缀；验收检查索引字段和实际数据库结构，不猜测执行计划。"
+      ],
+      "explanation": "复合索引的顺序改变可用左前缀；验收检查索引字段和实际数据库结构，不猜测执行计划。\n执行思路：在独立快照中执行目标操作，检查最终记录、结构与约束。\n本题比较操作后的表结构、索引、约束探针、完整记录及事务关闭状态。\n另一种可用写法：不同SQL结构或运算次序实现相同目标。",
+      "commonErrors": [
+        {
+          "sql": "CREATE INDEX idx_store_date ON orders(order_date,store_id);",
+          "reason": "复合索引的顺序改变可用左前缀；验收检查索引字段和实际数据库结构，不猜测执行计划。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0249-public",
+        "q0249-boundary"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0249-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0249/q0249-public.json",
+          "sha256": "d3fc2cab41338263de094b7c9a25ac576fc8ebaa859ceacaefe4ed83fb994eac"
+        },
+        {
+          "id": "q0249-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0249/q0249-boundary.json",
+          "sha256": "f8d8c9c9a8cd84bc267ba50f33ed210cd6ce1d6301d1a7ee164ccbd56933c7af"
+        }
+      ],
+      "orderPolicy": "not_applicable",
+      "columnPolicy": "database_state",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "仅限题设已执行的DDL/DML/事务及索引子集；原生MySQL和浏览器兼容层尚待验证。",
+      "executionMode": "database_state",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "复合索引与可搜索条件",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "state",
+        "equivalentKind": "状态等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0249-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "0c346e436c1c54707501cef2b8ad81d6571e25d9253aac71dd42845195dd6a84",
+              "rowCount": null
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "0c346e436c1c54707501cef2b8ad81d6571e25d9253aac71dd42845195dd6a84",
+              "rows": null
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "d68e4c7d41d01e311abd3ee377dbcb82ae5dc4f6173919bcc9de25e3e1dc1232",
+              "rows": null
+            }
+          },
+          {
+            "fixtureId": "q0249-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "6d0bbc544500841c0a4a3594baf042bb2989b83e30ca852b3cc21c707335de4b",
+              "rowCount": null
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "6d0bbc544500841c0a4a3594baf042bb2989b83e30ca852b3cc21c707335de4b",
+              "rows": null
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "9cd084eea1c1a3f1c5606d23f12c1c6fa81e4e4bcb182c88a8bf5de2ee293f84",
+              "rows": null
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/multiple-column-indexes.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0139"
+      ]
+    },
+    {
+      "id": "q0250",
+      "chapterId": "ch18",
+      "knowledgePointIds": [
+        "kp18-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp18-02"
+      ],
+      "difficulty": "困难",
+      "type": "独立编写",
+      "title": "避免一对多连接用于存在判断",
+      "context": "使用课程中小型客户、订单数据练习避免一对多连接用于存在判断。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "返回至少有一笔销售额>=700的订单的客户编号，每人一次，按编号升序；需求为存在性筛选而非所有订单明细。\n输出列名称及顺序：customer_id。按题设排序；参考排序键：c.customer_id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0250-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "customers",
+        "orders"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "customer_id"
+        ],
+        "rows": [
+          [
+            1
+          ],
+          [
+            3
+          ]
+        ],
+        "rowCount": 2
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT c.customer_id FROM customers c WHERE EXISTS(SELECT 1 FROM orders o WHERE o.customer_id=c.customer_id AND o.sales>=700) ORDER BY c.customer_id",
+          "sqliteSql": "SELECT c.customer_id FROM customers c WHERE EXISTS(SELECT 1 FROM orders o WHERE o.customer_id=c.customer_id AND o.sales>=700) ORDER BY c.customer_id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT c.customer_id FROM customers c WHERE EXISTS(SELECT 1 FROM orders o WHERE o.customer_id=c.customer_id AND NOT (o.sales<700)) ORDER BY c.customer_id",
+          "sqliteSql": "SELECT c.customer_id FROM customers c WHERE EXISTS(SELECT 1 FROM orders o WHERE o.customer_id=c.customer_id AND NOT (o.sales<700)) ORDER BY c.customer_id",
+          "explanation": "用反向比较并取 NOT 表达相同三值逻辑。"
+        }
+      ],
+      "hints": [
+        "将查询正确性与访问路径分开考量，先确认谓词和索引键是否符合要求。",
+        "结合《复合索引与可搜索条件》：复合索引按键顺序组织；常见 B 树访问可利用前导列，不能笼统保证任意列都高效。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nSELECT c.customer_id FROM customers c WHERE EXISTS(SELECT 1 FROM orders o WHERE o.customer_id=c.customer_id AND □□□) ORDER BY c.customer_id"
+      ],
+      "explanation": "存在性查询只需判断能否匹配，不需要产生全部一对多行。\n执行思路：确认customers、orders的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出customer_id列；遵循题设排序和并列规则。\n公开夹具实际返回 2 行、1 列；完整结果见 expectedOutput。\n另一种可用写法：用反向比较并取 NOT 表达相同三值逻辑。",
+      "commonErrors": [
+        {
+          "sql": "SELECT c.customer_id FROM customers c WHERE EXISTS(SELECT 1 FROM orders o WHERE o.customer_id=c.customer_id AND o.sales<700) ORDER BY c.customer_id",
+          "reason": "存在性查询只需判断能否匹配，不需要产生全部一对多行。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0250-public",
+        "q0250-boundary",
+        "q0250-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0250-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0250/q0250-public.json",
+          "sha256": "1f75c90fbaa88a635db6499fe45915639676030a369d74bbb1e03e0e5af7597c"
+        },
+        {
+          "id": "q0250-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0250/q0250-boundary.json",
+          "sha256": "573f39bfa6e8aaa3c56e03cfaa3860600e0846d6415e86aa1e0e6987bd9af0a6"
+        },
+        {
+          "id": "q0250-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0250/q0250-empty.json",
+          "sha256": "858f4debeba3172dcdc34761e8b40cff28148fde3aa92dad36e0539436ec666d"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "复合索引与可搜索条件",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0250-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "f69ba4f9345a2731c9c7a33e154884e042aa97185114da12702fab4e21ebb412",
+              "rowCount": 2
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "f69ba4f9345a2731c9c7a33e154884e042aa97185114da12702fab4e21ebb412",
+              "rows": 2
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "5b0fb3af2708565a426510b99f4a48341e2e5713965df40cfda4918cfd7830c0",
+              "rows": 2
+            }
+          },
+          {
+            "fixtureId": "q0250-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "b9264aff933fdc0b52d973b5ad3652848b8c103ca17d98fa75cb3c9a75d4033c",
+              "rowCount": 4
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "b9264aff933fdc0b52d973b5ad3652848b8c103ca17d98fa75cb3c9a75d4033c",
+              "rows": 4
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "7b971933ddf5703baa292d5a6729406695fba6a2613f59207f01f9df14f45c2c",
+              "rows": 3
+            }
+          },
+          {
+            "fixtureId": "q0250-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "56c705f0fa473cdb713173581b571b4f062ff40b68756b4049b4fbe4d2c8e709",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "56c705f0fa473cdb713173581b571b4f062ff40b68756b4049b4fbe4d2c8e709",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "56c705f0fa473cdb713173581b571b4f062ff40b68756b4049b4fbe4d2c8e709",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/multiple-column-indexes.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0140"
+      ]
+    }
+  ]
+}

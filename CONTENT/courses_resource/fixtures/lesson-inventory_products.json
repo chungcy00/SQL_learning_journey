@@ -1,0 +1,52 @@
+{
+  "id": "lesson-inventory_products",
+  "table": "inventory_products",
+  "columns": [
+    {
+      "name": "product_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "product_name",
+      "type": "TEXT",
+      "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+      "sqliteType": "TEXT"
+    },
+    {
+      "name": "category",
+      "type": "TEXT",
+      "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+      "sqliteType": "TEXT"
+    },
+    {
+      "name": "unit_cost",
+      "type": "INTEGER",
+      "mysqlType": "DECIMAL(12,2)",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "reorder_level",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    }
+  ],
+  "rows": [
+    [
+      1,
+      "Mask",
+      "护肤品",
+      10,
+      80
+    ],
+    [
+      2,
+      "Soap",
+      "日用品",
+      5,
+      10
+    ]
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "q0053-key",
+  "questionId": "q0053",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "未知（UNKNOWN）",
+      "explanation": "与NULL进行普通等号比较得到未知。"
+    },
+    {
+      "id": "B",
+      "text": "真（TRUE）",
+      "explanation": "NULL不是0。"
+    },
+    {
+      "id": "C",
+      "text": "一定触发语法错误",
+      "explanation": "语法合法，只是逻辑值未知。"
+    },
+    {
+      "id": "D",
+      "text": "假（FALSE）",
+      "explanation": "未知不等同于假，虽然WHERE均不保留。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "A"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

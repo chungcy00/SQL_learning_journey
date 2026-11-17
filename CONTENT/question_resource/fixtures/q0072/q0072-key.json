@@ -1,0 +1,33 @@
+{
+  "id": "q0072-key",
+  "questionId": "q0072",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "0 与 NULL",
+      "explanation": "两个聚合函数的空输入规则均被颠倒。"
+    },
+    {
+      "id": "B",
+      "text": "0 与 0",
+      "explanation": "将SUM置0需要显式空值替代。"
+    },
+    {
+      "id": "C",
+      "text": "NULL 与 0",
+      "explanation": "SUM无输入值返回NULL，COUNT空集为0。"
+    },
+    {
+      "id": "D",
+      "text": "NULL 与 NULL",
+      "explanation": "COUNT在空输入仍返回0。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "C"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

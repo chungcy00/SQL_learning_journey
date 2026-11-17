@@ -1,0 +1,1946 @@
+{
+  "chapterId": "ch05",
+  "title": "空值处理",
+  "count": 10,
+  "schemaVersion": 3,
+  "contentVersion": "3.0.0",
+  "questions": [
+    {
+      "id": "q0051",
+      "chapterId": "ch05",
+      "knowledgePointIds": [
+        "kp05-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp05-01"
+      ],
+      "difficulty": "入门",
+      "type": "独立编写",
+      "title": "零值不是缺失",
+      "context": "使用课程中小型缺失值示例数据练习零值不是缺失。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "从 nullable_values 找 value 恰等于0的记录，仅输出 id，按编号升序。\n输出列名称及顺序：id。按题设排序；参考排序键：id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0051-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "nullable_values"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "id"
+        ],
+        "rows": [
+          [
+            2
+          ]
+        ],
+        "rowCount": 1
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT id FROM nullable_values WHERE value=0 ORDER BY id",
+          "sqliteSql": "SELECT id FROM nullable_values WHERE value=0 ORDER BY id"
+        },
+        {
+          "kind": "独立方法等价",
+          "mysqlSql": "SELECT id FROM nullable_values WHERE value IN (0) ORDER BY id",
+          "sqliteSql": "SELECT id FROM nullable_values WHERE value IN (0) ORDER BY id",
+          "explanation": "采用另一种关系运算或查询结构计算相同结果。"
+        }
+      ],
+      "hints": [
+        "区分未知、零与空字符串，判断是否需要排除或填补缺失。",
+        "结合《IS NULL 与三值逻辑》：比较未知值通常返回 UNKNOWN，WHERE 只保留 TRUE；IS NULL 专门检测缺失。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nSELECT id FROM nullable_values WHERE □□□ ORDER BY id"
+      ],
+      "explanation": "数值0表示已知值，NULL 表示未知。\n执行思路：确认nullable_values的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出id列；遵循题设排序和并列规则。\n公开夹具实际返回 1 行、1 列；完整结果见 expectedOutput。\n另一种可用写法：采用另一种关系运算或查询结构计算相同结果。",
+      "commonErrors": [
+        {
+          "sql": "SELECT id FROM nullable_values WHERE value IS NULL ORDER BY id",
+          "reason": "数值0表示已知值，NULL 表示未知。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0051-public",
+        "q0051-boundary",
+        "q0051-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0051-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0051/q0051-public.json",
+          "sha256": "ac0339be98d7e72f72542f2fed1c9db9d31457bdc2777f4b92e9128749b442dd"
+        },
+        {
+          "id": "q0051-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0051/q0051-boundary.json",
+          "sha256": "bc8480f5bb2869222e049530e07dc53f0d469d68d5064c3530779ce391358629"
+        },
+        {
+          "id": "q0051-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0051/q0051-empty.json",
+          "sha256": "5cf668a3e1562ef8ca57c9874513ba6892f393384c71de8319cdf1845470c2ee"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "IS NULL 与三值逻辑",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "独立方法等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0051-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "f86ab21566bb8ae80daf96bc42488845cf7e12d1f40ffdd52ce55d1ec30954e1",
+              "rowCount": 1
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "f86ab21566bb8ae80daf96bc42488845cf7e12d1f40ffdd52ce55d1ec30954e1",
+              "rows": 1
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "7d053e399b894fd2ffd7c8ac07d9213f36a910b31b6f991efd29218026ee96c8",
+              "rows": 1
+            }
+          },
+          {
+            "fixtureId": "q0051-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "1654e9cb7afcdbeec35bce27d92b00be3353d26ebfcd741862d015af5adaf1c3",
+              "rowCount": 1
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "1654e9cb7afcdbeec35bce27d92b00be3353d26ebfcd741862d015af5adaf1c3",
+              "rows": 1
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "3a28b454110766151d40ef58730c3be2657c097ad0cb2ed449734c2c0d8374c1",
+              "rows": 2
+            }
+          },
+          {
+            "fixtureId": "q0051-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "0cf668393d85d9f05d3131586209d216006367b32322576670f09ebff2c70de0",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "0cf668393d85d9f05d3131586209d216006367b32322576670f09ebff2c70de0",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "0cf668393d85d9f05d3131586209d216006367b32322576670f09ebff2c70de0",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/problems-with-null.html",
+        "independentPythonAssertions": [
+          {
+            "fixtureId": "q0051-public",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          },
+          {
+            "fixtureId": "q0051-boundary",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          },
+          {
+            "fixtureId": "q0051-empty",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          }
+        ]
+      },
+      "relatedFlashcardIds": [
+        "fc0030",
+        "fc0033",
+        "fc0035"
+      ]
+    },
+    {
+      "id": "q0052",
+      "chapterId": "ch05",
+      "knowledgePointIds": [
+        "kp05-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp05-01"
+      ],
+      "difficulty": "入门",
+      "type": "独立编写",
+      "title": "缺少客户键的订单",
+      "context": "使用课程中小型订单数据练习缺少客户键的订单。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "输出 customer_id 为NULL的 orders.id，按编号升序。\n输出列名称及顺序：id。按题设排序；参考排序键：id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0052-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "orders"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "id"
+        ],
+        "rows": [
+          [
+            4
+          ]
+        ],
+        "rowCount": 1
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT id FROM orders WHERE customer_id IS NULL ORDER BY id",
+          "sqliteSql": "SELECT id FROM orders WHERE customer_id IS NULL ORDER BY id"
+        },
+        {
+          "kind": "关系结构等价",
+          "mysqlSql": "SELECT id FROM (SELECT * FROM orders) AS orders WHERE customer_id IS NULL ORDER BY id",
+          "sqliteSql": "SELECT id FROM (SELECT * FROM orders) AS orders WHERE customer_id IS NULL ORDER BY id",
+          "explanation": "先构造派生输入关系，再执行相同投影、聚合和筛选；保持结果语义。"
+        }
+      ],
+      "hints": [
+        "区分未知、零与空字符串，判断是否需要排除或填补缺失。",
+        "结合《IS NULL 与三值逻辑》：比较未知值通常返回 UNKNOWN，WHERE 只保留 TRUE；IS NULL 专门检测缺失。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nSELECT id FROM orders WHERE customer_id □□□ ORDER BY id"
+      ],
+      "explanation": "NULL 不能通过普通等号比较。\n执行思路：确认orders的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出id列；遵循题设排序和并列规则。\n公开夹具实际返回 1 行、1 列；完整结果见 expectedOutput。\n另一种可用写法：先构造派生输入关系，再执行相同投影、聚合和筛选；保持结果语义。",
+      "commonErrors": [
+        {
+          "sql": "SELECT id FROM orders WHERE customer_id = NULL ORDER BY id",
+          "reason": "NULL 不能通过普通等号比较。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0052-public",
+        "q0052-boundary",
+        "q0052-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0052-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0052/q0052-public.json",
+          "sha256": "220e297c38c19150b89b8c33b24d036811fa664ee0e95adb84bbcc45bc98e419"
+        },
+        {
+          "id": "q0052-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0052/q0052-boundary.json",
+          "sha256": "cc9a10af1047ef7bdca59c7cfbd94b2d872748d394986452203629ab5821f3e6"
+        },
+        {
+          "id": "q0052-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0052/q0052-empty.json",
+          "sha256": "c81b6fa7d2d6cd72285e93c5f318493c69c2279cb0e736eb8c6cb9c7ba176ea7"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "IS NULL 与三值逻辑",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "关系结构等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0052-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "3fd0eb886f8307aad0c03b0d81007cb4f1c41649c5972f10d70833f6025811df",
+              "rowCount": 1
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "3fd0eb886f8307aad0c03b0d81007cb4f1c41649c5972f10d70833f6025811df",
+              "rows": 1
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "0cf668393d85d9f05d3131586209d216006367b32322576670f09ebff2c70de0",
+              "rows": 0
+            }
+          },
+          {
+            "fixtureId": "q0052-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "f9287a8af850e8ab309623b78415162e1a8d813bcbedaf81b7d3ef718bc60d74",
+              "rowCount": 3
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "f9287a8af850e8ab309623b78415162e1a8d813bcbedaf81b7d3ef718bc60d74",
+              "rows": 3
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "0cf668393d85d9f05d3131586209d216006367b32322576670f09ebff2c70de0",
+              "rows": 0
+            }
+          },
+          {
+            "fixtureId": "q0052-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "0cf668393d85d9f05d3131586209d216006367b32322576670f09ebff2c70de0",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "0cf668393d85d9f05d3131586209d216006367b32322576670f09ebff2c70de0",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "0cf668393d85d9f05d3131586209d216006367b32322576670f09ebff2c70de0",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/problems-with-null.html",
+        "independentPythonAssertions": [
+          {
+            "fixtureId": "q0052-public",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          },
+          {
+            "fixtureId": "q0052-boundary",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          },
+          {
+            "fixtureId": "q0052-empty",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          }
+        ]
+      },
+      "relatedFlashcardIds": [
+        "fc0030",
+        "fc0033",
+        "fc0035"
+      ]
+    },
+    {
+      "id": "q0053",
+      "chapterId": "ch05",
+      "knowledgePointIds": [
+        "kp05-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp05-01"
+      ],
+      "difficulty": "入门",
+      "type": "选择",
+      "title": "IS NULL 与三值逻辑 · 如果 x 为NULL，表达式 x=0 在 SQL 三…",
+      "context": "本题考查《IS NULL 与三值逻辑》中实际使用时容易混淆的规则。",
+      "requirements": "如果 x 为NULL，表达式 x=0 在 SQL 三值逻辑中的结果是什么？",
+      "datasetId": null,
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "initialCode": null,
+      "options": [
+        {
+          "id": "A",
+          "text": "未知（UNKNOWN）",
+          "explanation": "与NULL进行普通等号比较得到未知。"
+        },
+        {
+          "id": "B",
+          "text": "真（TRUE）",
+          "explanation": "NULL不是0。"
+        },
+        {
+          "id": "C",
+          "text": "一定触发语法错误",
+          "explanation": "语法合法，只是逻辑值未知。"
+        },
+        {
+          "id": "D",
+          "text": "假（FALSE）",
+          "explanation": "未知不等同于假，虽然WHERE均不保留。"
+        }
+      ],
+      "correctOptionId": "A",
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "objective_choice",
+        "correctOptionId": "A"
+      },
+      "referenceSolutions": [
+        {
+          "kind": "choice",
+          "optionId": "A",
+          "answer": "未知（UNKNOWN）",
+          "explanation": "与NULL进行普通等号比较得到未知。"
+        }
+      ],
+      "hints": [
+        "区分未知、零与空字符串，判断是否需要排除或填补缺失。",
+        "回想本章《IS NULL 与三值逻辑》中定义的运算对象和限制，再逐个排除不满足题设的选项。",
+        "将每个候选与题设的明确条件对照，不能把偶然成立的情况当成通用规则。"
+      ],
+      "explanation": "与NULL进行普通等号比较得到未知。\nA. 与NULL进行普通等号比较得到未知。\nB. NULL不是0。\nC. 语法合法，只是逻辑值未知。\nD. 未知不等同于假，虽然WHERE均不保留。",
+      "commonErrors": [
+        {
+          "optionId": "B",
+          "reason": "NULL不是0。"
+        },
+        {
+          "optionId": "C",
+          "reason": "语法合法，只是逻辑值未知。"
+        },
+        {
+          "optionId": "D",
+          "reason": "未知不等同于假，虽然WHERE均不保留。"
+        }
+      ],
+      "testFixtureIds": [
+        "q0053-key"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0053-key",
+          "visibility": "hidden",
+          "variant": "objective_key",
+          "path": "fixtures/q0053/q0053-key.json",
+          "sha256": "bc8516bcd41f86ea4bad3e6486dc960c613f945c3bcebc7dd2cebd3cd3f3d7cf"
+        }
+      ],
+      "orderPolicy": "not_applicable",
+      "columnPolicy": "not_applicable",
+      "numericTolerance": null,
+      "requiredAstFeatures": [],
+      "supportStatus": "仅理论",
+      "executionMode": "objective_choice",
+      "interviewTag": "概念辨析",
+      "validationStatus": "客观答案键检查（人工编写事实依据；无原生执行）",
+      "mysqlVerification": "不适用：客观概念题",
+      "validation": {
+        "kind": "objective_key",
+        "options": [
+          {
+            "optionId": "A",
+            "expectedAccepted": true,
+            "passed": true
+          },
+          {
+            "optionId": "B",
+            "expectedAccepted": false,
+            "passed": true
+          },
+          {
+            "optionId": "C",
+            "expectedAccepted": false,
+            "passed": true
+          },
+          {
+            "optionId": "D",
+            "expectedAccepted": false,
+            "passed": true
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/problems-with-null.html"
+      },
+      "relatedFlashcardIds": [
+        "fc0030"
+      ]
+    },
+    {
+      "id": "q0054",
+      "chapterId": "ch05",
+      "knowledgePointIds": [
+        "kp05-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp05-02"
+      ],
+      "difficulty": "入门",
+      "type": "独立编写",
+      "title": "客户编号占位",
+      "context": "使用课程中小型订单数据练习客户编号占位。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "输出 orders 的 id 以及 customer_id 缺失时返回-1的 client_key，按 id 升序。\n输出列名称及顺序：id, client_key。按题设排序；参考排序键：id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0054-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "orders"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "id",
+          "client_key"
+        ],
+        "rows": [
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            4,
+            -1
+          ],
+          [
+            5,
+            3
+          ]
+        ],
+        "rowCount": 5
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT id,COALESCE(customer_id,-1) AS client_key FROM orders ORDER BY id",
+          "sqliteSql": "SELECT id,COALESCE(customer_id,-1) AS client_key FROM orders ORDER BY id"
+        },
+        {
+          "kind": "关系结构等价",
+          "mysqlSql": "SELECT id,COALESCE(customer_id,-1) AS client_key FROM (SELECT * FROM orders) AS orders ORDER BY id",
+          "sqliteSql": "SELECT id,COALESCE(customer_id,-1) AS client_key FROM (SELECT * FROM orders) AS orders ORDER BY id",
+          "explanation": "先构造派生输入关系，再执行相同投影、聚合和筛选；保持结果语义。"
+        }
+      ],
+      "hints": [
+        "区分未知、零与空字符串，判断是否需要排除或填补缺失。",
+        "结合《IFNULL 与 COALESCE》：IFNULL 接受两个参数，COALESCE 返回首个非空参数；仅在业务允许时填补缺失。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nSELECT id,□□□ AS client_key FROM orders ORDER BY id"
+      ],
+      "explanation": "占位值必须一致，并与原数据分开。\n执行思路：确认orders的输入记录；输出id、client_key列；遵循题设排序和并列规则。\n公开夹具实际返回 5 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：先构造派生输入关系，再执行相同投影、聚合和筛选；保持结果语义。",
+      "commonErrors": [
+        {
+          "sql": "SELECT id,COALESCE(customer_id,0) AS client_key FROM orders ORDER BY id",
+          "reason": "占位值必须一致，并与原数据分开。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0054-public",
+        "q0054-boundary",
+        "q0054-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0054-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0054/q0054-public.json",
+          "sha256": "b5693248ad656a79b75bf0ace7a50210660773ab6c42b40c70c8ef4a50ccc242"
+        },
+        {
+          "id": "q0054-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0054/q0054-boundary.json",
+          "sha256": "b77de50f5457cd21ecb06fa28e5c32c2633a6fc58ed688dad8032c01e5ac2f37"
+        },
+        {
+          "id": "q0054-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0054/q0054-empty.json",
+          "sha256": "3333fadb3deb178672a4880b7203588aedfc15350fb14074b6868cbc29958895"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "IFNULL 与 COALESCE",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "关系结构等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0054-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "268a6b51601863ecd5b36056cf920f296a804594b0675419cfd27c4d52347785",
+              "rowCount": 5
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "268a6b51601863ecd5b36056cf920f296a804594b0675419cfd27c4d52347785",
+              "rows": 5
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "7cf50d3373a087ba64c7c041bd44c6ab4a0c8a9a88683c0196a99b44e220f021",
+              "rows": 5
+            }
+          },
+          {
+            "fixtureId": "q0054-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "19cfcbe73f354a2a4537af615514742096b92895dc12c4fb50b0df750018a181",
+              "rowCount": 13
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "19cfcbe73f354a2a4537af615514742096b92895dc12c4fb50b0df750018a181",
+              "rows": 13
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "64493102961316522f2a00193b1fa6d1336877df11c5583ee5147351fb070c83",
+              "rows": 13
+            }
+          },
+          {
+            "fixtureId": "q0054-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "d86467822062daf2b5663f50003a733e8e8210790109b2170c7bf4cb55cd6316",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "d86467822062daf2b5663f50003a733e8e8210790109b2170c7bf4cb55cd6316",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "d86467822062daf2b5663f50003a733e8e8210790109b2170c7bf4cb55cd6316",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/problems-with-null.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0031",
+        "fc0032",
+        "fc0034"
+      ]
+    },
+    {
+      "id": "q0055",
+      "chapterId": "ch05",
+      "knowledgePointIds": [
+        "kp05-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp05-01"
+      ],
+      "difficulty": "入门",
+      "type": "独立编写",
+      "title": "有登记客户的订单",
+      "context": "使用课程中小型订单数据练习有登记客户的订单。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "输出非空 customer_id 的订单 id、customer_id，按编号升序。\n输出列名称及顺序：id, customer_id。按题设排序；参考排序键：id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0055-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "orders"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "id",
+          "customer_id"
+        ],
+        "rows": [
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            5,
+            3
+          ]
+        ],
+        "rowCount": 4
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT id,customer_id FROM orders WHERE customer_id IS NOT NULL ORDER BY id",
+          "sqliteSql": "SELECT id,customer_id FROM orders WHERE customer_id IS NOT NULL ORDER BY id"
+        },
+        {
+          "kind": "关系结构等价",
+          "mysqlSql": "SELECT id,customer_id FROM (SELECT * FROM orders) AS orders WHERE customer_id IS NOT NULL ORDER BY id",
+          "sqliteSql": "SELECT id,customer_id FROM (SELECT * FROM orders) AS orders WHERE customer_id IS NOT NULL ORDER BY id",
+          "explanation": "先构造派生输入关系，再执行相同投影、聚合和筛选；保持结果语义。"
+        }
+      ],
+      "hints": [
+        "区分未知、零与空字符串，判断是否需要排除或填补缺失。",
+        "结合《IS NULL 与三值逻辑》：比较未知值通常返回 UNKNOWN，WHERE 只保留 TRUE；IS NULL 专门检测缺失。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nSELECT id,customer_id FROM orders WHERE customer_id □□□ ORDER BY id"
+      ],
+      "explanation": "登记客户有可用的客户键，不能选缺失项。\n执行思路：确认orders的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出id、customer_id列；遵循题设排序和并列规则。\n公开夹具实际返回 4 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：先构造派生输入关系，再执行相同投影、聚合和筛选；保持结果语义。",
+      "commonErrors": [
+        {
+          "sql": "SELECT id,customer_id FROM orders WHERE customer_id IS NULL ORDER BY id",
+          "reason": "登记客户有可用的客户键，不能选缺失项。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0055-public",
+        "q0055-boundary",
+        "q0055-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0055-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0055/q0055-public.json",
+          "sha256": "9d18caed02fc752b6c93f4d5563038ef577460f65de29aa4b09f22d1aa1ce87f"
+        },
+        {
+          "id": "q0055-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0055/q0055-boundary.json",
+          "sha256": "b8e7fa423d9ea0c9d495cef9e606bef7c3363e357104f3f01e7334063e3ee931"
+        },
+        {
+          "id": "q0055-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0055/q0055-empty.json",
+          "sha256": "decd88b597bd38d52f71d91b140d76568f684755a90ce4b743e381d18bc7aa48"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "IS NULL 与三值逻辑",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "关系结构等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0055-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "349fc84482f321e80340c2f4bf3fad33a51392d87ab354156f800bb0d3dff04b",
+              "rowCount": 4
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "349fc84482f321e80340c2f4bf3fad33a51392d87ab354156f800bb0d3dff04b",
+              "rows": 4
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "68df62fa257690bec18a2da8111961dc119eb5d413de8dd4b4bd84032d2e22d7",
+              "rows": 1
+            }
+          },
+          {
+            "fixtureId": "q0055-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "a8e1f656abd376ff982ba122ab305a9dfded84c2672234b5709ef6d728bff90d",
+              "rowCount": 10
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "a8e1f656abd376ff982ba122ab305a9dfded84c2672234b5709ef6d728bff90d",
+              "rows": 10
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "1a7085a94b853a6c00655c71b02ec87e4c043c4b6c956afbad069cf58a483c07",
+              "rows": 3
+            }
+          },
+          {
+            "fixtureId": "q0055-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "9291fb438455a1395f43d8cc8dc70123d496059dfa73b1ef170dcc658e1a3fa4",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "9291fb438455a1395f43d8cc8dc70123d496059dfa73b1ef170dcc658e1a3fa4",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "9291fb438455a1395f43d8cc8dc70123d496059dfa73b1ef170dcc658e1a3fa4",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/problems-with-null.html",
+        "independentPythonAssertions": [
+          {
+            "fixtureId": "q0055-public",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          },
+          {
+            "fixtureId": "q0055-boundary",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          },
+          {
+            "fixtureId": "q0055-empty",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          }
+        ]
+      },
+      "relatedFlashcardIds": [
+        "fc0033"
+      ]
+    },
+    {
+      "id": "q0056",
+      "chapterId": "ch05",
+      "knowledgePointIds": [
+        "kp05-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp05-01"
+      ],
+      "difficulty": "入门",
+      "type": "独立编写",
+      "title": "空文本与未知文本",
+      "context": "使用课程中小型缺失值示例数据练习空文本与未知文本。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "寻找 note 为空字符串或NULL的记录，输出 id、note，按编号升序。\n输出列名称及顺序：id, note。按题设排序；参考排序键：id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0056-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "nullable_values"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "id",
+          "note"
+        ],
+        "rows": [
+          [
+            1,
+            null
+          ],
+          [
+            2,
+            ""
+          ]
+        ],
+        "rowCount": 2
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT id,note FROM nullable_values WHERE note='' OR note IS NULL ORDER BY id",
+          "sqliteSql": "SELECT id,note FROM nullable_values WHERE note='' OR note IS NULL ORDER BY id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT id,note FROM nullable_values WHERE NOT (note<>'') OR note IS NULL ORDER BY id",
+          "sqliteSql": "SELECT id,note FROM nullable_values WHERE NOT (note<>'') OR note IS NULL ORDER BY id",
+          "explanation": "用反向比较并取 NOT 表达相同三值逻辑。"
+        }
+      ],
+      "hints": [
+        "区分未知、零与空字符串，判断是否需要排除或填补缺失。",
+        "结合《IS NULL 与三值逻辑》：比较未知值通常返回 UNKNOWN，WHERE 只保留 TRUE；IS NULL 专门检测缺失。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nSELECT id,note FROM nullable_values WHERE note=''□□□note IS NULL ORDER BY id"
+      ],
+      "explanation": "空字符串与NULL互斥，OR 才覆盖两者。\n执行思路：确认nullable_values的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出id、note列；遵循题设排序和并列规则。\n公开夹具实际返回 2 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：用反向比较并取 NOT 表达相同三值逻辑。",
+      "commonErrors": [
+        {
+          "sql": "SELECT id,note FROM nullable_values WHERE note='' AND note IS NULL ORDER BY id",
+          "reason": "空字符串与NULL互斥，OR 才覆盖两者。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0056-public",
+        "q0056-boundary",
+        "q0056-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0056-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0056/q0056-public.json",
+          "sha256": "b9df846e70f7f02591f16b3a4b2f16b3df522ef56a1586fa358b7cdb5956d03d"
+        },
+        {
+          "id": "q0056-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0056/q0056-boundary.json",
+          "sha256": "07eb1a21a5f3dc9e0cebf2b60b8c930a39cf84a2715684c9e00282e5e7a315a5"
+        },
+        {
+          "id": "q0056-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0056/q0056-empty.json",
+          "sha256": "deb8d3c77c2cb7254271c0252cd3642df23ea84ef099f6f86e9ccdbeb13e5d4a"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "IS NULL 与三值逻辑",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0056-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "e4985c42e6e572af85edc8273f048affa1b5f9393d5a79670c06b71a5361dfee",
+              "rowCount": 2
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "e4985c42e6e572af85edc8273f048affa1b5f9393d5a79670c06b71a5361dfee",
+              "rows": 2
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "23654b32d70ca229e55efd6e67383d74d76f320d061f9267ec18cd0bf67c038f",
+              "rows": 0
+            }
+          },
+          {
+            "fixtureId": "q0056-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "eaa470378e1b245876a22100918511f821bd784099030a27b4dda639e92b3080",
+              "rowCount": 3
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "eaa470378e1b245876a22100918511f821bd784099030a27b4dda639e92b3080",
+              "rows": 3
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "23654b32d70ca229e55efd6e67383d74d76f320d061f9267ec18cd0bf67c038f",
+              "rows": 0
+            }
+          },
+          {
+            "fixtureId": "q0056-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "23654b32d70ca229e55efd6e67383d74d76f320d061f9267ec18cd0bf67c038f",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "23654b32d70ca229e55efd6e67383d74d76f320d061f9267ec18cd0bf67c038f",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "23654b32d70ca229e55efd6e67383d74d76f320d061f9267ec18cd0bf67c038f",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/problems-with-null.html",
+        "independentPythonAssertions": [
+          {
+            "fixtureId": "q0056-public",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          },
+          {
+            "fixtureId": "q0056-boundary",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          },
+          {
+            "fixtureId": "q0056-empty",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          }
+        ]
+      },
+      "relatedFlashcardIds": [
+        "fc0035"
+      ]
+    },
+    {
+      "id": "q0057",
+      "chapterId": "ch05",
+      "knowledgePointIds": [
+        "kp05-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp05-02"
+      ],
+      "difficulty": "简单",
+      "type": "代码填空",
+      "title": "未知备注默认文字",
+      "context": "使用课程中小型缺失值示例数据练习未知备注默认文字。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "补全代码中的一个空位，使完整SQL满足以下要求。可输入具有相同语义的片段，提交后按完整代码执行结果核对。\n输出 id 与 note 缺失时用“未备注”代替的 display_note；空字符串不变；按编号升序。\n输出列名称及顺序：id, display_note。按题设排序；参考排序键：id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0057-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "nullable_values"
+      ],
+      "initialCode": "SELECT id,{{blank1}} AS display_note FROM nullable_values ORDER BY id",
+      "options": [],
+      "acceptedBlanks": [
+        {
+          "id": "blank1",
+          "referenceText": "IFNULL(note,'未备注')",
+          "acceptedForms": [
+            "IFNULL(note,'未备注')",
+            "CASE WHEN note IS NULL THEN '未备注' ELSE note END"
+          ]
+        }
+      ],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "id",
+          "display_note"
+        ],
+        "rows": [
+          [
+            1,
+            "未备注"
+          ],
+          [
+            2,
+            ""
+          ],
+          [
+            3,
+            "ok"
+          ],
+          [
+            4,
+            "ok"
+          ]
+        ],
+        "rowCount": 4
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT id,IFNULL(note,'未备注') AS display_note FROM nullable_values ORDER BY id",
+          "sqliteSql": "SELECT id,IFNULL(note,'未备注') AS display_note FROM nullable_values ORDER BY id"
+        },
+        {
+          "kind": "独立方法等价",
+          "mysqlSql": "SELECT id,CASE WHEN note IS NULL THEN '未备注' ELSE note END AS display_note FROM nullable_values ORDER BY id",
+          "sqliteSql": "SELECT id,CASE WHEN note IS NULL THEN '未备注' ELSE note END AS display_note FROM nullable_values ORDER BY id",
+          "explanation": "采用另一种关系运算或查询结构计算相同结果。"
+        }
+      ],
+      "hints": [
+        "区分未知、零与空字符串，判断是否需要排除或填补缺失。",
+        "结合《IFNULL 与 COALESCE》：IFNULL 接受两个参数，COALESCE 返回首个非空参数；仅在业务允许时填补缺失。",
+        "回想空位所在子句的功能：IFNULL 与 COALESCE；保留周围代码，填入实现题设的表达式。"
+      ],
+      "explanation": "IFNULL 只替代NULL，空串不应被改写。\n执行思路：确认nullable_values的输入记录；输出id、display_note列；遵循题设排序和并列规则。\n公开夹具实际返回 4 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：采用另一种关系运算或查询结构计算相同结果。",
+      "commonErrors": [
+        {
+          "sql": "SELECT id,IFNULL(NULLIF(note,''),'未备注') AS display_note FROM nullable_values ORDER BY id",
+          "reason": "IFNULL 只替代NULL，空串不应被改写。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0057-public",
+        "q0057-boundary",
+        "q0057-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0057-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0057/q0057-public.json",
+          "sha256": "2e8df0824ed3d042f169d125b69228494cd5509e4a999c972e40f5cc3be17567"
+        },
+        {
+          "id": "q0057-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0057/q0057-boundary.json",
+          "sha256": "3b38c3f1777d54b2d94ef5e863b4f454f8aafade56cb112e4ceea6741428822d"
+        },
+        {
+          "id": "q0057-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0057/q0057-empty.json",
+          "sha256": "2e8a96ffcbbe39f20745362eb1e2f385caf3edebf0ae44ebd263b60aa4bb42bb"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "IFNULL 与 COALESCE",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "独立方法等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0057-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "38ffc2ba6842b915e765264c6dc9bb070a7ae576c0642915085d81bccb4f082a",
+              "rowCount": 4
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "38ffc2ba6842b915e765264c6dc9bb070a7ae576c0642915085d81bccb4f082a",
+              "rows": 4
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "05e18f050f8314bc85916ac37f793c5c3949f66625e1d6d2d2bdf0dd41a75b5f",
+              "rows": 4
+            }
+          },
+          {
+            "fixtureId": "q0057-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "565cd2d555b450d5f8ae63a3a0775c687f10d28802795a775ca0cfd01b8bdbfc",
+              "rowCount": 7
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "565cd2d555b450d5f8ae63a3a0775c687f10d28802795a775ca0cfd01b8bdbfc",
+              "rows": 7
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "74793a2b7dab48a0278105768720a17cadc11f5074847c2e3dcf1e1ba7bc868f",
+              "rows": 7
+            }
+          },
+          {
+            "fixtureId": "q0057-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "e7dd62bb9de09a13f0e199fddf7503732374c3c8ae71b6d42b820749cecb9ecc",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "e7dd62bb9de09a13f0e199fddf7503732374c3c8ae71b6d42b820749cecb9ecc",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "e7dd62bb9de09a13f0e199fddf7503732374c3c8ae71b6d42b820749cecb9ecc",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/problems-with-null.html",
+        "independentPythonAssertions": []
+      },
+      "fillEvaluation": {
+        "method": "插入后完整SQL真实执行；可接受形式不限制等价片段",
+        "referenceReassembled": true
+      },
+      "relatedFlashcardIds": [
+        "fc0031",
+        "fc0032",
+        "fc0034"
+      ]
+    },
+    {
+      "id": "q0058",
+      "chapterId": "ch05",
+      "knowledgePointIds": [
+        "kp05-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp05-02"
+      ],
+      "difficulty": "简单",
+      "type": "代码纠错",
+      "title": "缺失销售记录标记",
+      "context": "使用课程中小型缺失值示例数据练习缺失销售记录标记。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "下面提供的初始代码存在逻辑、语法或结构错误。请修改整段代码，使其满足以下要求。\n输出 nullable_values 的 id、reported_value，缺失数值以-99代替，其他值保持不变，按编号升序。\n输出列名称及顺序：id, reported_value。按题设排序；参考排序键：id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0058-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "nullable_values"
+      ],
+      "initialCode": "SELECT id,COALESCE(value,0) AS reported_value FROM nullable_values ORDER BY id",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "id",
+          "reported_value"
+        ],
+        "rows": [
+          [
+            1,
+            -99
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            3,
+            10
+          ],
+          [
+            4,
+            10
+          ]
+        ],
+        "rowCount": 4
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT id,COALESCE(value,-99) AS reported_value FROM nullable_values ORDER BY id",
+          "sqliteSql": "SELECT id,COALESCE(value,-99) AS reported_value FROM nullable_values ORDER BY id"
+        },
+        {
+          "kind": "关系结构等价",
+          "mysqlSql": "SELECT id,COALESCE(value,-99) AS reported_value FROM (SELECT * FROM nullable_values) AS nullable_values ORDER BY id",
+          "sqliteSql": "SELECT id,COALESCE(value,-99) AS reported_value FROM (SELECT * FROM nullable_values) AS nullable_values ORDER BY id",
+          "explanation": "先构造派生输入关系，再执行相同投影、聚合和筛选；保持结果语义。"
+        }
+      ],
+      "hints": [
+        "区分未知、零与空字符串，判断是否需要排除或填补缺失。",
+        "结合《IFNULL 与 COALESCE》：IFNULL 接受两个参数，COALESCE 返回首个非空参数；仅在业务允许时填补缺失。",
+        "检查初始代码的 COALESCE(value,-99) 对应的业务规则。替代标识必须按题目指定，0本身可能是有效值。"
+      ],
+      "explanation": "替代标识必须按题目指定，0本身可能是有效值。\n执行思路：确认nullable_values的输入记录；输出id、reported_value列；遵循题设排序和并列规则。\n公开夹具实际返回 4 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：先构造派生输入关系，再执行相同投影、聚合和筛选；保持结果语义。",
+      "commonErrors": [
+        {
+          "sql": "SELECT id,COALESCE(value,0) AS reported_value FROM nullable_values ORDER BY id",
+          "reason": "替代标识必须按题目指定，0本身可能是有效值。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0058-public",
+        "q0058-boundary",
+        "q0058-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0058-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0058/q0058-public.json",
+          "sha256": "4138738bff0994d4c3e8e923ce3b5b4500c6f95e84710b067ea57a204e9fddc8"
+        },
+        {
+          "id": "q0058-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0058/q0058-boundary.json",
+          "sha256": "0bc0af8810cf4f3ef969447eda2f6d50101adf6e409b684e5f79ac20fe5b8f61"
+        },
+        {
+          "id": "q0058-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0058/q0058-empty.json",
+          "sha256": "2dc0112f0ed27416b37a8348a2defc63453577496a5ac2e4c371234aa3f4284a"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "IFNULL 与 COALESCE",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "关系结构等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0058-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "8131cf75cdf9af07f30b1a7a9aabc2e2c749a7065aeb0b86789629f756f1a0e2",
+              "rowCount": 4
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "8131cf75cdf9af07f30b1a7a9aabc2e2c749a7065aeb0b86789629f756f1a0e2",
+              "rows": 4
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "d1053d4ecbee977cec39065564cc1d7bd982734abee0976a3f166bb3a576f555",
+              "rows": 4
+            }
+          },
+          {
+            "fixtureId": "q0058-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "967fa9de6de3666b80bf1c631f8ac3daf645c562b71ba83002efd49bbac3f014",
+              "rowCount": 7
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "967fa9de6de3666b80bf1c631f8ac3daf645c562b71ba83002efd49bbac3f014",
+              "rows": 7
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "b8f39ef6737a7808ad5cba0de964b6ac585c303e3bd56a773b25f92f82c1776f",
+              "rows": 7
+            }
+          },
+          {
+            "fixtureId": "q0058-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "d029bc50a0d2c8cfe2be4d16d27c3fffc59489b9699428ed57612e58e3165cea",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "d029bc50a0d2c8cfe2be4d16d27c3fffc59489b9699428ed57612e58e3165cea",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "d029bc50a0d2c8cfe2be4d16d27c3fffc59489b9699428ed57612e58e3165cea",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/problems-with-null.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0031"
+      ]
+    },
+    {
+      "id": "q0059",
+      "chapterId": "ch05",
+      "knowledgePointIds": [
+        "kp05-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp05-01"
+      ],
+      "difficulty": "简单",
+      "type": "代码填空",
+      "title": "包含未知值的排除条件",
+      "context": "使用课程中小型缺失值示例数据练习包含未知值的排除条件。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "补全代码中的一个空位，使完整SQL满足以下要求。可输入具有相同语义的片段，提交后按完整代码执行结果核对。\n保留 value 不等于10的已知值和未知值，输出 id、value，按编号升序。\n输出列名称及顺序：id, value。按题设排序；参考排序键：id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0059-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "nullable_values"
+      ],
+      "initialCode": "SELECT id,value FROM nullable_values WHERE value<>10{{blank1}} ORDER BY id",
+      "options": [],
+      "acceptedBlanks": [
+        {
+          "id": "blank1",
+          "referenceText": " OR value IS NULL",
+          "acceptedForms": [
+            " OR value IS NULL"
+          ]
+        }
+      ],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "id",
+          "value"
+        ],
+        "rows": [
+          [
+            1,
+            null
+          ],
+          [
+            2,
+            0
+          ]
+        ],
+        "rowCount": 2
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT id,value FROM nullable_values WHERE value<>10 OR value IS NULL ORDER BY id",
+          "sqliteSql": "SELECT id,value FROM nullable_values WHERE value<>10 OR value IS NULL ORDER BY id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT id,value FROM nullable_values WHERE NOT (value=10) OR value IS NULL ORDER BY id",
+          "sqliteSql": "SELECT id,value FROM nullable_values WHERE NOT (value=10) OR value IS NULL ORDER BY id",
+          "explanation": "用反向比较并取 NOT 表达相同三值逻辑。"
+        }
+      ],
+      "hints": [
+        "区分未知、零与空字符串，判断是否需要排除或填补缺失。",
+        "结合《IS NULL 与三值逻辑》：比较未知值通常返回 UNKNOWN，WHERE 只保留 TRUE；IS NULL 专门检测缺失。",
+        "回想空位所在子句的功能：IS NULL 与三值逻辑；保留周围代码，填入实现题设的表达式。"
+      ],
+      "explanation": "不等于在缺失值上为未知，必须明确补入 NULL。\n执行思路：确认nullable_values的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出id、value列；遵循题设排序和并列规则。\n公开夹具实际返回 2 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：用反向比较并取 NOT 表达相同三值逻辑。",
+      "commonErrors": [
+        {
+          "sql": "SELECT id,value FROM nullable_values WHERE value<>10 ORDER BY id",
+          "reason": "不等于在缺失值上为未知，必须明确补入 NULL。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0059-public",
+        "q0059-boundary",
+        "q0059-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0059-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0059/q0059-public.json",
+          "sha256": "8795fd067941581f705830c637fd467faea506da1117e944402a95e22937b60e"
+        },
+        {
+          "id": "q0059-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0059/q0059-boundary.json",
+          "sha256": "90d643c2de7efb504357351dc189df57ddd9213f6b784d0b74714f82c2b8b87e"
+        },
+        {
+          "id": "q0059-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0059/q0059-empty.json",
+          "sha256": "afd5088dce2569b6156f020eeedd2e95a0136356ebd294ca0e32e4ec94d9e4ec"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "IS NULL 与三值逻辑",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0059-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "4c7fbb7fe3ff083058f1504aa94b17d668da25f88f6ba7bf1ceea1d8ffa70e98",
+              "rowCount": 2
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "4c7fbb7fe3ff083058f1504aa94b17d668da25f88f6ba7bf1ceea1d8ffa70e98",
+              "rows": 2
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "632aaf28751b560c256a813268f0ddfd148774cf8a3454e1d5fc60ae4c9c0857",
+              "rows": 1
+            }
+          },
+          {
+            "fixtureId": "q0059-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "ecd36117afa103b7770ea9d5c11d2229c8f40d8cb6c4e3987981e8419987539b",
+              "rowCount": 5
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "ecd36117afa103b7770ea9d5c11d2229c8f40d8cb6c4e3987981e8419987539b",
+              "rows": 5
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "bad489804cd03dd6c88f2249ed3b3c25a308283ca60d1ff9aedfabd0828d1c22",
+              "rows": 3
+            }
+          },
+          {
+            "fixtureId": "q0059-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "477f06097ada1cdf60fc4b70112c3d80f95b77c1448e771e7068b05bfd1764c0",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "477f06097ada1cdf60fc4b70112c3d80f95b77c1448e771e7068b05bfd1764c0",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "477f06097ada1cdf60fc4b70112c3d80f95b77c1448e771e7068b05bfd1764c0",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/problems-with-null.html",
+        "independentPythonAssertions": []
+      },
+      "fillEvaluation": {
+        "method": "插入后完整SQL真实执行；可接受形式不限制等价片段",
+        "referenceReassembled": true
+      },
+      "relatedFlashcardIds": [
+        "fc0033"
+      ]
+    },
+    {
+      "id": "q0060",
+      "chapterId": "ch05",
+      "knowledgePointIds": [
+        "kp05-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp05-02"
+      ],
+      "difficulty": "简单",
+      "type": "结果预测",
+      "title": "优先选备注后选缺省",
+      "context": "使用课程中小型缺失值示例数据练习优先选备注后选缺省。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "不运行下方SQL，手工推算其在公开夹具中的完整返回结果。保留列名和重复行；明确区分NULL、空字符串和数值。\n输出 id、label：先选非空且非空串 note，否则输出“无信息”，按编号升序。\n输出列名称及顺序：id, label。按题设排序；参考排序键：id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0060-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "nullable_values"
+      ],
+      "initialCode": "SELECT id,COALESCE(NULLIF(note,''),'无信息') AS label FROM nullable_values ORDER BY id",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "id",
+          "label"
+        ],
+        "rows": [
+          [
+            1,
+            "无信息"
+          ],
+          [
+            2,
+            "无信息"
+          ],
+          [
+            3,
+            "ok"
+          ],
+          [
+            4,
+            "ok"
+          ]
+        ],
+        "rowCount": 4
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT id,COALESCE(NULLIF(note,''),'无信息') AS label FROM nullable_values ORDER BY id",
+          "sqliteSql": "SELECT id,COALESCE(NULLIF(note,''),'无信息') AS label FROM nullable_values ORDER BY id"
+        },
+        {
+          "kind": "关系结构等价",
+          "mysqlSql": "SELECT id,COALESCE(NULLIF(note,''),'无信息') AS label FROM (SELECT * FROM nullable_values) AS nullable_values ORDER BY id",
+          "sqliteSql": "SELECT id,COALESCE(NULLIF(note,''),'无信息') AS label FROM (SELECT * FROM nullable_values) AS nullable_values ORDER BY id",
+          "explanation": "先构造派生输入关系，再执行相同投影、聚合和筛选；保持结果语义。"
+        }
+      ],
+      "hints": [
+        "区分未知、零与空字符串，判断是否需要排除或填补缺失。",
+        "结合《IFNULL 与 COALESCE》：IFNULL 接受两个参数，COALESCE 返回首个非空参数；仅在业务允许时填补缺失。",
+        "逐行标记输入是否命中条件，再根据查询的分组、窗口或投影阶段逐一计算；最后按题设顺序整理结果。"
+      ],
+      "explanation": "将空串先转换为NULL后才可以统一默认文字。\n执行思路：确认nullable_values的输入记录；输出id、label列；遵循题设排序和并列规则。\n公开夹具实际返回 4 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：先构造派生输入关系，再执行相同投影、聚合和筛选；保持结果语义。",
+      "commonErrors": [
+        {
+          "sql": "SELECT id,COALESCE(note,'无信息') AS label FROM nullable_values ORDER BY id",
+          "reason": "将空串先转换为NULL后才可以统一默认文字。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0060-public",
+        "q0060-boundary",
+        "q0060-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0060-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0060/q0060-public.json",
+          "sha256": "b60dba99b24e5214fd0c55b3d8b07f6d80f85496a51c8b6c470148c859dd3f64"
+        },
+        {
+          "id": "q0060-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0060/q0060-boundary.json",
+          "sha256": "ae8879fbf7bc4b9f95134424ff7b6756e009e6e2bccff61ef30dfbd5a5722cc8"
+        },
+        {
+          "id": "q0060-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0060/q0060-empty.json",
+          "sha256": "7aaa3a45a7b4564c4be026c3a746f854ee9bac165eb202abc7e87f25edb81077"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "predict_public_result",
+      "runAllowedBeforeSubmit": false,
+      "hiddenFixturePolicy": "参考逻辑验证；用户只预测公开结果",
+      "interviewTag": "IFNULL 与 COALESCE",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "关系结构等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0060-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "32c8738fe36b0ebb9284b1b0b0e45b4cbd8e6b7c6f8a40f2e4369c9d7c7041bb",
+              "rowCount": 4
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "32c8738fe36b0ebb9284b1b0b0e45b4cbd8e6b7c6f8a40f2e4369c9d7c7041bb",
+              "rows": 4
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "4ccf1d58add149827f2bcbefe611cacdaa4b63b8617afceda28e2bfc6d9bf09c",
+              "rows": 4
+            }
+          },
+          {
+            "fixtureId": "q0060-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "1c9d0d5c10ab72673546a9b8cc3e8796b22bcf9257adaf4a9dfe7c6756712139",
+              "rowCount": 7
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "1c9d0d5c10ab72673546a9b8cc3e8796b22bcf9257adaf4a9dfe7c6756712139",
+              "rows": 7
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "a3a7d219669788f83f451a2daf7b224794bdd04340c06190b94fff124d6ae797",
+              "rows": 7
+            }
+          },
+          {
+            "fixtureId": "q0060-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "0583f448ffc2fc1890b9d051a27c5d58c6948e7dba4276f721e4e3a302057a7f",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "0583f448ffc2fc1890b9d051a27c5d58c6948e7dba4276f721e4e3a302057a7f",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "0583f448ffc2fc1890b9d051a27c5d58c6948e7dba4276f721e4e3a302057a7f",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/problems-with-null.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0034"
+      ]
+    }
+  ]
+}

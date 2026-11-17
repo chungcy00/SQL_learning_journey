@@ -1,0 +1,86 @@
+{
+  "projectId": "enterprise",
+  "title": "渠道广告后的贡献利润",
+  "context": "电商＋财务联合分析：管理层要求以同一企业口径核对业务数据。",
+  "requirements": "2025年线上订单归因会话渠道，净销售、毛利减广告支出为广告后贡献；未分摊管理、人力或配送费用；输出贡献率；按广告后贡献金额降序、渠道编号升序排列。",
+  "grain": "渠道",
+  "commonError": "广告后毛利不等于公司净利润。",
+  "executionSteps": [
+    "独立归因毛利与支出",
+    "连接渠道",
+    "计算贡献"
+  ],
+  "difficulty": "困难",
+  "crossGroup": "电商＋财务",
+  "mysqlSql": "WITH a AS (SELECT s.source_id,SUM(o.net_cents) net,SUM(o.net_cents-o.cost_cents) gross FROM v_order_net o JOIN customer_sessions s ON s.session_id=o.session_id WHERE o.channel='online' AND o.order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY s.source_id), b AS (SELECT source_id,SUM(spend_cents) spend FROM marketing_campaigns WHERE month_key BETWEEN '2025-01' AND '2025-12' GROUP BY source_id) SELECT t.source_id,COALESCE(a.net,0) net_cents,COALESCE(a.gross,0) gross_cents,COALESCE(b.spend,0) spend_cents,COALESCE(a.gross,0)-COALESCE(b.spend,0) contribution_cents,ROUND(100.0*(COALESCE(a.gross,0)-COALESCE(b.spend,0))/NULLIF(a.net,0),2) contribution_pct FROM traffic_sources t LEFT JOIN a ON a.source_id=t.source_id LEFT JOIN b ON b.source_id=t.source_id ORDER BY contribution_cents DESC,t.source_id",
+  "sqliteSql": "WITH a AS (SELECT s.source_id,SUM(o.net_cents) net,SUM(o.net_cents-o.cost_cents) gross FROM v_order_net o JOIN customer_sessions s ON s.session_id=o.session_id WHERE o.channel='online' AND o.order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY s.source_id), b AS (SELECT source_id,SUM(spend_cents) spend FROM marketing_campaigns WHERE month_key BETWEEN '2025-01' AND '2025-12' GROUP BY source_id) SELECT t.source_id,COALESCE(a.net,0) net_cents,COALESCE(a.gross,0) gross_cents,COALESCE(b.spend,0) spend_cents,COALESCE(a.gross,0)-COALESCE(b.spend,0) contribution_cents,ROUND(100.0*(COALESCE(a.gross,0)-COALESCE(b.spend,0))/NULLIF(a.net,0),2) contribution_pct FROM traffic_sources t LEFT JOIN a ON a.source_id=t.source_id LEFT JOIN b ON b.source_id=t.source_id ORDER BY contribution_cents DESC,t.source_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "source_id",
+    "net_cents",
+    "gross_cents",
+    "spend_cents",
+    "contribution_cents",
+    "contribution_pct"
+  ],
+  "id": "BP44",
+  "chapterId": "ch20",
+  "knowledgePointIds": [
+    "kp20-18"
+  ],
+  "datasetId": "enterprise-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP44.json",
+  "expectedRowCount": 5,
+  "expectedColumns": [
+    "source_id",
+    "net_cents",
+    "gross_cents",
+    "spend_cents",
+    "contribution_cents",
+    "contribution_pct"
+  ],
+  "sourceTables": [
+    "customer_sessions",
+    "marketing_campaigns",
+    "traffic_sources",
+    "v_order_net"
+  ],
+  "dependencyTables": [
+    "categories",
+    "customer_sessions",
+    "customers",
+    "marketing_campaigns",
+    "order_items",
+    "orders",
+    "products",
+    "promotions",
+    "returns",
+    "stores",
+    "traffic_sources",
+    "v_order_net",
+    "v_sales_lines"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH a AS (SELECT s.source_id,SUM(o.net_cents) net,SUM(o.net_cents-o.cost_cents) gross FROM v_order_net o JOIN customer_sessions s ON s.session_id=o.session_id WHERE o.channel='online' AND o.order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY s.source_id), b AS (SELECT source_id,SUM(spend_cents) spend FROM marketing_campaigns WHERE month_key BETWEEN '2025-01' AND '2025-12' GROUP BY source_id) SELECT t.source_id,COALESCE(a.net,0) net_cents,COALESCE(a.gross,0) gross_cents,COALESCE(b.spend,0) spend_cents,COALESCE(a.gross,0)-COALESCE(b.spend,0) contribution_cents,ROUND(100.0*(COALESCE(a.gross,0)-COALESCE(b.spend,0))/NULLIF(a.net,0),2) contribution_pct FROM traffic_sources t LEFT JOIN a ON a.source_id=t.source_id LEFT JOIN b ON b.source_id=t.source_id ORDER BY contribution_cents DESC,t.source_id",
+      "sqliteSql": "WITH a AS (SELECT s.source_id,SUM(o.net_cents) net,SUM(o.net_cents-o.cost_cents) gross FROM v_order_net o JOIN customer_sessions s ON s.session_id=o.session_id WHERE o.channel='online' AND o.order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY s.source_id), b AS (SELECT source_id,SUM(spend_cents) spend FROM marketing_campaigns WHERE month_key BETWEEN '2025-01' AND '2025-12' GROUP BY source_id) SELECT t.source_id,COALESCE(a.net,0) net_cents,COALESCE(a.gross,0) gross_cents,COALESCE(b.spend,0) spend_cents,COALESCE(a.gross,0)-COALESCE(b.spend,0) contribution_cents,ROUND(100.0*(COALESCE(a.gross,0)-COALESCE(b.spend,0))/NULLIF(a.net,0),2) contribution_pct FROM traffic_sources t LEFT JOIN a ON a.source_id=t.source_id LEFT JOIN b ON b.source_id=t.source_id ORDER BY contribution_cents DESC,t.source_id"
+    }
+  ],
+  "hints": [
+    "独立归因毛利与支出",
+    "独立归因毛利与支出；连接渠道",
+    "重点核对输出粒度：渠道"
+  ],
+  "explanation": "独立归因毛利与支出；连接渠道；计算贡献。广告后毛利不等于公司净利润。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 37.5
+}

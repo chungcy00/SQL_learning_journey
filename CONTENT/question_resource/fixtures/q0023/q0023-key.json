@@ -1,0 +1,33 @@
+{
+  "id": "q0023-key",
+  "questionId": "q0023",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "所有长度为2的文本",
+      "explanation": "模式共有三个字符位置且首字母固定。"
+    },
+    {
+      "id": "B",
+      "text": "名称必须含两个字面下划线",
+      "explanation": "不加转义的下划线是通配符。"
+    },
+    {
+      "id": "C",
+      "text": "以大写A开头且后面恰有两个字符",
+      "explanation": "每个下划线匹配一个字符。"
+    },
+    {
+      "id": "D",
+      "text": "以A开头且后面可以是任意长度",
+      "explanation": "任意长度应使用百分号。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "C"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

@@ -1,0 +1,22 @@
+{
+  "id": "fc0093-demo",
+  "tables": [],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT 7/2 AS whole,7.0/2 AS ratio",
+  "mysqlSql": "SELECT 7 DIV 2 AS whole,7/2 AS ratio",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      3,
+      3.5
+    ]
+  ],
+  "expectedColumns": [
+    "whole",
+    "ratio"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

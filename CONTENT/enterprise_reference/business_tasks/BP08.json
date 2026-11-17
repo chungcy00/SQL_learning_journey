@@ -1,0 +1,94 @@
+{
+  "projectId": "inventory",
+  "title": "销售速度与采购周期缺货风险",
+  "context": "补货主管需要找出采购尚未到货时可能售罄的商品。",
+  "requirements": "截止2025年底，近30天销售出库速度；供应商历史实际收货周期按合格收货量加权（使用完整2025年收货记录），无记录则14天；预计需要库存=日均出库×历史周期；仅有效商品且预计需求超过当前库存。",
+  "grain": "仓库×商品",
+  "commonError": "把下单承诺日当实际收货日，或以0天替代缺失历史。",
+  "executionSteps": [
+    "计算销售速度",
+    "按合格件加权实际交期",
+    "合并库存",
+    "识别预计缺口"
+  ],
+  "difficulty": "困难",
+  "mysqlSql": "WITH s AS (SELECT warehouse_id,product_id,SUM(-quantity_delta) sold FROM stock_movements WHERE movement_type='sale' AND movement_date BETWEEN '2025-12-02' AND '2025-12-31' GROUP BY warehouse_id,product_id), l AS (SELECT p.warehouse_id,i.product_id,SUM((b.day_index-a.day_index)*(g.quantity_received-g.quantity_rejected))*1.0/NULLIF(SUM(g.quantity_received-g.quantity_rejected),0) lead_days FROM goods_receipts g JOIN purchase_order_items i ON i.po_item_id=g.po_item_id JOIN purchase_orders p ON p.po_id=i.po_id JOIN calendar_days a ON a.day=p.order_date JOIN calendar_days b ON b.day=g.receipt_date WHERE g.receipt_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY p.warehouse_id,i.product_id), z AS (SELECT i.warehouse_id,i.product_id,i.quantity,COALESCE(s.sold,0) sold,COALESCE(l.lead_days,14) lead_days FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id LEFT JOIN s ON s.warehouse_id=i.warehouse_id AND s.product_id=i.product_id LEFT JOIN l ON l.warehouse_id=i.warehouse_id AND l.product_id=i.product_id WHERE i.snapshot_date='2025-12-31' AND p.active=1) SELECT warehouse_id,product_id,quantity,sold,ROUND(lead_days,2) lead_days,ROUND(sold*lead_days/30.0-quantity,2) expected_shortage FROM z WHERE sold*lead_days/30.0>quantity ORDER BY expected_shortage DESC,warehouse_id,product_id",
+  "sqliteSql": "WITH s AS (SELECT warehouse_id,product_id,SUM(-quantity_delta) sold FROM stock_movements WHERE movement_type='sale' AND movement_date BETWEEN '2025-12-02' AND '2025-12-31' GROUP BY warehouse_id,product_id), l AS (SELECT p.warehouse_id,i.product_id,SUM((b.day_index-a.day_index)*(g.quantity_received-g.quantity_rejected))*1.0/NULLIF(SUM(g.quantity_received-g.quantity_rejected),0) lead_days FROM goods_receipts g JOIN purchase_order_items i ON i.po_item_id=g.po_item_id JOIN purchase_orders p ON p.po_id=i.po_id JOIN calendar_days a ON a.day=p.order_date JOIN calendar_days b ON b.day=g.receipt_date WHERE g.receipt_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY p.warehouse_id,i.product_id), z AS (SELECT i.warehouse_id,i.product_id,i.quantity,COALESCE(s.sold,0) sold,COALESCE(l.lead_days,14) lead_days FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id LEFT JOIN s ON s.warehouse_id=i.warehouse_id AND s.product_id=i.product_id LEFT JOIN l ON l.warehouse_id=i.warehouse_id AND l.product_id=i.product_id WHERE i.snapshot_date='2025-12-31' AND p.active=1) SELECT warehouse_id,product_id,quantity,sold,ROUND(lead_days,2) lead_days,ROUND(sold*lead_days/30.0-quantity,2) expected_shortage FROM z WHERE sold*lead_days/30.0>quantity ORDER BY expected_shortage DESC,warehouse_id,product_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "warehouse_id",
+    "product_id",
+    "quantity",
+    "sold",
+    "lead_days",
+    "expected_shortage"
+  ],
+  "id": "BP08",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-38"
+  ],
+  "datasetId": "inventory-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP08.json",
+  "expectedRowCount": 41,
+  "expectedColumns": [
+    "warehouse_id",
+    "product_id",
+    "quantity",
+    "sold",
+    "lead_days",
+    "expected_shortage"
+  ],
+  "sourceTables": [
+    "calendar_days",
+    "goods_receipts",
+    "inventory_snapshots",
+    "products",
+    "purchase_order_items",
+    "purchase_orders",
+    "stock_movements"
+  ],
+  "dependencyTables": [
+    "calendar_days",
+    "categories",
+    "customer_sessions",
+    "customers",
+    "goods_receipts",
+    "inventory_snapshots",
+    "order_items",
+    "orders",
+    "products",
+    "promotions",
+    "purchase_order_items",
+    "purchase_orders",
+    "stock_movements",
+    "stores",
+    "supplier_contracts",
+    "suppliers",
+    "traffic_sources",
+    "warehouses"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH s AS (SELECT warehouse_id,product_id,SUM(-quantity_delta) sold FROM stock_movements WHERE movement_type='sale' AND movement_date BETWEEN '2025-12-02' AND '2025-12-31' GROUP BY warehouse_id,product_id), l AS (SELECT p.warehouse_id,i.product_id,SUM((b.day_index-a.day_index)*(g.quantity_received-g.quantity_rejected))*1.0/NULLIF(SUM(g.quantity_received-g.quantity_rejected),0) lead_days FROM goods_receipts g JOIN purchase_order_items i ON i.po_item_id=g.po_item_id JOIN purchase_orders p ON p.po_id=i.po_id JOIN calendar_days a ON a.day=p.order_date JOIN calendar_days b ON b.day=g.receipt_date WHERE g.receipt_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY p.warehouse_id,i.product_id), z AS (SELECT i.warehouse_id,i.product_id,i.quantity,COALESCE(s.sold,0) sold,COALESCE(l.lead_days,14) lead_days FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id LEFT JOIN s ON s.warehouse_id=i.warehouse_id AND s.product_id=i.product_id LEFT JOIN l ON l.warehouse_id=i.warehouse_id AND l.product_id=i.product_id WHERE i.snapshot_date='2025-12-31' AND p.active=1) SELECT warehouse_id,product_id,quantity,sold,ROUND(lead_days,2) lead_days,ROUND(sold*lead_days/30.0-quantity,2) expected_shortage FROM z WHERE sold*lead_days/30.0>quantity ORDER BY expected_shortage DESC,warehouse_id,product_id",
+      "sqliteSql": "WITH s AS (SELECT warehouse_id,product_id,SUM(-quantity_delta) sold FROM stock_movements WHERE movement_type='sale' AND movement_date BETWEEN '2025-12-02' AND '2025-12-31' GROUP BY warehouse_id,product_id), l AS (SELECT p.warehouse_id,i.product_id,SUM((b.day_index-a.day_index)*(g.quantity_received-g.quantity_rejected))*1.0/NULLIF(SUM(g.quantity_received-g.quantity_rejected),0) lead_days FROM goods_receipts g JOIN purchase_order_items i ON i.po_item_id=g.po_item_id JOIN purchase_orders p ON p.po_id=i.po_id JOIN calendar_days a ON a.day=p.order_date JOIN calendar_days b ON b.day=g.receipt_date WHERE g.receipt_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY p.warehouse_id,i.product_id), z AS (SELECT i.warehouse_id,i.product_id,i.quantity,COALESCE(s.sold,0) sold,COALESCE(l.lead_days,14) lead_days FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id LEFT JOIN s ON s.warehouse_id=i.warehouse_id AND s.product_id=i.product_id LEFT JOIN l ON l.warehouse_id=i.warehouse_id AND l.product_id=i.product_id WHERE i.snapshot_date='2025-12-31' AND p.active=1) SELECT warehouse_id,product_id,quantity,sold,ROUND(lead_days,2) lead_days,ROUND(sold*lead_days/30.0-quantity,2) expected_shortage FROM z WHERE sold*lead_days/30.0>quantity ORDER BY expected_shortage DESC,warehouse_id,product_id"
+    }
+  ],
+  "hints": [
+    "计算销售速度",
+    "计算销售速度；按合格件加权实际交期",
+    "重点核对输出粒度：仓库×商品"
+  ],
+  "explanation": "计算销售速度；按合格件加权实际交期；合并库存；识别预计缺口。把下单承诺日当实际收货日，或以0天替代缺失历史。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 16.5
+}

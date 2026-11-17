@@ -1,0 +1,285 @@
+{
+  "id": "ch05",
+  "number": 5,
+  "title": "空值处理",
+  "stage": "入门",
+  "objective": "区分缺失与零并正确处理三值逻辑。",
+  "prerequisites": [
+    "ch04"
+  ],
+  "knowledgePoints": [
+    {
+      "id": "kp05-01",
+      "chapterId": "ch05",
+      "title": "IS NULL 与三值逻辑",
+      "learningObjective": "能够运用本节知识完成：筛选明确不等于指定值的记录",
+      "prerequisites": [
+        "ch04"
+      ],
+      "concept": "比较未知值通常返回 UNKNOWN，WHERE 只保留 TRUE；IS NULL 专门检测缺失。",
+      "syntax": "WHERE col IS NULL; WHERE col IS NOT NULL;",
+      "parameters": {
+        "IS NOT NULL": "值已知"
+      },
+      "fixtureIds": [
+        "lesson-nullable_values"
+      ],
+      "sourceTables": [
+        {
+          "name": "nullable_values",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "value",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "note",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              null,
+              null
+            ],
+            [
+              2,
+              0,
+              ""
+            ],
+            [
+              3,
+              10,
+              "ok"
+            ],
+            [
+              4,
+              10,
+              "ok"
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT id, value FROM nullable_values WHERE value <> 10 ORDER BY id;",
+      "sqliteSql": "SELECT id, value FROM nullable_values WHERE value <> 10 ORDER BY id;",
+      "executionSteps": [
+        "比较值与10",
+        "未知值不通过",
+        "保留零值"
+      ],
+      "useCase": "筛选明确不等于指定值的记录",
+      "comparison": "NOT(value=10) 不会自动包含 NULL。",
+      "commonError": {
+        "example": "WHERE value <> 10 期待包含 NULL",
+        "correction": "WHERE value <> 10 OR value IS NULL"
+      },
+      "notes": "空串与零仍是已知值。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0051",
+        "q0052",
+        "q0053",
+        "q0055",
+        "q0056",
+        "q0059"
+      ],
+      "relatedFlashcardIds": [
+        "fc0030",
+        "fc0033",
+        "fc0035"
+      ],
+      "relatedKnowledgePointIds": [],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "id",
+          "value"
+        ],
+        "rows": [
+          [
+            2,
+            0
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp05-01.sql",
+      "primaryQuestionIds": [
+        "q0051",
+        "q0052",
+        "q0053",
+        "q0055",
+        "q0056",
+        "q0059"
+      ],
+      "primaryFlashcardIds": [
+        "fc0030",
+        "fc0033",
+        "fc0035"
+      ]
+    },
+    {
+      "id": "kp05-02",
+      "chapterId": "ch05",
+      "title": "IFNULL 与 COALESCE",
+      "learningObjective": "能够运用本节知识完成：标记缺失值供报表展示",
+      "prerequisites": [
+        "kp05-01"
+      ],
+      "concept": "IFNULL 接受两个参数，COALESCE 返回首个非空参数；仅在业务允许时填补缺失。",
+      "syntax": "COALESCE(a,b,c); IFNULL(a,b)",
+      "parameters": {
+        "a,b,c": "按优先级排列的候选值"
+      },
+      "fixtureIds": [
+        "lesson-nullable_values"
+      ],
+      "sourceTables": [
+        {
+          "name": "nullable_values",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "value",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "note",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              null,
+              null
+            ],
+            [
+              2,
+              0,
+              ""
+            ],
+            [
+              3,
+              10,
+              "ok"
+            ],
+            [
+              4,
+              10,
+              "ok"
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT id, IFNULL(value, -1) AS filled, COALESCE(note, 'missing') AS note_filled FROM nullable_values ORDER BY id;",
+      "sqliteSql": "SELECT id, IFNULL(value, -1) AS filled, COALESCE(note, 'missing') AS note_filled FROM nullable_values ORDER BY id;",
+      "executionSteps": [
+        "检查原值",
+        "仅对 NULL 采用替代值",
+        "保留空文本和零"
+      ],
+      "useCase": "标记缺失值供报表展示",
+      "comparison": "COALESCE 不会把空串识别为 NULL。",
+      "commonError": {
+        "example": "COALESCE(value,0) 后声称所有缺失都是真实零",
+        "correction": "保留缺失标记或明确业务填补规则"
+      },
+      "notes": "MySQL 返回类型推断与 SQLite 不同，混合类型需另测。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0054",
+        "q0057",
+        "q0058",
+        "q0060"
+      ],
+      "relatedFlashcardIds": [
+        "fc0031",
+        "fc0032",
+        "fc0034"
+      ],
+      "relatedKnowledgePointIds": [],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "id",
+          "filled",
+          "note_filled"
+        ],
+        "rows": [
+          [
+            1,
+            -1,
+            "missing"
+          ],
+          [
+            2,
+            0,
+            ""
+          ],
+          [
+            3,
+            10,
+            "ok"
+          ],
+          [
+            4,
+            10,
+            "ok"
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp05-02.sql",
+      "primaryQuestionIds": [
+        "q0054",
+        "q0057",
+        "q0058",
+        "q0060"
+      ],
+      "primaryFlashcardIds": [
+        "fc0031",
+        "fc0032",
+        "fc0034"
+      ]
+    }
+  ],
+  "plannedQuestionCount": 10,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "dialect": "MySQL 8.4",
+  "summary": "完成本章后：区分缺失与零并正确处理三值逻辑。",
+  "sources": [
+    "https://dev.mysql.com/doc/refman/8.4/en/",
+    "https://dev.mysql.com/doc/refman/8.4/en/functions.html"
+  ],
+  "knowledgePointCount": 2
+}

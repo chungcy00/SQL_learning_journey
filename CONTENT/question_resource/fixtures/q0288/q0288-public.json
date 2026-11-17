@@ -1,0 +1,130 @@
+{
+  "id": "q0288-public",
+  "questionId": "q0288",
+  "visibility": "public",
+  "variant": "public",
+  "kind": "database_delta",
+  "datasetId": "enterprise-v2",
+  "baseDatabase": "databases/enterprise/enterprise.sqlite",
+  "baseSha256": "bc4bd510731d3a3ef45f5bd5227349b37e59535322ba85afb28bcc0a4093ab2e",
+  "patchSql": [],
+  "patchDescription": "不更改上一阶段的正式模拟企业库",
+  "patchRowChanges": 0,
+  "testIsolation": "每次使用全新数据库副本；夹具可故意引入对账差异或改变业务记录，仅用于判题，绝不可写入基准库",
+  "expected": {
+    "columns": [
+      "store_id",
+      "net_cents",
+      "cost_cents",
+      "expense_cents",
+      "contribution_cents",
+      "contribution_pct"
+    ],
+    "rows": [
+      [
+        2,
+        57324235,
+        34930852,
+        22353641,
+        39742,
+        0.07
+      ],
+      [
+        1,
+        64392595,
+        38984368,
+        27111817,
+        -1703590,
+        -2.65
+      ],
+      [
+        4,
+        50749810,
+        31021433,
+        21563037,
+        -1834660,
+        -3.62
+      ],
+      [
+        8,
+        34450150,
+        21082681,
+        19867523,
+        -6500054,
+        -18.87
+      ],
+      [
+        3,
+        52610055,
+        32011714,
+        27112180,
+        -6513839,
+        -12.38
+      ],
+      [
+        6,
+        43210240,
+        26278202,
+        24598252,
+        -7666214,
+        -17.74
+      ],
+      [
+        7,
+        40177935,
+        24432320,
+        25829976,
+        -10084361,
+        -25.1
+      ],
+      [
+        5,
+        43368795,
+        26495144,
+        28361087,
+        -11487436,
+        -26.49
+      ],
+      [
+        9,
+        26362155,
+        16183640,
+        24702130,
+        -14523615,
+        -55.09
+      ],
+      [
+        10,
+        24645075,
+        14911824,
+        24932257,
+        -15199006,
+        -61.67
+      ],
+      [
+        11,
+        24326055,
+        14823306,
+        26670556,
+        -17167807,
+        -70.57
+      ],
+      [
+        12,
+        18276045,
+        11104736,
+        24621557,
+        -17450248,
+        -95.48
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

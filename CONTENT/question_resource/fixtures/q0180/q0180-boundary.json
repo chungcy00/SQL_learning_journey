@@ -1,0 +1,87 @@
+{
+  "visibility": "hidden",
+  "variant": "boundary",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "new_customers",
+      "columns": [
+        {
+          "name": "customer_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          2
+        ],
+        [
+          4
+        ],
+        [
+          4
+        ],
+        [
+          null
+        ]
+      ]
+    },
+    {
+      "name": "old_customers",
+      "columns": [
+        {
+          "name": "customer_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          5
+        ],
+        [
+          null
+        ]
+      ]
+    }
+  ],
+  "id": "q0180-boundary",
+  "questionId": "q0180",
+  "datasetId": "q0180-lesson",
+  "expected": {
+    "columns": [
+      "customer_id"
+    ],
+    "rows": [
+      [
+        null
+      ],
+      [
+        2
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

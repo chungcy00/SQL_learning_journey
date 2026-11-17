@@ -1,0 +1,20 @@
+{
+  "id": "fc0068-demo",
+  "tables": [],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT CASE WHEN 85>=60 THEN '及格' WHEN 85>=80 THEN '良好' ELSE '未及格' END AS label",
+  "mysqlSql": "SELECT CASE WHEN 85>=60 THEN '及格' WHEN 85>=80 THEN '良好' ELSE '未及格' END AS label",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      "及格"
+    ]
+  ],
+  "expectedColumns": [
+    "label"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

@@ -1,0 +1,79 @@
+{
+  "projectId": "retail",
+  "title": "高销售低毛利商品诊断",
+  "context": "商品经理不希望销售额掩盖利润问题。",
+  "requirements": "2025年线下商品净销售额位于前四分之一且毛利率低于30%；返回销售、毛利率、折扣额、退款额；按净销售降序、商品编号升序。四分位使用NTILE(4)，并列按编号。",
+  "grain": "商品",
+  "commonError": "先按毛利筛选再计算销售四分位改变总体。",
+  "executionSteps": [
+    "按商品独立汇总",
+    "按全体净额分箱",
+    "应用毛利阈值",
+    "输出折扣退款"
+  ],
+  "difficulty": "困难",
+  "mysqlSql": "WITH a AS (SELECT product_id,SUM(net_cents) net,SUM(cost_cents) cost,SUM(discount_cents) discount,SUM(refund_cents) refund FROM v_sales_lines WHERE channel='store' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY product_id), b AS (SELECT *,NTILE(4) OVER(ORDER BY net DESC,product_id) bucket FROM a) SELECT product_id,net net_cents,ROUND(100.0*(net-cost)/NULLIF(net,0),2) margin_pct,discount discount_cents,refund refund_cents FROM b WHERE bucket=1 AND 100.0*(net-cost)/NULLIF(net,0)<30 ORDER BY net DESC,product_id",
+  "sqliteSql": "WITH a AS (SELECT product_id,SUM(net_cents) net,SUM(cost_cents) cost,SUM(discount_cents) discount,SUM(refund_cents) refund FROM v_sales_lines WHERE channel='store' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY product_id), b AS (SELECT *,NTILE(4) OVER(ORDER BY net DESC,product_id) bucket FROM a) SELECT product_id,net net_cents,ROUND(100.0*(net-cost)/NULLIF(net,0),2) margin_pct,discount discount_cents,refund refund_cents FROM b WHERE bucket=1 AND 100.0*(net-cost)/NULLIF(net,0)<30 ORDER BY net DESC,product_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "product_id",
+    "net_cents",
+    "margin_pct",
+    "discount_cents",
+    "refund_cents"
+  ],
+  "id": "BP03",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-33"
+  ],
+  "datasetId": "retail-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP03.json",
+  "expectedRowCount": 3,
+  "expectedColumns": [
+    "product_id",
+    "net_cents",
+    "margin_pct",
+    "discount_cents",
+    "refund_cents"
+  ],
+  "sourceTables": [
+    "v_sales_lines"
+  ],
+  "dependencyTables": [
+    "categories",
+    "customer_sessions",
+    "customers",
+    "order_items",
+    "orders",
+    "products",
+    "promotions",
+    "returns",
+    "stores",
+    "traffic_sources",
+    "v_sales_lines"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH a AS (SELECT product_id,SUM(net_cents) net,SUM(cost_cents) cost,SUM(discount_cents) discount,SUM(refund_cents) refund FROM v_sales_lines WHERE channel='store' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY product_id), b AS (SELECT *,NTILE(4) OVER(ORDER BY net DESC,product_id) bucket FROM a) SELECT product_id,net net_cents,ROUND(100.0*(net-cost)/NULLIF(net,0),2) margin_pct,discount discount_cents,refund refund_cents FROM b WHERE bucket=1 AND 100.0*(net-cost)/NULLIF(net,0)<30 ORDER BY net DESC,product_id",
+      "sqliteSql": "WITH a AS (SELECT product_id,SUM(net_cents) net,SUM(cost_cents) cost,SUM(discount_cents) discount,SUM(refund_cents) refund FROM v_sales_lines WHERE channel='store' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY product_id), b AS (SELECT *,NTILE(4) OVER(ORDER BY net DESC,product_id) bucket FROM a) SELECT product_id,net net_cents,ROUND(100.0*(net-cost)/NULLIF(net,0),2) margin_pct,discount discount_cents,refund refund_cents FROM b WHERE bucket=1 AND 100.0*(net-cost)/NULLIF(net,0)<30 ORDER BY net DESC,product_id"
+    }
+  ],
+  "hints": [
+    "按商品独立汇总",
+    "按商品独立汇总；按全体净额分箱",
+    "重点核对输出粒度：商品"
+  ],
+  "explanation": "按商品独立汇总；按全体净额分箱；应用毛利阈值；输出折扣退款。先按毛利筛选再计算销售四分位改变总体。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 149.2
+}

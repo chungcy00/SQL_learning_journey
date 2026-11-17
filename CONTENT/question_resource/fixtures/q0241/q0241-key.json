@@ -1,0 +1,33 @@
+{
+  "id": "q0241-key",
+  "questionId": "q0241",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "MySQL 执行计划需用原生环境核实；SQLite 计划不能直接当作 MySQL 结果",
+      "explanation": "两者优化器及计划字段不同。"
+    },
+    {
+      "id": "B",
+      "text": "返回正确查询结果即可证明查询使用复合索引",
+      "explanation": "正确性不证明具体访问路径。"
+    },
+    {
+      "id": "C",
+      "text": "SQLite EXPLAIN QUERY PLAN 与 MySQL EXPLAIN 字段完全相同",
+      "explanation": "它们是不同引擎的不同计划接口。"
+    },
+    {
+      "id": "D",
+      "text": "存在索引就无需检查执行计划",
+      "explanation": "仍需观察是否真的使用和访问成本。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "A"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

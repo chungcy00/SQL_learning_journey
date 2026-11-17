@@ -1,0 +1,45 @@
+{
+  "visibility": "public",
+  "variant": "public",
+  "kind": "query",
+  "tables": [],
+  "id": "q0187-public",
+  "questionId": "q0187",
+  "datasetId": "q0187-lesson",
+  "expected": {
+    "columns": [
+      "n",
+      "factorial"
+    ],
+    "rows": [
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        3,
+        6
+      ],
+      [
+        4,
+        24
+      ],
+      [
+        5,
+        120
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

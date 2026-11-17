@@ -1,0 +1,33 @@
+{
+  "id": "q0176-key",
+  "questionId": "q0176",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "均为1行",
+      "explanation": "UNION ALL不会自动去重。"
+    },
+    {
+      "id": "B",
+      "text": "1行与2行",
+      "explanation": "UNION去重，UNION ALL保留所有记录。"
+    },
+    {
+      "id": "C",
+      "text": "2行与1行",
+      "explanation": "去重行为被颠倒。"
+    },
+    {
+      "id": "D",
+      "text": "均为2行",
+      "explanation": "普通UNION会去除重复结果行。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "B"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

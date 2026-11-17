@@ -1,0 +1,79 @@
+{
+  "projectId": "enterprise",
+  "title": "供应商延迟与仓库资金压力",
+  "context": "库存＋采购联合分析：管理层要求以同一企业口径核对业务数据。",
+  "requirements": "2025年到期采购行，按供应商计算逾期未接收金额；按商品仓库去重后汇总关联期末库存价值，仅纳入该供应商有逾期未足量收货的商品仓库；库存价值无法视为单一供应商独占。",
+  "grain": "供应商",
+  "commonError": "跨供应商库存暴露值不可全局相加，可能重叠。",
+  "executionSteps": [
+    "按供应商商品仓聚合",
+    "连接快照",
+    "汇总暴露值"
+  ],
+  "difficulty": "挑战",
+  "crossGroup": "库存＋采购",
+  "mysqlSql": "WITH a AS (SELECT supplier_id,warehouse_id,product_id,SUM((quantity_ordered-accepted)*unit_price_cents) overdue_value FROM v_po_lines WHERE promised_date BETWEEN '2025-01-01' AND '2025-12-31' AND quantity_ordered>accepted GROUP BY supplier_id,warehouse_id,product_id) SELECT a.supplier_id,COUNT(*) affected_pairs,SUM(a.overdue_value) overdue_cents,SUM(i.quantity*i.unit_cost_cents) exposed_stock_cents FROM a JOIN inventory_snapshots i ON i.warehouse_id=a.warehouse_id AND i.product_id=a.product_id AND i.snapshot_date='2025-12-31' GROUP BY a.supplier_id ORDER BY overdue_cents DESC,a.supplier_id",
+  "sqliteSql": "WITH a AS (SELECT supplier_id,warehouse_id,product_id,SUM((quantity_ordered-accepted)*unit_price_cents) overdue_value FROM v_po_lines WHERE promised_date BETWEEN '2025-01-01' AND '2025-12-31' AND quantity_ordered>accepted GROUP BY supplier_id,warehouse_id,product_id) SELECT a.supplier_id,COUNT(*) affected_pairs,SUM(a.overdue_value) overdue_cents,SUM(i.quantity*i.unit_cost_cents) exposed_stock_cents FROM a JOIN inventory_snapshots i ON i.warehouse_id=a.warehouse_id AND i.product_id=a.product_id AND i.snapshot_date='2025-12-31' GROUP BY a.supplier_id ORDER BY overdue_cents DESC,a.supplier_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "supplier_id",
+    "affected_pairs",
+    "overdue_cents",
+    "exposed_stock_cents"
+  ],
+  "id": "BP37",
+  "chapterId": "ch20",
+  "knowledgePointIds": [
+    "kp20-11"
+  ],
+  "datasetId": "enterprise-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP37.json",
+  "expectedRowCount": 60,
+  "expectedColumns": [
+    "supplier_id",
+    "affected_pairs",
+    "overdue_cents",
+    "exposed_stock_cents"
+  ],
+  "sourceTables": [
+    "inventory_snapshots",
+    "v_po_lines"
+  ],
+  "dependencyTables": [
+    "categories",
+    "goods_receipts",
+    "inventory_snapshots",
+    "products",
+    "purchase_order_items",
+    "purchase_orders",
+    "supplier_contracts",
+    "supplier_invoice_items",
+    "supplier_invoices",
+    "suppliers",
+    "v_po_lines",
+    "warehouses"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH a AS (SELECT supplier_id,warehouse_id,product_id,SUM((quantity_ordered-accepted)*unit_price_cents) overdue_value FROM v_po_lines WHERE promised_date BETWEEN '2025-01-01' AND '2025-12-31' AND quantity_ordered>accepted GROUP BY supplier_id,warehouse_id,product_id) SELECT a.supplier_id,COUNT(*) affected_pairs,SUM(a.overdue_value) overdue_cents,SUM(i.quantity*i.unit_cost_cents) exposed_stock_cents FROM a JOIN inventory_snapshots i ON i.warehouse_id=a.warehouse_id AND i.product_id=a.product_id AND i.snapshot_date='2025-12-31' GROUP BY a.supplier_id ORDER BY overdue_cents DESC,a.supplier_id",
+      "sqliteSql": "WITH a AS (SELECT supplier_id,warehouse_id,product_id,SUM((quantity_ordered-accepted)*unit_price_cents) overdue_value FROM v_po_lines WHERE promised_date BETWEEN '2025-01-01' AND '2025-12-31' AND quantity_ordered>accepted GROUP BY supplier_id,warehouse_id,product_id) SELECT a.supplier_id,COUNT(*) affected_pairs,SUM(a.overdue_value) overdue_cents,SUM(i.quantity*i.unit_cost_cents) exposed_stock_cents FROM a JOIN inventory_snapshots i ON i.warehouse_id=a.warehouse_id AND i.product_id=a.product_id AND i.snapshot_date='2025-12-31' GROUP BY a.supplier_id ORDER BY overdue_cents DESC,a.supplier_id"
+    }
+  ],
+  "hints": [
+    "按供应商商品仓聚合",
+    "按供应商商品仓聚合；连接快照",
+    "重点核对输出粒度：供应商"
+  ],
+  "explanation": "按供应商商品仓聚合；连接快照；汇总暴露值。跨供应商库存暴露值不可全局相加，可能重叠。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 29.3
+}

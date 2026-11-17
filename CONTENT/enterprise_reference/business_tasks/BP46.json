@@ -1,0 +1,84 @@
+{
+  "projectId": "enterprise",
+  "title": "退款影响与渠道利润风险",
+  "context": "电商＋财务联合分析：管理层要求以同一企业口径核对业务数据。",
+  "requirements": "2025年线上渠道，退款率=退款/折后退款前销售额，退货后毛利，以及退款前毛利估算（原销售成本加回退货原成本）；按退款率降序，分母为0返回NULL。",
+  "grain": "渠道",
+  "commonError": "只减退款不冲回退货成本会误算毛利。",
+  "executionSteps": [
+    "会话内分别汇总原销售与净销售",
+    "连接会话渠道",
+    "比较前后毛利"
+  ],
+  "difficulty": "困难",
+  "crossGroup": "电商＋财务",
+  "mysqlSql": "WITH a AS (SELECT o.session_id,SUM(i.quantity*i.unit_price_cents-i.discount_cents) gross_revenue,SUM(i.quantity*i.unit_cost_cents) original_cost FROM orders o JOIN order_items i ON i.order_id=o.order_id WHERE o.channel='online' AND o.status='completed' AND o.order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY o.session_id), b AS (SELECT session_id,SUM(net_cents) net,SUM(cost_cents) cost,SUM(refund_cents) refund FROM v_sales_lines WHERE channel='online' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY session_id) SELECT s.source_id,SUM(a.gross_revenue) before_refund_cents,SUM(b.refund) refund_cents,ROUND(100.0*SUM(b.refund)/NULLIF(SUM(a.gross_revenue),0),2) refund_pct,SUM(a.gross_revenue-a.original_cost) before_gross_cents,SUM(b.net-b.cost) after_gross_cents FROM customer_sessions s JOIN a ON a.session_id=s.session_id JOIN b ON b.session_id=s.session_id GROUP BY s.source_id ORDER BY refund_pct DESC,s.source_id",
+  "sqliteSql": "WITH a AS (SELECT o.session_id,SUM(i.quantity*i.unit_price_cents-i.discount_cents) gross_revenue,SUM(i.quantity*i.unit_cost_cents) original_cost FROM orders o JOIN order_items i ON i.order_id=o.order_id WHERE o.channel='online' AND o.status='completed' AND o.order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY o.session_id), b AS (SELECT session_id,SUM(net_cents) net,SUM(cost_cents) cost,SUM(refund_cents) refund FROM v_sales_lines WHERE channel='online' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY session_id) SELECT s.source_id,SUM(a.gross_revenue) before_refund_cents,SUM(b.refund) refund_cents,ROUND(100.0*SUM(b.refund)/NULLIF(SUM(a.gross_revenue),0),2) refund_pct,SUM(a.gross_revenue-a.original_cost) before_gross_cents,SUM(b.net-b.cost) after_gross_cents FROM customer_sessions s JOIN a ON a.session_id=s.session_id JOIN b ON b.session_id=s.session_id GROUP BY s.source_id ORDER BY refund_pct DESC,s.source_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "source_id",
+    "before_refund_cents",
+    "refund_cents",
+    "refund_pct",
+    "before_gross_cents",
+    "after_gross_cents"
+  ],
+  "id": "BP46",
+  "chapterId": "ch20",
+  "knowledgePointIds": [
+    "kp20-20"
+  ],
+  "datasetId": "enterprise-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP46.json",
+  "expectedRowCount": 5,
+  "expectedColumns": [
+    "source_id",
+    "before_refund_cents",
+    "refund_cents",
+    "refund_pct",
+    "before_gross_cents",
+    "after_gross_cents"
+  ],
+  "sourceTables": [
+    "customer_sessions",
+    "order_items",
+    "orders",
+    "v_sales_lines"
+  ],
+  "dependencyTables": [
+    "categories",
+    "customer_sessions",
+    "customers",
+    "order_items",
+    "orders",
+    "products",
+    "promotions",
+    "returns",
+    "stores",
+    "traffic_sources",
+    "v_sales_lines"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH a AS (SELECT o.session_id,SUM(i.quantity*i.unit_price_cents-i.discount_cents) gross_revenue,SUM(i.quantity*i.unit_cost_cents) original_cost FROM orders o JOIN order_items i ON i.order_id=o.order_id WHERE o.channel='online' AND o.status='completed' AND o.order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY o.session_id), b AS (SELECT session_id,SUM(net_cents) net,SUM(cost_cents) cost,SUM(refund_cents) refund FROM v_sales_lines WHERE channel='online' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY session_id) SELECT s.source_id,SUM(a.gross_revenue) before_refund_cents,SUM(b.refund) refund_cents,ROUND(100.0*SUM(b.refund)/NULLIF(SUM(a.gross_revenue),0),2) refund_pct,SUM(a.gross_revenue-a.original_cost) before_gross_cents,SUM(b.net-b.cost) after_gross_cents FROM customer_sessions s JOIN a ON a.session_id=s.session_id JOIN b ON b.session_id=s.session_id GROUP BY s.source_id ORDER BY refund_pct DESC,s.source_id",
+      "sqliteSql": "WITH a AS (SELECT o.session_id,SUM(i.quantity*i.unit_price_cents-i.discount_cents) gross_revenue,SUM(i.quantity*i.unit_cost_cents) original_cost FROM orders o JOIN order_items i ON i.order_id=o.order_id WHERE o.channel='online' AND o.status='completed' AND o.order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY o.session_id), b AS (SELECT session_id,SUM(net_cents) net,SUM(cost_cents) cost,SUM(refund_cents) refund FROM v_sales_lines WHERE channel='online' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY session_id) SELECT s.source_id,SUM(a.gross_revenue) before_refund_cents,SUM(b.refund) refund_cents,ROUND(100.0*SUM(b.refund)/NULLIF(SUM(a.gross_revenue),0),2) refund_pct,SUM(a.gross_revenue-a.original_cost) before_gross_cents,SUM(b.net-b.cost) after_gross_cents FROM customer_sessions s JOIN a ON a.session_id=s.session_id JOIN b ON b.session_id=s.session_id GROUP BY s.source_id ORDER BY refund_pct DESC,s.source_id"
+    }
+  ],
+  "hints": [
+    "会话内分别汇总原销售与净销售",
+    "会话内分别汇总原销售与净销售；连接会话渠道",
+    "重点核对输出粒度：渠道"
+  ],
+  "explanation": "会话内分别汇总原销售与净销售；连接会话渠道；比较前后毛利。只减退款不冲回退货成本会误算毛利。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 49.7
+}

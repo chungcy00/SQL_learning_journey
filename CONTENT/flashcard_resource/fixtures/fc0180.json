@@ -1,0 +1,80 @@
+{
+  "id": "fc0180-demo",
+  "tables": [
+    {
+      "name": "month_axis",
+      "columns": [
+        {
+          "name": "month_key",
+          "type": "TEXT"
+        }
+      ],
+      "rows": [
+        [
+          "2025-01"
+        ],
+        [
+          "2025-02"
+        ],
+        [
+          "2025-03"
+        ]
+      ],
+      "constraints": ""
+    },
+    {
+      "name": "months_missing",
+      "columns": [
+        {
+          "name": "month_key",
+          "type": "TEXT"
+        },
+        {
+          "name": "net_cents",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          "2025-01",
+          10000
+        ],
+        [
+          "2025-03",
+          15000
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "WITH m AS (SELECT a.month_key,COALESCE(s.net_cents,0) AS net FROM month_axis a LEFT JOIN months_missing s ON a.month_key=s.month_key) SELECT month_key,net,LAG(net) OVER(ORDER BY month_key) AS previous FROM m ORDER BY month_key",
+  "mysqlSql": "WITH m AS (SELECT a.month_key,COALESCE(s.net_cents,0) AS net FROM month_axis a LEFT JOIN months_missing s ON a.month_key=s.month_key) SELECT month_key,net,LAG(net) OVER(ORDER BY month_key) AS previous FROM m ORDER BY month_key",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      "2025-01",
+      10000,
+      null
+    ],
+    [
+      "2025-02",
+      0,
+      10000
+    ],
+    [
+      "2025-03",
+      15000,
+      0
+    ]
+  ],
+  "expectedColumns": [
+    "month_key",
+    "net",
+    "previous"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

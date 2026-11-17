@@ -1,0 +1,84 @@
+{
+  "id": "fc0166-demo",
+  "tables": [
+    {
+      "name": "aging_mini",
+      "columns": [
+        {
+          "name": "invoice_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "days_overdue",
+          "type": "INTEGER"
+        },
+        {
+          "name": "balance_cents",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          -1,
+          1000
+        ],
+        [
+          2,
+          0,
+          1000
+        ],
+        [
+          3,
+          30,
+          1000
+        ],
+        [
+          4,
+          31,
+          1000
+        ],
+        [
+          5,
+          91,
+          1000
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT invoice_id,CASE WHEN days_overdue<=0 THEN '未逾期' WHEN days_overdue BETWEEN 1 AND 30 THEN '1—30' WHEN days_overdue<=60 THEN '31—60' WHEN days_overdue<=90 THEN '61—90' ELSE '90以上' END AS band FROM aging_mini WHERE balance_cents>0 ORDER BY invoice_id",
+  "mysqlSql": "SELECT invoice_id,CASE WHEN days_overdue<=0 THEN '未逾期' WHEN days_overdue BETWEEN 1 AND 30 THEN '1—30' WHEN days_overdue<=60 THEN '31—60' WHEN days_overdue<=90 THEN '61—90' ELSE '90以上' END AS band FROM aging_mini WHERE balance_cents>0 ORDER BY invoice_id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      "未逾期"
+    ],
+    [
+      2,
+      "未逾期"
+    ],
+    [
+      3,
+      "1—30"
+    ],
+    [
+      4,
+      "31—60"
+    ],
+    [
+      5,
+      "90以上"
+    ]
+  ],
+  "expectedColumns": [
+    "invoice_id",
+    "band"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

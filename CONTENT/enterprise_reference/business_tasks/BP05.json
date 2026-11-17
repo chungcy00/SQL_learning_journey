@@ -1,0 +1,86 @@
+{
+  "projectId": "retail",
+  "title": "门店综合经营异常看板",
+  "context": "管理层需要优先检查经营异常的门店。",
+  "requirements": "2025年第四季度，门店净销售、毛利率、目标达成率、退款率（退款/退款前折后销售额）、净销售排名；异常项：毛利率<30%、达成率<90%、退款率>8%；按异常数降序。",
+  "grain": "门店",
+  "commonError": "阈值用四舍五入后的比率可能误判边界。",
+  "executionSteps": [
+    "按门店汇总经营指标",
+    "独立关联季度目标",
+    "用未舍入比率标记",
+    "窗口排名"
+  ],
+  "difficulty": "挑战",
+  "mysqlSql": "WITH a AS (SELECT store_id,SUM(net_cents) net,SUM(cost_cents) cost,SUM(refund_cents) refund FROM v_sales_lines WHERE channel='store' AND order_date BETWEEN '2025-10-01' AND '2025-12-31' GROUP BY store_id), b AS (SELECT store_id,SUM(target_cents) target FROM sales_targets WHERE month_key BETWEEN '2025-10' AND '2025-12' GROUP BY store_id), p AS (SELECT s.store_id,COALESCE(a.net,0) net,100.0*(a.net-a.cost)/NULLIF(a.net,0) margin,100.0*COALESCE(a.net,0)/NULLIF(b.target,0) attainment,100.0*a.refund/NULLIF(a.net+a.refund,0) refund_rate FROM stores s LEFT JOIN a ON a.store_id=s.store_id LEFT JOIN b ON b.store_id=s.store_id), z AS (SELECT *,CASE WHEN margin<30 THEN 1 ELSE 0 END+CASE WHEN attainment<90 THEN 1 ELSE 0 END+CASE WHEN refund_rate>8 THEN 1 ELSE 0 END flags,RANK() OVER(ORDER BY net DESC) sales_rank FROM p) SELECT store_id,net net_cents,ROUND(margin,2) margin_pct,ROUND(attainment,2) achievement_pct,ROUND(refund_rate,2) refund_pct,flags,sales_rank FROM z ORDER BY flags DESC,store_id",
+  "sqliteSql": "WITH a AS (SELECT store_id,SUM(net_cents) net,SUM(cost_cents) cost,SUM(refund_cents) refund FROM v_sales_lines WHERE channel='store' AND order_date BETWEEN '2025-10-01' AND '2025-12-31' GROUP BY store_id), b AS (SELECT store_id,SUM(target_cents) target FROM sales_targets WHERE month_key BETWEEN '2025-10' AND '2025-12' GROUP BY store_id), p AS (SELECT s.store_id,COALESCE(a.net,0) net,100.0*(a.net-a.cost)/NULLIF(a.net,0) margin,100.0*COALESCE(a.net,0)/NULLIF(b.target,0) attainment,100.0*a.refund/NULLIF(a.net+a.refund,0) refund_rate FROM stores s LEFT JOIN a ON a.store_id=s.store_id LEFT JOIN b ON b.store_id=s.store_id), z AS (SELECT *,CASE WHEN margin<30 THEN 1 ELSE 0 END+CASE WHEN attainment<90 THEN 1 ELSE 0 END+CASE WHEN refund_rate>8 THEN 1 ELSE 0 END flags,RANK() OVER(ORDER BY net DESC) sales_rank FROM p) SELECT store_id,net net_cents,ROUND(margin,2) margin_pct,ROUND(attainment,2) achievement_pct,ROUND(refund_rate,2) refund_pct,flags,sales_rank FROM z ORDER BY flags DESC,store_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "store_id",
+    "net_cents",
+    "margin_pct",
+    "achievement_pct",
+    "refund_pct",
+    "flags",
+    "sales_rank"
+  ],
+  "id": "BP05",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-35"
+  ],
+  "datasetId": "retail-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP05.json",
+  "expectedRowCount": 12,
+  "expectedColumns": [
+    "store_id",
+    "net_cents",
+    "margin_pct",
+    "achievement_pct",
+    "refund_pct",
+    "flags",
+    "sales_rank"
+  ],
+  "sourceTables": [
+    "sales_targets",
+    "stores",
+    "v_sales_lines"
+  ],
+  "dependencyTables": [
+    "categories",
+    "customer_sessions",
+    "customers",
+    "order_items",
+    "orders",
+    "products",
+    "promotions",
+    "returns",
+    "sales_targets",
+    "stores",
+    "traffic_sources",
+    "v_sales_lines"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH a AS (SELECT store_id,SUM(net_cents) net,SUM(cost_cents) cost,SUM(refund_cents) refund FROM v_sales_lines WHERE channel='store' AND order_date BETWEEN '2025-10-01' AND '2025-12-31' GROUP BY store_id), b AS (SELECT store_id,SUM(target_cents) target FROM sales_targets WHERE month_key BETWEEN '2025-10' AND '2025-12' GROUP BY store_id), p AS (SELECT s.store_id,COALESCE(a.net,0) net,100.0*(a.net-a.cost)/NULLIF(a.net,0) margin,100.0*COALESCE(a.net,0)/NULLIF(b.target,0) attainment,100.0*a.refund/NULLIF(a.net+a.refund,0) refund_rate FROM stores s LEFT JOIN a ON a.store_id=s.store_id LEFT JOIN b ON b.store_id=s.store_id), z AS (SELECT *,CASE WHEN margin<30 THEN 1 ELSE 0 END+CASE WHEN attainment<90 THEN 1 ELSE 0 END+CASE WHEN refund_rate>8 THEN 1 ELSE 0 END flags,RANK() OVER(ORDER BY net DESC) sales_rank FROM p) SELECT store_id,net net_cents,ROUND(margin,2) margin_pct,ROUND(attainment,2) achievement_pct,ROUND(refund_rate,2) refund_pct,flags,sales_rank FROM z ORDER BY flags DESC,store_id",
+      "sqliteSql": "WITH a AS (SELECT store_id,SUM(net_cents) net,SUM(cost_cents) cost,SUM(refund_cents) refund FROM v_sales_lines WHERE channel='store' AND order_date BETWEEN '2025-10-01' AND '2025-12-31' GROUP BY store_id), b AS (SELECT store_id,SUM(target_cents) target FROM sales_targets WHERE month_key BETWEEN '2025-10' AND '2025-12' GROUP BY store_id), p AS (SELECT s.store_id,COALESCE(a.net,0) net,100.0*(a.net-a.cost)/NULLIF(a.net,0) margin,100.0*COALESCE(a.net,0)/NULLIF(b.target,0) attainment,100.0*a.refund/NULLIF(a.net+a.refund,0) refund_rate FROM stores s LEFT JOIN a ON a.store_id=s.store_id LEFT JOIN b ON b.store_id=s.store_id), z AS (SELECT *,CASE WHEN margin<30 THEN 1 ELSE 0 END+CASE WHEN attainment<90 THEN 1 ELSE 0 END+CASE WHEN refund_rate>8 THEN 1 ELSE 0 END flags,RANK() OVER(ORDER BY net DESC) sales_rank FROM p) SELECT store_id,net net_cents,ROUND(margin,2) margin_pct,ROUND(attainment,2) achievement_pct,ROUND(refund_rate,2) refund_pct,flags,sales_rank FROM z ORDER BY flags DESC,store_id"
+    }
+  ],
+  "hints": [
+    "按门店汇总经营指标",
+    "按门店汇总经营指标；独立关联季度目标",
+    "重点核对输出粒度：门店"
+  ],
+  "explanation": "按门店汇总经营指标；独立关联季度目标；用未舍入比率标记；窗口排名。阈值用四舍五入后的比率可能误判边界。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 23.3
+}

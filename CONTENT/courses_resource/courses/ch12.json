@@ -1,0 +1,586 @@
+{
+  "id": "ch12",
+  "number": 12,
+  "title": "数值及日期函数",
+  "stage": "进阶",
+  "objective": "计算舍入、日期差和按月汇总。",
+  "prerequisites": [
+    "ch11"
+  ],
+  "knowledgePoints": [
+    {
+      "id": "kp12-01",
+      "chapterId": "ch12",
+      "title": "ROUND 与 ABS",
+      "learningObjective": "能够运用本节知识完成：展示金额和差异幅度",
+      "prerequisites": [
+        "ch11"
+      ],
+      "concept": "ROUND 在指定小数位舍入；ABS 返回绝对值。金额分析应优先精确十进制。",
+      "syntax": "ROUND(x,d); ABS(x)",
+      "parameters": {
+        "x": "数值",
+        "d": "小数位数"
+      },
+      "fixtureIds": [],
+      "sourceTables": [],
+      "mysqlSql": "SELECT ROUND(12.346,2) AS rounded, ABS(-25) AS magnitude;",
+      "sqliteSql": "SELECT ROUND(12.346,2) AS rounded, ABS(-25) AS magnitude;",
+      "executionSteps": [
+        "按两位小数舍入",
+        "计算负数绝对值"
+      ],
+      "useCase": "展示金额和差异幅度",
+      "comparison": "ABS 会丢失增减方向，差异报告应保留原符号。",
+      "commonError": {
+        "example": "ROUND(total,2) 后认为底层金额已经精确",
+        "correction": "使用 DECIMAL 或整数分并定义舍入点"
+      },
+      "notes": "本例不涉及浮点中点；MySQL 精确值和近似值的舍入行为有差异。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0163",
+        "q0166",
+        "q0167"
+      ],
+      "relatedFlashcardIds": [
+        "fc0087",
+        "fc0094"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp03-01",
+        "kp06-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "rounded",
+          "magnitude"
+        ],
+        "rows": [
+          [
+            12.35,
+            25
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp12-01.sql",
+      "primaryQuestionIds": [
+        "q0163",
+        "q0166",
+        "q0167"
+      ],
+      "primaryFlashcardIds": [
+        "fc0087",
+        "fc0094"
+      ]
+    },
+    {
+      "id": "kp12-02",
+      "chapterId": "ch12",
+      "title": "日期格式、年份和月份",
+      "learningObjective": "能够运用本节知识完成：构建按月销售报表",
+      "prerequisites": [
+        "kp12-01"
+      ],
+      "concept": "DATE_FORMAT 用指定格式展示日期；YEAR 和 MONTH 提取数值年份与月份。",
+      "syntax": "DATE_FORMAT(day,'%Y-%m'); YEAR(day); MONTH(day)",
+      "parameters": {
+        "day": "有效日期",
+        "%Y-%m": "四位年份和两位月份"
+      },
+      "fixtureIds": [
+        "lesson-orders"
+      ],
+      "sourceTables": [
+        {
+          "name": "orders",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "sales",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "store_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "order_date",
+              "type": "TEXT",
+              "mysqlType": "DATE",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "护肤品",
+              800,
+              1,
+              "2026-01-03",
+              1
+            ],
+            [
+              2,
+              "化妆品",
+              400,
+              2,
+              "2026-01-10",
+              2
+            ],
+            [
+              3,
+              "护肤品",
+              600,
+              1,
+              "2026-02-02",
+              1
+            ],
+            [
+              4,
+              "化妆品",
+              300,
+              2,
+              "2026-02-15",
+              null
+            ],
+            [
+              5,
+              "日用品",
+              1500,
+              1,
+              "2026-02-20",
+              3
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT id, DATE_FORMAT(order_date,'%Y-%m') AS month, YEAR(order_date) AS year_no, MONTH(order_date) AS month_no FROM orders ORDER BY id;",
+      "sqliteSql": "SELECT id, strftime('%Y-%m',order_date) AS month, CAST(strftime('%Y',order_date) AS INTEGER) AS year_no, CAST(strftime('%m',order_date) AS INTEGER) AS month_no FROM orders ORDER BY id;",
+      "executionSteps": [
+        "从日期提取年月",
+        "生成月份键",
+        "保持编号顺序"
+      ],
+      "useCase": "构建按月销售报表",
+      "comparison": "MONTH 单独分组会混合多个年份。",
+      "commonError": {
+        "example": "GROUP BY MONTH(order_date) 处理跨年数据",
+        "correction": "GROUP BY DATE_FORMAT(order_date,'%Y-%m')"
+      },
+      "notes": "SQLite strftime 格式与 MySQL 不完全相同；本例只转换指定格式。",
+      "compatibility": {
+        "status": "转换执行",
+        "detail": "需要明确转换或原生环境验证。"
+      },
+      "relatedQuestionIds": [
+        "q0161",
+        "q0162",
+        "q0171"
+      ],
+      "relatedFlashcardIds": [
+        "fc0088",
+        "fc0091"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp03-01",
+        "kp06-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "id",
+          "month",
+          "year_no",
+          "month_no"
+        ],
+        "rows": [
+          [
+            1,
+            "2026-01",
+            2026,
+            1
+          ],
+          [
+            2,
+            "2026-01",
+            2026,
+            1
+          ],
+          [
+            3,
+            "2026-02",
+            2026,
+            2
+          ],
+          [
+            4,
+            "2026-02",
+            2026,
+            2
+          ],
+          [
+            5,
+            "2026-02",
+            2026,
+            2
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp12-02.sql",
+      "primaryQuestionIds": [
+        "q0161",
+        "q0162",
+        "q0171"
+      ],
+      "primaryFlashcardIds": [
+        "fc0088",
+        "fc0091"
+      ]
+    },
+    {
+      "id": "kp12-03",
+      "chapterId": "ch12",
+      "title": "DATEDIFF 与 TIMESTAMPDIFF",
+      "learningObjective": "能够运用本节知识完成：计算交付延误、账龄",
+      "prerequisites": [
+        "kp12-02"
+      ],
+      "concept": "DATEDIFF(a,b) 计算日期部分之差；TIMESTAMPDIFF(unit,start,end) 按指定单位计算完整差值。",
+      "syntax": "DATEDIFF(end_date,start_date); TIMESTAMPDIFF(DAY,start_date,end_date)",
+      "parameters": {
+        "DAY": "差值单位",
+        "start_date,end_date": "起止日期"
+      },
+      "fixtureIds": [],
+      "sourceTables": [],
+      "mysqlSql": "SELECT DATEDIFF('2026-02-03','2026-01-31') AS days, TIMESTAMPDIFF(DAY,'2026-01-31','2026-02-03') AS elapsed;",
+      "sqliteSql": "SELECT CAST(julianday('2026-02-03')-julianday('2026-01-31') AS INTEGER) AS days, CAST(julianday('2026-02-03')-julianday('2026-01-31') AS INTEGER) AS elapsed;",
+      "executionSteps": [
+        "固定两个日期",
+        "计算跨月天数",
+        "输出3"
+      ],
+      "useCase": "计算交付延误、账龄",
+      "comparison": "两个函数参数方向不同；月差不等于天数除30。",
+      "commonError": {
+        "example": "DATEDIFF(start_date,end_date) 期待正数",
+        "correction": "DATEDIFF(end_date,start_date)"
+      },
+      "notes": "本例不含时刻；时区和月差须独立实现。",
+      "compatibility": {
+        "status": "转换执行",
+        "detail": "需要明确转换或原生环境验证。"
+      },
+      "relatedQuestionIds": [
+        "q0169",
+        "q0170",
+        "q0175"
+      ],
+      "relatedFlashcardIds": [
+        "fc0089",
+        "fc0092"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp03-01",
+        "kp06-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "days",
+          "elapsed"
+        ],
+        "rows": [
+          [
+            3,
+            3
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp12-03.sql",
+      "primaryQuestionIds": [
+        "q0169",
+        "q0170",
+        "q0175"
+      ],
+      "primaryFlashcardIds": [
+        "fc0089",
+        "fc0092"
+      ]
+    },
+    {
+      "id": "kp12-04",
+      "chapterId": "ch12",
+      "title": "日期区间与月边界",
+      "learningObjective": "能够运用本节知识完成：按月统计销售额",
+      "prerequisites": [
+        "kp12-03"
+      ],
+      "concept": "半开区间包含开始日期但不包含下一个月首日，适用于日期与时间戳。",
+      "syntax": "WHERE day >= start AND day < next_start",
+      "parameters": {
+        "start": "统计起点",
+        "next_start": "排除的上界"
+      },
+      "fixtureIds": [
+        "lesson-orders"
+      ],
+      "sourceTables": [
+        {
+          "name": "orders",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "sales",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "store_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "order_date",
+              "type": "TEXT",
+              "mysqlType": "DATE",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "护肤品",
+              800,
+              1,
+              "2026-01-03",
+              1
+            ],
+            [
+              2,
+              "化妆品",
+              400,
+              2,
+              "2026-01-10",
+              2
+            ],
+            [
+              3,
+              "护肤品",
+              600,
+              1,
+              "2026-02-02",
+              1
+            ],
+            [
+              4,
+              "化妆品",
+              300,
+              2,
+              "2026-02-15",
+              null
+            ],
+            [
+              5,
+              "日用品",
+              1500,
+              1,
+              "2026-02-20",
+              3
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT SUM(sales) AS feb_sales FROM orders WHERE order_date >= '2026-02-01' AND order_date < '2026-03-01';",
+      "sqliteSql": "SELECT SUM(sales) AS feb_sales FROM orders WHERE order_date >= '2026-02-01' AND order_date < '2026-03-01';",
+      "executionSteps": [
+        "保留2月订单",
+        "排除1月和3月",
+        "汇总600+300+1500"
+      ],
+      "useCase": "按月统计销售额",
+      "comparison": "BETWEEN 两端都包含；时间戳最后一天可能因时分秒被遗漏。",
+      "commonError": {
+        "example": "WHERE order_date <= '2026-02-28'",
+        "correction": "WHERE order_date < '2026-03-01' AND order_date >= '2026-02-01'"
+      },
+      "notes": "固定统计窗口，不能依赖设备当前日期；比率使用 NULLIF 避免零分母。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0164",
+        "q0172",
+        "q0173"
+      ],
+      "relatedFlashcardIds": [
+        "fc0090",
+        "fc0095"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp03-01",
+        "kp06-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "feb_sales"
+        ],
+        "rows": [
+          [
+            2400
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp12-04.sql",
+      "primaryQuestionIds": [
+        "q0164",
+        "q0172",
+        "q0173"
+      ],
+      "primaryFlashcardIds": [
+        "fc0090",
+        "fc0095"
+      ]
+    },
+    {
+      "id": "kp12-05",
+      "chapterId": "ch12",
+      "title": "数值除法与整数除法",
+      "learningObjective": "能够运用本节知识完成：计算平均销售金额和每箱可整除数量",
+      "prerequisites": [
+        "kp12-04"
+      ],
+      "concept": "MySQL / 的精确值除法可返回小数，DIV 为整数商；SQLite 两个整数使用 / 可能截断。",
+      "syntax": "a/b; a DIV b; MOD(a,b)",
+      "parameters": {
+        "a": "被除数",
+        "b": "除数"
+      },
+      "fixtureIds": [],
+      "sourceTables": [],
+      "mysqlSql": "SELECT 7/2 AS quotient, 7 DIV 2 AS integer_part, MOD(7,2) AS remainder;",
+      "sqliteSql": "SELECT 7.0/2 AS quotient, 7/2 AS integer_part, 7%2 AS remainder;",
+      "executionSteps": [
+        "7除以2得到3.5",
+        "整数商3",
+        "余数1"
+      ],
+      "useCase": "计算平均销售金额和每箱可整除数量",
+      "comparison": "DIV 与 ROUND 不同，前者截去小数部分；ROUND 根据指定精度舍入。",
+      "commonError": {
+        "example": "在 SQLite 中直接使用两个整数字段相除，期待小数",
+        "correction": "乘以1.0或经验证的精度转换再除；明确零分母策略"
+      },
+      "notes": "本演示仅正整数及非零分母；负数、溢出和精度需另行验证。",
+      "compatibility": {
+        "status": "转换执行",
+        "detail": "需要明确转换或原生环境验证。"
+      },
+      "relatedQuestionIds": [
+        "q0165",
+        "q0168",
+        "q0174"
+      ],
+      "relatedFlashcardIds": [
+        "fc0086",
+        "fc0093"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp03-01",
+        "kp06-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "quotient",
+          "integer_part",
+          "remainder"
+        ],
+        "rows": [
+          [
+            3.5,
+            3,
+            1
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp12-05.sql",
+      "primaryQuestionIds": [
+        "q0165",
+        "q0168",
+        "q0174"
+      ],
+      "primaryFlashcardIds": [
+        "fc0086",
+        "fc0093"
+      ]
+    }
+  ],
+  "plannedQuestionCount": 15,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "dialect": "MySQL 8.4",
+  "summary": "完成本章后：计算舍入、日期差和按月汇总。",
+  "sources": [
+    "https://dev.mysql.com/doc/refman/8.4/en/",
+    "https://dev.mysql.com/doc/refman/8.4/en/functions.html"
+  ],
+  "knowledgePointCount": 5
+}

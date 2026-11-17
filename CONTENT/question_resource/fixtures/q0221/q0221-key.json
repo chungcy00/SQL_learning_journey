@@ -1,0 +1,33 @@
+{
+  "id": "q0221-key",
+  "questionId": "q0221",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "仅按客户号码去重",
+      "explanation": "会删除同客户的其他合法订单。"
+    },
+    {
+      "id": "B",
+      "text": "确定可靠的业务唯一键与保留规则后再去重",
+      "explanation": "必须区分重复导入和真实重复交易。"
+    },
+    {
+      "id": "C",
+      "text": "仅按订单日期去重",
+      "explanation": "同一天可有多笔订单。"
+    },
+    {
+      "id": "D",
+      "text": "无条件删除每个金额相同的记录",
+      "explanation": "相同金额也可能代表不同订单。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "B"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

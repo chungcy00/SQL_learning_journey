@@ -1,0 +1,82 @@
+{
+  "projectId": "ecommerce",
+  "title": "高价值流失风险客户",
+  "context": "运营希望针对长期未购买但历史价值高的客户。",
+  "requirements": "截至2025年底所有线上有效购买客户；历史订单数≥3、历史净金额排名前20%（NTILE(5)，按编号决胜）、最近90日无消费，输出历史毛利、最近购买距今天数和风险优先级（毛利降序）。",
+  "grain": "客户",
+  "commonError": "仅凭最后消费日期无法识别高价值，且流失风险不是已流失事实。",
+  "executionSteps": [
+    "汇总历史价值",
+    "在全体客户上分位",
+    "计算距截止日天数",
+    "筛风险名单"
+  ],
+  "difficulty": "挑战",
+  "mysqlSql": "WITH a AS (SELECT customer_id,COUNT(*) freq,MAX(order_date) last_day,SUM(net_cents) net,SUM(net_cents-cost_cents) gross FROM v_order_net WHERE channel='online' GROUP BY customer_id), b AS (SELECT *,NTILE(5) OVER(ORDER BY net DESC,customer_id) bucket FROM a) SELECT b.customer_id,freq,net net_cents,gross gross_cents,1095-d.day_index recency_days FROM b JOIN calendar_days d ON d.day=b.last_day WHERE bucket=1 AND freq>=3 AND 1095-d.day_index>=90 ORDER BY gross DESC,b.customer_id",
+  "sqliteSql": "WITH a AS (SELECT customer_id,COUNT(*) freq,MAX(order_date) last_day,SUM(net_cents) net,SUM(net_cents-cost_cents) gross FROM v_order_net WHERE channel='online' GROUP BY customer_id), b AS (SELECT *,NTILE(5) OVER(ORDER BY net DESC,customer_id) bucket FROM a) SELECT b.customer_id,freq,net net_cents,gross gross_cents,1095-d.day_index recency_days FROM b JOIN calendar_days d ON d.day=b.last_day WHERE bucket=1 AND freq>=3 AND 1095-d.day_index>=90 ORDER BY gross DESC,b.customer_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "customer_id",
+    "freq",
+    "net_cents",
+    "gross_cents",
+    "recency_days"
+  ],
+  "id": "BP15",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-45"
+  ],
+  "datasetId": "ecommerce-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP15.json",
+  "expectedRowCount": 547,
+  "expectedColumns": [
+    "customer_id",
+    "freq",
+    "net_cents",
+    "gross_cents",
+    "recency_days"
+  ],
+  "sourceTables": [
+    "calendar_days",
+    "v_order_net"
+  ],
+  "dependencyTables": [
+    "calendar_days",
+    "categories",
+    "customer_sessions",
+    "customers",
+    "order_items",
+    "orders",
+    "products",
+    "promotions",
+    "returns",
+    "stores",
+    "traffic_sources",
+    "v_order_net",
+    "v_sales_lines"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH a AS (SELECT customer_id,COUNT(*) freq,MAX(order_date) last_day,SUM(net_cents) net,SUM(net_cents-cost_cents) gross FROM v_order_net WHERE channel='online' GROUP BY customer_id), b AS (SELECT *,NTILE(5) OVER(ORDER BY net DESC,customer_id) bucket FROM a) SELECT b.customer_id,freq,net net_cents,gross gross_cents,1095-d.day_index recency_days FROM b JOIN calendar_days d ON d.day=b.last_day WHERE bucket=1 AND freq>=3 AND 1095-d.day_index>=90 ORDER BY gross DESC,b.customer_id",
+      "sqliteSql": "WITH a AS (SELECT customer_id,COUNT(*) freq,MAX(order_date) last_day,SUM(net_cents) net,SUM(net_cents-cost_cents) gross FROM v_order_net WHERE channel='online' GROUP BY customer_id), b AS (SELECT *,NTILE(5) OVER(ORDER BY net DESC,customer_id) bucket FROM a) SELECT b.customer_id,freq,net net_cents,gross gross_cents,1095-d.day_index recency_days FROM b JOIN calendar_days d ON d.day=b.last_day WHERE bucket=1 AND freq>=3 AND 1095-d.day_index>=90 ORDER BY gross DESC,b.customer_id"
+    }
+  ],
+  "hints": [
+    "汇总历史价值",
+    "汇总历史价值；在全体客户上分位",
+    "重点核对输出粒度：客户"
+  ],
+  "explanation": "汇总历史价值；在全体客户上分位；计算距截止日天数；筛风险名单。仅凭最后消费日期无法识别高价值，且流失风险不是已流失事实。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 57.5
+}

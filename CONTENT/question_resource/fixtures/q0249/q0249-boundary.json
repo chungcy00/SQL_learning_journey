@@ -1,0 +1,106 @@
+{
+  "visibility": "hidden",
+  "variant": "boundary",
+  "kind": "database_state",
+  "setupSql": "CREATE TABLE orders(id INT PRIMARY KEY,store_id INT,order_date DATE); INSERT INTO orders VALUES(2,1,'2026-02-01'),(3,2,'2026-02-01'); CREATE TABLE guard(i INT);",
+  "probes": [],
+  "id": "q0249-boundary",
+  "questionId": "q0249",
+  "datasetId": "q0249-lesson",
+  "expected": {
+    "tables": {
+      "guard": {
+        "columns": [
+          [
+            "i",
+            "INT",
+            0,
+            null,
+            0
+          ]
+        ],
+        "foreignKeys": [],
+        "indexes": [],
+        "rows": []
+      },
+      "orders": {
+        "columns": [
+          [
+            "id",
+            "INT",
+            0,
+            null,
+            1
+          ],
+          [
+            "store_id",
+            "INT",
+            0,
+            null,
+            0
+          ],
+          [
+            "order_date",
+            "DATE",
+            0,
+            null,
+            0
+          ]
+        ],
+        "foreignKeys": [],
+        "indexes": [
+          {
+            "name": "idx_store_date",
+            "unique": 0,
+            "origin": "c",
+            "partial": 0,
+            "keys": [
+              [
+                "store_id",
+                0
+              ],
+              [
+                "order_date",
+                0
+              ]
+            ]
+          },
+          {
+            "name": null,
+            "unique": 1,
+            "origin": "pk",
+            "partial": 0,
+            "keys": [
+              [
+                "id",
+                0
+              ]
+            ]
+          }
+        ],
+        "rows": [
+          [
+            2,
+            1,
+            "2026-02-01"
+          ],
+          [
+            3,
+            2,
+            "2026-02-01"
+          ]
+        ]
+      }
+    },
+    "probes": [],
+    "transactionOpen": false
+  },
+  "orderPolicy": "not_applicable",
+  "columnPolicy": "state",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

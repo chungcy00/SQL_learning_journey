@@ -1,0 +1,62 @@
+{
+  "chapterId": "ch12",
+  "contentVersion": "1.0.0",
+  "mergePolicy": "按知识点id只更新relatedFlashcardIds、primaryFlashcardIds，不改课程编号、课文和relatedQuestionIds。",
+  "knowledgePointUpdates": [
+    {
+      "id": "kp12-01",
+      "relatedFlashcardIds": [
+        "fc0087",
+        "fc0094"
+      ],
+      "primaryFlashcardIds": [
+        "fc0087",
+        "fc0094"
+      ]
+    },
+    {
+      "id": "kp12-02",
+      "relatedFlashcardIds": [
+        "fc0088",
+        "fc0091"
+      ],
+      "primaryFlashcardIds": [
+        "fc0088",
+        "fc0091"
+      ]
+    },
+    {
+      "id": "kp12-03",
+      "relatedFlashcardIds": [
+        "fc0089",
+        "fc0092"
+      ],
+      "primaryFlashcardIds": [
+        "fc0089",
+        "fc0092"
+      ]
+    },
+    {
+      "id": "kp12-04",
+      "relatedFlashcardIds": [
+        "fc0090",
+        "fc0095"
+      ],
+      "primaryFlashcardIds": [
+        "fc0090",
+        "fc0095"
+      ]
+    },
+    {
+      "id": "kp12-05",
+      "relatedFlashcardIds": [
+        "fc0086",
+        "fc0093"
+      ],
+      "primaryFlashcardIds": [
+        "fc0086",
+        "fc0093"
+      ]
+    }
+  ]
+}

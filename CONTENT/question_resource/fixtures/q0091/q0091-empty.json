@@ -1,0 +1,68 @@
+{
+  "visibility": "hidden",
+  "variant": "empty",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "orders",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "category",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "sales",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "store_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "order_date",
+          "type": "TEXT",
+          "mysqlType": "DATE",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "customer_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": []
+    }
+  ],
+  "id": "q0091-empty",
+  "questionId": "q0091",
+  "datasetId": "q0091-lesson",
+  "expected": {
+    "columns": [
+      "store_id",
+      "month_key",
+      "total"
+    ],
+    "rows": []
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

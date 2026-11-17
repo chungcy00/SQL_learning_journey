@@ -1,0 +1,79 @@
+{
+  "projectId": "finance",
+  "title": "预算与实际费用差异",
+  "context": "财务负责人检查部门年度超支。",
+  "requirements": "2025年部门×费用科目，预算与费用分录各自汇总，偏差=实际-预算；超过预算10%标记；保留有预算但没有发生额的项目；分母为零返回NULL。",
+  "grain": "部门×科目",
+  "commonError": "预算按月存在，连接分录后再求和会放大预算。",
+  "executionSteps": [
+    "预算单独聚合",
+    "费用独立聚合",
+    "合并并计算差异"
+  ],
+  "difficulty": "中等",
+  "mysqlSql": "WITH b AS (SELECT department_id,account_id,SUM(budget_cents) budget FROM budgets WHERE month_key BETWEEN '2025-01' AND '2025-12' GROUP BY department_id,account_id), a AS (SELECT department_id,account_id,SUM(expense_cents) actual FROM v_expenses WHERE entry_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY department_id,account_id) SELECT b.department_id,b.account_id,b.budget budget_cents,COALESCE(a.actual,0) actual_cents,COALESCE(a.actual,0)-b.budget variance_cents,ROUND(100.0*(COALESCE(a.actual,0)-b.budget)/NULLIF(b.budget,0),2) variance_pct,CASE WHEN COALESCE(a.actual,0)>b.budget*1.1 THEN 1 ELSE 0 END over_budget FROM b LEFT JOIN a ON a.department_id=b.department_id AND a.account_id=b.account_id ORDER BY b.department_id,b.account_id",
+  "sqliteSql": "WITH b AS (SELECT department_id,account_id,SUM(budget_cents) budget FROM budgets WHERE month_key BETWEEN '2025-01' AND '2025-12' GROUP BY department_id,account_id), a AS (SELECT department_id,account_id,SUM(expense_cents) actual FROM v_expenses WHERE entry_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY department_id,account_id) SELECT b.department_id,b.account_id,b.budget budget_cents,COALESCE(a.actual,0) actual_cents,COALESCE(a.actual,0)-b.budget variance_cents,ROUND(100.0*(COALESCE(a.actual,0)-b.budget)/NULLIF(b.budget,0),2) variance_pct,CASE WHEN COALESCE(a.actual,0)>b.budget*1.1 THEN 1 ELSE 0 END over_budget FROM b LEFT JOIN a ON a.department_id=b.department_id AND a.account_id=b.account_id ORDER BY b.department_id,b.account_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "department_id",
+    "account_id",
+    "budget_cents",
+    "actual_cents",
+    "variance_cents",
+    "variance_pct",
+    "over_budget"
+  ],
+  "id": "BP16",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-46"
+  ],
+  "datasetId": "finance-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP16.json",
+  "expectedRowCount": 35,
+  "expectedColumns": [
+    "department_id",
+    "account_id",
+    "budget_cents",
+    "actual_cents",
+    "variance_cents",
+    "variance_pct",
+    "over_budget"
+  ],
+  "sourceTables": [
+    "budgets",
+    "v_expenses"
+  ],
+  "dependencyTables": [
+    "accounts",
+    "budgets",
+    "departments",
+    "journal_entries",
+    "journal_lines",
+    "stores",
+    "v_expenses"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH b AS (SELECT department_id,account_id,SUM(budget_cents) budget FROM budgets WHERE month_key BETWEEN '2025-01' AND '2025-12' GROUP BY department_id,account_id), a AS (SELECT department_id,account_id,SUM(expense_cents) actual FROM v_expenses WHERE entry_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY department_id,account_id) SELECT b.department_id,b.account_id,b.budget budget_cents,COALESCE(a.actual,0) actual_cents,COALESCE(a.actual,0)-b.budget variance_cents,ROUND(100.0*(COALESCE(a.actual,0)-b.budget)/NULLIF(b.budget,0),2) variance_pct,CASE WHEN COALESCE(a.actual,0)>b.budget*1.1 THEN 1 ELSE 0 END over_budget FROM b LEFT JOIN a ON a.department_id=b.department_id AND a.account_id=b.account_id ORDER BY b.department_id,b.account_id",
+      "sqliteSql": "WITH b AS (SELECT department_id,account_id,SUM(budget_cents) budget FROM budgets WHERE month_key BETWEEN '2025-01' AND '2025-12' GROUP BY department_id,account_id), a AS (SELECT department_id,account_id,SUM(expense_cents) actual FROM v_expenses WHERE entry_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY department_id,account_id) SELECT b.department_id,b.account_id,b.budget budget_cents,COALESCE(a.actual,0) actual_cents,COALESCE(a.actual,0)-b.budget variance_cents,ROUND(100.0*(COALESCE(a.actual,0)-b.budget)/NULLIF(b.budget,0),2) variance_pct,CASE WHEN COALESCE(a.actual,0)>b.budget*1.1 THEN 1 ELSE 0 END over_budget FROM b LEFT JOIN a ON a.department_id=b.department_id AND a.account_id=b.account_id ORDER BY b.department_id,b.account_id"
+    }
+  ],
+  "hints": [
+    "预算单独聚合",
+    "预算单独聚合；费用独立聚合",
+    "重点核对输出粒度：部门×科目"
+  ],
+  "explanation": "预算单独聚合；费用独立聚合；合并并计算差异。预算按月存在，连接分录后再求和会放大预算。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 16.7
+}

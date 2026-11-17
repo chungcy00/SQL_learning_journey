@@ -1,0 +1,80 @@
+{
+  "projectId": "hr",
+  "title": "月度离职率与趋势",
+  "context": "人资经理比较各部门真实离职率。",
+  "requirements": "2025年每部门每月真实离职人数（终止日期落月内，取终止前岗位）/期初期末平均在职数；期初以当月首日之前一天在职为准；滚动三月率用离职总数/三个月平均人数之和，非简单平均。",
+  "grain": "部门×月",
+  "commonError": "把部门调动当离职会夸大离职率。",
+  "executionSteps": [
+    "从历史岗位重建人数",
+    "匹配真正终止",
+    "计算月率及加权滚动率"
+  ],
+  "difficulty": "困难",
+  "mysqlSql": "WITH m AS (SELECT month_key,MIN(day) first_day,MAX(day) last_day,MIN(day_index) first_idx FROM calendar_days WHERE month_key>='2025-01' GROUP BY month_key), a AS (SELECT d.department_id,m.month_key,SUM(CASE WHEN h.start_date< m.first_day AND (h.end_date IS NULL OR h.end_date>=m.first_day) THEN 1 ELSE 0 END) opening,SUM(CASE WHEN h.start_date<=m.last_day AND (h.end_date IS NULL OR h.end_date>m.last_day) THEN 1 ELSE 0 END) closing,SUM(CASE WHEN e.termination_date BETWEEN m.first_day AND m.last_day AND h.end_date=e.termination_date THEN 1 ELSE 0 END) exits FROM departments d CROSS JOIN m LEFT JOIN employment_history h ON h.department_id=d.department_id LEFT JOIN employees e ON e.employee_id=h.employee_id GROUP BY d.department_id,m.month_key), b AS (SELECT *, (opening+closing)/2.0 avg_h FROM a), z AS (SELECT *,SUM(exits) OVER(PARTITION BY department_id ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) e3,SUM(avg_h) OVER(PARTITION BY department_id ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) h3,COUNT(*) OVER(PARTITION BY department_id ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) n3 FROM b) SELECT department_id,month_key,opening,closing,exits,ROUND(100.0*exits/NULLIF(avg_h,0),2) exit_pct,CASE WHEN n3=3 THEN ROUND(100.0*e3/NULLIF(h3,0),2) ELSE NULL END rolling_pct FROM z ORDER BY department_id,month_key",
+  "sqliteSql": "WITH m AS (SELECT month_key,MIN(day) first_day,MAX(day) last_day,MIN(day_index) first_idx FROM calendar_days WHERE month_key>='2025-01' GROUP BY month_key), a AS (SELECT d.department_id,m.month_key,SUM(CASE WHEN h.start_date< m.first_day AND (h.end_date IS NULL OR h.end_date>=m.first_day) THEN 1 ELSE 0 END) opening,SUM(CASE WHEN h.start_date<=m.last_day AND (h.end_date IS NULL OR h.end_date>m.last_day) THEN 1 ELSE 0 END) closing,SUM(CASE WHEN e.termination_date BETWEEN m.first_day AND m.last_day AND h.end_date=e.termination_date THEN 1 ELSE 0 END) exits FROM departments d CROSS JOIN m LEFT JOIN employment_history h ON h.department_id=d.department_id LEFT JOIN employees e ON e.employee_id=h.employee_id GROUP BY d.department_id,m.month_key), b AS (SELECT *, (opening+closing)/2.0 avg_h FROM a), z AS (SELECT *,SUM(exits) OVER(PARTITION BY department_id ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) e3,SUM(avg_h) OVER(PARTITION BY department_id ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) h3,COUNT(*) OVER(PARTITION BY department_id ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) n3 FROM b) SELECT department_id,month_key,opening,closing,exits,ROUND(100.0*exits/NULLIF(avg_h,0),2) exit_pct,CASE WHEN n3=3 THEN ROUND(100.0*e3/NULLIF(h3,0),2) ELSE NULL END rolling_pct FROM z ORDER BY department_id,month_key",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "department_id",
+    "month_key",
+    "opening",
+    "closing",
+    "exits",
+    "exit_pct",
+    "rolling_pct"
+  ],
+  "id": "BP22",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-52"
+  ],
+  "datasetId": "hr-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP22.json",
+  "expectedRowCount": 84,
+  "expectedColumns": [
+    "department_id",
+    "month_key",
+    "opening",
+    "closing",
+    "exits",
+    "exit_pct",
+    "rolling_pct"
+  ],
+  "sourceTables": [
+    "calendar_days",
+    "departments",
+    "employees",
+    "employment_history"
+  ],
+  "dependencyTables": [
+    "calendar_days",
+    "departments",
+    "employees",
+    "employment_history",
+    "positions",
+    "stores"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH m AS (SELECT month_key,MIN(day) first_day,MAX(day) last_day,MIN(day_index) first_idx FROM calendar_days WHERE month_key>='2025-01' GROUP BY month_key), a AS (SELECT d.department_id,m.month_key,SUM(CASE WHEN h.start_date< m.first_day AND (h.end_date IS NULL OR h.end_date>=m.first_day) THEN 1 ELSE 0 END) opening,SUM(CASE WHEN h.start_date<=m.last_day AND (h.end_date IS NULL OR h.end_date>m.last_day) THEN 1 ELSE 0 END) closing,SUM(CASE WHEN e.termination_date BETWEEN m.first_day AND m.last_day AND h.end_date=e.termination_date THEN 1 ELSE 0 END) exits FROM departments d CROSS JOIN m LEFT JOIN employment_history h ON h.department_id=d.department_id LEFT JOIN employees e ON e.employee_id=h.employee_id GROUP BY d.department_id,m.month_key), b AS (SELECT *, (opening+closing)/2.0 avg_h FROM a), z AS (SELECT *,SUM(exits) OVER(PARTITION BY department_id ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) e3,SUM(avg_h) OVER(PARTITION BY department_id ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) h3,COUNT(*) OVER(PARTITION BY department_id ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) n3 FROM b) SELECT department_id,month_key,opening,closing,exits,ROUND(100.0*exits/NULLIF(avg_h,0),2) exit_pct,CASE WHEN n3=3 THEN ROUND(100.0*e3/NULLIF(h3,0),2) ELSE NULL END rolling_pct FROM z ORDER BY department_id,month_key",
+      "sqliteSql": "WITH m AS (SELECT month_key,MIN(day) first_day,MAX(day) last_day,MIN(day_index) first_idx FROM calendar_days WHERE month_key>='2025-01' GROUP BY month_key), a AS (SELECT d.department_id,m.month_key,SUM(CASE WHEN h.start_date< m.first_day AND (h.end_date IS NULL OR h.end_date>=m.first_day) THEN 1 ELSE 0 END) opening,SUM(CASE WHEN h.start_date<=m.last_day AND (h.end_date IS NULL OR h.end_date>m.last_day) THEN 1 ELSE 0 END) closing,SUM(CASE WHEN e.termination_date BETWEEN m.first_day AND m.last_day AND h.end_date=e.termination_date THEN 1 ELSE 0 END) exits FROM departments d CROSS JOIN m LEFT JOIN employment_history h ON h.department_id=d.department_id LEFT JOIN employees e ON e.employee_id=h.employee_id GROUP BY d.department_id,m.month_key), b AS (SELECT *, (opening+closing)/2.0 avg_h FROM a), z AS (SELECT *,SUM(exits) OVER(PARTITION BY department_id ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) e3,SUM(avg_h) OVER(PARTITION BY department_id ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) h3,COUNT(*) OVER(PARTITION BY department_id ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) n3 FROM b) SELECT department_id,month_key,opening,closing,exits,ROUND(100.0*exits/NULLIF(avg_h,0),2) exit_pct,CASE WHEN n3=3 THEN ROUND(100.0*e3/NULLIF(h3,0),2) ELSE NULL END rolling_pct FROM z ORDER BY department_id,month_key"
+    }
+  ],
+  "hints": [
+    "从历史岗位重建人数",
+    "从历史岗位重建人数；匹配真正终止",
+    "重点核对输出粒度：部门×月"
+  ],
+  "explanation": "从历史岗位重建人数；匹配真正终止；计算月率及加权滚动率。把部门调动当离职会夸大离职率。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 4.4
+}

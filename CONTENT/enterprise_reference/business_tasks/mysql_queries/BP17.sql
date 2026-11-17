@@ -1,0 +1,1 @@
+SELECT supplier_invoice_id,supplier_id,billed_cents,paid_cents,balance_cents,CASE WHEN paid_cents=0 THEN 'unpaid' WHEN balance_cents>0 THEN 'partial' WHEN balance_cents=0 THEN 'paid' ELSE 'overpaid' END payment_state FROM v_invoice_balance ORDER BY balance_cents DESC,supplier_invoice_id;

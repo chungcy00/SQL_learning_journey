@@ -1,0 +1,665 @@
+{
+  "chapterId": "ch13",
+  "title": "集合运算",
+  "count": 7,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "cards": [
+    {
+      "id": "fc0096",
+      "chapterId": "ch13",
+      "knowledgePointIds": [
+        "kp13-04"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp13-04"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0181"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "中等",
+      "front": {
+        "question": "集合合并为什么要求左右查询拥有相同列数？"
+      },
+      "back": {
+        "answer": "集合运算按列位置对齐，而非按列名对齐。",
+        "explanation": "每列的类型和业务含义应兼容；列名通常来自第一个查询。"
+      },
+      "tags": [
+        "UNION 去重与合并结果",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "UNION 去重与合并结果"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0097",
+      "chapterId": "ch13",
+      "knowledgePointIds": [
+        "kp13-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp13-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0176",
+        "q0179",
+        "q0182"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "中等",
+      "front": {
+        "question": "回忆保留两份来源全部重复行的合并结构，并增加来源列以便核查。",
+        "sourceTables": [
+          {
+            "name": "list_a",
+            "columns": [
+              {
+                "name": "value",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1
+              ],
+              [
+                1
+              ],
+              [
+                2
+              ],
+              [
+                null
+              ]
+            ],
+            "constraints": ""
+          },
+          {
+            "name": "list_b",
+            "columns": [
+              {
+                "name": "value",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1
+              ],
+              [
+                3
+              ],
+              [
+                null
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "SELECT 来源标识,列 FROM 表1 UNION ALL SELECT 来源标识,列 FROM 表2",
+        "explanation": "保留重复与来源；两个查询的列位置应一致，排序作用于合并结果。",
+        "code": "SELECT 'A' AS src,value FROM list_a UNION ALL SELECT 'B' AS src,value FROM list_b ORDER BY src,value",
+        "sqliteCode": "SELECT 'A' AS src,value FROM list_a UNION ALL SELECT 'B' AS src,value FROM list_b ORDER BY src,value",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "src",
+            "value"
+          ],
+          "rows": [
+            [
+              "A",
+              null
+            ],
+            [
+              "A",
+              1
+            ],
+            [
+              "A",
+              1
+            ],
+            [
+              "A",
+              2
+            ],
+            [
+              "B",
+              null
+            ],
+            [
+              "B",
+              1
+            ],
+            [
+              "B",
+              3
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "UNION 与 UNION ALL",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "c0474052c2647f84a46fd41bb8f77ff9a2ba0a8350223db231734ded3e88d816",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0097-demo"
+      ],
+      "fixturePath": "fixtures/fc0097.json",
+      "referenceTopicNames": [
+        "UNION 与 UNION ALL"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0097.sql"
+    },
+    {
+      "id": "fc0098",
+      "chapterId": "ch13",
+      "knowledgePointIds": [
+        "kp13-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp13-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0176",
+        "q0179"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "中等",
+      "front": {
+        "question": "UNION 与 UNION ALL 对重复行的处理有什么区别？"
+      },
+      "back": {
+        "answer": "UNION 去掉整行重复；UNION ALL 保留。",
+        "explanation": "汇总交易流水通常需要保留真实重复金额，而不是按整行消重。"
+      },
+      "tags": [
+        "UNION 与 UNION ALL",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "UNION 与 UNION ALL"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0099",
+      "chapterId": "ch13",
+      "knowledgePointIds": [
+        "kp13-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp13-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0177",
+        "q0180"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "中等",
+      "front": {
+        "question": "INTERSECT 和 EXCEPT 的方向有何区别？"
+      },
+      "back": {
+        "answer": "INTERSECT 取交集，EXCEPT 取左侧有而右侧没有的行。",
+        "explanation": "差集有方向；默认 DISTINCT 集合语义，NULL 在集合去重匹配中按不相异处理。"
+      },
+      "tags": [
+        "INTERSECT 与 EXCEPT",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "INTERSECT 与 EXCEPT"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0100",
+      "chapterId": "ch13",
+      "knowledgePointIds": [
+        "kp13-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp13-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0177",
+        "q0180"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "中等",
+      "front": {
+        "question": "返回A和B共有的值，默认消除重复，填入集合运算符。",
+        "code": "SELECT value FROM list_a □ SELECT value FROM list_b ORDER BY value",
+        "sourceTables": [
+          {
+            "name": "list_a",
+            "columns": [
+              {
+                "name": "value",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1
+              ],
+              [
+                1
+              ],
+              [
+                2
+              ],
+              [
+                null
+              ]
+            ],
+            "constraints": ""
+          },
+          {
+            "name": "list_b",
+            "columns": [
+              {
+                "name": "value",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1
+              ],
+              [
+                3
+              ],
+              [
+                null
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "INTERSECT",
+        "explanation": "交集包含共同NULL和1，各只出现一次。",
+        "acceptedBlanks": [
+          "INTERSECT"
+        ],
+        "code": "SELECT value FROM list_a INTERSECT SELECT value FROM list_b ORDER BY value",
+        "sqliteCode": "SELECT value FROM list_a INTERSECT SELECT value FROM list_b ORDER BY value",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "value"
+          ],
+          "rows": [
+            [
+              null
+            ],
+            [
+              1
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "INTERSECT 与 EXCEPT",
+        "代码填空"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "MySQL 8.4 支持 INTERSECT；SQLite已实测默认去重语义。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "efd6fa92a42c8025e6e11733cb89854bb7aaeff43af50be4fa7776dc1cbaf3e1",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0100-demo"
+      ],
+      "fixturePath": "fixtures/fc0100.json",
+      "referenceTopicNames": [
+        "INTERSECT 与 EXCEPT"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0100.sql"
+    },
+    {
+      "id": "fc0101",
+      "chapterId": "ch13",
+      "knowledgePointIds": [
+        "kp13-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp13-03"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0178",
+        "q0183"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "结果预测",
+      "difficulty": "中等",
+      "front": {
+        "question": "预测从A中排除B中的值，最后按值排序。",
+        "code": "SELECT value FROM list_a EXCEPT SELECT value FROM list_b ORDER BY value",
+        "sourceTables": [
+          {
+            "name": "list_a",
+            "columns": [
+              {
+                "name": "value",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1
+              ],
+              [
+                1
+              ],
+              [
+                2
+              ],
+              [
+                null
+              ]
+            ],
+            "constraints": ""
+          },
+          {
+            "name": "list_b",
+            "columns": [
+              {
+                "name": "value",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1
+              ],
+              [
+                3
+              ],
+              [
+                null
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "返回以下结果。",
+        "explanation": "A的1和NULL均在B中；剩2。",
+        "code": "SELECT value FROM list_a EXCEPT SELECT value FROM list_b ORDER BY value",
+        "sqliteCode": "SELECT value FROM list_a EXCEPT SELECT value FROM list_b ORDER BY value",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "value"
+          ],
+          "rows": [
+            [
+              2
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "差集与排序范围",
+        "结果预测"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "44835fd2a6f10fdb752b60986266d2e46d1cce7db94b106e4d0dbe61d3e8d81d",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0101-demo"
+      ],
+      "fixturePath": "fixtures/fc0101.json",
+      "referenceTopicNames": [
+        "差集与排序范围"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0101.sql"
+    },
+    {
+      "id": "fc0102",
+      "chapterId": "ch13",
+      "knowledgePointIds": [
+        "kp13-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp13-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0176",
+        "q0179"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "错误纠正",
+      "difficulty": "中等",
+      "front": {
+        "question": "目标：合并两份原始流水且保留重复值。纠正无意去重的写法。",
+        "code": "SELECT value FROM list_a UNION SELECT value FROM list_b ORDER BY value",
+        "sourceTables": [
+          {
+            "name": "list_a",
+            "columns": [
+              {
+                "name": "value",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1
+              ],
+              [
+                1
+              ],
+              [
+                2
+              ],
+              [
+                null
+              ]
+            ],
+            "constraints": ""
+          },
+          {
+            "name": "list_b",
+            "columns": [
+              {
+                "name": "value",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1
+              ],
+              [
+                3
+              ],
+              [
+                null
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "改用背面的修正语句。",
+        "explanation": "UNION 会消掉有效的重复流水；只有业务确认重复是错误时才去重。",
+        "code": "SELECT value FROM list_a UNION ALL SELECT value FROM list_b ORDER BY value",
+        "sqliteCode": "SELECT value FROM list_a UNION ALL SELECT value FROM list_b ORDER BY value",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "value"
+          ],
+          "rows": [
+            [
+              null
+            ],
+            [
+              null
+            ],
+            [
+              1
+            ],
+            [
+              1
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ]
+          ]
+        },
+        "wrongResult": {
+          "kind": "result",
+          "columns": [
+            "value"
+          ],
+          "rows": [
+            [
+              null
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ]
+          ]
+        },
+        "correctionReason": "UNION 会消掉有效的重复流水；只有业务确认重复是错误时才去重。"
+      },
+      "tags": [
+        "UNION 与 UNION ALL",
+        "错误纠正"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "f91ddae94fbc8eacfc0c52c29a9937bced512bc09c9ade4bb52d35f827b47276",
+        "mysqlNative": "未执行",
+        "wrongRejected": true,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0102-demo"
+      ],
+      "fixturePath": "fixtures/fc0102.json",
+      "referenceTopicNames": [
+        "UNION 与 UNION ALL"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0102.sql"
+    }
+  ]
+}

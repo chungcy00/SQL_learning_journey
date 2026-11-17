@@ -1,0 +1,22 @@
+{
+  "id": "fc0003-demo",
+  "tables": [],
+  "dialect": "SQLite",
+  "sqliteSql": "CREATE TABLE parent_card (id INT NOT NULL PRIMARY KEY); CREATE TABLE child_card (id INT NOT NULL PRIMARY KEY, client_id INT, FOREIGN KEY (client_id) REFERENCES parent_card(id)); INSERT INTO parent_card VALUES (1); INSERT INTO child_card VALUES (10,1);",
+  "mysqlSql": "CREATE TABLE parent_card (id INT NOT NULL PRIMARY KEY); CREATE TABLE child_card (id INT NOT NULL PRIMARY KEY, client_id INT, FOREIGN KEY (client_id) REFERENCES parent_card(id)); INSERT INTO parent_card VALUES (1); INSERT INTO child_card VALUES (10,1);",
+  "verificationQuery": "SELECT id,client_id FROM child_card ORDER BY id",
+  "expectedRows": [
+    [
+      10,
+      1
+    ]
+  ],
+  "expectedColumns": [
+    "id",
+    "client_id"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

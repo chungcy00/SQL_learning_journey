@@ -1,0 +1,97 @@
+{
+  "visibility": "hidden",
+  "variant": "empty",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "products",
+      "columns": [
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "product_name",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "category",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "price",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "stock",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": []
+    },
+    {
+      "name": "purchase_items",
+      "columns": [
+        {
+          "name": "po_item_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "po_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "quantity_ordered",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "unit_price",
+          "type": "INTEGER",
+          "mysqlType": "DECIMAL(12,2)",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": []
+    }
+  ],
+  "id": "q0137-empty",
+  "questionId": "q0137",
+  "datasetId": "q0137-lesson",
+  "expected": {
+    "columns": [
+      "product_id",
+      "product_name"
+    ],
+    "rows": []
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

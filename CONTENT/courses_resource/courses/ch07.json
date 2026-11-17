@@ -1,0 +1,634 @@
+{
+  "id": "ch07",
+  "number": 7,
+  "title": "分组统计",
+  "stage": "核心",
+  "objective": "按组聚合并区分行筛选与组筛选。",
+  "prerequisites": [
+    "ch06"
+  ],
+  "knowledgePoints": [
+    {
+      "id": "kp07-01",
+      "chapterId": "ch07",
+      "title": "GROUP BY 分组",
+      "learningObjective": "能够运用本节知识完成：按商品类别汇总销售额",
+      "prerequisites": [
+        "ch06"
+      ],
+      "concept": "依据分组键将输入行归入不同组，再对每组计算聚合值；本例三个类别。",
+      "syntax": "SELECT key, SUM(value) FROM t GROUP BY key;",
+      "parameters": {
+        "key": "分组维度",
+        "value": "度量列"
+      },
+      "fixtureIds": [
+        "lesson-orders"
+      ],
+      "sourceTables": [
+        {
+          "name": "orders",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "sales",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "store_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "order_date",
+              "type": "TEXT",
+              "mysqlType": "DATE",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "护肤品",
+              800,
+              1,
+              "2026-01-03",
+              1
+            ],
+            [
+              2,
+              "化妆品",
+              400,
+              2,
+              "2026-01-10",
+              2
+            ],
+            [
+              3,
+              "护肤品",
+              600,
+              1,
+              "2026-02-02",
+              1
+            ],
+            [
+              4,
+              "化妆品",
+              300,
+              2,
+              "2026-02-15",
+              null
+            ],
+            [
+              5,
+              "日用品",
+              1500,
+              1,
+              "2026-02-20",
+              3
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT category, SUM(sales) AS total_sales FROM orders GROUP BY category ORDER BY total_sales DESC;",
+      "sqliteSql": "SELECT category, SUM(sales) AS total_sales FROM orders GROUP BY category ORDER BY total_sales DESC;",
+      "executionSteps": [
+        "护肤品800+600=1400",
+        "化妆品400+300=700",
+        "日用品1500",
+        "按总额降序"
+      ],
+      "useCase": "按商品类别汇总销售额",
+      "comparison": "DISTINCT 只去重，不计算合计。",
+      "commonError": {
+        "example": "SELECT category, SUM(sales) FROM orders（遗漏 GROUP BY）",
+        "correction": "GROUP BY category"
+      },
+      "notes": "分组键 NULL 会被归为一组；禁止依赖自然分组顺序。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0078",
+        "q0079",
+        "q0081",
+        "q0082",
+        "q0083",
+        "q0088"
+      ],
+      "relatedFlashcardIds": [
+        "fc0044",
+        "fc0045",
+        "fc0049"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp02-01",
+        "kp05-01",
+        "kp06-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "category",
+          "total_sales"
+        ],
+        "rows": [
+          [
+            "日用品",
+            1500
+          ],
+          [
+            "护肤品",
+            1400
+          ],
+          [
+            "化妆品",
+            700
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "visualization": {
+        "kind": "stepFlow",
+        "steps": [
+          {
+            "id": "1",
+            "label": "护肤品800+600=1400"
+          },
+          {
+            "id": "2",
+            "label": "化妆品400+300=700"
+          },
+          {
+            "id": "3",
+            "label": "日用品1500"
+          },
+          {
+            "id": "4",
+            "label": "按总额降序"
+          }
+        ],
+        "sourceFixtureIds": [
+          "lesson-orders"
+        ],
+        "resultColumns": [
+          "category",
+          "total_sales"
+        ]
+      },
+      "mysqlVerificationScript": "validation/mysql/kp07-01.sql",
+      "primaryQuestionIds": [
+        "q0078",
+        "q0079",
+        "q0081",
+        "q0082",
+        "q0083",
+        "q0088"
+      ],
+      "primaryFlashcardIds": [
+        "fc0044",
+        "fc0045",
+        "fc0049"
+      ]
+    },
+    {
+      "id": "kp07-02",
+      "chapterId": "ch07",
+      "title": "HAVING 与 WHERE",
+      "learningObjective": "能够运用本节知识完成：找出销售总额超过1000的类别",
+      "prerequisites": [
+        "kp07-01"
+      ],
+      "concept": "WHERE 在聚合前筛行，HAVING 在聚合后筛组；无 GROUP BY 的聚合查询也可有 HAVING。",
+      "syntax": "SELECT key,SUM(v) FROM t WHERE p GROUP BY key HAVING SUM(v)>n;",
+      "parameters": {
+        "p": "行条件",
+        "n": "组阈值"
+      },
+      "fixtureIds": [
+        "lesson-orders"
+      ],
+      "sourceTables": [
+        {
+          "name": "orders",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "sales",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "store_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "order_date",
+              "type": "TEXT",
+              "mysqlType": "DATE",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "护肤品",
+              800,
+              1,
+              "2026-01-03",
+              1
+            ],
+            [
+              2,
+              "化妆品",
+              400,
+              2,
+              "2026-01-10",
+              2
+            ],
+            [
+              3,
+              "护肤品",
+              600,
+              1,
+              "2026-02-02",
+              1
+            ],
+            [
+              4,
+              "化妆品",
+              300,
+              2,
+              "2026-02-15",
+              null
+            ],
+            [
+              5,
+              "日用品",
+              1500,
+              1,
+              "2026-02-20",
+              3
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT category, SUM(sales) AS total_sales FROM orders GROUP BY category HAVING SUM(sales) > 1000 ORDER BY total_sales DESC;",
+      "sqliteSql": "SELECT category, SUM(sales) AS total_sales FROM orders GROUP BY category HAVING SUM(sales) > 1000 ORDER BY total_sales DESC;",
+      "executionSteps": [
+        "读取5行",
+        "按类别分组",
+        "计算总量",
+        "移除700的组",
+        "排序"
+      ],
+      "useCase": "找出销售总额超过1000的类别",
+      "comparison": "WHERE sales > 1000 只筛单笔，不筛类别总额。",
+      "commonError": {
+        "example": "WHERE SUM(sales)>1000",
+        "correction": "HAVING SUM(sales)>1000"
+      },
+      "notes": "逻辑顺序 FROM→WHERE→GROUP BY→聚合→HAVING→SELECT→ORDER BY→LIMIT；不是物理执行计划。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0076",
+        "q0084",
+        "q0087",
+        "q0089",
+        "q0090",
+        "q0093"
+      ],
+      "relatedFlashcardIds": [
+        "fc0046",
+        "fc0047"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp02-01",
+        "kp05-01",
+        "kp06-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "category",
+          "total_sales"
+        ],
+        "rows": [
+          [
+            "日用品",
+            1500
+          ],
+          [
+            "护肤品",
+            1400
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "visualization": {
+        "kind": "stepFlow",
+        "steps": [
+          {
+            "id": "1",
+            "label": "读取5行"
+          },
+          {
+            "id": "2",
+            "label": "按类别分组"
+          },
+          {
+            "id": "3",
+            "label": "计算总量"
+          },
+          {
+            "id": "4",
+            "label": "移除700的组"
+          },
+          {
+            "id": "5",
+            "label": "排序"
+          }
+        ],
+        "sourceFixtureIds": [
+          "lesson-orders"
+        ],
+        "resultColumns": [
+          "category",
+          "total_sales"
+        ]
+      },
+      "mysqlVerificationScript": "validation/mysql/kp07-02.sql",
+      "primaryQuestionIds": [
+        "q0076",
+        "q0084",
+        "q0087",
+        "q0089",
+        "q0090",
+        "q0093"
+      ],
+      "primaryFlashcardIds": [
+        "fc0046",
+        "fc0047"
+      ]
+    },
+    {
+      "id": "kp07-03",
+      "chapterId": "ch07",
+      "title": "多字段分组与严格分组",
+      "learningObjective": "能够运用本节知识完成：比较各门店各类别销售表现",
+      "prerequisites": [
+        "kp07-02"
+      ],
+      "concept": "多个分组字段形成联合键；MySQL 默认 ONLY_FULL_GROUP_BY 要求非聚合表达式在分组键中、由其函数决定或符合允许的单值条件。",
+      "syntax": "GROUP BY store_id, category",
+      "parameters": {
+        "store_id": "门店维度",
+        "category": "类别维度"
+      },
+      "fixtureIds": [
+        "lesson-orders"
+      ],
+      "sourceTables": [
+        {
+          "name": "orders",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "sales",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "store_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "order_date",
+              "type": "TEXT",
+              "mysqlType": "DATE",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "护肤品",
+              800,
+              1,
+              "2026-01-03",
+              1
+            ],
+            [
+              2,
+              "化妆品",
+              400,
+              2,
+              "2026-01-10",
+              2
+            ],
+            [
+              3,
+              "护肤品",
+              600,
+              1,
+              "2026-02-02",
+              1
+            ],
+            [
+              4,
+              "化妆品",
+              300,
+              2,
+              "2026-02-15",
+              null
+            ],
+            [
+              5,
+              "日用品",
+              1500,
+              1,
+              "2026-02-20",
+              3
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT store_id, category, SUM(sales) AS total FROM orders GROUP BY store_id, category ORDER BY total DESC, store_id;",
+      "sqliteSql": "SELECT store_id, category, SUM(sales) AS total FROM orders GROUP BY store_id, category ORDER BY total DESC, store_id;",
+      "executionSteps": [
+        "构造门店与类别组合",
+        "组内求和",
+        "按金额排序"
+      ],
+      "useCase": "比较各门店各类别销售表现",
+      "comparison": "SQLite 可能接受裸列，MySQL 严格模式通常拒绝无确定来源裸列。",
+      "commonError": {
+        "example": "SELECT category, id, SUM(sales) FROM orders GROUP BY category",
+        "correction": "删除 id 或根据业务将其聚合/纳入分组"
+      },
+      "notes": "函数依赖不能简单用字符串匹配判断；本例明确列出非聚合字段。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0077",
+        "q0080",
+        "q0085",
+        "q0086",
+        "q0091",
+        "q0092"
+      ],
+      "relatedFlashcardIds": [
+        "fc0048",
+        "fc0050"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp02-01",
+        "kp05-01",
+        "kp06-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "store_id",
+          "category",
+          "total"
+        ],
+        "rows": [
+          [
+            1,
+            "日用品",
+            1500
+          ],
+          [
+            1,
+            "护肤品",
+            1400
+          ],
+          [
+            2,
+            "化妆品",
+            700
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "visualization": {
+        "kind": "stepFlow",
+        "steps": [
+          {
+            "id": "1",
+            "label": "构造门店与类别组合"
+          },
+          {
+            "id": "2",
+            "label": "组内求和"
+          },
+          {
+            "id": "3",
+            "label": "按金额排序"
+          }
+        ],
+        "sourceFixtureIds": [
+          "lesson-orders"
+        ],
+        "resultColumns": [
+          "store_id",
+          "category",
+          "total"
+        ]
+      },
+      "mysqlVerificationScript": "validation/mysql/kp07-03.sql",
+      "primaryQuestionIds": [
+        "q0077",
+        "q0080",
+        "q0085",
+        "q0086",
+        "q0091",
+        "q0092"
+      ],
+      "primaryFlashcardIds": [
+        "fc0048",
+        "fc0050"
+      ]
+    }
+  ],
+  "plannedQuestionCount": 18,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "dialect": "MySQL 8.4",
+  "summary": "完成本章后：按组聚合并区分行筛选与组筛选。",
+  "sources": [
+    "https://dev.mysql.com/doc/refman/8.4/en/",
+    "https://dev.mysql.com/doc/refman/8.4/en/functions.html"
+  ],
+  "knowledgePointCount": 3
+}

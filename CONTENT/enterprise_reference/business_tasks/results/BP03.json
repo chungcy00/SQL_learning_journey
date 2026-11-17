@@ -1,0 +1,33 @@
+{
+  "columns": [
+    "product_id",
+    "net_cents",
+    "margin_pct",
+    "discount_cents",
+    "refund_cents"
+  ],
+  "rows": [
+    [
+      34,
+      2740920,
+      5.5,
+      139230,
+      130650
+    ],
+    [
+      85,
+      2415820,
+      9.84,
+      108230,
+      161950
+    ],
+    [
+      17,
+      1794420,
+      8.98,
+      84510,
+      156870
+    ]
+  ],
+  "orderGuaranteed": true
+}

@@ -1,0 +1,86 @@
+{
+  "visibility": "public",
+  "variant": "public",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "hr_employees",
+      "columns": [
+        {
+          "name": "employee_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "department_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "employee_name",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "hire_date",
+          "type": "TEXT",
+          "mysqlType": "DATE",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "termination_date",
+          "type": "TEXT",
+          "mysqlType": "DATE",
+          "sqliteType": "TEXT"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          1,
+          "A",
+          "2025-01-01",
+          null
+        ],
+        [
+          2,
+          1,
+          "B",
+          "2025-02-01",
+          "2026-02-01"
+        ],
+        [
+          3,
+          2,
+          "C",
+          "2026-02-02",
+          null
+        ]
+      ]
+    }
+  ],
+  "id": "q0173-public",
+  "questionId": "q0173",
+  "datasetId": "q0173-lesson",
+  "expected": {
+    "columns": [
+      "employee_id"
+    ],
+    "rows": [
+      [
+        1
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

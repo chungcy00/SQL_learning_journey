@@ -1,0 +1,89 @@
+{
+  "id": "fc0143-demo",
+  "tables": [
+    {
+      "name": "store_products",
+      "columns": [
+        {
+          "name": "store_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "net_cents",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          1,
+          800
+        ],
+        [
+          1,
+          2,
+          800
+        ],
+        [
+          1,
+          3,
+          600
+        ],
+        [
+          1,
+          4,
+          300
+        ],
+        [
+          2,
+          1,
+          100
+        ],
+        [
+          2,
+          2,
+          200
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "WITH r AS (SELECT store_id,product_id,ROW_NUMBER() OVER(PARTITION BY store_id ORDER BY net_cents DESC,product_id) AS rn FROM store_products) SELECT store_id,product_id FROM r WHERE rn<=3 ORDER BY store_id,rn",
+  "mysqlSql": "WITH r AS (SELECT store_id,product_id,ROW_NUMBER() OVER(PARTITION BY store_id ORDER BY net_cents DESC,product_id) AS rn FROM store_products) SELECT store_id,product_id FROM r WHERE rn<=3 ORDER BY store_id,rn",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      2
+    ],
+    [
+      2,
+      1
+    ]
+  ],
+  "expectedColumns": [
+    "store_id",
+    "product_id"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

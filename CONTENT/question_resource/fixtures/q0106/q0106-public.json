@@ -1,0 +1,188 @@
+{
+  "visibility": "public",
+  "variant": "public",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "order_items",
+      "columns": [
+        {
+          "name": "order_item_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "order_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "quantity",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "unit_price",
+          "type": "INTEGER",
+          "mysqlType": "DECIMAL(12,2)",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "discount_amount",
+          "type": "INTEGER",
+          "mysqlType": "DECIMAL(12,2)",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          1,
+          1,
+          2,
+          100,
+          10
+        ],
+        [
+          2,
+          2,
+          1,
+          1,
+          100,
+          0
+        ],
+        [
+          3,
+          3,
+          2,
+          3,
+          50,
+          0
+        ]
+      ]
+    },
+    {
+      "name": "products",
+      "columns": [
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "product_name",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "category",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "price",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "stock",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "Mask",
+          "护肤品",
+          15,
+          150
+        ],
+        [
+          2,
+          "Serum",
+          "护肤品",
+          89,
+          40
+        ],
+        [
+          3,
+          "Cleanser",
+          "护肤品",
+          35,
+          200
+        ],
+        [
+          4,
+          "Cream",
+          "化妆品",
+          65,
+          180
+        ],
+        [
+          5,
+          "Sunscreen",
+          "化妆品",
+          45,
+          80
+        ],
+        [
+          6,
+          "Soap_1",
+          "日用品",
+          15,
+          0
+        ]
+      ]
+    }
+  ],
+  "id": "q0106-public",
+  "questionId": "q0106",
+  "datasetId": "q0106-lesson",
+  "expected": {
+    "columns": [
+      "order_item_id",
+      "product_name",
+      "quantity"
+    ],
+    "rows": [
+      [
+        1,
+        "Mask",
+        2
+      ],
+      [
+        2,
+        "Mask",
+        1
+      ],
+      [
+        3,
+        "Serum",
+        3
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

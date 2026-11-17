@@ -1,0 +1,74 @@
+{
+  "id": "q0294-public",
+  "questionId": "q0294",
+  "visibility": "public",
+  "variant": "public",
+  "kind": "database_delta",
+  "datasetId": "enterprise-v2",
+  "baseDatabase": "databases/enterprise/enterprise.sqlite",
+  "baseSha256": "bc4bd510731d3a3ef45f5bd5227349b37e59535322ba85afb28bcc0a4093ab2e",
+  "patchSql": [],
+  "patchDescription": "不更改上一阶段的正式模拟企业库",
+  "patchRowChanges": 0,
+  "testIsolation": "每次使用全新数据库副本；夹具可故意引入对账差异或改变业务记录，仅用于判题，绝不可写入基准库",
+  "expected": {
+    "columns": [
+      "source_id",
+      "net_cents",
+      "gross_cents",
+      "spend_cents",
+      "contribution_cents",
+      "contribution_pct"
+    ],
+    "rows": [
+      [
+        1,
+        111551350,
+        43752386,
+        0,
+        43752386,
+        39.22
+      ],
+      [
+        2,
+        78065030,
+        30342507,
+        4476201,
+        25866306,
+        33.13
+      ],
+      [
+        3,
+        64911290,
+        25468400,
+        4177783,
+        21290617,
+        32.8
+      ],
+      [
+        5,
+        35031600,
+        13885392,
+        4304517,
+        9580875,
+        27.35
+      ],
+      [
+        4,
+        29221640,
+        11467883,
+        3790908,
+        7676975,
+        26.27
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

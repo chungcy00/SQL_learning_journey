@@ -1,0 +1,7 @@
+-- 门店净销售、利润与目标达成
+-- 原生MySQL 8.4未执行。先从第二部分资源导入对应隔离数据库。
+-- 公开基准参考解；独立执行等价解，不得变动原库。
+WITH a AS (SELECT store_id,SUM(net_cents) net,SUM(cost_cents) cost FROM v_sales_lines WHERE channel='store' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY store_id), b AS (SELECT store_id,SUM(target_cents) target FROM sales_targets WHERE month_key BETWEEN '2025-01' AND '2025-12' GROUP BY store_id) SELECT s.store_id,COALESCE(a.net,0) net_cents,COALESCE(a.net-a.cost,0) gross_cents,ROUND(100.0*(a.net-a.cost)/NULLIF(a.net,0),2) margin_pct,b.target target_cents,ROUND(100.0*COALESCE(a.net,0)/NULLIF(b.target,0),2) achievement_pct FROM stores s LEFT JOIN a ON a.store_id=s.store_id LEFT JOIN b ON b.store_id=s.store_id ORDER BY s.store_id;
+
+-- 等价解（SQLite已验证，MySQL待复验）
+WITH a AS (SELECT store_id,SUM(net_cents) net,SUM(cost_cents) cost FROM v_sales_lines WHERE channel='store' AND (order_date>='2025-01-01' AND order_date<='2025-12-31') GROUP BY store_id), b AS (SELECT store_id,SUM(target_cents) target FROM sales_targets WHERE (month_key>='2025-01' AND month_key<='2025-12') GROUP BY store_id) SELECT s.store_id,COALESCE(a.net,0) net_cents,COALESCE(a.net-a.cost,0) gross_cents,ROUND(100.0*(a.net-a.cost)/NULLIF(a.net,0),2) margin_pct,b.target target_cents,ROUND(100.0*COALESCE(a.net,0)/NULLIF(b.target,0),2) achievement_pct FROM stores s LEFT JOIN a ON a.store_id=s.store_id LEFT JOIN b ON b.store_id=s.store_id ORDER BY s.store_id;

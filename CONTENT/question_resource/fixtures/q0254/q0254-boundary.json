@@ -1,0 +1,42 @@
+{
+  "id": "q0254-boundary",
+  "questionId": "q0254",
+  "visibility": "hidden",
+  "variant": "boundary",
+  "kind": "database_delta",
+  "datasetId": "retail-v2",
+  "baseDatabase": "databases/retail/retail.sqlite",
+  "baseSha256": "649e1e06b63851702adc525d689d0319e5f10de164733998f9c5ffc81c03cbc8",
+  "patchSql": [
+    "UPDATE promotions SET start_date='2025-01-01',end_date='2025-12-31' WHERE promotion_id=(SELECT MIN(promotion_id) FROM promotions)"
+  ],
+  "patchDescription": "增加覆盖全年促销日期的情形，日历仍不应因促销区间重叠而重复计数。",
+  "patchRowChanges": 1,
+  "testIsolation": "每次使用全新数据库副本；夹具可故意引入对账差异或改变业务记录，仅用于判题，绝不可写入基准库",
+  "expected": {
+    "columns": [
+      "promo",
+      "days",
+      "daily_net_cents",
+      "daily_units",
+      "margin_pct"
+    ],
+    "rows": [
+      [
+        1,
+        365,
+        1314775.74,
+        151.04,
+        39.1
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

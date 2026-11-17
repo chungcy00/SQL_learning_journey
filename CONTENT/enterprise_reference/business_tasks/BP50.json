@@ -1,0 +1,115 @@
+{
+  "projectId": "enterprise",
+  "title": "跨域季度风险评分与经营报告",
+  "context": "企业综合经营联合分析：管理层要求以同一企业口径核对业务数据。",
+  "requirements": "2025年每季度，计算毛利率、费用率、人工率、供应商准时足量率、期末库存资金；风险项为毛利率<30%、费用率>50%、人工率>20%、履约<60%；保留所有季度，缺失不计风险并显示缺失指标数。使用月份映射，不将采购承诺算费用。",
+  "grain": "季度",
+  "commonError": "跨不同粒度连表会夸大指标；风险评分不是财务审计结论。",
+  "executionSteps": [
+    "建立季度轴",
+    "独立汇总各域",
+    "连接季度末库存",
+    "计算指标和风险"
+  ],
+  "difficulty": "挑战",
+  "crossGroup": "企业综合经营",
+  "mysqlSql": "WITH qm AS (SELECT DISTINCT month_key,CONCAT(SUBSTR(month_key,1,4),'-Q',CASE WHEN SUBSTR(month_key,6,2)<='03' THEN '1' WHEN SUBSTR(month_key,6,2)<='06' THEN '2' WHEN SUBSTR(month_key,6,2)<='09' THEN '3' ELSE '4' END) q FROM calendar_days WHERE month_key>='2025-01'), qs AS (SELECT q,MAX(month_key) end_m FROM qm GROUP BY q), s AS (SELECT qm.q,SUM(v.net_cents) net,SUM(v.net_cents-v.cost_cents) gross FROM v_sales_lines v JOIN qm ON qm.month_key=SUBSTR(v.order_date,1,7) GROUP BY qm.q), f AS (SELECT qm.q,SUM(v.expense_cents) expense FROM v_expenses v JOIN qm ON qm.month_key=SUBSTR(v.entry_date,1,7) GROUP BY qm.q), h AS (SELECT qm.q,SUM(v.labor_cents) labor FROM v_staff_month v JOIN qm ON qm.month_key=v.month_key GROUP BY qm.q), p AS (SELECT qm.q,COUNT(*) n,SUM(CASE WHEN v.on_time>=v.quantity_ordered THEN 1 ELSE 0 END) good FROM v_po_lines v JOIN qm ON qm.month_key=SUBSTR(v.promised_date,1,7) GROUP BY qm.q), i AS (SELECT SUBSTR(snapshot_date,1,7) m,SUM(quantity*unit_cost_cents) stock FROM inventory_snapshots GROUP BY SUBSTR(snapshot_date,1,7)), z AS (SELECT qs.q,s.net,100.0*s.gross/NULLIF(s.net,0) margin,100.0*COALESCE(f.expense,0)/NULLIF(s.net,0) expense_pct,100.0*COALESCE(h.labor,0)/NULLIF(s.net,0) labor_pct,100.0*p.good/NULLIF(p.n,0) delivery,i.stock FROM qs LEFT JOIN s ON s.q=qs.q LEFT JOIN f ON f.q=qs.q LEFT JOIN h ON h.q=qs.q LEFT JOIN p ON p.q=qs.q LEFT JOIN i ON i.m=qs.end_m) SELECT q,net net_cents,ROUND(margin,2) margin_pct,ROUND(expense_pct,2) expense_pct,ROUND(labor_pct,2) labor_pct,ROUND(delivery,2) delivery_pct,stock stock_cents,CASE WHEN margin<30 THEN 1 ELSE 0 END+CASE WHEN expense_pct>50 THEN 1 ELSE 0 END+CASE WHEN labor_pct>20 THEN 1 ELSE 0 END+CASE WHEN delivery<60 THEN 1 ELSE 0 END risk_count,CASE WHEN margin IS NULL THEN 1 ELSE 0 END+CASE WHEN expense_pct IS NULL THEN 1 ELSE 0 END+CASE WHEN labor_pct IS NULL THEN 1 ELSE 0 END+CASE WHEN delivery IS NULL THEN 1 ELSE 0 END missing_count FROM z ORDER BY q",
+  "sqliteSql": "WITH qm AS (SELECT DISTINCT month_key,CONCAT(SUBSTR(month_key,1,4),'-Q',CASE WHEN SUBSTR(month_key,6,2)<='03' THEN '1' WHEN SUBSTR(month_key,6,2)<='06' THEN '2' WHEN SUBSTR(month_key,6,2)<='09' THEN '3' ELSE '4' END) q FROM calendar_days WHERE month_key>='2025-01'), qs AS (SELECT q,MAX(month_key) end_m FROM qm GROUP BY q), s AS (SELECT qm.q,SUM(v.net_cents) net,SUM(v.net_cents-v.cost_cents) gross FROM v_sales_lines v JOIN qm ON qm.month_key=SUBSTR(v.order_date,1,7) GROUP BY qm.q), f AS (SELECT qm.q,SUM(v.expense_cents) expense FROM v_expenses v JOIN qm ON qm.month_key=SUBSTR(v.entry_date,1,7) GROUP BY qm.q), h AS (SELECT qm.q,SUM(v.labor_cents) labor FROM v_staff_month v JOIN qm ON qm.month_key=v.month_key GROUP BY qm.q), p AS (SELECT qm.q,COUNT(*) n,SUM(CASE WHEN v.on_time>=v.quantity_ordered THEN 1 ELSE 0 END) good FROM v_po_lines v JOIN qm ON qm.month_key=SUBSTR(v.promised_date,1,7) GROUP BY qm.q), i AS (SELECT SUBSTR(snapshot_date,1,7) m,SUM(quantity*unit_cost_cents) stock FROM inventory_snapshots GROUP BY SUBSTR(snapshot_date,1,7)), z AS (SELECT qs.q,s.net,100.0*s.gross/NULLIF(s.net,0) margin,100.0*COALESCE(f.expense,0)/NULLIF(s.net,0) expense_pct,100.0*COALESCE(h.labor,0)/NULLIF(s.net,0) labor_pct,100.0*p.good/NULLIF(p.n,0) delivery,i.stock FROM qs LEFT JOIN s ON s.q=qs.q LEFT JOIN f ON f.q=qs.q LEFT JOIN h ON h.q=qs.q LEFT JOIN p ON p.q=qs.q LEFT JOIN i ON i.m=qs.end_m) SELECT q,net net_cents,ROUND(margin,2) margin_pct,ROUND(expense_pct,2) expense_pct,ROUND(labor_pct,2) labor_pct,ROUND(delivery,2) delivery_pct,stock stock_cents,CASE WHEN margin<30 THEN 1 ELSE 0 END+CASE WHEN expense_pct>50 THEN 1 ELSE 0 END+CASE WHEN labor_pct>20 THEN 1 ELSE 0 END+CASE WHEN delivery<60 THEN 1 ELSE 0 END risk_count,CASE WHEN margin IS NULL THEN 1 ELSE 0 END+CASE WHEN expense_pct IS NULL THEN 1 ELSE 0 END+CASE WHEN labor_pct IS NULL THEN 1 ELSE 0 END+CASE WHEN delivery IS NULL THEN 1 ELSE 0 END missing_count FROM z ORDER BY q",
+  "compatibility": "转换执行",
+  "columns": [
+    "q",
+    "net_cents",
+    "margin_pct",
+    "expense_pct",
+    "labor_pct",
+    "delivery_pct",
+    "stock_cents",
+    "risk_count",
+    "missing_count"
+  ],
+  "id": "BP50",
+  "chapterId": "ch20",
+  "knowledgePointIds": [
+    "kp20-24"
+  ],
+  "datasetId": "enterprise-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP50.json",
+  "expectedRowCount": 4,
+  "expectedColumns": [
+    "q",
+    "net_cents",
+    "margin_pct",
+    "expense_pct",
+    "labor_pct",
+    "delivery_pct",
+    "stock_cents",
+    "risk_count",
+    "missing_count"
+  ],
+  "sourceTables": [
+    "calendar_days",
+    "inventory_snapshots",
+    "v_expenses",
+    "v_po_lines",
+    "v_sales_lines",
+    "v_staff_month"
+  ],
+  "dependencyTables": [
+    "accounts",
+    "attendance",
+    "calendar_days",
+    "categories",
+    "customer_sessions",
+    "customers",
+    "departments",
+    "employees",
+    "employment_history",
+    "goods_receipts",
+    "inventory_snapshots",
+    "journal_entries",
+    "journal_lines",
+    "order_items",
+    "orders",
+    "positions",
+    "products",
+    "promotions",
+    "purchase_order_items",
+    "purchase_orders",
+    "returns",
+    "salary_history",
+    "stores",
+    "supplier_contracts",
+    "supplier_invoice_items",
+    "supplier_invoices",
+    "suppliers",
+    "traffic_sources",
+    "v_expenses",
+    "v_po_lines",
+    "v_sales_lines",
+    "v_staff_month",
+    "warehouses"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH qm AS (SELECT DISTINCT month_key,CONCAT(SUBSTR(month_key,1,4),'-Q',CASE WHEN SUBSTR(month_key,6,2)<='03' THEN '1' WHEN SUBSTR(month_key,6,2)<='06' THEN '2' WHEN SUBSTR(month_key,6,2)<='09' THEN '3' ELSE '4' END) q FROM calendar_days WHERE month_key>='2025-01'), qs AS (SELECT q,MAX(month_key) end_m FROM qm GROUP BY q), s AS (SELECT qm.q,SUM(v.net_cents) net,SUM(v.net_cents-v.cost_cents) gross FROM v_sales_lines v JOIN qm ON qm.month_key=SUBSTR(v.order_date,1,7) GROUP BY qm.q), f AS (SELECT qm.q,SUM(v.expense_cents) expense FROM v_expenses v JOIN qm ON qm.month_key=SUBSTR(v.entry_date,1,7) GROUP BY qm.q), h AS (SELECT qm.q,SUM(v.labor_cents) labor FROM v_staff_month v JOIN qm ON qm.month_key=v.month_key GROUP BY qm.q), p AS (SELECT qm.q,COUNT(*) n,SUM(CASE WHEN v.on_time>=v.quantity_ordered THEN 1 ELSE 0 END) good FROM v_po_lines v JOIN qm ON qm.month_key=SUBSTR(v.promised_date,1,7) GROUP BY qm.q), i AS (SELECT SUBSTR(snapshot_date,1,7) m,SUM(quantity*unit_cost_cents) stock FROM inventory_snapshots GROUP BY SUBSTR(snapshot_date,1,7)), z AS (SELECT qs.q,s.net,100.0*s.gross/NULLIF(s.net,0) margin,100.0*COALESCE(f.expense,0)/NULLIF(s.net,0) expense_pct,100.0*COALESCE(h.labor,0)/NULLIF(s.net,0) labor_pct,100.0*p.good/NULLIF(p.n,0) delivery,i.stock FROM qs LEFT JOIN s ON s.q=qs.q LEFT JOIN f ON f.q=qs.q LEFT JOIN h ON h.q=qs.q LEFT JOIN p ON p.q=qs.q LEFT JOIN i ON i.m=qs.end_m) SELECT q,net net_cents,ROUND(margin,2) margin_pct,ROUND(expense_pct,2) expense_pct,ROUND(labor_pct,2) labor_pct,ROUND(delivery,2) delivery_pct,stock stock_cents,CASE WHEN margin<30 THEN 1 ELSE 0 END+CASE WHEN expense_pct>50 THEN 1 ELSE 0 END+CASE WHEN labor_pct>20 THEN 1 ELSE 0 END+CASE WHEN delivery<60 THEN 1 ELSE 0 END risk_count,CASE WHEN margin IS NULL THEN 1 ELSE 0 END+CASE WHEN expense_pct IS NULL THEN 1 ELSE 0 END+CASE WHEN labor_pct IS NULL THEN 1 ELSE 0 END+CASE WHEN delivery IS NULL THEN 1 ELSE 0 END missing_count FROM z ORDER BY q",
+      "sqliteSql": "WITH qm AS (SELECT DISTINCT month_key,CONCAT(SUBSTR(month_key,1,4),'-Q',CASE WHEN SUBSTR(month_key,6,2)<='03' THEN '1' WHEN SUBSTR(month_key,6,2)<='06' THEN '2' WHEN SUBSTR(month_key,6,2)<='09' THEN '3' ELSE '4' END) q FROM calendar_days WHERE month_key>='2025-01'), qs AS (SELECT q,MAX(month_key) end_m FROM qm GROUP BY q), s AS (SELECT qm.q,SUM(v.net_cents) net,SUM(v.net_cents-v.cost_cents) gross FROM v_sales_lines v JOIN qm ON qm.month_key=SUBSTR(v.order_date,1,7) GROUP BY qm.q), f AS (SELECT qm.q,SUM(v.expense_cents) expense FROM v_expenses v JOIN qm ON qm.month_key=SUBSTR(v.entry_date,1,7) GROUP BY qm.q), h AS (SELECT qm.q,SUM(v.labor_cents) labor FROM v_staff_month v JOIN qm ON qm.month_key=v.month_key GROUP BY qm.q), p AS (SELECT qm.q,COUNT(*) n,SUM(CASE WHEN v.on_time>=v.quantity_ordered THEN 1 ELSE 0 END) good FROM v_po_lines v JOIN qm ON qm.month_key=SUBSTR(v.promised_date,1,7) GROUP BY qm.q), i AS (SELECT SUBSTR(snapshot_date,1,7) m,SUM(quantity*unit_cost_cents) stock FROM inventory_snapshots GROUP BY SUBSTR(snapshot_date,1,7)), z AS (SELECT qs.q,s.net,100.0*s.gross/NULLIF(s.net,0) margin,100.0*COALESCE(f.expense,0)/NULLIF(s.net,0) expense_pct,100.0*COALESCE(h.labor,0)/NULLIF(s.net,0) labor_pct,100.0*p.good/NULLIF(p.n,0) delivery,i.stock FROM qs LEFT JOIN s ON s.q=qs.q LEFT JOIN f ON f.q=qs.q LEFT JOIN h ON h.q=qs.q LEFT JOIN p ON p.q=qs.q LEFT JOIN i ON i.m=qs.end_m) SELECT q,net net_cents,ROUND(margin,2) margin_pct,ROUND(expense_pct,2) expense_pct,ROUND(labor_pct,2) labor_pct,ROUND(delivery,2) delivery_pct,stock stock_cents,CASE WHEN margin<30 THEN 1 ELSE 0 END+CASE WHEN expense_pct>50 THEN 1 ELSE 0 END+CASE WHEN labor_pct>20 THEN 1 ELSE 0 END+CASE WHEN delivery<60 THEN 1 ELSE 0 END risk_count,CASE WHEN margin IS NULL THEN 1 ELSE 0 END+CASE WHEN expense_pct IS NULL THEN 1 ELSE 0 END+CASE WHEN labor_pct IS NULL THEN 1 ELSE 0 END+CASE WHEN delivery IS NULL THEN 1 ELSE 0 END missing_count FROM z ORDER BY q"
+    }
+  ],
+  "hints": [
+    "建立季度轴",
+    "建立季度轴；独立汇总各域",
+    "重点核对输出粒度：季度"
+  ],
+  "explanation": "建立季度轴；独立汇总各域；连接季度末库存；计算指标和风险。跨不同粒度连表会夸大指标；风险评分不是财务审计结论。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 202.1
+}

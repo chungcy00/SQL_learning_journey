@@ -1,0 +1,86 @@
+{
+  "projectId": "enterprise",
+  "title": "跨仓库存调拨候选",
+  "context": "销售＋库存联合分析：管理层要求以同一企业口径核对业务数据。",
+  "requirements": "2025年底，每仓每商品库存超过近30日销量两倍且至少多10件为供给；库存低于同期间销量为需求。按商品匹配异仓供需，输出候选调拨量=min(超额,缺口)，仅候选不能同时执行多个配对。",
+  "grain": "商品×供给仓×需求仓",
+  "commonError": "候选配对不等于完成调拨优化，同一库存可能被重复分配。",
+  "executionSteps": [
+    "计算供需",
+    "自连接不同仓",
+    "取可行上限",
+    "注明非全局优化"
+  ],
+  "difficulty": "挑战",
+  "crossGroup": "销售＋库存",
+  "mysqlSql": "WITH s AS (SELECT warehouse_id,product_id,SUM(-quantity_delta) sold FROM stock_movements WHERE movement_type='sale' AND movement_date BETWEEN '2025-12-02' AND '2025-12-31' GROUP BY warehouse_id,product_id), a AS (SELECT i.warehouse_id,i.product_id,i.quantity,COALESCE(s.sold,0) sold FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id LEFT JOIN s ON s.warehouse_id=i.warehouse_id AND s.product_id=i.product_id WHERE i.snapshot_date='2025-12-31' AND p.active=1), b AS (SELECT *,quantity-2*sold surplus,sold-quantity shortage FROM a) SELECT x.product_id,x.warehouse_id from_warehouse,y.warehouse_id to_warehouse,CASE WHEN x.surplus<y.shortage THEN x.surplus ELSE y.shortage END proposed_units FROM b x JOIN b y ON y.product_id=x.product_id AND y.warehouse_id<>x.warehouse_id WHERE x.surplus>=10 AND y.shortage>0 ORDER BY x.product_id,x.warehouse_id,y.warehouse_id",
+  "sqliteSql": "WITH s AS (SELECT warehouse_id,product_id,SUM(-quantity_delta) sold FROM stock_movements WHERE movement_type='sale' AND movement_date BETWEEN '2025-12-02' AND '2025-12-31' GROUP BY warehouse_id,product_id), a AS (SELECT i.warehouse_id,i.product_id,i.quantity,COALESCE(s.sold,0) sold FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id LEFT JOIN s ON s.warehouse_id=i.warehouse_id AND s.product_id=i.product_id WHERE i.snapshot_date='2025-12-31' AND p.active=1), b AS (SELECT *,quantity-2*sold surplus,sold-quantity shortage FROM a) SELECT x.product_id,x.warehouse_id from_warehouse,y.warehouse_id to_warehouse,CASE WHEN x.surplus<y.shortage THEN x.surplus ELSE y.shortage END proposed_units FROM b x JOIN b y ON y.product_id=x.product_id AND y.warehouse_id<>x.warehouse_id WHERE x.surplus>=10 AND y.shortage>0 ORDER BY x.product_id,x.warehouse_id,y.warehouse_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "product_id",
+    "from_warehouse",
+    "to_warehouse",
+    "proposed_units"
+  ],
+  "id": "BP33",
+  "chapterId": "ch20",
+  "knowledgePointIds": [
+    "kp20-07"
+  ],
+  "datasetId": "enterprise-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP33.json",
+  "expectedRowCount": 116,
+  "expectedColumns": [
+    "product_id",
+    "from_warehouse",
+    "to_warehouse",
+    "proposed_units"
+  ],
+  "sourceTables": [
+    "inventory_snapshots",
+    "products",
+    "stock_movements"
+  ],
+  "dependencyTables": [
+    "categories",
+    "customer_sessions",
+    "customers",
+    "goods_receipts",
+    "inventory_snapshots",
+    "order_items",
+    "orders",
+    "products",
+    "promotions",
+    "purchase_order_items",
+    "purchase_orders",
+    "stock_movements",
+    "stores",
+    "supplier_contracts",
+    "suppliers",
+    "traffic_sources",
+    "warehouses"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH s AS (SELECT warehouse_id,product_id,SUM(-quantity_delta) sold FROM stock_movements WHERE movement_type='sale' AND movement_date BETWEEN '2025-12-02' AND '2025-12-31' GROUP BY warehouse_id,product_id), a AS (SELECT i.warehouse_id,i.product_id,i.quantity,COALESCE(s.sold,0) sold FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id LEFT JOIN s ON s.warehouse_id=i.warehouse_id AND s.product_id=i.product_id WHERE i.snapshot_date='2025-12-31' AND p.active=1), b AS (SELECT *,quantity-2*sold surplus,sold-quantity shortage FROM a) SELECT x.product_id,x.warehouse_id from_warehouse,y.warehouse_id to_warehouse,CASE WHEN x.surplus<y.shortage THEN x.surplus ELSE y.shortage END proposed_units FROM b x JOIN b y ON y.product_id=x.product_id AND y.warehouse_id<>x.warehouse_id WHERE x.surplus>=10 AND y.shortage>0 ORDER BY x.product_id,x.warehouse_id,y.warehouse_id",
+      "sqliteSql": "WITH s AS (SELECT warehouse_id,product_id,SUM(-quantity_delta) sold FROM stock_movements WHERE movement_type='sale' AND movement_date BETWEEN '2025-12-02' AND '2025-12-31' GROUP BY warehouse_id,product_id), a AS (SELECT i.warehouse_id,i.product_id,i.quantity,COALESCE(s.sold,0) sold FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id LEFT JOIN s ON s.warehouse_id=i.warehouse_id AND s.product_id=i.product_id WHERE i.snapshot_date='2025-12-31' AND p.active=1), b AS (SELECT *,quantity-2*sold surplus,sold-quantity shortage FROM a) SELECT x.product_id,x.warehouse_id from_warehouse,y.warehouse_id to_warehouse,CASE WHEN x.surplus<y.shortage THEN x.surplus ELSE y.shortage END proposed_units FROM b x JOIN b y ON y.product_id=x.product_id AND y.warehouse_id<>x.warehouse_id WHERE x.surplus>=10 AND y.shortage>0 ORDER BY x.product_id,x.warehouse_id,y.warehouse_id"
+    }
+  ],
+  "hints": [
+    "计算供需",
+    "计算供需；自连接不同仓",
+    "重点核对输出粒度：商品×供给仓×需求仓"
+  ],
+  "explanation": "计算供需；自连接不同仓；取可行上限；注明非全局优化。候选配对不等于完成调拨优化，同一库存可能被重复分配。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 32.0
+}

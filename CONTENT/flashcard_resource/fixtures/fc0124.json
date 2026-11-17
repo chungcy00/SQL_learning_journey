@@ -1,0 +1,93 @@
+{
+  "id": "fc0124-demo",
+  "tables": [
+    {
+      "name": "raw_names",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "label",
+          "type": "TEXT"
+        },
+        {
+          "name": "ref",
+          "type": "TEXT"
+        },
+        {
+          "name": "updated",
+          "type": "TEXT"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "  tea ",
+          "A",
+          "2025-01-01"
+        ],
+        [
+          2,
+          "TEA",
+          "A",
+          "2025-02-01"
+        ],
+        [
+          3,
+          "Rice",
+          "B",
+          "2025-01-01"
+        ],
+        [
+          4,
+          "",
+          "C",
+          "2025-01-01"
+        ],
+        [
+          5,
+          null,
+          "D",
+          "2025-01-01"
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT id,NULLIF(TRIM(label),'') AS clean FROM raw_names ORDER BY id",
+  "mysqlSql": "SELECT id,NULLIF(TRIM(label),'') AS clean FROM raw_names ORDER BY id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      "tea"
+    ],
+    [
+      2,
+      "TEA"
+    ],
+    [
+      3,
+      "Rice"
+    ],
+    [
+      4,
+      null
+    ],
+    [
+      5,
+      null
+    ]
+  ],
+  "expectedColumns": [
+    "id",
+    "clean"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

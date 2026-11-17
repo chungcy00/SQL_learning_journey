@@ -1,0 +1,117 @@
+{
+  "visibility": "hidden",
+  "variant": "boundary",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "transactions",
+      "columns": [
+        {
+          "name": "transaction_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "account_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "transaction_date",
+          "type": "TEXT",
+          "mysqlType": "DATE",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "amount",
+          "type": "INTEGER",
+          "mysqlType": "DECIMAL(12,2)",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "direction",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "reference_no",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        }
+      ],
+      "rows": [
+        [
+          11,
+          1,
+          "2026-01-01",
+          100,
+          "expense",
+          "x"
+        ],
+        [
+          12,
+          1,
+          "2026-02-01",
+          200,
+          "expense",
+          "y"
+        ],
+        [
+          13,
+          3,
+          "2026-03-01",
+          50,
+          "expense",
+          "z"
+        ],
+        [
+          14,
+          2,
+          "2026-02-28",
+          1000,
+          "income",
+          "w"
+        ]
+      ]
+    }
+  ],
+  "id": "q0171-boundary",
+  "questionId": "q0171",
+  "datasetId": "q0171-lesson",
+  "expected": {
+    "columns": [
+      "transaction_id",
+      "month_key"
+    ],
+    "rows": [
+      [
+        11,
+        "2026-01"
+      ],
+      [
+        12,
+        "2026-02"
+      ],
+      [
+        13,
+        "2026-03"
+      ],
+      [
+        14,
+        "2026-02"
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

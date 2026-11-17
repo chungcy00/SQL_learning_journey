@@ -1,0 +1,244 @@
+[
+  {
+    "chapterId": "ch01",
+    "title": "数据库基础",
+    "plannedQuestionCount": 8,
+    "knowledgePointIds": [
+      "kp01-01",
+      "kp01-02",
+      "kp01-03",
+      "kp01-04"
+    ]
+  },
+  {
+    "chapterId": "ch02",
+    "title": "基础查询",
+    "plannedQuestionCount": 12,
+    "knowledgePointIds": [
+      "kp02-01",
+      "kp02-02",
+      "kp02-03"
+    ]
+  },
+  {
+    "chapterId": "ch03",
+    "title": "条件筛选",
+    "plannedQuestionCount": 22,
+    "knowledgePointIds": [
+      "kp03-01",
+      "kp03-02",
+      "kp03-03",
+      "kp03-04"
+    ]
+  },
+  {
+    "chapterId": "ch04",
+    "title": "排序与分页",
+    "plannedQuestionCount": 8,
+    "knowledgePointIds": [
+      "kp04-01",
+      "kp04-02"
+    ]
+  },
+  {
+    "chapterId": "ch05",
+    "title": "空值处理",
+    "plannedQuestionCount": 10,
+    "knowledgePointIds": [
+      "kp05-01",
+      "kp05-02"
+    ]
+  },
+  {
+    "chapterId": "ch06",
+    "title": "聚合函数",
+    "plannedQuestionCount": 15,
+    "knowledgePointIds": [
+      "kp06-01",
+      "kp06-02",
+      "kp06-03"
+    ]
+  },
+  {
+    "chapterId": "ch07",
+    "title": "分组统计",
+    "plannedQuestionCount": 18,
+    "knowledgePointIds": [
+      "kp07-01",
+      "kp07-02",
+      "kp07-03"
+    ]
+  },
+  {
+    "chapterId": "ch08",
+    "title": "多表连接",
+    "plannedQuestionCount": 25,
+    "knowledgePointIds": [
+      "kp08-01",
+      "kp08-02",
+      "kp08-03",
+      "kp08-04",
+      "kp08-05",
+      "kp08-06",
+      "kp08-07"
+    ]
+  },
+  {
+    "chapterId": "ch09",
+    "title": "条件表达式",
+    "plannedQuestionCount": 12,
+    "knowledgePointIds": [
+      "kp09-01",
+      "kp09-02",
+      "kp09-03",
+      "kp09-04"
+    ]
+  },
+  {
+    "chapterId": "ch10",
+    "title": "子查询",
+    "plannedQuestionCount": 20,
+    "knowledgePointIds": [
+      "kp10-01",
+      "kp10-02",
+      "kp10-03",
+      "kp10-04"
+    ]
+  },
+  {
+    "chapterId": "ch11",
+    "title": "字符串处理",
+    "plannedQuestionCount": 10,
+    "knowledgePointIds": [
+      "kp11-01",
+      "kp11-02",
+      "kp11-03",
+      "kp11-04"
+    ]
+  },
+  {
+    "chapterId": "ch12",
+    "title": "数值及日期函数",
+    "plannedQuestionCount": 15,
+    "knowledgePointIds": [
+      "kp12-01",
+      "kp12-02",
+      "kp12-03",
+      "kp12-04",
+      "kp12-05"
+    ]
+  },
+  {
+    "chapterId": "ch13",
+    "title": "集合运算",
+    "plannedQuestionCount": 8,
+    "knowledgePointIds": [
+      "kp13-01",
+      "kp13-02",
+      "kp13-03",
+      "kp13-04"
+    ]
+  },
+  {
+    "chapterId": "ch14",
+    "title": "公用表表达式",
+    "plannedQuestionCount": 12,
+    "knowledgePointIds": [
+      "kp14-01",
+      "kp14-02"
+    ]
+  },
+  {
+    "chapterId": "ch15",
+    "title": "窗口函数",
+    "plannedQuestionCount": 25,
+    "knowledgePointIds": [
+      "kp15-01",
+      "kp15-02",
+      "kp15-03",
+      "kp15-04",
+      "kp15-05",
+      "kp15-06"
+    ]
+  },
+  {
+    "chapterId": "ch16",
+    "title": "数据清洗",
+    "plannedQuestionCount": 10,
+    "knowledgePointIds": [
+      "kp16-01",
+      "kp16-02",
+      "kp16-03"
+    ]
+  },
+  {
+    "chapterId": "ch17",
+    "title": "数据表管理",
+    "plannedQuestionCount": 10,
+    "knowledgePointIds": [
+      "kp17-01",
+      "kp17-02",
+      "kp17-03",
+      "kp17-04",
+      "kp17-05"
+    ]
+  },
+  {
+    "chapterId": "ch18",
+    "title": "查询优化",
+    "plannedQuestionCount": 10,
+    "knowledgePointIds": [
+      "kp18-01",
+      "kp18-02",
+      "kp18-03"
+    ]
+  },
+  {
+    "chapterId": "ch19",
+    "title": "业务数据分析",
+    "plannedQuestionCount": 30,
+    "knowledgePointIds": [
+      "kp19-01",
+      "kp19-02",
+      "kp19-03",
+      "kp19-04",
+      "kp19-05",
+      "kp19-06",
+      "kp19-07",
+      "kp19-08",
+      "kp19-09",
+      "kp19-10",
+      "kp19-11",
+      "kp19-12",
+      "kp19-13",
+      "kp19-14",
+      "kp19-15",
+      "kp19-16",
+      "kp19-17",
+      "kp19-18",
+      "kp19-19",
+      "kp19-20",
+      "kp19-21",
+      "kp19-22",
+      "kp19-23",
+      "kp19-24",
+      "kp19-25",
+      "kp19-26",
+      "kp19-27",
+      "kp19-28",
+      "kp19-29",
+      "kp19-30"
+    ]
+  },
+  {
+    "chapterId": "ch20",
+    "title": "综合挑战",
+    "plannedQuestionCount": 20,
+    "knowledgePointIds": [
+      "kp20-01",
+      "kp20-02",
+      "kp20-03",
+      "kp20-04"
+    ]
+  }
+]

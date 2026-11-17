@@ -1,0 +1,57 @@
+{
+  "id": "fc0183-demo",
+  "tables": [
+    {
+      "name": "inventory_pair",
+      "columns": [
+        {
+          "name": "product_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "supply_excess",
+          "type": "INTEGER"
+        },
+        {
+          "name": "demand_shortage",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          30,
+          12
+        ],
+        [
+          2,
+          15,
+          40
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT product_id,MIN(supply_excess,demand_shortage) AS candidate_qty FROM inventory_pair ORDER BY product_id",
+  "mysqlSql": "SELECT product_id,LEAST(supply_excess,demand_shortage) AS candidate_qty FROM inventory_pair ORDER BY product_id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      12
+    ],
+    [
+      2,
+      15
+    ]
+  ],
+  "expectedColumns": [
+    "product_id",
+    "candidate_qty"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

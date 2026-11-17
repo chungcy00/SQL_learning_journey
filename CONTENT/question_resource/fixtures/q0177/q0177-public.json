@@ -1,0 +1,149 @@
+{
+  "visibility": "public",
+  "variant": "public",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "order_items",
+      "columns": [
+        {
+          "name": "order_item_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "order_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "quantity",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "unit_price",
+          "type": "INTEGER",
+          "mysqlType": "DECIMAL(12,2)",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "discount_amount",
+          "type": "INTEGER",
+          "mysqlType": "DECIMAL(12,2)",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          1,
+          1,
+          2,
+          100,
+          10
+        ],
+        [
+          2,
+          2,
+          1,
+          1,
+          100,
+          0
+        ],
+        [
+          3,
+          3,
+          2,
+          3,
+          50,
+          0
+        ]
+      ]
+    },
+    {
+      "name": "purchase_items",
+      "columns": [
+        {
+          "name": "po_item_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "po_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "quantity_ordered",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "unit_price",
+          "type": "INTEGER",
+          "mysqlType": "DECIMAL(12,2)",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          1,
+          1,
+          10,
+          8
+        ],
+        [
+          2,
+          1,
+          2,
+          5,
+          20
+        ]
+      ]
+    }
+  ],
+  "id": "q0177-public",
+  "questionId": "q0177",
+  "datasetId": "q0177-lesson",
+  "expected": {
+    "columns": [
+      "product_id"
+    ],
+    "rows": [
+      [
+        1
+      ],
+      [
+        2
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

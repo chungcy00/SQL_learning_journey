@@ -1,0 +1,37 @@
+[
+  {
+    "name": "跨舍入边界但在容差内",
+    "expected": true,
+    "actual": true
+  },
+  {
+    "name": "超过容差",
+    "expected": false,
+    "actual": false
+  },
+  {
+    "name": "重复行不能凭集合通过",
+    "expected": false,
+    "actual": false
+  },
+  {
+    "name": "NULL不同于零",
+    "expected": false,
+    "actual": false
+  },
+  {
+    "name": "文本不同于数字",
+    "expected": false,
+    "actual": false
+  },
+  {
+    "name": "无序允许交换",
+    "expected": true,
+    "actual": true
+  },
+  {
+    "name": "非贪心匹配",
+    "expected": true,
+    "actual": true
+  }
+]

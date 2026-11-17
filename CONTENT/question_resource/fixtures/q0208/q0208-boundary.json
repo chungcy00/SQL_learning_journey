@@ -1,0 +1,93 @@
+{
+  "visibility": "hidden",
+  "variant": "boundary",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "monthly",
+      "columns": [
+        {
+          "name": "month",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "sales",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          "2026-01",
+          1000
+        ],
+        [
+          "2026-02",
+          0
+        ],
+        [
+          "2026-03",
+          null
+        ],
+        [
+          "2026-04",
+          500
+        ],
+        [
+          "2026-06",
+          1500
+        ],
+        [
+          "2026-07",
+          1500
+        ]
+      ]
+    }
+  ],
+  "id": "q0208-boundary",
+  "questionId": "q0208",
+  "datasetId": "q0208-lesson",
+  "expected": {
+    "columns": [
+      "month",
+      "remaining_sales"
+    ],
+    "rows": [
+      [
+        "2026-01",
+        4500
+      ],
+      [
+        "2026-02",
+        3500
+      ],
+      [
+        "2026-03",
+        3500
+      ],
+      [
+        "2026-04",
+        3500
+      ],
+      [
+        "2026-06",
+        3000
+      ],
+      [
+        "2026-07",
+        1500
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

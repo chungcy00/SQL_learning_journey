@@ -1,0 +1,357 @@
+{
+  "id": "ch04",
+  "number": 4,
+  "title": "排序与分页",
+  "stage": "入门",
+  "objective": "控制确定性顺序、并列及分页边界。",
+  "prerequisites": [
+    "ch03"
+  ],
+  "knowledgePoints": [
+    {
+      "id": "kp04-01",
+      "chapterId": "ch04",
+      "title": "ORDER BY 多列排序",
+      "learningObjective": "能够运用本节知识完成：生成价格排行榜",
+      "prerequisites": [
+        "ch03"
+      ],
+      "concept": "先按第一排序键排序，同值再按后续键；ASC 升序，DESC 降序。",
+      "syntax": "ORDER BY col1 DESC, col2 ASC",
+      "parameters": {
+        "col1": "主要排序字段",
+        "col2": "次级排序字段"
+      },
+      "fixtureIds": [
+        "lesson-products"
+      ],
+      "sourceTables": [
+        {
+          "name": "products",
+          "columns": [
+            {
+              "name": "product_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "product_name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "price",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "stock",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "Mask",
+              "护肤品",
+              15,
+              150
+            ],
+            [
+              2,
+              "Serum",
+              "护肤品",
+              89,
+              40
+            ],
+            [
+              3,
+              "Cleanser",
+              "护肤品",
+              35,
+              200
+            ],
+            [
+              4,
+              "Cream",
+              "化妆品",
+              65,
+              180
+            ],
+            [
+              5,
+              "Sunscreen",
+              "化妆品",
+              45,
+              80
+            ],
+            [
+              6,
+              "Soap_1",
+              "日用品",
+              15,
+              0
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT product_id, price FROM products ORDER BY price DESC, product_id ASC;",
+      "sqliteSql": "SELECT product_id, price FROM products ORDER BY price DESC, product_id ASC;",
+      "executionSteps": [
+        "价格降序",
+        "同价按编号升序"
+      ],
+      "useCase": "生成价格排行榜",
+      "comparison": "GROUP BY 合并行，ORDER BY 不改变行数。",
+      "commonError": {
+        "example": "ORDER BY price, product_id DESC 期待两列都降序",
+        "correction": "ORDER BY price DESC, product_id DESC"
+      },
+      "notes": "每个排序键单独指定方向。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0045",
+        "q0047",
+        "q0048"
+      ],
+      "relatedFlashcardIds": [
+        "fc0024",
+        "fc0026",
+        "fc0027"
+      ],
+      "relatedKnowledgePointIds": [],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "product_id",
+          "price"
+        ],
+        "rows": [
+          [
+            2,
+            89
+          ],
+          [
+            4,
+            65
+          ],
+          [
+            5,
+            45
+          ],
+          [
+            3,
+            35
+          ],
+          [
+            1,
+            15
+          ],
+          [
+            6,
+            15
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp04-01.sql",
+      "primaryQuestionIds": [
+        "q0045",
+        "q0047",
+        "q0048"
+      ],
+      "primaryFlashcardIds": [
+        "fc0024",
+        "fc0026",
+        "fc0027"
+      ]
+    },
+    {
+      "id": "kp04-02",
+      "chapterId": "ch04",
+      "title": "LIMIT 与 OFFSET",
+      "learningObjective": "能够运用本节知识完成：实现排行榜第二页",
+      "prerequisites": [
+        "kp04-01"
+      ],
+      "concept": "LIMIT 控制最多返回多少行；OFFSET 跳过前几行。",
+      "syntax": "ORDER BY key LIMIT count OFFSET offset",
+      "parameters": {
+        "count": "返回上限",
+        "offset": "跳过的行数"
+      },
+      "fixtureIds": [
+        "lesson-products"
+      ],
+      "sourceTables": [
+        {
+          "name": "products",
+          "columns": [
+            {
+              "name": "product_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "product_name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "price",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "stock",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "Mask",
+              "护肤品",
+              15,
+              150
+            ],
+            [
+              2,
+              "Serum",
+              "护肤品",
+              89,
+              40
+            ],
+            [
+              3,
+              "Cleanser",
+              "护肤品",
+              35,
+              200
+            ],
+            [
+              4,
+              "Cream",
+              "化妆品",
+              65,
+              180
+            ],
+            [
+              5,
+              "Sunscreen",
+              "化妆品",
+              45,
+              80
+            ],
+            [
+              6,
+              "Soap_1",
+              "日用品",
+              15,
+              0
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT product_id, price FROM products ORDER BY price DESC, product_id LIMIT 2 OFFSET 2;",
+      "sqliteSql": "SELECT product_id, price FROM products ORDER BY price DESC, product_id LIMIT 2 OFFSET 2;",
+      "executionSteps": [
+        "稳定排序",
+        "跳过前2行",
+        "取接下来2行"
+      ],
+      "useCase": "实现排行榜第二页",
+      "comparison": "LIMIT 2 OFFSET 2 与 MySQL LIMIT 2,2 本例等价，但逗号形式易混淆。",
+      "commonError": {
+        "example": "LIMIT 2 无 ORDER BY 并称是最高两名",
+        "correction": "ORDER BY price DESC, product_id LIMIT 2"
+      },
+      "notes": "分页期间源数据变化可能导致跨页重复，生产可考虑游标分页。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0043",
+        "q0044",
+        "q0046",
+        "q0049",
+        "q0050"
+      ],
+      "relatedFlashcardIds": [
+        "fc0025",
+        "fc0028",
+        "fc0029"
+      ],
+      "relatedKnowledgePointIds": [],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "product_id",
+          "price"
+        ],
+        "rows": [
+          [
+            5,
+            45
+          ],
+          [
+            3,
+            35
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp04-02.sql",
+      "primaryQuestionIds": [
+        "q0043",
+        "q0044",
+        "q0046",
+        "q0049",
+        "q0050"
+      ],
+      "primaryFlashcardIds": [
+        "fc0025",
+        "fc0028",
+        "fc0029"
+      ]
+    }
+  ],
+  "plannedQuestionCount": 8,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "dialect": "MySQL 8.4",
+  "summary": "完成本章后：控制确定性顺序、并列及分页边界。",
+  "sources": [
+    "https://dev.mysql.com/doc/refman/8.4/en/",
+    "https://dev.mysql.com/doc/refman/8.4/en/functions.html"
+  ],
+  "knowledgePointCount": 2
+}

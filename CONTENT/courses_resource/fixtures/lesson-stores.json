@@ -1,0 +1,32 @@
+{
+  "id": "lesson-stores",
+  "table": "stores",
+  "columns": [
+    {
+      "name": "store_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "store_name",
+      "type": "TEXT",
+      "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+      "sqliteType": "TEXT"
+    }
+  ],
+  "rows": [
+    [
+      1,
+      "古晋"
+    ],
+    [
+      2,
+      "美里"
+    ],
+    [
+      3,
+      "诗巫"
+    ]
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "visibility": "public",
+  "variant": "public",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "raw_data",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "name",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "amount",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "category",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "  Mask ",
+          "15",
+          "SKIN"
+        ],
+        [
+          2,
+          "Mask",
+          "15",
+          "skin"
+        ],
+        [
+          3,
+          "Serum",
+          null,
+          "Skin"
+        ],
+        [
+          4,
+          "Soap",
+          "-5",
+          "HOME"
+        ],
+        [
+          5,
+          "Cream",
+          "0",
+          "makeup"
+        ],
+        [
+          6,
+          "",
+          "20",
+          "HOME"
+        ]
+      ]
+    }
+  ],
+  "id": "q0154-public",
+  "questionId": "q0154",
+  "datasetId": "q0154-lesson",
+  "expected": {
+    "columns": [
+      "id",
+      "normalized_category"
+    ],
+    "rows": [
+      [
+        1,
+        "SKIN"
+      ],
+      [
+        2,
+        "SKIN"
+      ],
+      [
+        3,
+        "SKIN"
+      ],
+      [
+        4,
+        "HOME"
+      ],
+      [
+        5,
+        "MAKEUP"
+      ],
+      [
+        6,
+        "HOME"
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

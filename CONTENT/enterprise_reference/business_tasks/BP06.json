@@ -1,0 +1,89 @@
+{
+  "projectId": "inventory",
+  "title": "低销量高库存诊断",
+  "context": "仓储经理希望优先处理积压货品。",
+  "requirements": "统计2025-10-03至12-31共90日仓库销售出库量；期末为12-31；有效商品、库存价值超过500000分且销量低于20件；无销售记0，库存覆盖天数无销售返回NULL。",
+  "grain": "仓库×商品",
+  "commonError": "用内连接会漏掉零销售的积压商品。",
+  "executionSteps": [
+    "汇总90天销售出库",
+    "关联期末快照与有效商品",
+    "补零并应用双阈值",
+    "计算覆盖天数"
+  ],
+  "difficulty": "中等",
+  "mysqlSql": "WITH s AS (SELECT warehouse_id,product_id,SUM(-quantity_delta) sold FROM stock_movements WHERE movement_type='sale' AND movement_date BETWEEN '2025-10-03' AND '2025-12-31' GROUP BY warehouse_id,product_id) SELECT i.warehouse_id,i.product_id,i.quantity,COALESCE(s.sold,0) sold_units,i.quantity*i.unit_cost_cents stock_value_cents,ROUND(90.0*i.quantity/NULLIF(s.sold,0),2) cover_days FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id LEFT JOIN s ON s.warehouse_id=i.warehouse_id AND s.product_id=i.product_id WHERE p.active=1 AND i.snapshot_date='2025-12-31' AND i.quantity*i.unit_cost_cents>500000 AND COALESCE(s.sold,0)<20 ORDER BY stock_value_cents DESC,i.warehouse_id,i.product_id",
+  "sqliteSql": "WITH s AS (SELECT warehouse_id,product_id,SUM(-quantity_delta) sold FROM stock_movements WHERE movement_type='sale' AND movement_date BETWEEN '2025-10-03' AND '2025-12-31' GROUP BY warehouse_id,product_id) SELECT i.warehouse_id,i.product_id,i.quantity,COALESCE(s.sold,0) sold_units,i.quantity*i.unit_cost_cents stock_value_cents,ROUND(90.0*i.quantity/NULLIF(s.sold,0),2) cover_days FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id LEFT JOIN s ON s.warehouse_id=i.warehouse_id AND s.product_id=i.product_id WHERE p.active=1 AND i.snapshot_date='2025-12-31' AND i.quantity*i.unit_cost_cents>500000 AND COALESCE(s.sold,0)<20 ORDER BY stock_value_cents DESC,i.warehouse_id,i.product_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "warehouse_id",
+    "product_id",
+    "quantity",
+    "sold_units",
+    "stock_value_cents",
+    "cover_days"
+  ],
+  "id": "BP06",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-36"
+  ],
+  "datasetId": "inventory-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP06.json",
+  "expectedRowCount": 823,
+  "expectedColumns": [
+    "warehouse_id",
+    "product_id",
+    "quantity",
+    "sold_units",
+    "stock_value_cents",
+    "cover_days"
+  ],
+  "sourceTables": [
+    "inventory_snapshots",
+    "products",
+    "stock_movements"
+  ],
+  "dependencyTables": [
+    "categories",
+    "customer_sessions",
+    "customers",
+    "goods_receipts",
+    "inventory_snapshots",
+    "order_items",
+    "orders",
+    "products",
+    "promotions",
+    "purchase_order_items",
+    "purchase_orders",
+    "stock_movements",
+    "stores",
+    "supplier_contracts",
+    "suppliers",
+    "traffic_sources",
+    "warehouses"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH s AS (SELECT warehouse_id,product_id,SUM(-quantity_delta) sold FROM stock_movements WHERE movement_type='sale' AND movement_date BETWEEN '2025-10-03' AND '2025-12-31' GROUP BY warehouse_id,product_id) SELECT i.warehouse_id,i.product_id,i.quantity,COALESCE(s.sold,0) sold_units,i.quantity*i.unit_cost_cents stock_value_cents,ROUND(90.0*i.quantity/NULLIF(s.sold,0),2) cover_days FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id LEFT JOIN s ON s.warehouse_id=i.warehouse_id AND s.product_id=i.product_id WHERE p.active=1 AND i.snapshot_date='2025-12-31' AND i.quantity*i.unit_cost_cents>500000 AND COALESCE(s.sold,0)<20 ORDER BY stock_value_cents DESC,i.warehouse_id,i.product_id",
+      "sqliteSql": "WITH s AS (SELECT warehouse_id,product_id,SUM(-quantity_delta) sold FROM stock_movements WHERE movement_type='sale' AND movement_date BETWEEN '2025-10-03' AND '2025-12-31' GROUP BY warehouse_id,product_id) SELECT i.warehouse_id,i.product_id,i.quantity,COALESCE(s.sold,0) sold_units,i.quantity*i.unit_cost_cents stock_value_cents,ROUND(90.0*i.quantity/NULLIF(s.sold,0),2) cover_days FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id LEFT JOIN s ON s.warehouse_id=i.warehouse_id AND s.product_id=i.product_id WHERE p.active=1 AND i.snapshot_date='2025-12-31' AND i.quantity*i.unit_cost_cents>500000 AND COALESCE(s.sold,0)<20 ORDER BY stock_value_cents DESC,i.warehouse_id,i.product_id"
+    }
+  ],
+  "hints": [
+    "汇总90天销售出库",
+    "汇总90天销售出库；关联期末快照与有效商品",
+    "重点核对输出粒度：仓库×商品"
+  ],
+  "explanation": "汇总90天销售出库；关联期末快照与有效商品；补零并应用双阈值；计算覆盖天数。用内连接会漏掉零销售的积压商品。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 13.5
+}

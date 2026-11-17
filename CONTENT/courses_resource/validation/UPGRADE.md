@@ -1,0 +1,1 @@
+原 validation/REPORT.md、execution.json、coverage.json 和 mysql/ 是版本1.0的102个小型课程知识点验证记录，保留作历史证据。新增50点使用统一企业数据库，验证报告在外层 validation/REPORT.md 和 checks.json；原生查询在 business_tasks/mysql_queries。不要把原报告合计当成2.0全库覆盖。

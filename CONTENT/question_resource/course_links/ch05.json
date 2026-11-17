@@ -1,0 +1,40 @@
+{
+  "chapterId": "ch05",
+  "contentVersion": "3.0.0",
+  "knowledgePointUpdates": [
+    {
+      "id": "kp05-01",
+      "relatedQuestionIds": [
+        "q0051",
+        "q0052",
+        "q0053",
+        "q0055",
+        "q0056",
+        "q0059"
+      ],
+      "primaryQuestionIds": [
+        "q0051",
+        "q0052",
+        "q0053",
+        "q0055",
+        "q0056",
+        "q0059"
+      ]
+    },
+    {
+      "id": "kp05-02",
+      "relatedQuestionIds": [
+        "q0054",
+        "q0057",
+        "q0058",
+        "q0060"
+      ],
+      "primaryQuestionIds": [
+        "q0054",
+        "q0057",
+        "q0058",
+        "q0060"
+      ]
+    }
+  ]
+}

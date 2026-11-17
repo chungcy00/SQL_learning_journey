@@ -1,0 +1,100 @@
+{
+  "id": "q0273-boundary",
+  "questionId": "q0273",
+  "visibility": "hidden",
+  "variant": "boundary",
+  "kind": "database_delta",
+  "datasetId": "hr-v2",
+  "baseDatabase": "databases/hr/hr.sqlite",
+  "baseSha256": "b8e8328981418fd75b89186eebab0cba47c12e873293f05898769ee0fc625bfa",
+  "patchSql": [
+    "UPDATE salary_history SET base_cents=base_cents+100000 WHERE employee_id=138 AND month_key='2025-12'"
+  ],
+  "patchDescription": "改变一位员工当月基础薪资，检验部门职位均值、偏离率与排名。",
+  "patchRowChanges": 1,
+  "testIsolation": "每次使用全新数据库副本；夹具可故意引入对账差异或改变业务记录，仅用于判题，绝不可写入基准库",
+  "expected": {
+    "columns": [
+      "employee_id",
+      "department_id",
+      "position_id",
+      "base_cents",
+      "avg_base_cents",
+      "salary_rank",
+      "deviation_pct"
+    ],
+    "rows": [
+      [
+        138,
+        1,
+        3,
+        585482,
+        372654.85,
+        1,
+        57.11
+      ],
+      [
+        230,
+        1,
+        3,
+        473696,
+        372654.85,
+        2,
+        27.11
+      ],
+      [
+        46,
+        1,
+        5,
+        578102,
+        484436.67,
+        1,
+        19.33
+      ],
+      [
+        161,
+        2,
+        2,
+        413566,
+        307264.5,
+        1,
+        34.6
+      ],
+      [
+        69,
+        5,
+        2,
+        395362,
+        320389.5,
+        1,
+        23.4
+      ],
+      [
+        184,
+        5,
+        5,
+        619503,
+        531211.0,
+        1,
+        16.62
+      ],
+      [
+        207,
+        7,
+        5,
+        614421,
+        501837.0,
+        1,
+        22.43
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

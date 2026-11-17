@@ -1,0 +1,86 @@
+{
+  "projectId": "enterprise",
+  "title": "收货入库完整性核对",
+  "context": "库存＋采购联合分析：管理层要求以同一企业口径核对业务数据。",
+  "requirements": "比较每条合格收货记录与库存流水入库数量，包含拒收全部的记录；输出采购行、收货编号、应入库及已入库差额；仅差额非0。预计干净主库无差异，不能伪造异常。",
+  "grain": "收货记录",
+  "commonError": "内连接会漏掉应入库但未记账的记录。",
+  "executionSteps": [
+    "先聚合库存流水",
+    "与质检收货匹配",
+    "筛选差额",
+    "空结果也是成功"
+  ],
+  "difficulty": "困难",
+  "crossGroup": "库存＋采购",
+  "mysqlSql": "WITH a AS (SELECT receipt_id,SUM(quantity_delta) qty FROM stock_movements WHERE movement_type='receipt' GROUP BY receipt_id) SELECT g.receipt_id,g.po_item_id,g.quantity_received-g.quantity_rejected expected_units,COALESCE(a.qty,0) posted_units,COALESCE(a.qty,0)-(g.quantity_received-g.quantity_rejected) difference FROM goods_receipts g LEFT JOIN a ON a.receipt_id=g.receipt_id WHERE COALESCE(a.qty,0)<>g.quantity_received-g.quantity_rejected ORDER BY g.receipt_id",
+  "sqliteSql": "WITH a AS (SELECT receipt_id,SUM(quantity_delta) qty FROM stock_movements WHERE movement_type='receipt' GROUP BY receipt_id) SELECT g.receipt_id,g.po_item_id,g.quantity_received-g.quantity_rejected expected_units,COALESCE(a.qty,0) posted_units,COALESCE(a.qty,0)-(g.quantity_received-g.quantity_rejected) difference FROM goods_receipts g LEFT JOIN a ON a.receipt_id=g.receipt_id WHERE COALESCE(a.qty,0)<>g.quantity_received-g.quantity_rejected ORDER BY g.receipt_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "receipt_id",
+    "po_item_id",
+    "expected_units",
+    "posted_units",
+    "difference"
+  ],
+  "id": "BP36",
+  "chapterId": "ch20",
+  "knowledgePointIds": [
+    "kp20-10"
+  ],
+  "datasetId": "enterprise-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP36.json",
+  "expectedRowCount": 0,
+  "expectedColumns": [
+    "receipt_id",
+    "po_item_id",
+    "expected_units",
+    "posted_units",
+    "difference"
+  ],
+  "sourceTables": [
+    "goods_receipts",
+    "stock_movements"
+  ],
+  "dependencyTables": [
+    "categories",
+    "customer_sessions",
+    "customers",
+    "goods_receipts",
+    "order_items",
+    "orders",
+    "products",
+    "promotions",
+    "purchase_order_items",
+    "purchase_orders",
+    "stock_movements",
+    "stores",
+    "supplier_contracts",
+    "suppliers",
+    "traffic_sources",
+    "warehouses"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH a AS (SELECT receipt_id,SUM(quantity_delta) qty FROM stock_movements WHERE movement_type='receipt' GROUP BY receipt_id) SELECT g.receipt_id,g.po_item_id,g.quantity_received-g.quantity_rejected expected_units,COALESCE(a.qty,0) posted_units,COALESCE(a.qty,0)-(g.quantity_received-g.quantity_rejected) difference FROM goods_receipts g LEFT JOIN a ON a.receipt_id=g.receipt_id WHERE COALESCE(a.qty,0)<>g.quantity_received-g.quantity_rejected ORDER BY g.receipt_id",
+      "sqliteSql": "WITH a AS (SELECT receipt_id,SUM(quantity_delta) qty FROM stock_movements WHERE movement_type='receipt' GROUP BY receipt_id) SELECT g.receipt_id,g.po_item_id,g.quantity_received-g.quantity_rejected expected_units,COALESCE(a.qty,0) posted_units,COALESCE(a.qty,0)-(g.quantity_received-g.quantity_rejected) difference FROM goods_receipts g LEFT JOIN a ON a.receipt_id=g.receipt_id WHERE COALESCE(a.qty,0)<>g.quantity_received-g.quantity_rejected ORDER BY g.receipt_id"
+    }
+  ],
+  "hints": [
+    "先聚合库存流水",
+    "先聚合库存流水；与质检收货匹配",
+    "重点核对输出粒度：收货记录"
+  ],
+  "explanation": "先聚合库存流水；与质检收货匹配；筛选差额；空结果也是成功。内连接会漏掉应入库但未记账的记录。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 30.2
+}

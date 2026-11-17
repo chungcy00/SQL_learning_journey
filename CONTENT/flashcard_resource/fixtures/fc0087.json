@@ -1,0 +1,20 @@
+{
+  "id": "fc0087-demo",
+  "tables": [],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT ROUND(ABS(-8.456),2) AS rounded",
+  "mysqlSql": "SELECT ROUND(ABS(-8.456),2) AS rounded",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      8.46
+    ]
+  ],
+  "expectedColumns": [
+    "rounded"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

@@ -1,0 +1,94 @@
+{
+  "id": "fc0107-demo",
+  "tables": [
+    {
+      "name": "items",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "name",
+          "type": "TEXT"
+        },
+        {
+          "name": "category",
+          "type": "TEXT"
+        },
+        {
+          "name": "price",
+          "type": "INTEGER"
+        },
+        {
+          "name": "stock",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "Tea",
+          "A",
+          12,
+          0
+        ],
+        [
+          2,
+          "Rice",
+          "A",
+          20,
+          8
+        ],
+        [
+          3,
+          "Soap",
+          "B",
+          12,
+          3
+        ],
+        [
+          4,
+          "Milk",
+          "B",
+          null,
+          0
+        ],
+        [
+          5,
+          "Bag",
+          "C",
+          30,
+          null
+        ],
+        [
+          6,
+          "Tea_2",
+          "A",
+          20,
+          6
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "WITH v AS (SELECT id FROM items WHERE stock=0) SELECT id FROM v ORDER BY id",
+  "mysqlSql": "WITH v AS (SELECT id FROM items WHERE stock=0) SELECT id FROM v ORDER BY id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1
+    ],
+    [
+      4
+    ]
+  ],
+  "expectedColumns": [
+    "id"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

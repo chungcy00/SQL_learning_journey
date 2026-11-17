@@ -1,0 +1,101 @@
+{
+  "id": "fc0043-demo",
+  "tables": [
+    {
+      "name": "items",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "name",
+          "type": "TEXT"
+        },
+        {
+          "name": "category",
+          "type": "TEXT"
+        },
+        {
+          "name": "price",
+          "type": "INTEGER"
+        },
+        {
+          "name": "stock",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "Tea",
+          "A",
+          12,
+          0
+        ],
+        [
+          2,
+          "Rice",
+          "A",
+          20,
+          8
+        ],
+        [
+          3,
+          "Soap",
+          "B",
+          12,
+          3
+        ],
+        [
+          4,
+          "Milk",
+          "B",
+          null,
+          0
+        ],
+        [
+          5,
+          "Bag",
+          "C",
+          30,
+          null
+        ],
+        [
+          6,
+          "Tea_2",
+          "A",
+          20,
+          6
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT AVG(price) AS mean FROM items",
+  "mysqlSql": "SELECT AVG(price) AS mean FROM items",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      18.8
+    ]
+  ],
+  "expectedColumns": [
+    "mean"
+  ],
+  "wrongSqlite": "SELECT SUM(price)*1.0/COUNT(*) AS mean FROM items",
+  "wrongMysql": "SELECT SUM(price)*1.0/COUNT(*) AS mean FROM items",
+  "wrongResult": {
+    "kind": "result",
+    "columns": [
+      "mean"
+    ],
+    "rows": [
+      [
+        15.666666666666666
+      ]
+    ]
+  },
+  "independentAuthorExpectation": true
+}

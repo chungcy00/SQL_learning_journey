@@ -1,0 +1,424 @@
+{
+  "id": "ch06",
+  "number": 6,
+  "title": "聚合函数",
+  "stage": "核心",
+  "objective": "计算计数、金额、平均值及极值。",
+  "prerequisites": [
+    "ch05"
+  ],
+  "knowledgePoints": [
+    {
+      "id": "kp06-01",
+      "chapterId": "ch06",
+      "title": "COUNT 的三个形式",
+      "learningObjective": "能够运用本节知识完成：比较数据量、有效量及唯一值",
+      "prerequisites": [
+        "ch05"
+      ],
+      "concept": "COUNT(*) 统计行；COUNT(col) 忽略该列 NULL；COUNT(DISTINCT col) 统计不同非空值。",
+      "syntax": "COUNT(*); COUNT(col); COUNT(DISTINCT col)",
+      "parameters": {
+        "col": "计数目标列"
+      },
+      "fixtureIds": [
+        "lesson-nullable_values"
+      ],
+      "sourceTables": [
+        {
+          "name": "nullable_values",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "value",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "note",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              null,
+              null
+            ],
+            [
+              2,
+              0,
+              ""
+            ],
+            [
+              3,
+              10,
+              "ok"
+            ],
+            [
+              4,
+              10,
+              "ok"
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT COUNT(*) AS rows_count, COUNT(value) AS nonnull_count, COUNT(DISTINCT value) AS unique_count FROM nullable_values;",
+      "sqliteSql": "SELECT COUNT(*) AS rows_count, COUNT(value) AS nonnull_count, COUNT(DISTINCT value) AS unique_count FROM nullable_values;",
+      "executionSteps": [
+        "统计4行",
+        "排除缺失得到3",
+        "去重后得到2"
+      ],
+      "useCase": "比较数据量、有效量及唯一值",
+      "comparison": "COUNT(0) 对常量非空逐行计数，不表示零值的数量。",
+      "commonError": {
+        "example": "COUNT(value) 当作总行数",
+        "correction": "COUNT(*)"
+      },
+      "notes": "空输入的 COUNT 返回0。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0061",
+        "q0065",
+        "q0069",
+        "q0070",
+        "q0074"
+      ],
+      "relatedFlashcardIds": [
+        "fc0036",
+        "fc0040",
+        "fc0042"
+      ],
+      "relatedKnowledgePointIds": [],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "rows_count",
+          "nonnull_count",
+          "unique_count"
+        ],
+        "rows": [
+          [
+            4,
+            3,
+            2
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp06-01.sql",
+      "primaryQuestionIds": [
+        "q0061",
+        "q0065",
+        "q0069",
+        "q0070",
+        "q0074"
+      ],
+      "primaryFlashcardIds": [
+        "fc0036",
+        "fc0040",
+        "fc0042"
+      ]
+    },
+    {
+      "id": "kp06-02",
+      "chapterId": "ch06",
+      "title": "SUM 与 AVG",
+      "learningObjective": "能够运用本节知识完成：计算有效记录的平均值",
+      "prerequisites": [
+        "kp06-01"
+      ],
+      "concept": "SUM 汇总非空数值；AVG 的分母是非空数值个数，不是总行数。",
+      "syntax": "SUM(col); AVG(col)",
+      "parameters": {
+        "col": "数值字段"
+      },
+      "fixtureIds": [
+        "lesson-nullable_values"
+      ],
+      "sourceTables": [
+        {
+          "name": "nullable_values",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "value",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "note",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              null,
+              null
+            ],
+            [
+              2,
+              0,
+              ""
+            ],
+            [
+              3,
+              10,
+              "ok"
+            ],
+            [
+              4,
+              10,
+              "ok"
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT SUM(value) AS total, AVG(value) AS mean FROM nullable_values;",
+      "sqliteSql": "SELECT SUM(value) AS total, AVG(value) AS mean FROM nullable_values;",
+      "executionSteps": [
+        "忽略 NULL",
+        "总和20",
+        "除以3"
+      ],
+      "useCase": "计算有效记录的平均值",
+      "comparison": "AVG(COALESCE(value,0)) 会改变分母。",
+      "commonError": {
+        "example": "SUM(value)/COUNT(*) 当成 AVG(value)",
+        "correction": "AVG(value)"
+      },
+      "notes": "没有有效数值时 SUM/AVG 返回 NULL；数值精度按引擎处理。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0062",
+        "q0066",
+        "q0068",
+        "q0071",
+        "q0072",
+        "q0075"
+      ],
+      "relatedFlashcardIds": [
+        "fc0037",
+        "fc0039",
+        "fc0041",
+        "fc0043"
+      ],
+      "relatedKnowledgePointIds": [],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "total",
+          "mean"
+        ],
+        "rows": [
+          [
+            20,
+            6.666666666666667
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp06-02.sql",
+      "primaryQuestionIds": [
+        "q0062",
+        "q0066",
+        "q0068",
+        "q0071",
+        "q0072",
+        "q0075"
+      ],
+      "primaryFlashcardIds": [
+        "fc0037",
+        "fc0039",
+        "fc0041",
+        "fc0043"
+      ]
+    },
+    {
+      "id": "kp06-03",
+      "chapterId": "ch06",
+      "title": "MIN 与 MAX",
+      "learningObjective": "能够运用本节知识完成：检查商品价格范围",
+      "prerequisites": [
+        "kp06-02"
+      ],
+      "concept": "MIN/MAX 返回非空值的最小及最大值，不自动返回对应整行。",
+      "syntax": "MIN(col); MAX(col)",
+      "parameters": {
+        "col": "比较目标"
+      },
+      "fixtureIds": [
+        "lesson-products"
+      ],
+      "sourceTables": [
+        {
+          "name": "products",
+          "columns": [
+            {
+              "name": "product_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "product_name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "price",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "stock",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "Mask",
+              "护肤品",
+              15,
+              150
+            ],
+            [
+              2,
+              "Serum",
+              "护肤品",
+              89,
+              40
+            ],
+            [
+              3,
+              "Cleanser",
+              "护肤品",
+              35,
+              200
+            ],
+            [
+              4,
+              "Cream",
+              "化妆品",
+              65,
+              180
+            ],
+            [
+              5,
+              "Sunscreen",
+              "化妆品",
+              45,
+              80
+            ],
+            [
+              6,
+              "Soap_1",
+              "日用品",
+              15,
+              0
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT MIN(price) AS min_price, MAX(price) AS max_price FROM products;",
+      "sqliteSql": "SELECT MIN(price) AS min_price, MAX(price) AS max_price FROM products;",
+      "executionSteps": [
+        "读取全部价格",
+        "比较极值"
+      ],
+      "useCase": "检查商品价格范围",
+      "comparison": "MAX(price) 不等于价格最高商品的所有字段。",
+      "commonError": {
+        "example": "SELECT product_name, MAX(price) FROM products",
+        "correction": "SELECT product_name, price FROM products ORDER BY price DESC, product_id LIMIT 1"
+      },
+      "notes": "需要全部并列最高行时使用子查询或排名。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0063",
+        "q0064",
+        "q0067",
+        "q0073"
+      ],
+      "relatedFlashcardIds": [
+        "fc0038"
+      ],
+      "relatedKnowledgePointIds": [],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "min_price",
+          "max_price"
+        ],
+        "rows": [
+          [
+            15,
+            89
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp06-03.sql",
+      "primaryQuestionIds": [
+        "q0063",
+        "q0064",
+        "q0067",
+        "q0073"
+      ],
+      "primaryFlashcardIds": [
+        "fc0038"
+      ]
+    }
+  ],
+  "plannedQuestionCount": 15,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "dialect": "MySQL 8.4",
+  "summary": "完成本章后：计算计数、金额、平均值及极值。",
+  "sources": [
+    "https://dev.mysql.com/doc/refman/8.4/en/",
+    "https://dev.mysql.com/doc/refman/8.4/en/functions.html"
+  ],
+  "knowledgePointCount": 3
+}

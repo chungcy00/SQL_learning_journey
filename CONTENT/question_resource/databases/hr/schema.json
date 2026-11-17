@@ -1,0 +1,461 @@
+{
+  "datasetId": "hr-v2",
+  "schemaVersion": 2,
+  "tables": {
+    "calendar_days": {
+      "description": "连续日期维度",
+      "rowCount": 1096,
+      "columns": [
+        {
+          "name": "day",
+          "description": "日历日期",
+          "sqliteType": "TEXT",
+          "mysqlType": "DATE",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "month_key",
+          "description": "统计月份 YYYY-MM",
+          "sqliteType": "TEXT",
+          "mysqlType": "CHAR(7)",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "day_index",
+          "description": "从2023-01-01开始的日序号（0起）",
+          "sqliteType": "INTEGER",
+          "mysqlType": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE calendar_days (day TEXT PRIMARY KEY, month_key TEXT NOT NULL, day_index INTEGER NOT NULL UNIQUE)",
+      "mysqlDDL": "CREATE TABLE calendar_days (\n  day DATE PRIMARY KEY,\n  month_key CHAR(7) NOT NULL,\n  day_index INT NOT NULL UNIQUE\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": []
+    },
+    "stores": {
+      "description": "门店主档",
+      "rowCount": 12,
+      "columns": [
+        {
+          "name": "store_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "store_name",
+          "description": "名称",
+          "sqliteType": "TEXT",
+          "mysqlType": "VARCHAR(160)",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "city",
+          "description": "业务字段",
+          "sqliteType": "TEXT",
+          "mysqlType": "VARCHAR(160)",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE stores (store_id INTEGER PRIMARY KEY, store_name TEXT NOT NULL, city TEXT NOT NULL)",
+      "mysqlDDL": "CREATE TABLE stores (\n  store_id BIGINT PRIMARY KEY,\n  store_name VARCHAR(160) NOT NULL,\n  city VARCHAR(160) NOT NULL\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": []
+    },
+    "departments": {
+      "description": "部门主档",
+      "rowCount": 7,
+      "columns": [
+        {
+          "name": "department_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "department_name",
+          "description": "名称",
+          "sqliteType": "TEXT",
+          "mysqlType": "VARCHAR(160)",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE departments (department_id INTEGER PRIMARY KEY, department_name TEXT NOT NULL)",
+      "mysqlDDL": "CREATE TABLE departments (\n  department_id BIGINT PRIMARY KEY,\n  department_name VARCHAR(160) NOT NULL\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": []
+    },
+    "positions": {
+      "description": "职位职级",
+      "rowCount": 5,
+      "columns": [
+        {
+          "name": "position_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "position_name",
+          "description": "名称",
+          "sqliteType": "TEXT",
+          "mysqlType": "VARCHAR(160)",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "grade",
+          "description": "职级",
+          "sqliteType": "INTEGER",
+          "mysqlType": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE positions (position_id INTEGER PRIMARY KEY, position_name TEXT NOT NULL, grade INTEGER NOT NULL)",
+      "mysqlDDL": "CREATE TABLE positions (\n  position_id BIGINT PRIMARY KEY,\n  position_name VARCHAR(160) NOT NULL,\n  grade INT NOT NULL\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": []
+    },
+    "employees": {
+      "description": "虚构员工",
+      "rowCount": 250,
+      "columns": [
+        {
+          "name": "employee_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "employee_name",
+          "description": "名称",
+          "sqliteType": "TEXT",
+          "mysqlType": "VARCHAR(160)",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "hire_date",
+          "description": "日期（YYYY-MM-DD）",
+          "sqliteType": "TEXT",
+          "mysqlType": "DATE",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "termination_date",
+          "description": "日期（YYYY-MM-DD）",
+          "sqliteType": "TEXT",
+          "mysqlType": "DATE",
+          "nullable": true,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY, employee_name TEXT NOT NULL, hire_date TEXT NOT NULL, termination_date TEXT)",
+      "mysqlDDL": "CREATE TABLE employees (\n  employee_id BIGINT PRIMARY KEY,\n  employee_name VARCHAR(160) NOT NULL,\n  hire_date DATE NOT NULL,\n  termination_date DATE\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": [
+        "CREATE INDEX ix_employees_hire_date ON employees(hire_date)",
+        "CREATE INDEX ix_employees_termination_date ON employees(termination_date)"
+      ]
+    },
+    "employment_history": {
+      "description": "历史岗位和门店",
+      "rowCount": 307,
+      "columns": [
+        {
+          "name": "employment_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "employee_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": {
+            "table": "employees",
+            "column": "employee_id"
+          },
+          "default": null
+        },
+        {
+          "name": "department_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": {
+            "table": "departments",
+            "column": "department_id"
+          },
+          "default": null
+        },
+        {
+          "name": "position_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": {
+            "table": "positions",
+            "column": "position_id"
+          },
+          "default": null
+        },
+        {
+          "name": "store_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": true,
+          "primaryKey": false,
+          "foreignKey": {
+            "table": "stores",
+            "column": "store_id"
+          },
+          "default": null
+        },
+        {
+          "name": "start_date",
+          "description": "日期（YYYY-MM-DD）",
+          "sqliteType": "TEXT",
+          "mysqlType": "DATE",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "end_date",
+          "description": "日期（YYYY-MM-DD）",
+          "sqliteType": "TEXT",
+          "mysqlType": "DATE",
+          "nullable": true,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE employment_history (employment_id INTEGER PRIMARY KEY, employee_id INTEGER NOT NULL REFERENCES employees(employee_id), department_id INTEGER NOT NULL REFERENCES departments(department_id), position_id INTEGER NOT NULL REFERENCES positions(position_id), store_id INTEGER REFERENCES stores(store_id), start_date TEXT NOT NULL, end_date TEXT)",
+      "mysqlDDL": "CREATE TABLE employment_history (\n  employment_id BIGINT PRIMARY KEY,\n  employee_id BIGINT NOT NULL,\n  department_id BIGINT NOT NULL,\n  position_id BIGINT NOT NULL,\n  store_id BIGINT,\n  start_date DATE NOT NULL,\n  end_date DATE,\n  FOREIGN KEY (employee_id) REFERENCES employees(employee_id),\n  FOREIGN KEY (department_id) REFERENCES departments(department_id),\n  FOREIGN KEY (position_id) REFERENCES positions(position_id),\n  FOREIGN KEY (store_id) REFERENCES stores(store_id)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": [
+        "CREATE INDEX ix_employment_history_department_id ON employment_history(department_id)",
+        "CREATE INDEX ix_employment_history_employee_id ON employment_history(employee_id)",
+        "CREATE INDEX ix_employment_history_end_date ON employment_history(end_date)",
+        "CREATE INDEX ix_employment_history_position_id ON employment_history(position_id)",
+        "CREATE INDEX ix_employment_history_start_date ON employment_history(start_date)",
+        "CREATE INDEX ix_employment_history_store_id ON employment_history(store_id)"
+      ]
+    },
+    "salary_history": {
+      "description": "员工月薪",
+      "rowCount": 4966,
+      "columns": [
+        {
+          "name": "salary_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "employee_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": {
+            "table": "employees",
+            "column": "employee_id"
+          },
+          "default": null
+        },
+        {
+          "name": "employment_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": {
+            "table": "employment_history",
+            "column": "employment_id"
+          },
+          "default": null
+        },
+        {
+          "name": "month_key",
+          "description": "统计月份 YYYY-MM",
+          "sqliteType": "TEXT",
+          "mysqlType": "CHAR(7)",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "base_cents",
+          "description": "金额（马币分）",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "bonus_cents",
+          "description": "金额（马币分）",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE salary_history (salary_id INTEGER PRIMARY KEY, employee_id INTEGER NOT NULL REFERENCES employees(employee_id), employment_id INTEGER NOT NULL REFERENCES employment_history(employment_id), month_key TEXT NOT NULL, base_cents INTEGER NOT NULL CHECK(base_cents>=0), bonus_cents INTEGER NOT NULL CHECK(bonus_cents>=0), UNIQUE(employee_id,month_key))",
+      "mysqlDDL": "CREATE TABLE salary_history (\n  salary_id BIGINT PRIMARY KEY,\n  employee_id BIGINT NOT NULL,\n  employment_id BIGINT NOT NULL,\n  month_key CHAR(7) NOT NULL,\n  base_cents BIGINT NOT NULL CHECK(base_cents>=0),\n  bonus_cents BIGINT NOT NULL CHECK(bonus_cents>=0),\n  UNIQUE(employee_id,month_key),\n  FOREIGN KEY (employee_id) REFERENCES employees(employee_id),\n  FOREIGN KEY (employment_id) REFERENCES employment_history(employment_id)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": [
+        "CREATE INDEX ix_salary_history_employee_id ON salary_history(employee_id)",
+        "CREATE INDEX ix_salary_history_employment_id ON salary_history(employment_id)"
+      ]
+    },
+    "attendance": {
+      "description": "出勤及加班",
+      "rowCount": 104754,
+      "columns": [
+        {
+          "name": "attendance_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "employee_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": {
+            "table": "employees",
+            "column": "employee_id"
+          },
+          "default": null
+        },
+        {
+          "name": "attendance_date",
+          "description": "日期（YYYY-MM-DD）",
+          "sqliteType": "TEXT",
+          "mysqlType": "DATE",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "status",
+          "description": "业务状态（见表约束及口径）",
+          "sqliteType": "TEXT",
+          "mysqlType": "VARCHAR(160)",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "work_minutes",
+          "description": "正常出勤分钟",
+          "sqliteType": "INTEGER",
+          "mysqlType": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "overtime_minutes",
+          "description": "加班分钟",
+          "sqliteType": "INTEGER",
+          "mysqlType": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE attendance (attendance_id INTEGER PRIMARY KEY, employee_id INTEGER NOT NULL REFERENCES employees(employee_id), attendance_date TEXT NOT NULL, status TEXT NOT NULL, work_minutes INTEGER NOT NULL CHECK(work_minutes>=0), overtime_minutes INTEGER NOT NULL CHECK(overtime_minutes>=0), UNIQUE(employee_id,attendance_date))",
+      "mysqlDDL": "CREATE TABLE attendance (\n  attendance_id BIGINT PRIMARY KEY,\n  employee_id BIGINT NOT NULL,\n  attendance_date DATE NOT NULL,\n  status VARCHAR(160) NOT NULL,\n  work_minutes INT NOT NULL CHECK(work_minutes>=0),\n  overtime_minutes INT NOT NULL CHECK(overtime_minutes>=0),\n  UNIQUE(employee_id,attendance_date),\n  FOREIGN KEY (employee_id) REFERENCES employees(employee_id)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": [
+        "CREATE INDEX ix_attendance_attendance_date ON attendance(attendance_date)",
+        "CREATE INDEX ix_attendance_employee_id ON attendance(employee_id)"
+      ]
+    }
+  },
+  "views": {
+    "v_staff_month": "CREATE VIEW v_staff_month AS SELECT s.employee_id,s.month_key,h.department_id,h.position_id,h.store_id,s.base_cents,s.bonus_cents,COALESCE(a.ot,0) overtime_minutes,COALESCE(a.worked,0) worked_minutes,s.base_cents+s.bonus_cents+ROUND(s.base_cents*1.5*COALESCE(a.ot,0)/10560.0,0) AS labor_cents FROM salary_history s JOIN employment_history h ON h.employment_id=s.employment_id LEFT JOIN (SELECT employee_id,SUBSTR(attendance_date,1,7) m,SUM(overtime_minutes) ot,SUM(work_minutes) worked FROM attendance GROUP BY employee_id,SUBSTR(attendance_date,1,7)) a ON a.employee_id=s.employee_id AND a.m=s.month_key"
+  },
+  "cutoff": "2025-12-31",
+  "currency": "MYR",
+  "moneyUnit": "cent"
+}

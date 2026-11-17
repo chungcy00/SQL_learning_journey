@@ -1,0 +1,33 @@
+{
+  "id": "q0196-key",
+  "questionId": "q0196",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "3 与 2",
+      "explanation": "RANK跳过并列占用的名次，DENSE_RANK不跳号。"
+    },
+    {
+      "id": "B",
+      "text": "2 与 3",
+      "explanation": "两种函数的跳号规则被颠倒。"
+    },
+    {
+      "id": "C",
+      "text": "2 与 2",
+      "explanation": "RANK的第二个不同金额名次为3。"
+    },
+    {
+      "id": "D",
+      "text": "3 与 3",
+      "explanation": "DENSE_RANK按不同值连续编号。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "A"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

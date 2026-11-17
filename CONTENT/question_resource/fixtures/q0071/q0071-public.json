@@ -1,0 +1,95 @@
+{
+  "visibility": "public",
+  "variant": "public",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "order_items",
+      "columns": [
+        {
+          "name": "order_item_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "order_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "quantity",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "unit_price",
+          "type": "INTEGER",
+          "mysqlType": "DECIMAL(12,2)",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "discount_amount",
+          "type": "INTEGER",
+          "mysqlType": "DECIMAL(12,2)",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          1,
+          1,
+          2,
+          100,
+          10
+        ],
+        [
+          2,
+          2,
+          1,
+          1,
+          100,
+          0
+        ],
+        [
+          3,
+          3,
+          2,
+          3,
+          50,
+          0
+        ]
+      ]
+    }
+  ],
+  "id": "q0071-public",
+  "questionId": "q0071",
+  "datasetId": "q0071-lesson",
+  "expected": {
+    "columns": [
+      "net_sales"
+    ],
+    "rows": [
+      [
+        440
+      ]
+    ]
+  },
+  "orderPolicy": "unordered_multiset",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

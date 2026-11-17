@@ -1,0 +1,49 @@
+{
+  "id": "q0253-boundary",
+  "questionId": "q0253",
+  "visibility": "hidden",
+  "variant": "boundary",
+  "kind": "database_delta",
+  "datasetId": "retail-v2",
+  "baseDatabase": "databases/retail/retail.sqlite",
+  "baseSha256": "649e1e06b63851702adc525d689d0319e5f10de164733998f9c5ffc81c03cbc8",
+  "patchSql": [
+    "UPDATE order_items SET unit_cost_cents=0 WHERE product_id=34 AND order_id IN (SELECT order_id FROM orders WHERE channel='store' AND order_date BETWEEN '2025-01-01' AND '2025-12-31')"
+  ],
+  "patchDescription": "将原先候选商品的年内销售成本设为零，检验毛利阈值和排名过滤是否真正生效。",
+  "patchRowChanges": 133,
+  "testIsolation": "每次使用全新数据库副本；夹具可故意引入对账差异或改变业务记录，仅用于判题，绝不可写入基准库",
+  "expected": {
+    "columns": [
+      "product_id",
+      "net_cents",
+      "margin_pct",
+      "discount_cents",
+      "refund_cents"
+    ],
+    "rows": [
+      [
+        85,
+        2415820,
+        9.84,
+        108230,
+        161950
+      ],
+      [
+        17,
+        1794420,
+        8.98,
+        84510,
+        156870
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

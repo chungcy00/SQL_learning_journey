@@ -1,0 +1,51 @@
+{
+  "id": "fc0135-demo",
+  "tables": [
+    {
+      "name": "stock_log",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "qty",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          8
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "BEGIN; UPDATE stock_log SET qty=qty+10 WHERE id=1; ROLLBACK;",
+  "mysqlSql": "START TRANSACTION; UPDATE stock_log SET qty=qty+10 WHERE id=1; ROLLBACK;",
+  "verificationQuery": "SELECT id,qty FROM stock_log WHERE id=1",
+  "expectedRows": [
+    [
+      1,
+      8
+    ]
+  ],
+  "expectedColumns": [
+    "id",
+    "qty"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

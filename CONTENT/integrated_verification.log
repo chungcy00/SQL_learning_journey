@@ -1,0 +1,10 @@
+课程 151 理论 1 业务 50 共享表核对 87
+复验题数 50
+复验题数 100
+复验题数 150
+复验题数 200
+复验题数 250
+复验题数 300
+{"engine": "SQLite 3.46.1", "passed": true, "databaseHashes": 7, "fixtureHashes": 776, "solutionRuns": 1492, "wrongRejectedCases": 520, "wrongRuns": 746, "executedFixtures": 746, "questionsRejectingWrong": 270, "questionsWithChangedHiddenResult": 268, "questions": 300, "objectiveKeys": 30}
+{'status': '通过', 'sqliteVersion': '3.46.1', 'cards': 200, 'chapters': 20, 'correctExecuted': 125, 'wrongRejected': 25, 'wrongExecutionErrors': 1, 'wrongDifferentResults': 24, 'stateTests': 7, 'fixtureHashMatches': 125, 'nativeScriptsPresentNotExecuted': 125, 'primaryKnowledgePoints': 152, 'linkedQuestions': 300, 'businessTasks': 50}
+整合复验通过；原生 MySQL 未执行。

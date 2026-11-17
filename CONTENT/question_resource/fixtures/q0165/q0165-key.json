@@ -1,0 +1,33 @@
+{
+  "id": "q0165-key",
+  "questionId": "q0165",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "前者为3，后者为余数1",
+      "explanation": "余数运算使用MOD或%，不是DIV。"
+    },
+    {
+      "id": "B",
+      "text": "前者为3.5的数值，后者为整数3",
+      "explanation": "/执行除法，DIV截断整数商。"
+    },
+    {
+      "id": "C",
+      "text": "二者均为3",
+      "explanation": "这会混淆MySQL与SQLite整数除法。"
+    },
+    {
+      "id": "D",
+      "text": "二者均为3.5",
+      "explanation": "DIV只返回整数商。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "B"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

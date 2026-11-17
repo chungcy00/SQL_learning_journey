@@ -1,0 +1,59 @@
+{
+  "id": "lesson-stock_movements",
+  "table": "stock_movements",
+  "columns": [
+    {
+      "name": "movement_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "product_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "warehouse_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "movement_date",
+      "type": "TEXT",
+      "mysqlType": "DATE",
+      "sqliteType": "TEXT"
+    },
+    {
+      "name": "movement_type",
+      "type": "TEXT",
+      "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+      "sqliteType": "TEXT"
+    },
+    {
+      "name": "quantity",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "unit_cost",
+      "type": "INTEGER",
+      "mysqlType": "DECIMAL(12,2)",
+      "sqliteType": "INTEGER"
+    }
+  ],
+  "rows": [
+    [
+      1,
+      1,
+      1,
+      "2026-01-15",
+      "sale_out",
+      40,
+      10
+    ]
+  ]
+}

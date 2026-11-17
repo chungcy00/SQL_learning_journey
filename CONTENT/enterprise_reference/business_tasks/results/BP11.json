@@ -1,0 +1,26 @@
+{
+  "columns": [
+    "segment",
+    "customers",
+    "orders",
+    "net_cents",
+    "avg_order_cents"
+  ],
+  "rows": [
+    [
+      "new",
+      766,
+      766,
+      56872765,
+      74246.43
+    ],
+    [
+      "returning",
+      2414,
+      3479,
+      261908145,
+      75282.59
+    ]
+  ],
+  "orderGuaranteed": true
+}

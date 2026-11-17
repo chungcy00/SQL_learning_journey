@@ -1,0 +1,33 @@
+{
+  "id": "q0008-key",
+  "questionId": "q0008",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "一个客户可对应多笔订单",
+      "explanation": "订单外键可以重复引用同一客户。"
+    },
+    {
+      "id": "B",
+      "text": "每笔订单必须属于多位客户",
+      "explanation": "单个外键字段每行只引用一个键或为空。"
+    },
+    {
+      "id": "C",
+      "text": "每个客户最多对应一笔订单",
+      "explanation": "外键并未声明唯一。"
+    },
+    {
+      "id": "D",
+      "text": "两张表必须拥有相同行数",
+      "explanation": "外键约束不限制两个表的记录总数一致。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "A"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

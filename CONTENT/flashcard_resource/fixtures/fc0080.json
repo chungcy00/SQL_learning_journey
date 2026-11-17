@@ -1,0 +1,91 @@
+{
+  "id": "fc0080-demo",
+  "tables": [
+    {
+      "name": "items",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "name",
+          "type": "TEXT"
+        },
+        {
+          "name": "category",
+          "type": "TEXT"
+        },
+        {
+          "name": "price",
+          "type": "INTEGER"
+        },
+        {
+          "name": "stock",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "Tea",
+          "A",
+          12,
+          0
+        ],
+        [
+          2,
+          "Rice",
+          "A",
+          20,
+          8
+        ],
+        [
+          3,
+          "Soap",
+          "B",
+          12,
+          3
+        ],
+        [
+          4,
+          "Milk",
+          "B",
+          null,
+          0
+        ],
+        [
+          5,
+          "Bag",
+          "C",
+          30,
+          null
+        ],
+        [
+          6,
+          "Tea_2",
+          "A",
+          20,
+          6
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT CAST(id AS TEXT)||':'||name AS label FROM items WHERE id=3",
+  "mysqlSql": "SELECT CONCAT(id,':',name) AS label FROM items WHERE id=3",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      "3:Soap"
+    ]
+  ],
+  "expectedColumns": [
+    "label"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

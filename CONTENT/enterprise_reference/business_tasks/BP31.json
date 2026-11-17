@@ -1,0 +1,89 @@
+{
+  "projectId": "enterprise",
+  "title": "畅销缺货与滞销积压双向筛查",
+  "context": "销售＋库存联合分析：管理层要求以同一企业口径核对业务数据。",
+  "requirements": "2025年底仓库商品；近30日毛销量≥30且库存低于15日需求为畅销风险；近30日销量≤3且库存金额≥300000分为积压；仅有效商品。",
+  "grain": "仓库×商品",
+  "commonError": "把门店库存与仓库库存混为一谈。",
+  "executionSteps": [
+    "汇总仓库实际出库",
+    "连接期末",
+    "应用两套互斥规则"
+  ],
+  "difficulty": "困难",
+  "crossGroup": "销售＋库存",
+  "mysqlSql": "WITH s AS (SELECT warehouse_id,product_id,SUM(-quantity_delta) sold FROM stock_movements WHERE movement_type='sale' AND movement_date BETWEEN '2025-12-02' AND '2025-12-31' GROUP BY warehouse_id,product_id), a AS (SELECT i.warehouse_id,i.product_id,i.quantity,i.quantity*i.unit_cost_cents value_cents,COALESCE(s.sold,0) sold FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id LEFT JOIN s ON s.warehouse_id=i.warehouse_id AND s.product_id=i.product_id WHERE i.snapshot_date='2025-12-31' AND p.active=1) SELECT warehouse_id,product_id,quantity,sold,value_cents,CASE WHEN sold>=30 AND quantity<sold*.5 THEN 'fast_shortage' ELSE 'slow_excess' END issue FROM a WHERE (sold>=30 AND quantity<sold*.5) OR (sold<=3 AND value_cents>=300000) ORDER BY issue,value_cents DESC,warehouse_id,product_id",
+  "sqliteSql": "WITH s AS (SELECT warehouse_id,product_id,SUM(-quantity_delta) sold FROM stock_movements WHERE movement_type='sale' AND movement_date BETWEEN '2025-12-02' AND '2025-12-31' GROUP BY warehouse_id,product_id), a AS (SELECT i.warehouse_id,i.product_id,i.quantity,i.quantity*i.unit_cost_cents value_cents,COALESCE(s.sold,0) sold FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id LEFT JOIN s ON s.warehouse_id=i.warehouse_id AND s.product_id=i.product_id WHERE i.snapshot_date='2025-12-31' AND p.active=1) SELECT warehouse_id,product_id,quantity,sold,value_cents,CASE WHEN sold>=30 AND quantity<sold*.5 THEN 'fast_shortage' ELSE 'slow_excess' END issue FROM a WHERE (sold>=30 AND quantity<sold*.5) OR (sold<=3 AND value_cents>=300000) ORDER BY issue,value_cents DESC,warehouse_id,product_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "warehouse_id",
+    "product_id",
+    "quantity",
+    "sold",
+    "value_cents",
+    "issue"
+  ],
+  "id": "BP31",
+  "chapterId": "ch20",
+  "knowledgePointIds": [
+    "kp20-05"
+  ],
+  "datasetId": "enterprise-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP31.json",
+  "expectedRowCount": 698,
+  "expectedColumns": [
+    "warehouse_id",
+    "product_id",
+    "quantity",
+    "sold",
+    "value_cents",
+    "issue"
+  ],
+  "sourceTables": [
+    "inventory_snapshots",
+    "products",
+    "stock_movements"
+  ],
+  "dependencyTables": [
+    "categories",
+    "customer_sessions",
+    "customers",
+    "goods_receipts",
+    "inventory_snapshots",
+    "order_items",
+    "orders",
+    "products",
+    "promotions",
+    "purchase_order_items",
+    "purchase_orders",
+    "stock_movements",
+    "stores",
+    "supplier_contracts",
+    "suppliers",
+    "traffic_sources",
+    "warehouses"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH s AS (SELECT warehouse_id,product_id,SUM(-quantity_delta) sold FROM stock_movements WHERE movement_type='sale' AND movement_date BETWEEN '2025-12-02' AND '2025-12-31' GROUP BY warehouse_id,product_id), a AS (SELECT i.warehouse_id,i.product_id,i.quantity,i.quantity*i.unit_cost_cents value_cents,COALESCE(s.sold,0) sold FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id LEFT JOIN s ON s.warehouse_id=i.warehouse_id AND s.product_id=i.product_id WHERE i.snapshot_date='2025-12-31' AND p.active=1) SELECT warehouse_id,product_id,quantity,sold,value_cents,CASE WHEN sold>=30 AND quantity<sold*.5 THEN 'fast_shortage' ELSE 'slow_excess' END issue FROM a WHERE (sold>=30 AND quantity<sold*.5) OR (sold<=3 AND value_cents>=300000) ORDER BY issue,value_cents DESC,warehouse_id,product_id",
+      "sqliteSql": "WITH s AS (SELECT warehouse_id,product_id,SUM(-quantity_delta) sold FROM stock_movements WHERE movement_type='sale' AND movement_date BETWEEN '2025-12-02' AND '2025-12-31' GROUP BY warehouse_id,product_id), a AS (SELECT i.warehouse_id,i.product_id,i.quantity,i.quantity*i.unit_cost_cents value_cents,COALESCE(s.sold,0) sold FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id LEFT JOIN s ON s.warehouse_id=i.warehouse_id AND s.product_id=i.product_id WHERE i.snapshot_date='2025-12-31' AND p.active=1) SELECT warehouse_id,product_id,quantity,sold,value_cents,CASE WHEN sold>=30 AND quantity<sold*.5 THEN 'fast_shortage' ELSE 'slow_excess' END issue FROM a WHERE (sold>=30 AND quantity<sold*.5) OR (sold<=3 AND value_cents>=300000) ORDER BY issue,value_cents DESC,warehouse_id,product_id"
+    }
+  ],
+  "hints": [
+    "汇总仓库实际出库",
+    "汇总仓库实际出库；连接期末",
+    "重点核对输出粒度：仓库×商品"
+  ],
+  "explanation": "汇总仓库实际出库；连接期末；应用两套互斥规则。把门店库存与仓库库存混为一谈。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 8.3
+}

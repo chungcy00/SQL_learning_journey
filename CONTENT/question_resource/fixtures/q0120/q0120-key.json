@@ -1,0 +1,33 @@
+{
+  "id": "q0120-key",
+  "questionId": "q0120",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "A",
+      "explanation": "CASE按顺序返回第一个为真的分支。"
+    },
+    {
+      "id": "B",
+      "text": "同时返回A和B",
+      "explanation": "单一CASE表达式每行只得一个值。"
+    },
+    {
+      "id": "C",
+      "text": "B",
+      "explanation": "第二分支虽也为真，但已由第一分支匹配。"
+    },
+    {
+      "id": "D",
+      "text": "C",
+      "explanation": "ELSE只在前面没有真条件时生效。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "A"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

@@ -1,0 +1,83 @@
+{
+  "projectId": "enterprise",
+  "title": "订单结算与收入核对",
+  "context": "销售＋财务联合分析：管理层要求以同一企业口径核对业务数据。",
+  "requirements": "2025年全部已完成订单，支付成功金额减实际退款，比较净销售金额；输出存在差额的订单。退款本库即退款已支付，支付日期≤年底；失败支付不计。",
+  "grain": "订单",
+  "commonError": "使用所有付款状态或连接拆分付款导致重复。",
+  "executionSteps": [
+    "聚合订单付款",
+    "聚合退款",
+    "对照订单净额",
+    "允许空结果"
+  ],
+  "difficulty": "困难",
+  "crossGroup": "销售＋财务",
+  "mysqlSql": "WITH a AS (SELECT order_id,SUM(amount_cents) paid FROM payments WHERE status='settled' AND payment_date<='2025-12-31' GROUP BY order_id), b AS (SELECT i.order_id,SUM(r.refund_cents) refunded FROM returns r JOIN order_items i ON i.order_item_id=r.order_item_id WHERE r.return_date<='2025-12-31' GROUP BY i.order_id) SELECT o.order_id,o.net_cents,COALESCE(a.paid,0)-COALESCE(b.refunded,0) cash_net_cents,COALESCE(a.paid,0)-COALESCE(b.refunded,0)-o.net_cents difference_cents FROM v_order_net o LEFT JOIN a ON a.order_id=o.order_id LEFT JOIN b ON b.order_id=o.order_id WHERE o.order_date BETWEEN '2025-01-01' AND '2025-12-31' AND COALESCE(a.paid,0)-COALESCE(b.refunded,0)<>o.net_cents ORDER BY o.order_id",
+  "sqliteSql": "WITH a AS (SELECT order_id,SUM(amount_cents) paid FROM payments WHERE status='settled' AND payment_date<='2025-12-31' GROUP BY order_id), b AS (SELECT i.order_id,SUM(r.refund_cents) refunded FROM returns r JOIN order_items i ON i.order_item_id=r.order_item_id WHERE r.return_date<='2025-12-31' GROUP BY i.order_id) SELECT o.order_id,o.net_cents,COALESCE(a.paid,0)-COALESCE(b.refunded,0) cash_net_cents,COALESCE(a.paid,0)-COALESCE(b.refunded,0)-o.net_cents difference_cents FROM v_order_net o LEFT JOIN a ON a.order_id=o.order_id LEFT JOIN b ON b.order_id=o.order_id WHERE o.order_date BETWEEN '2025-01-01' AND '2025-12-31' AND COALESCE(a.paid,0)-COALESCE(b.refunded,0)<>o.net_cents ORDER BY o.order_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "order_id",
+    "net_cents",
+    "cash_net_cents",
+    "difference_cents"
+  ],
+  "id": "BP39",
+  "chapterId": "ch20",
+  "knowledgePointIds": [
+    "kp20-13"
+  ],
+  "datasetId": "enterprise-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP39.json",
+  "expectedRowCount": 0,
+  "expectedColumns": [
+    "order_id",
+    "net_cents",
+    "cash_net_cents",
+    "difference_cents"
+  ],
+  "sourceTables": [
+    "order_items",
+    "payments",
+    "returns",
+    "v_order_net"
+  ],
+  "dependencyTables": [
+    "categories",
+    "customer_sessions",
+    "customers",
+    "order_items",
+    "orders",
+    "payments",
+    "products",
+    "promotions",
+    "returns",
+    "stores",
+    "traffic_sources",
+    "v_order_net",
+    "v_sales_lines"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH a AS (SELECT order_id,SUM(amount_cents) paid FROM payments WHERE status='settled' AND payment_date<='2025-12-31' GROUP BY order_id), b AS (SELECT i.order_id,SUM(r.refund_cents) refunded FROM returns r JOIN order_items i ON i.order_item_id=r.order_item_id WHERE r.return_date<='2025-12-31' GROUP BY i.order_id) SELECT o.order_id,o.net_cents,COALESCE(a.paid,0)-COALESCE(b.refunded,0) cash_net_cents,COALESCE(a.paid,0)-COALESCE(b.refunded,0)-o.net_cents difference_cents FROM v_order_net o LEFT JOIN a ON a.order_id=o.order_id LEFT JOIN b ON b.order_id=o.order_id WHERE o.order_date BETWEEN '2025-01-01' AND '2025-12-31' AND COALESCE(a.paid,0)-COALESCE(b.refunded,0)<>o.net_cents ORDER BY o.order_id",
+      "sqliteSql": "WITH a AS (SELECT order_id,SUM(amount_cents) paid FROM payments WHERE status='settled' AND payment_date<='2025-12-31' GROUP BY order_id), b AS (SELECT i.order_id,SUM(r.refund_cents) refunded FROM returns r JOIN order_items i ON i.order_item_id=r.order_item_id WHERE r.return_date<='2025-12-31' GROUP BY i.order_id) SELECT o.order_id,o.net_cents,COALESCE(a.paid,0)-COALESCE(b.refunded,0) cash_net_cents,COALESCE(a.paid,0)-COALESCE(b.refunded,0)-o.net_cents difference_cents FROM v_order_net o LEFT JOIN a ON a.order_id=o.order_id LEFT JOIN b ON b.order_id=o.order_id WHERE o.order_date BETWEEN '2025-01-01' AND '2025-12-31' AND COALESCE(a.paid,0)-COALESCE(b.refunded,0)<>o.net_cents ORDER BY o.order_id"
+    }
+  ],
+  "hints": [
+    "聚合订单付款",
+    "聚合订单付款；聚合退款",
+    "重点核对输出粒度：订单"
+  ],
+  "explanation": "聚合订单付款；聚合退款；对照订单净额；允许空结果。使用所有付款状态或连接拆分付款导致重复。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 115.4
+}

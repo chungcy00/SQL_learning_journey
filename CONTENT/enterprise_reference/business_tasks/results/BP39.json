@@ -1,0 +1,10 @@
+{
+  "columns": [
+    "order_id",
+    "net_cents",
+    "cash_net_cents",
+    "difference_cents"
+  ],
+  "rows": [],
+  "orderGuaranteed": true
+}

@@ -1,0 +1,22 @@
+{
+  "id": "fc0130-demo",
+  "tables": [],
+  "dialect": "SQLite",
+  "sqliteSql": "CREATE TABLE inventory_card(id INT NOT NULL PRIMARY KEY,qty INT NOT NULL CHECK(qty>=0)); INSERT INTO inventory_card VALUES(1,3);",
+  "mysqlSql": "CREATE TABLE inventory_card(id INT NOT NULL PRIMARY KEY,qty INT NOT NULL CHECK(qty>=0)); INSERT INTO inventory_card VALUES(1,3);",
+  "verificationQuery": "SELECT id,qty FROM inventory_card ORDER BY id",
+  "expectedRows": [
+    [
+      1,
+      3
+    ]
+  ],
+  "expectedColumns": [
+    "id",
+    "qty"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

@@ -1,0 +1,50 @@
+{
+  "sources": [
+    {
+      "name": "SQL_手机离线学习_最终开发资料.zip",
+      "sha256": "2f41ff06d67840392adc0987d12a1f52857cd6977c7ce13a38a84752e1acda04"
+    },
+    {
+      "name": "SQL_第十一阶段_整合审核修订版.zip",
+      "sha256": "20f2ec9656db289322e5cb0693a01483f125631b9edf381da1f8b7b4ec221ae7"
+    }
+  ],
+  "counts": {
+    "chapters": 20,
+    "knowledgePoints": 152,
+    "questions": 300,
+    "flashcards": 200,
+    "questionFixtures": 776,
+    "databases": 7,
+    "uiImages": 60,
+    "svg": 24,
+    "assetPng": 39
+  },
+  "questionTypes": {
+    "结果预测": 25,
+    "选择": 30,
+    "独立编写": 120,
+    "代码填空": 35,
+    "代码纠错": 30,
+    "业务情景": 60
+  },
+  "difficulty": {
+    "入门": 60,
+    "简单": 90,
+    "中等": 90,
+    "困难": 45,
+    "挑战": 15
+  },
+  "flashcardTypes": {
+    "概念记忆": 40,
+    "语法结构": 35,
+    "用法辨析": 35,
+    "代码填空": 35,
+    "结果预测": 30,
+    "错误纠正": 25
+  },
+  "contentUnchanged": true,
+  "visualFilesUnchanged": true,
+  "nativeMysqlExecuted": false,
+  "mobileExecuted": false
+}

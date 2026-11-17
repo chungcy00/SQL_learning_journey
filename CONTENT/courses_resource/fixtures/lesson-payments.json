@@ -1,0 +1,44 @@
+{
+  "id": "lesson-payments",
+  "table": "payments",
+  "columns": [
+    {
+      "name": "payment_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "invoice_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "payment_date",
+      "type": "TEXT",
+      "mysqlType": "DATE",
+      "sqliteType": "TEXT"
+    },
+    {
+      "name": "amount",
+      "type": "INTEGER",
+      "mysqlType": "DECIMAL(12,2)",
+      "sqliteType": "INTEGER"
+    }
+  ],
+  "rows": [
+    [
+      1,
+      1,
+      "2026-01-10",
+      40
+    ],
+    [
+      2,
+      1,
+      "2026-02-02",
+      60
+    ]
+  ]
+}

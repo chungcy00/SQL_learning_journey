@@ -1,0 +1,98 @@
+{
+  "chapterId": "ch15",
+  "contentVersion": "3.0.0",
+  "knowledgePointUpdates": [
+    {
+      "id": "kp15-01",
+      "relatedQuestionIds": [
+        "q0199",
+        "q0200",
+        "q0201",
+        "q0204"
+      ],
+      "primaryQuestionIds": [
+        "q0199",
+        "q0200",
+        "q0201",
+        "q0204"
+      ]
+    },
+    {
+      "id": "kp15-02",
+      "relatedQuestionIds": [
+        "q0196",
+        "q0206",
+        "q0207",
+        "q0216",
+        "q0217",
+        "q0218",
+        "q0219"
+      ],
+      "primaryQuestionIds": [
+        "q0196",
+        "q0206",
+        "q0207",
+        "q0216",
+        "q0217",
+        "q0218",
+        "q0219"
+      ]
+    },
+    {
+      "id": "kp15-03",
+      "relatedQuestionIds": [
+        "q0197",
+        "q0198",
+        "q0202",
+        "q0209"
+      ],
+      "primaryQuestionIds": [
+        "q0197",
+        "q0198",
+        "q0202",
+        "q0209"
+      ]
+    },
+    {
+      "id": "kp15-04",
+      "relatedQuestionIds": [
+        "q0205",
+        "q0208",
+        "q0210",
+        "q0211"
+      ],
+      "primaryQuestionIds": [
+        "q0205",
+        "q0208",
+        "q0210",
+        "q0211"
+      ]
+    },
+    {
+      "id": "kp15-05",
+      "relatedQuestionIds": [
+        "q0203",
+        "q0214",
+        "q0215",
+        "q0220"
+      ],
+      "primaryQuestionIds": [
+        "q0203",
+        "q0214",
+        "q0215",
+        "q0220"
+      ]
+    },
+    {
+      "id": "kp15-06",
+      "relatedQuestionIds": [
+        "q0212",
+        "q0213"
+      ],
+      "primaryQuestionIds": [
+        "q0212",
+        "q0213"
+      ]
+    }
+  ]
+}

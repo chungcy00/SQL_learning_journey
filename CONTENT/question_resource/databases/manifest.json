@@ -1,0 +1,48 @@
+{
+  "version": "2.0.0",
+  "note": "七份数据库与上一阶段逐文件哈希一致；开发时可复用。",
+  "datasets": [
+    {
+      "id": "retail-v2",
+      "path": "databases/retail/retail.sqlite",
+      "sha256": "649e1e06b63851702adc525d689d0319e5f10de164733998f9c5ffc81c03cbc8",
+      "bytes": 13484032
+    },
+    {
+      "id": "inventory-v2",
+      "path": "databases/inventory/inventory.sqlite",
+      "sha256": "0bf3d7e12be603e8bca9f45225807912f64f8361b82a48b9f9ac04d58be40d0c",
+      "bytes": 28434432
+    },
+    {
+      "id": "ecommerce-v2",
+      "path": "databases/ecommerce/ecommerce.sqlite",
+      "sha256": "f5940b0776a7a15f793f1186bb87474a80be94acae79cfc96f7dcfa2f514e279",
+      "bytes": 13365248
+    },
+    {
+      "id": "finance-v2",
+      "path": "databases/finance/finance.sqlite",
+      "sha256": "753f0a32277e2d1eec48c836d6a1ae69756f1cea9766ff7c3b0f2a9bcd911a08",
+      "bytes": 6533120
+    },
+    {
+      "id": "hr-v2",
+      "path": "databases/hr/hr.sqlite",
+      "sha256": "b8e8328981418fd75b89186eebab0cba47c12e873293f05898769ee0fc625bfa",
+      "bytes": 9355264
+    },
+    {
+      "id": "procurement-v2",
+      "path": "databases/procurement/procurement.sqlite",
+      "sha256": "dca13f4d0491909639b3e449e1a6d969ce59f598f87bbee31d46bd0f6ab2d82d",
+      "bytes": 2863104
+    },
+    {
+      "id": "enterprise-v2",
+      "path": "databases/enterprise/enterprise.sqlite",
+      "sha256": "bc4bd510731d3a3ef45f5bd5227349b37e59535322ba85afb28bcc0a4093ab2e",
+      "bytes": 44265472
+    }
+  ]
+}

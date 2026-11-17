@@ -1,0 +1,78 @@
+{
+  "projectId": "procurement",
+  "title": "同商品跨供应商采购价差",
+  "context": "管理层希望看到同品不同供应商的采购单价差异。",
+  "requirements": "2025年非取消采购行，同商品同供应商采购金额/订购量为加权单价；只比较有至少两家供应商商品；输出供应商加权价、最低价及相对最低价的溢价率。",
+  "grain": "商品×供应商",
+  "commonError": "对单位价格直接AVG没有反映采购数量权重。",
+  "executionSteps": [
+    "按每商品供应商求加权价",
+    "窗口求最低与样本数",
+    "比较价差"
+  ],
+  "difficulty": "困难",
+  "mysqlSql": "WITH a AS (SELECT product_id,supplier_id,SUM(ordered_cents)*1.0/SUM(quantity_ordered) avg_price FROM v_po_lines WHERE order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY product_id,supplier_id), b AS (SELECT *,MIN(avg_price) OVER(PARTITION BY product_id) low,COUNT(*) OVER(PARTITION BY product_id) n FROM a) SELECT product_id,supplier_id,ROUND(avg_price,2) weighted_price_cents,ROUND(low,2) low_price_cents,ROUND(100.0*(avg_price-low)/NULLIF(low,0),2) premium_pct FROM b WHERE n>=2 ORDER BY product_id,premium_pct,supplier_id",
+  "sqliteSql": "WITH a AS (SELECT product_id,supplier_id,SUM(ordered_cents)*1.0/SUM(quantity_ordered) avg_price FROM v_po_lines WHERE order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY product_id,supplier_id), b AS (SELECT *,MIN(avg_price) OVER(PARTITION BY product_id) low,COUNT(*) OVER(PARTITION BY product_id) n FROM a) SELECT product_id,supplier_id,ROUND(avg_price,2) weighted_price_cents,ROUND(low,2) low_price_cents,ROUND(100.0*(avg_price-low)/NULLIF(low,0),2) premium_pct FROM b WHERE n>=2 ORDER BY product_id,premium_pct,supplier_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "product_id",
+    "supplier_id",
+    "weighted_price_cents",
+    "low_price_cents",
+    "premium_pct"
+  ],
+  "id": "BP29",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-59"
+  ],
+  "datasetId": "procurement-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP29.json",
+  "expectedRowCount": 900,
+  "expectedColumns": [
+    "product_id",
+    "supplier_id",
+    "weighted_price_cents",
+    "low_price_cents",
+    "premium_pct"
+  ],
+  "sourceTables": [
+    "v_po_lines"
+  ],
+  "dependencyTables": [
+    "categories",
+    "goods_receipts",
+    "products",
+    "purchase_order_items",
+    "purchase_orders",
+    "supplier_contracts",
+    "supplier_invoice_items",
+    "supplier_invoices",
+    "suppliers",
+    "v_po_lines",
+    "warehouses"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH a AS (SELECT product_id,supplier_id,SUM(ordered_cents)*1.0/SUM(quantity_ordered) avg_price FROM v_po_lines WHERE order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY product_id,supplier_id), b AS (SELECT *,MIN(avg_price) OVER(PARTITION BY product_id) low,COUNT(*) OVER(PARTITION BY product_id) n FROM a) SELECT product_id,supplier_id,ROUND(avg_price,2) weighted_price_cents,ROUND(low,2) low_price_cents,ROUND(100.0*(avg_price-low)/NULLIF(low,0),2) premium_pct FROM b WHERE n>=2 ORDER BY product_id,premium_pct,supplier_id",
+      "sqliteSql": "WITH a AS (SELECT product_id,supplier_id,SUM(ordered_cents)*1.0/SUM(quantity_ordered) avg_price FROM v_po_lines WHERE order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY product_id,supplier_id), b AS (SELECT *,MIN(avg_price) OVER(PARTITION BY product_id) low,COUNT(*) OVER(PARTITION BY product_id) n FROM a) SELECT product_id,supplier_id,ROUND(avg_price,2) weighted_price_cents,ROUND(low,2) low_price_cents,ROUND(100.0*(avg_price-low)/NULLIF(low,0),2) premium_pct FROM b WHERE n>=2 ORDER BY product_id,premium_pct,supplier_id"
+    }
+  ],
+  "hints": [
+    "按每商品供应商求加权价",
+    "按每商品供应商求加权价；窗口求最低与样本数",
+    "重点核对输出粒度：商品×供应商"
+  ],
+  "explanation": "按每商品供应商求加权价；窗口求最低与样本数；比较价差。对单位价格直接AVG没有反映采购数量权重。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 33.3
+}

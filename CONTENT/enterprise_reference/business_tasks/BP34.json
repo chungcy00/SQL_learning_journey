@@ -1,0 +1,82 @@
+{
+  "projectId": "enterprise",
+  "title": "销售毛利与库存投资回报",
+  "context": "销售＋库存联合分析：管理层要求以同一企业口径核对业务数据。",
+  "requirements": "2025年全部渠道，按类别计算净销售毛利与2024年底/2025年底平均库存标准价值，毛利/平均库存为库存投资回报倍数；保留全部类别。",
+  "grain": "类别",
+  "commonError": "用销售收入替代毛利会变成另一个指标。",
+  "executionSteps": [
+    "汇总类别毛利",
+    "汇总两端库存",
+    "计算回报并标明估算口径"
+  ],
+  "difficulty": "挑战",
+  "crossGroup": "销售＋库存",
+  "mysqlSql": "WITH a AS (SELECT p.category_id,SUM(s.net_cents-s.cost_cents) gross FROM v_sales_lines s JOIN products p ON p.product_id=s.product_id WHERE s.order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY p.category_id), b AS (SELECT p.category_id,SUM(i.quantity*i.unit_cost_cents)/2.0 avg_stock FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id WHERE i.snapshot_date IN ('2024-12-31','2025-12-31') GROUP BY p.category_id) SELECT c.category_id,COALESCE(a.gross,0) gross_cents,b.avg_stock avg_stock_cents,ROUND(COALESCE(a.gross,0)/NULLIF(b.avg_stock,0),4) gmroi FROM categories c LEFT JOIN a ON a.category_id=c.category_id LEFT JOIN b ON b.category_id=c.category_id ORDER BY gmroi DESC,c.category_id",
+  "sqliteSql": "WITH a AS (SELECT p.category_id,SUM(s.net_cents-s.cost_cents) gross FROM v_sales_lines s JOIN products p ON p.product_id=s.product_id WHERE s.order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY p.category_id), b AS (SELECT p.category_id,SUM(i.quantity*i.unit_cost_cents)/2.0 avg_stock FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id WHERE i.snapshot_date IN ('2024-12-31','2025-12-31') GROUP BY p.category_id) SELECT c.category_id,COALESCE(a.gross,0) gross_cents,b.avg_stock avg_stock_cents,ROUND(COALESCE(a.gross,0)/NULLIF(b.avg_stock,0),4) gmroi FROM categories c LEFT JOIN a ON a.category_id=c.category_id LEFT JOIN b ON b.category_id=c.category_id ORDER BY gmroi DESC,c.category_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "category_id",
+    "gross_cents",
+    "avg_stock_cents",
+    "gmroi"
+  ],
+  "id": "BP34",
+  "chapterId": "ch20",
+  "knowledgePointIds": [
+    "kp20-08"
+  ],
+  "datasetId": "enterprise-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP34.json",
+  "expectedRowCount": 15,
+  "expectedColumns": [
+    "category_id",
+    "gross_cents",
+    "avg_stock_cents",
+    "gmroi"
+  ],
+  "sourceTables": [
+    "categories",
+    "inventory_snapshots",
+    "products",
+    "v_sales_lines"
+  ],
+  "dependencyTables": [
+    "categories",
+    "customer_sessions",
+    "customers",
+    "inventory_snapshots",
+    "order_items",
+    "orders",
+    "products",
+    "promotions",
+    "returns",
+    "stores",
+    "traffic_sources",
+    "v_sales_lines",
+    "warehouses"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH a AS (SELECT p.category_id,SUM(s.net_cents-s.cost_cents) gross FROM v_sales_lines s JOIN products p ON p.product_id=s.product_id WHERE s.order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY p.category_id), b AS (SELECT p.category_id,SUM(i.quantity*i.unit_cost_cents)/2.0 avg_stock FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id WHERE i.snapshot_date IN ('2024-12-31','2025-12-31') GROUP BY p.category_id) SELECT c.category_id,COALESCE(a.gross,0) gross_cents,b.avg_stock avg_stock_cents,ROUND(COALESCE(a.gross,0)/NULLIF(b.avg_stock,0),4) gmroi FROM categories c LEFT JOIN a ON a.category_id=c.category_id LEFT JOIN b ON b.category_id=c.category_id ORDER BY gmroi DESC,c.category_id",
+      "sqliteSql": "WITH a AS (SELECT p.category_id,SUM(s.net_cents-s.cost_cents) gross FROM v_sales_lines s JOIN products p ON p.product_id=s.product_id WHERE s.order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY p.category_id), b AS (SELECT p.category_id,SUM(i.quantity*i.unit_cost_cents)/2.0 avg_stock FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id WHERE i.snapshot_date IN ('2024-12-31','2025-12-31') GROUP BY p.category_id) SELECT c.category_id,COALESCE(a.gross,0) gross_cents,b.avg_stock avg_stock_cents,ROUND(COALESCE(a.gross,0)/NULLIF(b.avg_stock,0),4) gmroi FROM categories c LEFT JOIN a ON a.category_id=c.category_id LEFT JOIN b ON b.category_id=c.category_id ORDER BY gmroi DESC,c.category_id"
+    }
+  ],
+  "hints": [
+    "汇总类别毛利",
+    "汇总类别毛利；汇总两端库存",
+    "重点核对输出粒度：类别"
+  ],
+  "explanation": "汇总类别毛利；汇总两端库存；计算回报并标明估算口径。用销售收入替代毛利会变成另一个指标。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 64.2
+}

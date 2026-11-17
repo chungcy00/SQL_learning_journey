@@ -1,0 +1,2195 @@
+{
+  "chapterId": "ch17",
+  "title": "数据表管理",
+  "count": 10,
+  "schemaVersion": 3,
+  "contentVersion": "3.0.0",
+  "questions": [
+    {
+      "id": "q0231",
+      "chapterId": "ch17",
+      "knowledgePointIds": [
+        "kp17-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp17-01"
+      ],
+      "difficulty": "简单",
+      "type": "选择",
+      "title": "CREATE TABLE 与约束 · 在 MySQL 8.4 中，将 qty INT NO…",
+      "context": "本题考查《CREATE TABLE 与约束》中实际使用时容易混淆的规则。",
+      "requirements": "在 MySQL 8.4 中，将 qty INT NOT NULL CHECK(qty>=0) 用于库存表的作用是什么？",
+      "datasetId": null,
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "initialCode": null,
+      "options": [
+        {
+          "id": "A",
+          "text": "只要建立约束就一定有唯一库存主键",
+          "explanation": "该约束没有声明主键或唯一性。"
+        },
+        {
+          "id": "B",
+          "text": "自动将负值改成0",
+          "explanation": "约束不会自动修正数据。"
+        },
+        {
+          "id": "C",
+          "text": "允许NULL但禁止负数",
+          "explanation": "NOT NULL明确排除NULL。"
+        },
+        {
+          "id": "D",
+          "text": "禁止NULL及负库存值进入该字段",
+          "explanation": "NOT NULL排除缺失，CHECK排除不满足的数值。"
+        }
+      ],
+      "correctOptionId": "D",
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "objective_choice",
+        "correctOptionId": "D"
+      },
+      "referenceSolutions": [
+        {
+          "kind": "choice",
+          "optionId": "D",
+          "answer": "禁止NULL及负库存值进入该字段",
+          "explanation": "NOT NULL排除缺失，CHECK排除不满足的数值。"
+        }
+      ],
+      "hints": [
+        "明确是数据行还是结构发生变化；保留不应修改的其他数据与约束。",
+        "回想本章《CREATE TABLE 与约束》中定义的运算对象和限制，再逐个排除不满足题设的选项。",
+        "将每个候选与题设的明确条件对照，不能把偶然成立的情况当成通用规则。"
+      ],
+      "explanation": "NOT NULL排除缺失，CHECK排除不满足的数值。\nA. 该约束没有声明主键或唯一性。\nB. 约束不会自动修正数据。\nC. NOT NULL明确排除NULL。\nD. NOT NULL排除缺失，CHECK排除不满足的数值。",
+      "commonErrors": [
+        {
+          "optionId": "A",
+          "reason": "该约束没有声明主键或唯一性。"
+        },
+        {
+          "optionId": "B",
+          "reason": "约束不会自动修正数据。"
+        },
+        {
+          "optionId": "C",
+          "reason": "NOT NULL明确排除NULL。"
+        }
+      ],
+      "testFixtureIds": [
+        "q0231-key"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0231-key",
+          "visibility": "hidden",
+          "variant": "objective_key",
+          "path": "fixtures/q0231/q0231-key.json",
+          "sha256": "4fe65b8aaa67a6d797563d5ecf58534b1530eb1579e0aa31bc10ad6878b753c2"
+        }
+      ],
+      "orderPolicy": "not_applicable",
+      "columnPolicy": "not_applicable",
+      "numericTolerance": null,
+      "requiredAstFeatures": [],
+      "supportStatus": "仅理论",
+      "executionMode": "objective_choice",
+      "interviewTag": "概念辨析",
+      "validationStatus": "客观答案键检查（人工编写事实依据；无原生执行）",
+      "mysqlVerification": "不适用：客观概念题",
+      "validation": {
+        "kind": "objective_key",
+        "options": [
+          {
+            "optionId": "A",
+            "expectedAccepted": false,
+            "passed": true
+          },
+          {
+            "optionId": "B",
+            "expectedAccepted": false,
+            "passed": true
+          },
+          {
+            "optionId": "C",
+            "expectedAccepted": false,
+            "passed": true
+          },
+          {
+            "optionId": "D",
+            "expectedAccepted": true,
+            "passed": true
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/create-table-check-constraints.html"
+      },
+      "relatedFlashcardIds": [
+        "fc0128",
+        "fc0130"
+      ]
+    },
+    {
+      "id": "q0232",
+      "chapterId": "ch17",
+      "knowledgePointIds": [
+        "kp17-04"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp17-04"
+      ],
+      "difficulty": "简单",
+      "type": "选择",
+      "title": "事务、COMMIT 与 ROLLBACK · MySQL InnoDB 表在显式事务中执行普通 U…",
+      "context": "本题考查《事务、COMMIT 与 ROLLBACK》中实际使用时容易混淆的规则。",
+      "requirements": "MySQL InnoDB 表在显式事务中执行普通 UPDATE 后尚未提交，此时执行 ROLLBACK 且无隐式提交语句，会发生什么？",
+      "datasetId": null,
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "initialCode": null,
+      "options": [
+        {
+          "id": "A",
+          "text": "永久保留刚更新的数据",
+          "explanation": "未提交普通DML可回滚。"
+        },
+        {
+          "id": "B",
+          "text": "撤销该事务未提交的更新",
+          "explanation": "事务回滚恢复提交前状态。"
+        },
+        {
+          "id": "C",
+          "text": "自动创建一个备份文件",
+          "explanation": "ROLLBACK不是文件导出功能。"
+        },
+        {
+          "id": "D",
+          "text": "删除整个表结构",
+          "explanation": "回滚更新不等于DROP TABLE。"
+        }
+      ],
+      "correctOptionId": "B",
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "objective_choice",
+        "correctOptionId": "B"
+      },
+      "referenceSolutions": [
+        {
+          "kind": "choice",
+          "optionId": "B",
+          "answer": "撤销该事务未提交的更新",
+          "explanation": "事务回滚恢复提交前状态。"
+        }
+      ],
+      "hints": [
+        "明确是数据行还是结构发生变化；保留不应修改的其他数据与约束。",
+        "回想本章《事务、COMMIT 与 ROLLBACK》中定义的运算对象和限制，再逐个排除不满足题设的选项。",
+        "将每个候选与题设的明确条件对照，不能把偶然成立的情况当成通用规则。"
+      ],
+      "explanation": "事务回滚恢复提交前状态。\nA. 未提交普通DML可回滚。\nB. 事务回滚恢复提交前状态。\nC. ROLLBACK不是文件导出功能。\nD. 回滚更新不等于DROP TABLE。",
+      "commonErrors": [
+        {
+          "optionId": "A",
+          "reason": "未提交普通DML可回滚。"
+        },
+        {
+          "optionId": "C",
+          "reason": "ROLLBACK不是文件导出功能。"
+        },
+        {
+          "optionId": "D",
+          "reason": "回滚更新不等于DROP TABLE。"
+        }
+      ],
+      "testFixtureIds": [
+        "q0232-key"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0232-key",
+          "visibility": "hidden",
+          "variant": "objective_key",
+          "path": "fixtures/q0232/q0232-key.json",
+          "sha256": "e14d9254b46a19a5fab9ed639d694c2fad2ce76b132390adce0de104440f60ba"
+        }
+      ],
+      "orderPolicy": "not_applicable",
+      "columnPolicy": "not_applicable",
+      "numericTolerance": null,
+      "requiredAstFeatures": [],
+      "supportStatus": "仅理论",
+      "executionMode": "objective_choice",
+      "interviewTag": "概念辨析",
+      "validationStatus": "客观答案键检查（人工编写事实依据；无原生执行）",
+      "mysqlVerification": "不适用：客观概念题",
+      "validation": {
+        "kind": "objective_key",
+        "options": [
+          {
+            "optionId": "A",
+            "expectedAccepted": false,
+            "passed": true
+          },
+          {
+            "optionId": "B",
+            "expectedAccepted": true,
+            "passed": true
+          },
+          {
+            "optionId": "C",
+            "expectedAccepted": false,
+            "passed": true
+          },
+          {
+            "optionId": "D",
+            "expectedAccepted": false,
+            "passed": true
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/create-table-check-constraints.html"
+      },
+      "relatedFlashcardIds": [
+        "fc0129",
+        "fc0135"
+      ]
+    },
+    {
+      "id": "q0233",
+      "chapterId": "ch17",
+      "knowledgePointIds": [
+        "kp17-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp17-03"
+      ],
+      "difficulty": "简单",
+      "type": "独立编写",
+      "title": "删除过期临时数据表",
+      "context": "在独立教学数据库上练习安全的结构与记录修改，不会变动内置企业数据库。",
+      "requirements": "删除 stale_stock 表本身（不是仅清空数据），保留 practice_stock 与 guard。",
+      "datasetId": "q0233-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "database_state",
+        "state": {
+          "tables": {
+            "guard": {
+              "columns": [
+                [
+                  "id",
+                  "INT",
+                  0,
+                  null,
+                  1
+                ]
+              ],
+              "foreignKeys": [],
+              "indexes": [
+                {
+                  "name": null,
+                  "unique": 1,
+                  "origin": "pk",
+                  "partial": 0,
+                  "keys": [
+                    [
+                      "id",
+                      0
+                    ]
+                  ]
+                }
+              ],
+              "rows": [
+                [
+                  99
+                ]
+              ]
+            },
+            "practice_stock": {
+              "columns": [
+                [
+                  "product_id",
+                  "INT",
+                  1,
+                  null,
+                  1
+                ],
+                [
+                  "qty",
+                  "INT",
+                  1,
+                  null,
+                  0
+                ]
+              ],
+              "foreignKeys": [],
+              "indexes": [
+                {
+                  "name": null,
+                  "unique": 1,
+                  "origin": "pk",
+                  "partial": 0,
+                  "keys": [
+                    [
+                      "product_id",
+                      0
+                    ]
+                  ]
+                }
+              ],
+              "rows": [
+                [
+                  1,
+                  10
+                ],
+                [
+                  2,
+                  20
+                ],
+                [
+                  3,
+                  0
+                ]
+              ]
+            }
+          },
+          "probes": [],
+          "transactionOpen": false
+        }
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "DROP TABLE stale_stock;",
+          "sqliteSql": "DROP TABLE stale_stock;"
+        },
+        {
+          "kind": "状态等价",
+          "mysqlSql": "DROP TABLE IF EXISTS stale_stock;",
+          "sqliteSql": "DROP TABLE IF EXISTS stale_stock;",
+          "explanation": "不同SQL结构或运算次序实现相同目标。"
+        }
+      ],
+      "hints": [
+        "明确是数据行还是结构发生变化；保留不应修改的其他数据与约束。",
+        "结合《ALTER TABLE 与 DROP TABLE》：ALTER 修改表结构；DROP 删除表。某些结构修改需重建数据表或转换引擎语法。",
+        "可以从以下语句骨架开始：\nDROP TABLE stale_stock;"
+      ],
+      "explanation": "DROP删除表定义，DELETE只删除表内记录。\n执行思路：在独立快照中执行目标操作，检查最终记录、结构与约束。\n本题比较操作后的表结构、索引、约束探针、完整记录及事务关闭状态。\n另一种可用写法：不同SQL结构或运算次序实现相同目标。",
+      "commonErrors": [
+        {
+          "sql": "DELETE FROM stale_stock;",
+          "reason": "DROP删除表定义，DELETE只删除表内记录。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0233-public",
+        "q0233-boundary"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0233-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0233/q0233-public.json",
+          "sha256": "573211983d0d481abccbc9ff3896cdf1a0e1a9b9f601ceb5f34d5b7f597e946f"
+        },
+        {
+          "id": "q0233-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0233/q0233-boundary.json",
+          "sha256": "764494bcdee0d7e2f46d708a3c47a6f0c46edcde28a01a1b8810cc6db2de7362"
+        }
+      ],
+      "orderPolicy": "not_applicable",
+      "columnPolicy": "database_state",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "仅限题设已执行的DDL/DML/事务及索引子集；原生MySQL和浏览器兼容层尚待验证。",
+      "executionMode": "database_state",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "ALTER TABLE 与 DROP TABLE",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "state",
+        "equivalentKind": "状态等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0233-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "ebff746d5508c40aac8544eb7915f18b39c2b607ec3a29958f20994a71c9612d",
+              "rowCount": null
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "ebff746d5508c40aac8544eb7915f18b39c2b607ec3a29958f20994a71c9612d",
+              "rows": null
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "3039bb3ca6632c86fd3f43785d0eef25065a07f851251f8049df0ffa71d36c62",
+              "rows": null
+            }
+          },
+          {
+            "fixtureId": "q0233-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "e6766f047b35b05196f0cb5c4b8c21b36fe233840c5df69d598375e75c7b4778",
+              "rowCount": null
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "e6766f047b35b05196f0cb5c4b8c21b36fe233840c5df69d598375e75c7b4778",
+              "rows": null
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "52cc71116fb715039f60ca042d2e0f97ba9c859149a25d65118517c16b27e2d0",
+              "rows": null
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/create-table-check-constraints.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0132",
+        "fc0134"
+      ]
+    },
+    {
+      "id": "q0234",
+      "chapterId": "ch17",
+      "knowledgePointIds": [
+        "kp17-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp17-02"
+      ],
+      "difficulty": "中等",
+      "type": "独立编写",
+      "title": "清除零库存演示记录",
+      "context": "在独立教学数据库上练习安全的结构与记录修改，不会变动内置企业数据库。",
+      "requirements": "仅删除 qty=0 的商品，不删除其他商品或数据表。",
+      "datasetId": "q0234-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "database_state",
+        "state": {
+          "tables": {
+            "guard": {
+              "columns": [
+                [
+                  "id",
+                  "INT",
+                  0,
+                  null,
+                  1
+                ]
+              ],
+              "foreignKeys": [],
+              "indexes": [
+                {
+                  "name": null,
+                  "unique": 1,
+                  "origin": "pk",
+                  "partial": 0,
+                  "keys": [
+                    [
+                      "id",
+                      0
+                    ]
+                  ]
+                }
+              ],
+              "rows": [
+                [
+                  99
+                ]
+              ]
+            },
+            "practice_stock": {
+              "columns": [
+                [
+                  "product_id",
+                  "INT",
+                  1,
+                  null,
+                  1
+                ],
+                [
+                  "qty",
+                  "INT",
+                  1,
+                  null,
+                  0
+                ]
+              ],
+              "foreignKeys": [],
+              "indexes": [
+                {
+                  "name": null,
+                  "unique": 1,
+                  "origin": "pk",
+                  "partial": 0,
+                  "keys": [
+                    [
+                      "product_id",
+                      0
+                    ]
+                  ]
+                }
+              ],
+              "rows": [
+                [
+                  1,
+                  10
+                ],
+                [
+                  2,
+                  20
+                ]
+              ]
+            }
+          },
+          "probes": [],
+          "transactionOpen": false
+        }
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "DELETE FROM practice_stock WHERE qty=0;",
+          "sqliteSql": "DELETE FROM practice_stock WHERE qty=0;"
+        },
+        {
+          "kind": "状态等价",
+          "mysqlSql": "DELETE FROM practice_stock WHERE 0=qty;",
+          "sqliteSql": "DELETE FROM practice_stock WHERE 0=qty;",
+          "explanation": "不同SQL结构或运算次序实现相同目标。"
+        }
+      ],
+      "hints": [
+        "明确是数据行还是结构发生变化；保留不应修改的其他数据与约束。",
+        "结合《INSERT、UPDATE、DELETE》：INSERT 新增行，UPDATE 修改匹配行，DELETE 删除匹配行；写操作先确定 WHERE 匹配范围。",
+        "可以从以下语句骨架开始：\nDELETE FROM practice_stock WHERE qty=0;"
+      ],
+      "explanation": "删除前确认边界：零库存才符合，10件仍为有效记录。\n执行思路：在独立快照中执行目标操作，检查最终记录、结构与约束。\n本题比较操作后的表结构、索引、约束探针、完整记录及事务关闭状态。\n另一种可用写法：不同SQL结构或运算次序实现相同目标。",
+      "commonErrors": [
+        {
+          "sql": "DELETE FROM practice_stock WHERE qty<=10;",
+          "reason": "删除前确认边界：零库存才符合，10件仍为有效记录。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0234-public",
+        "q0234-boundary"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0234-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0234/q0234-public.json",
+          "sha256": "eef78790071b70c6dfdde28ae690095b24d5a389b9de0b64a74f0a37459f0f14"
+        },
+        {
+          "id": "q0234-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0234/q0234-boundary.json",
+          "sha256": "73c45b397a395becd8906af739447350edf4e5e86084ade3182deb32f9789d29"
+        }
+      ],
+      "orderPolicy": "not_applicable",
+      "columnPolicy": "database_state",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "仅限题设已执行的DDL/DML/事务及索引子集；原生MySQL和浏览器兼容层尚待验证。",
+      "executionMode": "database_state",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "INSERT、UPDATE、DELETE",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "state",
+        "equivalentKind": "状态等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0234-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "8803728f9ccb053ccd990a4bb0ec3738bba750d9b50ccca48f209ba84d0daa96",
+              "rowCount": null
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "8803728f9ccb053ccd990a4bb0ec3738bba750d9b50ccca48f209ba84d0daa96",
+              "rows": null
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "12c9c533d05ecb3e8127a5f86061b51d202a455043c8e45fcf6e301fba225502",
+              "rows": null
+            }
+          },
+          {
+            "fixtureId": "q0234-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "a4c9d2510b62c9a93469a96ecfa3a942314a6961f4c3d05540b8808b554f8302",
+              "rowCount": null
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "a4c9d2510b62c9a93469a96ecfa3a942314a6961f4c3d05540b8808b554f8302",
+              "rows": null
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "3e2c7c3fc81294a6dbd1752e6e0e3c42a874581960b123aa19b10b4bdc399282",
+              "rows": null
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/create-table-check-constraints.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0131",
+        "fc0133"
+      ]
+    },
+    {
+      "id": "q0235",
+      "chapterId": "ch17",
+      "knowledgePointIds": [
+        "kp17-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp17-02"
+      ],
+      "difficulty": "中等",
+      "type": "独立编写",
+      "title": "对指定商品补货",
+      "context": "在独立教学数据库上练习安全的结构与记录修改，不会变动内置企业数据库。",
+      "requirements": "仅将编号2的库存增加5件，不重置原有库存，不修改其他表。",
+      "datasetId": "q0235-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "database_state",
+        "state": {
+          "tables": {
+            "guard": {
+              "columns": [
+                [
+                  "id",
+                  "INT",
+                  0,
+                  null,
+                  1
+                ]
+              ],
+              "foreignKeys": [],
+              "indexes": [
+                {
+                  "name": null,
+                  "unique": 1,
+                  "origin": "pk",
+                  "partial": 0,
+                  "keys": [
+                    [
+                      "id",
+                      0
+                    ]
+                  ]
+                }
+              ],
+              "rows": [
+                [
+                  99
+                ]
+              ]
+            },
+            "practice_stock": {
+              "columns": [
+                [
+                  "product_id",
+                  "INT",
+                  1,
+                  null,
+                  1
+                ],
+                [
+                  "qty",
+                  "INT",
+                  1,
+                  null,
+                  0
+                ]
+              ],
+              "foreignKeys": [],
+              "indexes": [
+                {
+                  "name": null,
+                  "unique": 1,
+                  "origin": "pk",
+                  "partial": 0,
+                  "keys": [
+                    [
+                      "product_id",
+                      0
+                    ]
+                  ]
+                }
+              ],
+              "rows": [
+                [
+                  1,
+                  10
+                ],
+                [
+                  2,
+                  25
+                ],
+                [
+                  3,
+                  0
+                ]
+              ]
+            }
+          },
+          "probes": [],
+          "transactionOpen": false
+        }
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "UPDATE practice_stock SET qty=qty+5 WHERE product_id=2;",
+          "sqliteSql": "UPDATE practice_stock SET qty=qty+5 WHERE product_id=2;"
+        },
+        {
+          "kind": "状态等价",
+          "mysqlSql": "UPDATE practice_stock SET qty=5+qty WHERE product_id=2;",
+          "sqliteSql": "UPDATE practice_stock SET qty=5+qty WHERE product_id=2;",
+          "explanation": "不同SQL结构或运算次序实现相同目标。"
+        }
+      ],
+      "hints": [
+        "明确是数据行还是结构发生变化；保留不应修改的其他数据与约束。",
+        "结合《INSERT、UPDATE、DELETE》：INSERT 新增行，UPDATE 修改匹配行，DELETE 删除匹配行；写操作先确定 WHERE 匹配范围。",
+        "可以从以下语句骨架开始：\nUPDATE practice_stock …;"
+      ],
+      "explanation": "增加量与直接覆盖不同；WHERE 防止修改所有商品。\n执行思路：在独立快照中执行目标操作，检查最终记录、结构与约束。\n本题比较操作后的表结构、索引、约束探针、完整记录及事务关闭状态。\n另一种可用写法：不同SQL结构或运算次序实现相同目标。",
+      "commonErrors": [
+        {
+          "sql": "UPDATE practice_stock SET qty=5 WHERE product_id=2;",
+          "reason": "增加量与直接覆盖不同；WHERE 防止修改所有商品。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0235-public",
+        "q0235-boundary"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0235-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0235/q0235-public.json",
+          "sha256": "f9a6cd99865196b5f192971fb51b58e2cc17ae1168c08931c0595776342a9182"
+        },
+        {
+          "id": "q0235-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0235/q0235-boundary.json",
+          "sha256": "20ae223027c6e50a9331758e8148dff01bb089403cf23613efccf9a80cec1a45"
+        }
+      ],
+      "orderPolicy": "not_applicable",
+      "columnPolicy": "database_state",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "仅限题设已执行的DDL/DML/事务及索引子集；原生MySQL和浏览器兼容层尚待验证。",
+      "executionMode": "database_state",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "INSERT、UPDATE、DELETE",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "state",
+        "equivalentKind": "状态等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0235-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "a3c2eb7d8dff097a3ca052ee168e950c2cfe34a3f1248d7b27f3576132faed29",
+              "rowCount": null
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "a3c2eb7d8dff097a3ca052ee168e950c2cfe34a3f1248d7b27f3576132faed29",
+              "rows": null
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "67da21fa603cf4aaa671634230c0dd7e3f82e65c3bfed8e75450902ecf87a572",
+              "rows": null
+            }
+          },
+          {
+            "fixtureId": "q0235-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "42b661e9589319213a409f108d37e5cd0ed28f83141ce98f6ed451199578e9cb",
+              "rowCount": null
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "42b661e9589319213a409f108d37e5cd0ed28f83141ce98f6ed451199578e9cb",
+              "rows": null
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "42b661e9589319213a409f108d37e5cd0ed28f83141ce98f6ed451199578e9cb",
+              "rows": null
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/create-table-check-constraints.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0131",
+        "fc0133"
+      ]
+    },
+    {
+      "id": "q0236",
+      "chapterId": "ch17",
+      "knowledgePointIds": [
+        "kp17-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp17-02"
+      ],
+      "difficulty": "中等",
+      "type": "独立编写",
+      "title": "新增盘点记录",
+      "context": "在独立教学数据库上练习安全的结构与记录修改，不会变动内置企业数据库。",
+      "requirements": "在 practice_stock 加入唯一新商品编号7、库存25，不影响其他商品、结构或 guard 表。",
+      "datasetId": "q0236-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "database_state",
+        "state": {
+          "tables": {
+            "guard": {
+              "columns": [
+                [
+                  "id",
+                  "INT",
+                  0,
+                  null,
+                  1
+                ]
+              ],
+              "foreignKeys": [],
+              "indexes": [
+                {
+                  "name": null,
+                  "unique": 1,
+                  "origin": "pk",
+                  "partial": 0,
+                  "keys": [
+                    [
+                      "id",
+                      0
+                    ]
+                  ]
+                }
+              ],
+              "rows": [
+                [
+                  99
+                ]
+              ]
+            },
+            "practice_stock": {
+              "columns": [
+                [
+                  "product_id",
+                  "INT",
+                  1,
+                  null,
+                  1
+                ],
+                [
+                  "qty",
+                  "INT",
+                  1,
+                  null,
+                  0
+                ]
+              ],
+              "foreignKeys": [],
+              "indexes": [
+                {
+                  "name": null,
+                  "unique": 1,
+                  "origin": "pk",
+                  "partial": 0,
+                  "keys": [
+                    [
+                      "product_id",
+                      0
+                    ]
+                  ]
+                }
+              ],
+              "rows": [
+                [
+                  1,
+                  10
+                ],
+                [
+                  2,
+                  20
+                ],
+                [
+                  3,
+                  0
+                ],
+                [
+                  7,
+                  25
+                ]
+              ]
+            }
+          },
+          "probes": [],
+          "transactionOpen": false
+        }
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "INSERT INTO practice_stock(product_id,qty) VALUES(7,25);",
+          "sqliteSql": "INSERT INTO practice_stock(product_id,qty) VALUES(7,25);"
+        },
+        {
+          "kind": "状态等价",
+          "mysqlSql": "INSERT INTO practice_stock(qty,product_id) VALUES(25,7);",
+          "sqliteSql": "INSERT INTO practice_stock(qty,product_id) VALUES(25,7);",
+          "explanation": "不同SQL结构或运算次序实现相同目标。"
+        }
+      ],
+      "hints": [
+        "明确是数据行还是结构发生变化；保留不应修改的其他数据与约束。",
+        "结合《INSERT、UPDATE、DELETE》：INSERT 新增行，UPDATE 修改匹配行，DELETE 删除匹配行；写操作先确定 WHERE 匹配范围。",
+        "可以从以下语句骨架开始：\nINSERT INTO practice_stock(product_id,qty) …;"
+      ],
+      "explanation": "显式列名保证值对应正确字段，写操作判题比较最终记录。\n执行思路：在独立快照中执行目标操作，检查最终记录、结构与约束。\n本题比较操作后的表结构、索引、约束探针、完整记录及事务关闭状态。\n另一种可用写法：不同SQL结构或运算次序实现相同目标。",
+      "commonErrors": [
+        {
+          "sql": "INSERT INTO practice_stock(product_id,qty) VALUES(7,52);",
+          "reason": "显式列名保证值对应正确字段，写操作判题比较最终记录。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0236-public",
+        "q0236-boundary"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0236-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0236/q0236-public.json",
+          "sha256": "178df9bc6511d17cf6aff720ea873f7f00f57a0b6b512c1426c424e1a7f70164"
+        },
+        {
+          "id": "q0236-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0236/q0236-boundary.json",
+          "sha256": "efdcb0a4c67d74e682712fa0532e51659c2588f876f0902cbc1f612ddcf38dd2"
+        }
+      ],
+      "orderPolicy": "not_applicable",
+      "columnPolicy": "database_state",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "仅限题设已执行的DDL/DML/事务及索引子集；原生MySQL和浏览器兼容层尚待验证。",
+      "executionMode": "database_state",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "INSERT、UPDATE、DELETE",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "state",
+        "equivalentKind": "状态等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0236-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "b9fb9346c39180f742e7c58c531fd10b47e655803e4a27098d2a6b063cc525b0",
+              "rowCount": null
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "b9fb9346c39180f742e7c58c531fd10b47e655803e4a27098d2a6b063cc525b0",
+              "rows": null
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "cb891ee95dda68c9f0b8395d9e53c7535ff65c0aef679ff5fe87612e9d4a5c0b",
+              "rows": null
+            }
+          },
+          {
+            "fixtureId": "q0236-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "4cfec29c2405597b70c60c9322b8c96c6cace0f6e93b712ab821307c116e31d8",
+              "rowCount": null
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "4cfec29c2405597b70c60c9322b8c96c6cace0f6e93b712ab821307c116e31d8",
+              "rows": null
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "e4c29b9b30e1e80c3a37a86d867c5133919c159ee4dfc277100077260385d69b",
+              "rows": null
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/create-table-check-constraints.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0131"
+      ]
+    },
+    {
+      "id": "q0237",
+      "chapterId": "ch17",
+      "knowledgePointIds": [
+        "kp17-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp17-03"
+      ],
+      "difficulty": "中等",
+      "type": "独立编写",
+      "title": "增加库存文字标签列",
+      "context": "在独立教学数据库上练习安全的结构与记录修改，不会变动内置企业数据库。",
+      "requirements": "向 practice_stock 末尾添加 label VARCHAR(30) NOT NULL DEFAULT '未标记'，原记录和 guard 保留。",
+      "datasetId": "q0237-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "database_state",
+        "state": {
+          "tables": {
+            "guard": {
+              "columns": [
+                [
+                  "id",
+                  "INT",
+                  0,
+                  null,
+                  1
+                ]
+              ],
+              "foreignKeys": [],
+              "indexes": [
+                {
+                  "name": null,
+                  "unique": 1,
+                  "origin": "pk",
+                  "partial": 0,
+                  "keys": [
+                    [
+                      "id",
+                      0
+                    ]
+                  ]
+                }
+              ],
+              "rows": [
+                [
+                  99
+                ]
+              ]
+            },
+            "practice_stock": {
+              "columns": [
+                [
+                  "product_id",
+                  "INT",
+                  1,
+                  null,
+                  1
+                ],
+                [
+                  "qty",
+                  "INT",
+                  1,
+                  null,
+                  0
+                ],
+                [
+                  "label",
+                  "VARCHAR(30)",
+                  1,
+                  "'未标记'",
+                  0
+                ]
+              ],
+              "foreignKeys": [],
+              "indexes": [
+                {
+                  "name": null,
+                  "unique": 1,
+                  "origin": "pk",
+                  "partial": 0,
+                  "keys": [
+                    [
+                      "product_id",
+                      0
+                    ]
+                  ]
+                }
+              ],
+              "rows": [
+                [
+                  1,
+                  10,
+                  "未标记"
+                ],
+                [
+                  2,
+                  20,
+                  "未标记"
+                ],
+                [
+                  3,
+                  0,
+                  "未标记"
+                ]
+              ]
+            }
+          },
+          "probes": [
+            {
+              "rejected": false,
+              "observation": {
+                "columns": [
+                  "label"
+                ],
+                "rows": [
+                  [
+                    "未标记"
+                  ]
+                ]
+              }
+            },
+            {
+              "rejected": true,
+              "observation": null
+            }
+          ],
+          "transactionOpen": false
+        }
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "ALTER TABLE practice_stock ADD COLUMN label VARCHAR(30) NOT NULL DEFAULT '未标记';",
+          "sqliteSql": "ALTER TABLE practice_stock ADD COLUMN label VARCHAR(30) NOT NULL DEFAULT '未标记';"
+        },
+        {
+          "kind": "状态等价",
+          "mysqlSql": "ALTER TABLE practice_stock ADD label VARCHAR(30) NOT NULL DEFAULT '未标记';",
+          "sqliteSql": "ALTER TABLE practice_stock ADD label VARCHAR(30) NOT NULL DEFAULT '未标记';",
+          "explanation": "不同SQL结构或运算次序实现相同目标。"
+        }
+      ],
+      "hints": [
+        "明确是数据行还是结构发生变化；保留不应修改的其他数据与约束。",
+        "结合《ALTER TABLE 与 DROP TABLE》：ALTER 修改表结构；DROP 删除表。某些结构修改需重建数据表或转换引擎语法。",
+        "可以从以下语句骨架开始：\nALTER TABLE practice_stock ADD COLUMN label VARCHAR(30) NOT NULL DEFAULT '未标记';"
+      ],
+      "explanation": "新增字段必须同时满足类型、非空、默认值及旧记录填充要求。\n执行思路：在独立快照中执行目标操作，检查最终记录、结构与约束。\n本题比较操作后的表结构、索引、约束探针、完整记录及事务关闭状态。\n另一种可用写法：不同SQL结构或运算次序实现相同目标。",
+      "commonErrors": [
+        {
+          "sql": "ALTER TABLE practice_stock ADD COLUMN label VARCHAR(30) NOT NULL DEFAULT '未知';",
+          "reason": "新增字段必须同时满足类型、非空、默认值及旧记录填充要求。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0237-public",
+        "q0237-boundary"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0237-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0237/q0237-public.json",
+          "sha256": "e0e91c2ac91c16bae020b59174ac411a254b82ced0be580971b789aa82ec8809"
+        },
+        {
+          "id": "q0237-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0237/q0237-boundary.json",
+          "sha256": "f6b0201d97684cf1781ccdfddc90bb62035ebf964d3e86a7a58af74022b7cb3c"
+        }
+      ],
+      "orderPolicy": "not_applicable",
+      "columnPolicy": "database_state",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "仅限题设已执行的DDL/DML/事务及索引子集；原生MySQL和浏览器兼容层尚待验证。",
+      "executionMode": "database_state",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "ALTER TABLE 与 DROP TABLE",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "state",
+        "equivalentKind": "状态等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0237-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "7d9d0522dd06dfc71d4172650c3b0dcb20a62c94af3531c09f52ec1a4ffc708c",
+              "rowCount": null
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "7d9d0522dd06dfc71d4172650c3b0dcb20a62c94af3531c09f52ec1a4ffc708c",
+              "rows": null
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "e481fa35aab9bfe752541f77fe4c11bf93651755a7a3e939c0b6924436e7a6a7",
+              "rows": null
+            }
+          },
+          {
+            "fixtureId": "q0237-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "c3c8be6844c8be7708020478224ccd1b4d6650c38af3f7a4b0fa0215640452f2",
+              "rowCount": null
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "c3c8be6844c8be7708020478224ccd1b4d6650c38af3f7a4b0fa0215640452f2",
+              "rows": null
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "b3f11eb300e4e1f9bbe90b8bc076b4879e61da0ce90a6cfcef26f847688792a1",
+              "rows": null
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/create-table-check-constraints.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0132",
+        "fc0134"
+      ]
+    },
+    {
+      "id": "q0238",
+      "chapterId": "ch17",
+      "knowledgePointIds": [
+        "kp17-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp17-01"
+      ],
+      "difficulty": "中等",
+      "type": "独立编写",
+      "title": "创建受约束的库存表",
+      "context": "在独立教学数据库上练习安全的结构与记录修改，不会变动内置企业数据库。",
+      "requirements": "在已有 guard 表的独立数据库中建立 practice_stock，字段依次为 product_id（INT、非空主键）、qty（INT、非空且>=0），新表为空。保留原表。",
+      "datasetId": "q0238-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "database_state",
+        "state": {
+          "tables": {
+            "guard": {
+              "columns": [
+                [
+                  "id",
+                  "INT",
+                  0,
+                  null,
+                  1
+                ]
+              ],
+              "foreignKeys": [],
+              "indexes": [
+                {
+                  "name": null,
+                  "unique": 1,
+                  "origin": "pk",
+                  "partial": 0,
+                  "keys": [
+                    [
+                      "id",
+                      0
+                    ]
+                  ]
+                }
+              ],
+              "rows": [
+                [
+                  99
+                ]
+              ]
+            },
+            "practice_stock": {
+              "columns": [
+                [
+                  "product_id",
+                  "INT",
+                  1,
+                  null,
+                  1
+                ],
+                [
+                  "qty",
+                  "INT",
+                  1,
+                  null,
+                  0
+                ]
+              ],
+              "foreignKeys": [],
+              "indexes": [
+                {
+                  "name": null,
+                  "unique": 1,
+                  "origin": "pk",
+                  "partial": 0,
+                  "keys": [
+                    [
+                      "product_id",
+                      0
+                    ]
+                  ]
+                }
+              ],
+              "rows": []
+            }
+          },
+          "probes": [
+            {
+              "rejected": true,
+              "observation": null
+            },
+            {
+              "rejected": true,
+              "observation": null
+            },
+            {
+              "rejected": true,
+              "observation": null
+            },
+            {
+              "rejected": false,
+              "observation": null
+            },
+            {
+              "rejected": true,
+              "observation": null
+            }
+          ],
+          "transactionOpen": false
+        }
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "CREATE TABLE practice_stock(product_id INT NOT NULL PRIMARY KEY,qty INT NOT NULL CHECK(qty>=0));",
+          "sqliteSql": "CREATE TABLE practice_stock(product_id INT NOT NULL PRIMARY KEY,qty INT NOT NULL CHECK(qty>=0));"
+        },
+        {
+          "kind": "状态等价",
+          "mysqlSql": "CREATE TABLE practice_stock(product_id INT NOT NULL,qty INT NOT NULL CHECK(0<=qty),PRIMARY KEY(product_id));",
+          "sqliteSql": "CREATE TABLE practice_stock(product_id INT NOT NULL,qty INT NOT NULL CHECK(0<=qty),PRIMARY KEY(product_id));",
+          "explanation": "不同SQL结构或运算次序实现相同目标。"
+        }
+      ],
+      "hints": [
+        "明确是数据行还是结构发生变化；保留不应修改的其他数据与约束。",
+        "结合《CREATE TABLE 与约束》：建表定义字段类型、主键、非空、唯一、检查约束及外键。约束在写入时保障有效性。",
+        "可以从以下语句骨架开始：\nCREATE TABLE practice_stock(product_id INT NOT NULL PRIMARY KEY,qty INT NOT NULL …);"
+      ],
+      "explanation": "主键、非空和非负约束都需要真实生效，不能只建两个无约束的字段。\n执行思路：在独立快照中执行目标操作，检查最终记录、结构与约束。\n本题比较操作后的表结构、索引、约束探针、完整记录及事务关闭状态。\n另一种可用写法：不同SQL结构或运算次序实现相同目标。",
+      "commonErrors": [
+        {
+          "sql": "CREATE TABLE practice_stock(product_id INT NOT NULL PRIMARY KEY,qty INT NOT NULL);",
+          "reason": "主键、非空和非负约束都需要真实生效，不能只建两个无约束的字段。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0238-public",
+        "q0238-boundary"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0238-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0238/q0238-public.json",
+          "sha256": "5ea176b6d5efa676caf21d35462d3cba3ef83bd855f00b9782e65fd7a68b58ac"
+        },
+        {
+          "id": "q0238-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0238/q0238-boundary.json",
+          "sha256": "1383dc2e23af1ceac7057a24ef0db1baed7f9c14faf0aeb98753e262cf60ce28"
+        }
+      ],
+      "orderPolicy": "not_applicable",
+      "columnPolicy": "database_state",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "仅限题设已执行的DDL/DML/事务及索引子集；原生MySQL和浏览器兼容层尚待验证。",
+      "executionMode": "database_state",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "CREATE TABLE 与约束",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "state",
+        "equivalentKind": "状态等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0238-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "3adbd6ba79513b3eda2378c5b03d0b2f620c14b872a6f0dfbbee72ae625b5337",
+              "rowCount": null
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "3adbd6ba79513b3eda2378c5b03d0b2f620c14b872a6f0dfbbee72ae625b5337",
+              "rows": null
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "2067736f74a4949c4ea0acdd3e8fa07cb370ac8ebe6a21a7d330bd1a684078b0",
+              "rows": null
+            }
+          },
+          {
+            "fixtureId": "q0238-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "f716471131c6492860035f26ce4416ab41f76e974c58ac13e079f5f1cb16aad9",
+              "rowCount": null
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "f716471131c6492860035f26ce4416ab41f76e974c58ac13e079f5f1cb16aad9",
+              "rows": null
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "97d12fe3585ab46ce1b944db8018e6e89e0782b3a18ab6235fcc4d912d831d4a",
+              "rows": null
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/create-table-check-constraints.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0128",
+        "fc0130"
+      ]
+    },
+    {
+      "id": "q0239",
+      "chapterId": "ch17",
+      "knowledgePointIds": [
+        "kp17-05"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp17-05"
+      ],
+      "difficulty": "中等",
+      "type": "独立编写",
+      "title": "创建引用库存表的流水表",
+      "context": "在独立教学数据库上练习安全的结构与记录修改，不会变动内置企业数据库。",
+      "requirements": "建立空表 practice_moves，字段 move_id（INT非空主键）、product_id（INT非空，外键引用 practice_stock.product_id）、ref（VARCHAR(30) 非空且唯一），顺序如题；保留现有表。",
+      "datasetId": "q0239-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "database_state",
+        "state": {
+          "tables": {
+            "guard": {
+              "columns": [
+                [
+                  "id",
+                  "INT",
+                  0,
+                  null,
+                  1
+                ]
+              ],
+              "foreignKeys": [],
+              "indexes": [
+                {
+                  "name": null,
+                  "unique": 1,
+                  "origin": "pk",
+                  "partial": 0,
+                  "keys": [
+                    [
+                      "id",
+                      0
+                    ]
+                  ]
+                }
+              ],
+              "rows": [
+                [
+                  99
+                ]
+              ]
+            },
+            "practice_moves": {
+              "columns": [
+                [
+                  "move_id",
+                  "INT",
+                  1,
+                  null,
+                  1
+                ],
+                [
+                  "product_id",
+                  "INT",
+                  1,
+                  null,
+                  0
+                ],
+                [
+                  "ref",
+                  "VARCHAR(30)",
+                  1,
+                  null,
+                  0
+                ]
+              ],
+              "foreignKeys": [
+                [
+                  "practice_stock",
+                  "product_id",
+                  "product_id",
+                  "NO ACTION",
+                  "NO ACTION",
+                  "NONE"
+                ]
+              ],
+              "indexes": [
+                {
+                  "name": null,
+                  "unique": 1,
+                  "origin": "pk",
+                  "partial": 0,
+                  "keys": [
+                    [
+                      "move_id",
+                      0
+                    ]
+                  ]
+                },
+                {
+                  "name": null,
+                  "unique": 1,
+                  "origin": "u",
+                  "partial": 0,
+                  "keys": [
+                    [
+                      "ref",
+                      0
+                    ]
+                  ]
+                }
+              ],
+              "rows": []
+            },
+            "practice_stock": {
+              "columns": [
+                [
+                  "product_id",
+                  "INT",
+                  1,
+                  null,
+                  1
+                ],
+                [
+                  "qty",
+                  "INT",
+                  1,
+                  null,
+                  0
+                ]
+              ],
+              "foreignKeys": [],
+              "indexes": [
+                {
+                  "name": null,
+                  "unique": 1,
+                  "origin": "pk",
+                  "partial": 0,
+                  "keys": [
+                    [
+                      "product_id",
+                      0
+                    ]
+                  ]
+                }
+              ],
+              "rows": [
+                [
+                  1,
+                  10
+                ],
+                [
+                  2,
+                  20
+                ],
+                [
+                  3,
+                  0
+                ]
+              ]
+            }
+          },
+          "probes": [
+            {
+              "rejected": true,
+              "observation": null
+            },
+            {
+              "rejected": true,
+              "observation": null
+            },
+            {
+              "rejected": true,
+              "observation": null
+            },
+            {
+              "rejected": false,
+              "observation": null
+            }
+          ],
+          "transactionOpen": false
+        }
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "CREATE TABLE practice_moves(move_id INT NOT NULL PRIMARY KEY,product_id INT NOT NULL,ref VARCHAR(30) NOT NULL UNIQUE,FOREIGN KEY(product_id) REFERENCES practice_stock(product_id));",
+          "sqliteSql": "CREATE TABLE practice_moves(move_id INT NOT NULL PRIMARY KEY,product_id INT NOT NULL,ref VARCHAR(30) NOT NULL UNIQUE,FOREIGN KEY(product_id) REFERENCES practice_stock(product_id));"
+        },
+        {
+          "kind": "状态等价",
+          "mysqlSql": "CREATE TABLE practice_moves(move_id INT NOT NULL,product_id INT NOT NULL,ref VARCHAR(30) NOT NULL,PRIMARY KEY(move_id),UNIQUE(ref),FOREIGN KEY(product_id) REFERENCES practice_stock(product_id));",
+          "sqliteSql": "CREATE TABLE practice_moves(move_id INT NOT NULL,product_id INT NOT NULL,ref VARCHAR(30) NOT NULL,PRIMARY KEY(move_id),UNIQUE(ref),FOREIGN KEY(product_id) REFERENCES practice_stock(product_id));",
+          "explanation": "不同SQL结构或运算次序实现相同目标。"
+        }
+      ],
+      "hints": [
+        "明确是数据行还是结构发生变化；保留不应修改的其他数据与约束。",
+        "结合《主外键、UNIQUE 与数据完整性》：主键保证唯一且非空；UNIQUE 约束避免业务键重复；外键要求非空引用对应父记录。",
+        "可以从以下语句骨架开始：\nCREATE TABLE practice_moves(move_id INT NOT NULL PRIMARY KEY,product_id INT NOT NULL,ref VARCHAR(30) NOT NULL UNIQUE,FOREIGN KEY(product_id) REFERENCES practice_stock(product_id));"
+      ],
+      "explanation": "外键确保流水对应有效商品，唯一约束防止同一参考号重复。\n执行思路：在独立快照中执行目标操作，检查最终记录、结构与约束。\n本题比较操作后的表结构、索引、约束探针、完整记录及事务关闭状态。\n另一种可用写法：不同SQL结构或运算次序实现相同目标。",
+      "commonErrors": [
+        {
+          "sql": "CREATE TABLE practice_moves(move_id INT NOT NULL PRIMARY KEY,product_id INT NOT NULL,ref VARCHAR(30) NOT NULL UNIQUE);",
+          "reason": "外键确保流水对应有效商品，唯一约束防止同一参考号重复。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0239-public",
+        "q0239-boundary"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0239-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0239/q0239-public.json",
+          "sha256": "95b133229bc253f56b7653bc0d79ca1dda8fc8f14fae001193e4d649942b97d1"
+        },
+        {
+          "id": "q0239-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0239/q0239-boundary.json",
+          "sha256": "fe5812f74920a2840948f984ace72e31c7d9194584e85a2a0ab281f6d73ba6d4"
+        }
+      ],
+      "orderPolicy": "not_applicable",
+      "columnPolicy": "database_state",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "仅限题设已执行的DDL/DML/事务及索引子集；原生MySQL和浏览器兼容层尚待验证。",
+      "executionMode": "database_state",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "主外键、UNIQUE 与数据完整性",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "state",
+        "equivalentKind": "状态等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0239-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "1ddb8b96044b776417d187d7ac17db768bd24eefef582705c9516249dd1937c6",
+              "rowCount": null
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "1ddb8b96044b776417d187d7ac17db768bd24eefef582705c9516249dd1937c6",
+              "rows": null
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "1767d286925e6d0f690d3b5d8cbb95c297153d530d9d812be503d747d806f0d3",
+              "rows": null
+            }
+          },
+          {
+            "fixtureId": "q0239-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "e7bac34972b8b5a8ea3eab85cd01b6178ad2fdb93634be075bed88a8a2f79f31",
+              "rowCount": null
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "e7bac34972b8b5a8ea3eab85cd01b6178ad2fdb93634be075bed88a8a2f79f31",
+              "rows": null
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "e80e6f9bba490024e59c8e779b793a1a3b5d6ea44e86302e9c4b659e202f2b9e",
+              "rows": null
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/create-table-check-constraints.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0128"
+      ]
+    },
+    {
+      "id": "q0240",
+      "chapterId": "ch17",
+      "knowledgePointIds": [
+        "kp17-04"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp17-04"
+      ],
+      "difficulty": "困难",
+      "type": "代码纠错",
+      "title": "通过保存点撤销临时补货",
+      "context": "在独立教学数据库上练习安全的结构与记录修改，不会变动内置企业数据库。",
+      "requirements": "下面提供的初始代码存在逻辑、语法或结构错误。请修改整段代码，使其满足以下要求。\n在显式事务中给商品2加5件；随后创建保存点，把商品1暂时置0，再回滚到保存点、提交事务。最终仅商品2增加5，其他记录不变。考核保存点操作（原生语法与本地兼容语法不同）。",
+      "datasetId": "q0240-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [],
+      "initialCode": "BEGIN; UPDATE practice_stock SET qty=qty+5 WHERE product_id=2; SAVEPOINT sp; UPDATE practice_stock SET qty=0 WHERE product_id=1; RELEASE SAVEPOINT sp; COMMIT;",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "database_state",
+        "state": {
+          "tables": {
+            "guard": {
+              "columns": [
+                [
+                  "id",
+                  "INT",
+                  0,
+                  null,
+                  1
+                ]
+              ],
+              "foreignKeys": [],
+              "indexes": [
+                {
+                  "name": null,
+                  "unique": 1,
+                  "origin": "pk",
+                  "partial": 0,
+                  "keys": [
+                    [
+                      "id",
+                      0
+                    ]
+                  ]
+                }
+              ],
+              "rows": [
+                [
+                  99
+                ]
+              ]
+            },
+            "practice_stock": {
+              "columns": [
+                [
+                  "product_id",
+                  "INT",
+                  1,
+                  null,
+                  1
+                ],
+                [
+                  "qty",
+                  "INT",
+                  1,
+                  null,
+                  0
+                ]
+              ],
+              "foreignKeys": [],
+              "indexes": [
+                {
+                  "name": null,
+                  "unique": 1,
+                  "origin": "pk",
+                  "partial": 0,
+                  "keys": [
+                    [
+                      "product_id",
+                      0
+                    ]
+                  ]
+                }
+              ],
+              "rows": [
+                [
+                  1,
+                  10
+                ],
+                [
+                  2,
+                  25
+                ],
+                [
+                  3,
+                  0
+                ]
+              ]
+            }
+          },
+          "probes": [],
+          "transactionOpen": false
+        }
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "START TRANSACTION; UPDATE practice_stock SET qty=qty+5 WHERE product_id=2; SAVEPOINT sp; UPDATE practice_stock SET qty=0 WHERE product_id=1; ROLLBACK TO SAVEPOINT sp; RELEASE SAVEPOINT sp; COMMIT;",
+          "sqliteSql": "BEGIN TRANSACTION; UPDATE practice_stock SET qty=qty+5 WHERE product_id=2; SAVEPOINT sp; UPDATE practice_stock SET qty=0 WHERE product_id=1; ROLLBACK TO SAVEPOINT sp; RELEASE SAVEPOINT sp; COMMIT;"
+        },
+        {
+          "kind": "状态等价",
+          "mysqlSql": "START TRANSACTION; UPDATE practice_stock SET qty=5+qty WHERE product_id=2; SAVEPOINT keep_state; UPDATE practice_stock SET qty=0 WHERE product_id=1; ROLLBACK TO SAVEPOINT keep_state; RELEASE SAVEPOINT keep_state; COMMIT;",
+          "sqliteSql": "BEGIN; UPDATE practice_stock SET qty=5+qty WHERE product_id=2; SAVEPOINT keep_state; UPDATE practice_stock SET qty=0 WHERE product_id=1; ROLLBACK TO keep_state; RELEASE keep_state; COMMIT;",
+          "explanation": "不同SQL结构或运算次序实现相同目标。"
+        }
+      ],
+      "hints": [
+        "明确是数据行还是结构发生变化；保留不应修改的其他数据与约束。",
+        "结合《事务、COMMIT 与 ROLLBACK》：事务将一组写操作作为逻辑单位；提交使修改持久化，回滚撤销未提交的事务修改。",
+        "检查初始代码的 写操作或结构 对应的业务规则。回滚到保存点仅撤销该点之后的更新；提交前不能遗漏回滚。"
+      ],
+      "explanation": "回滚到保存点仅撤销该点之后的更新；提交前不能遗漏回滚。\n执行思路：在独立快照中执行目标操作，检查最终记录、结构与约束。\n本题比较操作后的表结构、索引、约束探针、完整记录及事务关闭状态。\n另一种可用写法：不同SQL结构或运算次序实现相同目标。",
+      "commonErrors": [
+        {
+          "sql": "BEGIN; UPDATE practice_stock SET qty=qty+5 WHERE product_id=2; SAVEPOINT sp; UPDATE practice_stock SET qty=0 WHERE product_id=1; RELEASE SAVEPOINT sp; COMMIT;",
+          "reason": "回滚到保存点仅撤销该点之后的更新；提交前不能遗漏回滚。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0240-public",
+        "q0240-boundary"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0240-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0240/q0240-public.json",
+          "sha256": "79195a2fced3b14be97c7011dcc93990a72861b96cd5b466c5efaa4734bd2115"
+        },
+        {
+          "id": "q0240-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0240/q0240-boundary.json",
+          "sha256": "d7469bcc591f19b1d0ccfb5a2acb3f7a5a542f8f05443d15cc81c015c8207089"
+        }
+      ],
+      "orderPolicy": "not_applicable",
+      "columnPolicy": "database_state",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [
+        {
+          "kind": "transaction_savepoint",
+          "sequence": [
+            "begin",
+            "update",
+            "savepoint",
+            "update",
+            "rollback_to",
+            "commit"
+          ],
+          "status": "需要运行时解析及事务轨迹校验；本次只验证最终状态与事务已结束"
+        }
+      ],
+      "supportStatus": "转换执行",
+      "compatibility": "仅限题设已执行的DDL/DML/事务及索引子集；原生MySQL和浏览器兼容层尚待验证。",
+      "executionMode": "database_state",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "事务、COMMIT 与 ROLLBACK",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "state",
+        "equivalentKind": "状态等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0240-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "a3c2eb7d8dff097a3ca052ee168e950c2cfe34a3f1248d7b27f3576132faed29",
+              "rowCount": null
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "a3c2eb7d8dff097a3ca052ee168e950c2cfe34a3f1248d7b27f3576132faed29",
+              "rows": null
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "7a258508e96498a633bd76965fcc326fab507361e67a777f7d5839328ada1053",
+              "rows": null
+            }
+          },
+          {
+            "fixtureId": "q0240-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "42b661e9589319213a409f108d37e5cd0ed28f83141ce98f6ed451199578e9cb",
+              "rowCount": null
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "42b661e9589319213a409f108d37e5cd0ed28f83141ce98f6ed451199578e9cb",
+              "rows": null
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "c12bb637820ece9e463559e416e1012178d54dcc3fdbe1c4c438d400f240f141",
+              "rows": null
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/create-table-check-constraints.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0129",
+        "fc0135"
+      ]
+    }
+  ]
+}

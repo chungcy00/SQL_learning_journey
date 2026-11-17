@@ -1,0 +1,224 @@
+{
+  "chapterId": "ch20",
+  "contentVersion": "1.0.0",
+  "mergePolicy": "按知识点id只更新relatedFlashcardIds、primaryFlashcardIds，不改课程编号、课文和relatedQuestionIds。",
+  "knowledgePointUpdates": [
+    {
+      "id": "kp20-01",
+      "relatedFlashcardIds": [
+        "fc0182"
+      ],
+      "primaryFlashcardIds": [
+        "fc0182"
+      ]
+    },
+    {
+      "id": "kp20-02",
+      "relatedFlashcardIds": [
+        "fc0150",
+        "fc0180"
+      ],
+      "primaryFlashcardIds": [
+        "fc0180"
+      ]
+    },
+    {
+      "id": "kp20-03",
+      "relatedFlashcardIds": [
+        "fc0179"
+      ],
+      "primaryFlashcardIds": [
+        "fc0179"
+      ]
+    },
+    {
+      "id": "kp20-04",
+      "relatedFlashcardIds": [
+        "fc0181"
+      ],
+      "primaryFlashcardIds": [
+        "fc0181"
+      ]
+    },
+    {
+      "id": "kp20-05",
+      "relatedFlashcardIds": [
+        "fc0181"
+      ],
+      "primaryFlashcardIds": [
+        "fc0181"
+      ]
+    },
+    {
+      "id": "kp20-06",
+      "relatedFlashcardIds": [
+        "fc0182"
+      ],
+      "primaryFlashcardIds": [
+        "fc0182"
+      ]
+    },
+    {
+      "id": "kp20-07",
+      "relatedFlashcardIds": [
+        "fc0183"
+      ],
+      "primaryFlashcardIds": [
+        "fc0183"
+      ]
+    },
+    {
+      "id": "kp20-08",
+      "relatedFlashcardIds": [
+        "fc0184"
+      ],
+      "primaryFlashcardIds": [
+        "fc0184"
+      ]
+    },
+    {
+      "id": "kp20-09",
+      "relatedFlashcardIds": [
+        "fc0185"
+      ],
+      "primaryFlashcardIds": [
+        "fc0185"
+      ]
+    },
+    {
+      "id": "kp20-10",
+      "relatedFlashcardIds": [
+        "fc0186"
+      ],
+      "primaryFlashcardIds": [
+        "fc0186"
+      ]
+    },
+    {
+      "id": "kp20-11",
+      "relatedFlashcardIds": [
+        "fc0187"
+      ],
+      "primaryFlashcardIds": [
+        "fc0187"
+      ]
+    },
+    {
+      "id": "kp20-12",
+      "relatedFlashcardIds": [
+        "fc0188"
+      ],
+      "primaryFlashcardIds": [
+        "fc0188"
+      ]
+    },
+    {
+      "id": "kp20-13",
+      "relatedFlashcardIds": [
+        "fc0189"
+      ],
+      "primaryFlashcardIds": [
+        "fc0189"
+      ]
+    },
+    {
+      "id": "kp20-14",
+      "relatedFlashcardIds": [
+        "fc0190"
+      ],
+      "primaryFlashcardIds": [
+        "fc0190"
+      ]
+    },
+    {
+      "id": "kp20-15",
+      "relatedFlashcardIds": [
+        "fc0191"
+      ],
+      "primaryFlashcardIds": [
+        "fc0191"
+      ]
+    },
+    {
+      "id": "kp20-16",
+      "relatedFlashcardIds": [
+        "fc0192"
+      ],
+      "primaryFlashcardIds": [
+        "fc0192"
+      ]
+    },
+    {
+      "id": "kp20-17",
+      "relatedFlashcardIds": [
+        "fc0193"
+      ],
+      "primaryFlashcardIds": [
+        "fc0193"
+      ]
+    },
+    {
+      "id": "kp20-18",
+      "relatedFlashcardIds": [
+        "fc0194"
+      ],
+      "primaryFlashcardIds": [
+        "fc0194"
+      ]
+    },
+    {
+      "id": "kp20-19",
+      "relatedFlashcardIds": [
+        "fc0195"
+      ],
+      "primaryFlashcardIds": [
+        "fc0195"
+      ]
+    },
+    {
+      "id": "kp20-20",
+      "relatedFlashcardIds": [
+        "fc0196"
+      ],
+      "primaryFlashcardIds": [
+        "fc0196"
+      ]
+    },
+    {
+      "id": "kp20-21",
+      "relatedFlashcardIds": [
+        "fc0197"
+      ],
+      "primaryFlashcardIds": [
+        "fc0197"
+      ]
+    },
+    {
+      "id": "kp20-22",
+      "relatedFlashcardIds": [
+        "fc0198"
+      ],
+      "primaryFlashcardIds": [
+        "fc0198"
+      ]
+    },
+    {
+      "id": "kp20-23",
+      "relatedFlashcardIds": [
+        "fc0199"
+      ],
+      "primaryFlashcardIds": [
+        "fc0199"
+      ]
+    },
+    {
+      "id": "kp20-24",
+      "relatedFlashcardIds": [
+        "fc0200"
+      ],
+      "primaryFlashcardIds": [
+        "fc0200"
+      ]
+    }
+  ]
+}

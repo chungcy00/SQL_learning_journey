@@ -1,0 +1,88 @@
+{
+  "projectId": "ecommerce",
+  "title": "最近消费、频率、金额客户分层",
+  "context": "客户运营团队需要可执行的分层名单。",
+  "requirements": "2025年有线上有效购买的客户；截止12-31距最近购买天数；年度订单数和净消费金额；分别按最近日期近到远、频率高到低、金额高到低分五组（并列客户编号）；三个分数5为最好；总分≥13为高价值、≤6为低活跃。",
+  "grain": "客户",
+  "commonError": "每行订单做NTILE会将同一客户拆入多组。",
+  "executionSteps": [
+    "先按客户聚合",
+    "三种独立窗口分箱",
+    "按总分分类",
+    "计算距截止日天数"
+  ],
+  "difficulty": "困难",
+  "mysqlSql": "WITH a AS (SELECT customer_id,MAX(order_date) last_day,COUNT(*) freq,SUM(net_cents) money FROM v_order_net WHERE channel='online' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY customer_id), b AS (SELECT *,6-NTILE(5) OVER(ORDER BY last_day DESC,customer_id) r_score,6-NTILE(5) OVER(ORDER BY freq DESC,customer_id) f_score,6-NTILE(5) OVER(ORDER BY money DESC,customer_id) m_score FROM a) SELECT b.customer_id,1095-d.day_index recency_days,freq,money net_cents,r_score,f_score,m_score,CASE WHEN r_score+f_score+m_score>=13 THEN 'high_value' WHEN r_score+f_score+m_score<=6 THEN 'low_activity' ELSE 'regular' END segment FROM b JOIN calendar_days d ON d.day=b.last_day ORDER BY b.customer_id",
+  "sqliteSql": "WITH a AS (SELECT customer_id,MAX(order_date) last_day,COUNT(*) freq,SUM(net_cents) money FROM v_order_net WHERE channel='online' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY customer_id), b AS (SELECT *,6-NTILE(5) OVER(ORDER BY last_day DESC,customer_id) r_score,6-NTILE(5) OVER(ORDER BY freq DESC,customer_id) f_score,6-NTILE(5) OVER(ORDER BY money DESC,customer_id) m_score FROM a) SELECT b.customer_id,1095-d.day_index recency_days,freq,money net_cents,r_score,f_score,m_score,CASE WHEN r_score+f_score+m_score>=13 THEN 'high_value' WHEN r_score+f_score+m_score<=6 THEN 'low_activity' ELSE 'regular' END segment FROM b JOIN calendar_days d ON d.day=b.last_day ORDER BY b.customer_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "customer_id",
+    "recency_days",
+    "freq",
+    "net_cents",
+    "r_score",
+    "f_score",
+    "m_score",
+    "segment"
+  ],
+  "id": "BP12",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-42"
+  ],
+  "datasetId": "ecommerce-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP12.json",
+  "expectedRowCount": 2889,
+  "expectedColumns": [
+    "customer_id",
+    "recency_days",
+    "freq",
+    "net_cents",
+    "r_score",
+    "f_score",
+    "m_score",
+    "segment"
+  ],
+  "sourceTables": [
+    "calendar_days",
+    "v_order_net"
+  ],
+  "dependencyTables": [
+    "calendar_days",
+    "categories",
+    "customer_sessions",
+    "customers",
+    "order_items",
+    "orders",
+    "products",
+    "promotions",
+    "returns",
+    "stores",
+    "traffic_sources",
+    "v_order_net",
+    "v_sales_lines"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH a AS (SELECT customer_id,MAX(order_date) last_day,COUNT(*) freq,SUM(net_cents) money FROM v_order_net WHERE channel='online' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY customer_id), b AS (SELECT *,6-NTILE(5) OVER(ORDER BY last_day DESC,customer_id) r_score,6-NTILE(5) OVER(ORDER BY freq DESC,customer_id) f_score,6-NTILE(5) OVER(ORDER BY money DESC,customer_id) m_score FROM a) SELECT b.customer_id,1095-d.day_index recency_days,freq,money net_cents,r_score,f_score,m_score,CASE WHEN r_score+f_score+m_score>=13 THEN 'high_value' WHEN r_score+f_score+m_score<=6 THEN 'low_activity' ELSE 'regular' END segment FROM b JOIN calendar_days d ON d.day=b.last_day ORDER BY b.customer_id",
+      "sqliteSql": "WITH a AS (SELECT customer_id,MAX(order_date) last_day,COUNT(*) freq,SUM(net_cents) money FROM v_order_net WHERE channel='online' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY customer_id), b AS (SELECT *,6-NTILE(5) OVER(ORDER BY last_day DESC,customer_id) r_score,6-NTILE(5) OVER(ORDER BY freq DESC,customer_id) f_score,6-NTILE(5) OVER(ORDER BY money DESC,customer_id) m_score FROM a) SELECT b.customer_id,1095-d.day_index recency_days,freq,money net_cents,r_score,f_score,m_score,CASE WHEN r_score+f_score+m_score>=13 THEN 'high_value' WHEN r_score+f_score+m_score<=6 THEN 'low_activity' ELSE 'regular' END segment FROM b JOIN calendar_days d ON d.day=b.last_day ORDER BY b.customer_id"
+    }
+  ],
+  "hints": [
+    "先按客户聚合",
+    "先按客户聚合；三种独立窗口分箱",
+    "重点核对输出粒度：客户"
+  ],
+  "explanation": "先按客户聚合；三种独立窗口分箱；按总分分类；计算距截止日天数。每行订单做NTILE会将同一客户拆入多组。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 52.9
+}

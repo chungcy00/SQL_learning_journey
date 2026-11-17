@@ -1,0 +1,90 @@
+{
+  "projectId": "enterprise",
+  "title": "首购客户90天毛利与获客成本",
+  "context": "电商＋财务联合分析：管理层要求以同一企业口径核对业务数据。",
+  "requirements": "按历史首次线上订单归因渠道及首购月份；只纳入截至年底有90日完整观察期客户；首购日起第0—89日的净毛利；对照该渠道该月广告支出/该月所有新客数（包括未成熟客户），求每人成熟期毛利和获客成本差额。",
+  "grain": "首购渠道×月",
+  "commonError": "将未满90天客户也进入90天价值分母会产生右删失偏差。",
+  "executionSteps": [
+    "确定首次订单与渠道",
+    "建立完整观察窗口",
+    "计算客户毛利",
+    "独立获客成本"
+  ],
+  "difficulty": "挑战",
+  "crossGroup": "电商＋财务",
+  "mysqlSql": "WITH f AS (SELECT o.*,ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY order_date,order_id) rn FROM v_order_net o WHERE channel='online'), a AS (SELECT f.customer_id,f.order_date,d.day_index idx,s.source_id,SUBSTR(f.order_date,1,7) m FROM f JOIN customer_sessions s ON s.session_id=f.session_id JOIN calendar_days d ON d.day=f.order_date WHERE f.rn=1), n AS (SELECT source_id,m,COUNT(*) customers FROM a GROUP BY source_id,m), g AS (SELECT a.source_id,a.m,a.customer_id,SUM(o.net_cents-o.cost_cents) gross FROM a JOIN f o ON o.customer_id=a.customer_id JOIN calendar_days d ON d.day=o.order_date AND d.day_index BETWEEN a.idx AND a.idx+89 WHERE a.idx+89<=1095 GROUP BY a.source_id,a.m,a.customer_id), z AS (SELECT source_id,m,COUNT(*) mature,AVG(gross) avg_gross FROM g GROUP BY source_id,m) SELECT z.source_id,z.m cohort,z.mature,n.customers new_customers,ROUND(z.avg_gross,2) gross90_per_customer_cents,ROUND(1.0*p.spend_cents/n.customers,2) cac_cents,ROUND(z.avg_gross-1.0*p.spend_cents/n.customers,2) difference_cents FROM z JOIN n ON n.source_id=z.source_id AND n.m=z.m JOIN marketing_campaigns p ON p.source_id=z.source_id AND p.month_key=z.m ORDER BY z.source_id,z.m",
+  "sqliteSql": "WITH f AS (SELECT o.*,ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY order_date,order_id) rn FROM v_order_net o WHERE channel='online'), a AS (SELECT f.customer_id,f.order_date,d.day_index idx,s.source_id,SUBSTR(f.order_date,1,7) m FROM f JOIN customer_sessions s ON s.session_id=f.session_id JOIN calendar_days d ON d.day=f.order_date WHERE f.rn=1), n AS (SELECT source_id,m,COUNT(*) customers FROM a GROUP BY source_id,m), g AS (SELECT a.source_id,a.m,a.customer_id,SUM(o.net_cents-o.cost_cents) gross FROM a JOIN f o ON o.customer_id=a.customer_id JOIN calendar_days d ON d.day=o.order_date AND d.day_index BETWEEN a.idx AND a.idx+89 WHERE a.idx+89<=1095 GROUP BY a.source_id,a.m,a.customer_id), z AS (SELECT source_id,m,COUNT(*) mature,AVG(gross) avg_gross FROM g GROUP BY source_id,m) SELECT z.source_id,z.m cohort,z.mature,n.customers new_customers,ROUND(z.avg_gross,2) gross90_per_customer_cents,ROUND(1.0*p.spend_cents/n.customers,2) cac_cents,ROUND(z.avg_gross-1.0*p.spend_cents/n.customers,2) difference_cents FROM z JOIN n ON n.source_id=z.source_id AND n.m=z.m JOIN marketing_campaigns p ON p.source_id=z.source_id AND p.month_key=z.m ORDER BY z.source_id,z.m",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "source_id",
+    "cohort",
+    "mature",
+    "new_customers",
+    "gross90_per_customer_cents",
+    "cac_cents",
+    "difference_cents"
+  ],
+  "id": "BP45",
+  "chapterId": "ch20",
+  "knowledgePointIds": [
+    "kp20-19"
+  ],
+  "datasetId": "enterprise-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP45.json",
+  "expectedRowCount": 169,
+  "expectedColumns": [
+    "source_id",
+    "cohort",
+    "mature",
+    "new_customers",
+    "gross90_per_customer_cents",
+    "cac_cents",
+    "difference_cents"
+  ],
+  "sourceTables": [
+    "calendar_days",
+    "customer_sessions",
+    "marketing_campaigns",
+    "v_order_net"
+  ],
+  "dependencyTables": [
+    "calendar_days",
+    "categories",
+    "customer_sessions",
+    "customers",
+    "marketing_campaigns",
+    "order_items",
+    "orders",
+    "products",
+    "promotions",
+    "returns",
+    "stores",
+    "traffic_sources",
+    "v_order_net",
+    "v_sales_lines"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH f AS (SELECT o.*,ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY order_date,order_id) rn FROM v_order_net o WHERE channel='online'), a AS (SELECT f.customer_id,f.order_date,d.day_index idx,s.source_id,SUBSTR(f.order_date,1,7) m FROM f JOIN customer_sessions s ON s.session_id=f.session_id JOIN calendar_days d ON d.day=f.order_date WHERE f.rn=1), n AS (SELECT source_id,m,COUNT(*) customers FROM a GROUP BY source_id,m), g AS (SELECT a.source_id,a.m,a.customer_id,SUM(o.net_cents-o.cost_cents) gross FROM a JOIN f o ON o.customer_id=a.customer_id JOIN calendar_days d ON d.day=o.order_date AND d.day_index BETWEEN a.idx AND a.idx+89 WHERE a.idx+89<=1095 GROUP BY a.source_id,a.m,a.customer_id), z AS (SELECT source_id,m,COUNT(*) mature,AVG(gross) avg_gross FROM g GROUP BY source_id,m) SELECT z.source_id,z.m cohort,z.mature,n.customers new_customers,ROUND(z.avg_gross,2) gross90_per_customer_cents,ROUND(1.0*p.spend_cents/n.customers,2) cac_cents,ROUND(z.avg_gross-1.0*p.spend_cents/n.customers,2) difference_cents FROM z JOIN n ON n.source_id=z.source_id AND n.m=z.m JOIN marketing_campaigns p ON p.source_id=z.source_id AND p.month_key=z.m ORDER BY z.source_id,z.m",
+      "sqliteSql": "WITH f AS (SELECT o.*,ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY order_date,order_id) rn FROM v_order_net o WHERE channel='online'), a AS (SELECT f.customer_id,f.order_date,d.day_index idx,s.source_id,SUBSTR(f.order_date,1,7) m FROM f JOIN customer_sessions s ON s.session_id=f.session_id JOIN calendar_days d ON d.day=f.order_date WHERE f.rn=1), n AS (SELECT source_id,m,COUNT(*) customers FROM a GROUP BY source_id,m), g AS (SELECT a.source_id,a.m,a.customer_id,SUM(o.net_cents-o.cost_cents) gross FROM a JOIN f o ON o.customer_id=a.customer_id JOIN calendar_days d ON d.day=o.order_date AND d.day_index BETWEEN a.idx AND a.idx+89 WHERE a.idx+89<=1095 GROUP BY a.source_id,a.m,a.customer_id), z AS (SELECT source_id,m,COUNT(*) mature,AVG(gross) avg_gross FROM g GROUP BY source_id,m) SELECT z.source_id,z.m cohort,z.mature,n.customers new_customers,ROUND(z.avg_gross,2) gross90_per_customer_cents,ROUND(1.0*p.spend_cents/n.customers,2) cac_cents,ROUND(z.avg_gross-1.0*p.spend_cents/n.customers,2) difference_cents FROM z JOIN n ON n.source_id=z.source_id AND n.m=z.m JOIN marketing_campaigns p ON p.source_id=z.source_id AND p.month_key=z.m ORDER BY z.source_id,z.m"
+    }
+  ],
+  "hints": [
+    "确定首次订单与渠道",
+    "确定首次订单与渠道；建立完整观察窗口",
+    "重点核对输出粒度：首购渠道×月"
+  ],
+  "explanation": "确定首次订单与渠道；建立完整观察窗口；计算客户毛利；独立获客成本。将未满90天客户也进入90天价值分母会产生右删失偏差。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 113.0
+}

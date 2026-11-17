@@ -1,0 +1,177 @@
+{
+  "visibility": "hidden",
+  "variant": "boundary",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "invoices",
+      "columns": [
+        {
+          "name": "invoice_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "account_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "invoice_date",
+          "type": "TEXT",
+          "mysqlType": "DATE",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "due_date",
+          "type": "TEXT",
+          "mysqlType": "DATE",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "amount",
+          "type": "INTEGER",
+          "mysqlType": "DECIMAL(12,2)",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          11,
+          1,
+          "2026-01-01",
+          "2026-01-31",
+          150
+        ],
+        [
+          12,
+          1,
+          "2026-01-02",
+          "2026-02-15",
+          200
+        ],
+        [
+          13,
+          3,
+          "2026-02-01",
+          "2026-03-01",
+          0
+        ],
+        [
+          14,
+          3,
+          "2026-02-07",
+          "2026-02-28",
+          80
+        ]
+      ]
+    },
+    {
+      "name": "payments",
+      "columns": [
+        {
+          "name": "payment_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "invoice_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "payment_date",
+          "type": "TEXT",
+          "mysqlType": "DATE",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "amount",
+          "type": "INTEGER",
+          "mysqlType": "DECIMAL(12,2)",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          20,
+          11,
+          "2026-01-31",
+          60
+        ],
+        [
+          21,
+          11,
+          "2026-02-01",
+          10
+        ],
+        [
+          22,
+          12,
+          "2026-02-28",
+          200
+        ],
+        [
+          23,
+          12,
+          "2026-03-01",
+          5
+        ]
+      ]
+    }
+  ],
+  "id": "q0109-boundary",
+  "questionId": "q0109",
+  "datasetId": "q0109-lesson",
+  "expected": {
+    "columns": [
+      "invoice_id",
+      "payment_id",
+      "amount_paid"
+    ],
+    "rows": [
+      [
+        11,
+        20,
+        60
+      ],
+      [
+        11,
+        21,
+        10
+      ],
+      [
+        12,
+        22,
+        200
+      ],
+      [
+        12,
+        23,
+        5
+      ],
+      [
+        13,
+        null,
+        null
+      ],
+      [
+        14,
+        null,
+        null
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

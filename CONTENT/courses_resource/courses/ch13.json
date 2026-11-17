@@ -1,0 +1,527 @@
+{
+  "id": "ch13",
+  "number": 13,
+  "title": "集合运算",
+  "stage": "进阶",
+  "objective": "合并结果集并掌握去重、交集与差集。",
+  "prerequisites": [
+    "ch12"
+  ],
+  "knowledgePoints": [
+    {
+      "id": "kp13-01",
+      "chapterId": "ch13",
+      "title": "UNION 与 UNION ALL",
+      "learningObjective": "能够运用本节知识完成：合并不同期间客户记录",
+      "prerequisites": [
+        "ch12"
+      ],
+      "concept": "UNION 合并并去重，UNION ALL 保留所有行及重复项；两侧必须具有相同列数。",
+      "syntax": "SELECT col FROM a UNION [ALL] SELECT col FROM b ORDER BY col;",
+      "parameters": {
+        "ALL": "保留重复项"
+      },
+      "fixtureIds": [
+        "lesson-old_customers",
+        "lesson-new_customers"
+      ],
+      "sourceTables": [
+        {
+          "name": "old_customers",
+          "columns": [
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ]
+          ]
+        },
+        {
+          "name": "new_customers",
+          "columns": [
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT customer_id FROM old_customers UNION ALL SELECT customer_id FROM new_customers ORDER BY customer_id;",
+      "sqliteSql": "SELECT customer_id FROM old_customers UNION ALL SELECT customer_id FROM new_customers ORDER BY customer_id;",
+      "executionSteps": [
+        "读取两批客户",
+        "追加所有行",
+        "对联合结果排序"
+      ],
+      "useCase": "合并不同期间客户记录",
+      "comparison": "JOIN 横向组合列，UNION 纵向组合行。",
+      "commonError": {
+        "example": "UNION ALL 后把行数解释为唯一客户数",
+        "correction": "UNION 或外层 COUNT(DISTINCT customer_id)"
+      },
+      "notes": "列名通常取第一查询；类型应语义一致，MySQL 与 SQLite 的隐式类型不同。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0176",
+        "q0179",
+        "q0182"
+      ],
+      "relatedFlashcardIds": [
+        "fc0097",
+        "fc0098",
+        "fc0102"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp02-01",
+        "kp08-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "customer_id"
+        ],
+        "rows": [
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            2
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp13-01.sql",
+      "primaryQuestionIds": [
+        "q0176",
+        "q0179",
+        "q0182"
+      ],
+      "primaryFlashcardIds": [
+        "fc0097",
+        "fc0098",
+        "fc0102"
+      ]
+    },
+    {
+      "id": "kp13-02",
+      "chapterId": "ch13",
+      "title": "INTERSECT 与 EXCEPT",
+      "learningObjective": "能够运用本节知识完成：识别两期都购买的客户",
+      "prerequisites": [
+        "kp13-01"
+      ],
+      "concept": "MySQL 8.4 支持 INTERSECT 求交集，EXCEPT 求前一集合减后一集合，默认去重。",
+      "syntax": "SELECT col FROM a INTERSECT SELECT col FROM b; SELECT col FROM a EXCEPT SELECT col FROM b;",
+      "parameters": {
+        "INTERSECT": "两个集合共同记录",
+        "EXCEPT": "前者独有记录"
+      },
+      "fixtureIds": [
+        "lesson-old_customers",
+        "lesson-new_customers"
+      ],
+      "sourceTables": [
+        {
+          "name": "old_customers",
+          "columns": [
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ]
+          ]
+        },
+        {
+          "name": "new_customers",
+          "columns": [
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT customer_id FROM old_customers INTERSECT SELECT customer_id FROM new_customers ORDER BY customer_id;",
+      "sqliteSql": "SELECT customer_id FROM old_customers INTERSECT SELECT customer_id FROM new_customers ORDER BY customer_id;",
+      "executionSteps": [
+        "两侧去重",
+        "保留共有编号2和3",
+        "排序"
+      ],
+      "useCase": "识别两期都购买的客户",
+      "comparison": "EXCEPT 的顺序有意义；INTERSECT 对称。",
+      "commonError": {
+        "example": "SELECT customer_id FROM old_customers EXCEPT SELECT customer_id FROM new_customers 期待共同客户",
+        "correction": "使用 INTERSECT"
+      },
+      "notes": "MySQL 支持 ALL 形式而 SQLite 不支持 INTERSECT ALL / EXCEPT ALL；混合运算优先级亦不同。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0177",
+        "q0180"
+      ],
+      "relatedFlashcardIds": [
+        "fc0099",
+        "fc0100"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp02-01",
+        "kp08-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "customer_id"
+        ],
+        "rows": [
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp13-02.sql",
+      "primaryQuestionIds": [
+        "q0177",
+        "q0180"
+      ],
+      "primaryFlashcardIds": [
+        "fc0099",
+        "fc0100"
+      ]
+    },
+    {
+      "id": "kp13-03",
+      "chapterId": "ch13",
+      "title": "差集与排序范围",
+      "learningObjective": "能够运用本节知识完成：识别上一期有记录而本期没有的客户",
+      "prerequisites": [
+        "kp13-02"
+      ],
+      "concept": "差集仅保留前一结果中未出现在后一结果的行。末尾 ORDER BY 作用于整个组合结果。",
+      "syntax": "SELECT col FROM a EXCEPT SELECT col FROM b ORDER BY col;",
+      "parameters": {
+        "col": "两侧对应字段"
+      },
+      "fixtureIds": [
+        "lesson-old_customers",
+        "lesson-new_customers"
+      ],
+      "sourceTables": [
+        {
+          "name": "old_customers",
+          "columns": [
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ]
+          ]
+        },
+        {
+          "name": "new_customers",
+          "columns": [
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT customer_id FROM old_customers EXCEPT SELECT customer_id FROM new_customers ORDER BY customer_id;",
+      "sqliteSql": "SELECT customer_id FROM old_customers EXCEPT SELECT customer_id FROM new_customers ORDER BY customer_id;",
+      "executionSteps": [
+        "去除双方共有编号2和3",
+        "保留编号1"
+      ],
+      "useCase": "识别上一期有记录而本期没有的客户",
+      "comparison": "差集不等于对称差；后者还要加新集合独有项。",
+      "commonError": {
+        "example": "将最后的 ORDER BY 误认为只对第二个查询排序",
+        "correction": "在整体集合查询末尾明确排序"
+      },
+      "notes": "多个集合操作使用具名 CTE 分步，避免优先级差异。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0178",
+        "q0183"
+      ],
+      "relatedFlashcardIds": [
+        "fc0101"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp02-01",
+        "kp08-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "customer_id"
+        ],
+        "rows": [
+          [
+            1
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp13-03.sql",
+      "primaryQuestionIds": [
+        "q0178",
+        "q0183"
+      ],
+      "primaryFlashcardIds": [
+        "fc0101"
+      ]
+    },
+    {
+      "id": "kp13-04",
+      "chapterId": "ch13",
+      "title": "UNION 去重与合并结果",
+      "learningObjective": "能够运用本节知识完成：统计两个期间覆盖的唯一客户",
+      "prerequisites": [
+        "kp13-03"
+      ],
+      "concept": "默认 UNION 对全部输出列去重，保留同一客户在两批数据中的唯一编号。",
+      "syntax": "SELECT col FROM a UNION SELECT col FROM b",
+      "parameters": {
+        "col": "两侧对应字段"
+      },
+      "fixtureIds": [
+        "lesson-old_customers",
+        "lesson-new_customers"
+      ],
+      "sourceTables": [
+        {
+          "name": "old_customers",
+          "columns": [
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ]
+          ]
+        },
+        {
+          "name": "new_customers",
+          "columns": [
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT customer_id FROM old_customers UNION SELECT customer_id FROM new_customers ORDER BY customer_id;",
+      "sqliteSql": "SELECT customer_id FROM old_customers UNION SELECT customer_id FROM new_customers ORDER BY customer_id;",
+      "executionSteps": [
+        "第一批包含1、2、2、3",
+        "第二批包含2、3、4",
+        "合并并去重",
+        "返回1至4"
+      ],
+      "useCase": "统计两个期间覆盖的唯一客户",
+      "comparison": "UNION ALL 保留7条原始记录；UNION 保留4条唯一记录。",
+      "commonError": {
+        "example": "选择 customer_id,source 后期待跨来源仅按 customer_id 去重",
+        "correction": "外层仅对所需业务键执行 DISTINCT 或分组"
+      },
+      "notes": "NULL 的去重规则与普通等号比较不同。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0181"
+      ],
+      "relatedFlashcardIds": [
+        "fc0096"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp02-01",
+        "kp08-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "customer_id"
+        ],
+        "rows": [
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp13-04.sql",
+      "primaryQuestionIds": [
+        "q0181"
+      ],
+      "primaryFlashcardIds": [
+        "fc0096"
+      ]
+    }
+  ],
+  "plannedQuestionCount": 8,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "dialect": "MySQL 8.4",
+  "summary": "完成本章后：合并结果集并掌握去重、交集与差集。",
+  "sources": [
+    "https://dev.mysql.com/doc/refman/8.4/en/",
+    "https://dev.mysql.com/doc/refman/8.4/en/functions.html"
+  ],
+  "knowledgePointCount": 4
+}

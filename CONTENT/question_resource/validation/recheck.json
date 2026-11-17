@@ -1,0 +1,14 @@
+{
+  "engine": "SQLite 3.46.1",
+  "passed": true,
+  "databaseHashes": 7,
+  "fixtureHashes": 776,
+  "solutionRuns": 1492,
+  "wrongRejectedCases": 520,
+  "wrongRuns": 746,
+  "executedFixtures": 746,
+  "questionsRejectingWrong": 270,
+  "questionsWithChangedHiddenResult": 268,
+  "questions": 300,
+  "objectiveKeys": 30
+}

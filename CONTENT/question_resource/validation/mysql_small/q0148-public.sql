@@ -1,0 +1,16 @@
+-- 在独立空 MySQL 8.4 测试库中执行，不得用于正式业务库。
+SET NAMES utf8mb4 COLLATE utf8mb4_0900_bin;
+SET SESSION sql_mode='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION';
+CREATE TABLE `new_customers` (`customer_id` INT);
+INSERT INTO `new_customers` VALUES
+(2),
+(3),
+(4);
+CREATE TABLE `old_customers` (`customer_id` INT);
+INSERT INTO `old_customers` VALUES
+(1),
+(2),
+(2),
+(3);
+-- 参考解；等价解须从同一初始快照另行运行。
+SELECT DISTINCT n.customer_id FROM new_customers n WHERE n.customer_id IS NOT NULL AND NOT EXISTS(SELECT 1 FROM old_customers o WHERE o.customer_id=n.customer_id) ORDER BY n.customer_id;

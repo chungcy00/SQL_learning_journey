@@ -1,0 +1,237 @@
+{
+  "chapterId": "ch20",
+  "contentVersion": "3.0.0",
+  "knowledgePointUpdates": [
+    {
+      "id": "kp20-01",
+      "relatedQuestionIds": [
+        "q0282",
+        "q0283",
+        "q0284",
+        "q0287",
+        "q0288",
+        "q0291",
+        "q0294",
+        "q0297",
+        "q0299",
+        "q0300"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp20-02",
+      "relatedQuestionIds": [
+        "q0252",
+        "q0290",
+        "q0295",
+        "q0298",
+        "q0299"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp20-03",
+      "relatedQuestionIds": [
+        "q0253"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp20-04",
+      "relatedQuestionIds": [
+        "q0255",
+        "q0269",
+        "q0270",
+        "q0281",
+        "q0285",
+        "q0286",
+        "q0289",
+        "q0292",
+        "q0293",
+        "q0296",
+        "q0300"
+      ],
+      "primaryQuestionIds": []
+    },
+    {
+      "id": "kp20-05",
+      "relatedQuestionIds": [
+        "q0281"
+      ],
+      "primaryQuestionIds": [
+        "q0281"
+      ]
+    },
+    {
+      "id": "kp20-06",
+      "relatedQuestionIds": [
+        "q0282"
+      ],
+      "primaryQuestionIds": [
+        "q0282"
+      ]
+    },
+    {
+      "id": "kp20-07",
+      "relatedQuestionIds": [
+        "q0283"
+      ],
+      "primaryQuestionIds": [
+        "q0283"
+      ]
+    },
+    {
+      "id": "kp20-08",
+      "relatedQuestionIds": [
+        "q0284"
+      ],
+      "primaryQuestionIds": [
+        "q0284"
+      ]
+    },
+    {
+      "id": "kp20-09",
+      "relatedQuestionIds": [
+        "q0285"
+      ],
+      "primaryQuestionIds": [
+        "q0285"
+      ]
+    },
+    {
+      "id": "kp20-10",
+      "relatedQuestionIds": [
+        "q0286"
+      ],
+      "primaryQuestionIds": [
+        "q0286"
+      ]
+    },
+    {
+      "id": "kp20-11",
+      "relatedQuestionIds": [
+        "q0287"
+      ],
+      "primaryQuestionIds": [
+        "q0287"
+      ]
+    },
+    {
+      "id": "kp20-12",
+      "relatedQuestionIds": [
+        "q0288"
+      ],
+      "primaryQuestionIds": [
+        "q0288"
+      ]
+    },
+    {
+      "id": "kp20-13",
+      "relatedQuestionIds": [
+        "q0289"
+      ],
+      "primaryQuestionIds": [
+        "q0289"
+      ]
+    },
+    {
+      "id": "kp20-14",
+      "relatedQuestionIds": [
+        "q0290"
+      ],
+      "primaryQuestionIds": [
+        "q0290"
+      ]
+    },
+    {
+      "id": "kp20-15",
+      "relatedQuestionIds": [
+        "q0291"
+      ],
+      "primaryQuestionIds": [
+        "q0291"
+      ]
+    },
+    {
+      "id": "kp20-16",
+      "relatedQuestionIds": [
+        "q0292"
+      ],
+      "primaryQuestionIds": [
+        "q0292"
+      ]
+    },
+    {
+      "id": "kp20-17",
+      "relatedQuestionIds": [
+        "q0293"
+      ],
+      "primaryQuestionIds": [
+        "q0293"
+      ]
+    },
+    {
+      "id": "kp20-18",
+      "relatedQuestionIds": [
+        "q0294"
+      ],
+      "primaryQuestionIds": [
+        "q0294"
+      ]
+    },
+    {
+      "id": "kp20-19",
+      "relatedQuestionIds": [
+        "q0295"
+      ],
+      "primaryQuestionIds": [
+        "q0295"
+      ]
+    },
+    {
+      "id": "kp20-20",
+      "relatedQuestionIds": [
+        "q0296"
+      ],
+      "primaryQuestionIds": [
+        "q0296"
+      ]
+    },
+    {
+      "id": "kp20-21",
+      "relatedQuestionIds": [
+        "q0297"
+      ],
+      "primaryQuestionIds": [
+        "q0297"
+      ]
+    },
+    {
+      "id": "kp20-22",
+      "relatedQuestionIds": [
+        "q0298"
+      ],
+      "primaryQuestionIds": [
+        "q0298"
+      ]
+    },
+    {
+      "id": "kp20-23",
+      "relatedQuestionIds": [
+        "q0299"
+      ],
+      "primaryQuestionIds": [
+        "q0299"
+      ]
+    },
+    {
+      "id": "kp20-24",
+      "relatedQuestionIds": [
+        "q0300"
+      ],
+      "primaryQuestionIds": [
+        "q0300"
+      ]
+    }
+  ]
+}

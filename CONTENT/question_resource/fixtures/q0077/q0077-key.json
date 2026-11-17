@@ -1,0 +1,33 @@
+{
+  "id": "q0077-key",
+  "questionId": "q0077",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "在 ORDER BY 中添加 product_name 就可以",
+      "explanation": "排序不能决定组内该列唯一取值。"
+    },
+    {
+      "id": "B",
+      "text": "只要为结果添加 LIMIT 1 即可",
+      "explanation": "LIMIT在分组之后限制结果，不能修复不确定列。"
+    },
+    {
+      "id": "C",
+      "text": "不应直接选择未聚合且非分组的 product_name",
+      "explanation": "该列缺少唯一确定的组值，违反严格分组约束。"
+    },
+    {
+      "id": "D",
+      "text": "只要给 product_name 添加别名即可",
+      "explanation": "别名不改变分组语义。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "C"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

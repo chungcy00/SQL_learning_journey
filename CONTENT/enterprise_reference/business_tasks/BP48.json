@@ -1,0 +1,92 @@
+{
+  "projectId": "enterprise",
+  "title": "门店人员变化与销售变化诊断",
+  "context": "人力＋销售联合分析：管理层要求以同一企业口径核对业务数据。",
+  "requirements": "2025年门店×月，月末在岗人数使用历史区间，月度净销售使用实际交易；计算环比人力及销售变化率，上月为0或缺失返回NULL；标记人数增加而销售下降。",
+  "grain": "门店×月",
+  "commonError": "人力变动与销售变化相关并不证明因果。",
+  "executionSteps": [
+    "重建历史人数",
+    "独立月份销售",
+    "窗口比较",
+    "生成复核标志"
+  ],
+  "difficulty": "挑战",
+  "crossGroup": "人力＋销售",
+  "mysqlSql": "WITH m AS (SELECT month_key,MAX(day) last_day FROM calendar_days WHERE month_key>='2024-12' GROUP BY month_key), h AS (SELECT s.store_id,m.month_key,COUNT(e.employee_id) headcount FROM stores s CROSS JOIN m LEFT JOIN employment_history e ON e.store_id=s.store_id AND e.start_date<=m.last_day AND (e.end_date IS NULL OR e.end_date>m.last_day) GROUP BY s.store_id,m.month_key), a AS (SELECT store_id,SUBSTR(order_date,1,7) m,SUM(net_cents) net FROM v_sales_lines WHERE channel='store' AND order_date>='2024-12-01' GROUP BY store_id,SUBSTR(order_date,1,7)), z AS (SELECT h.*,COALESCE(a.net,0) net FROM h LEFT JOIN a ON a.store_id=h.store_id AND a.m=h.month_key), p AS (SELECT *,LAG(headcount) OVER(PARTITION BY store_id ORDER BY month_key) prev_h,LAG(net) OVER(PARTITION BY store_id ORDER BY month_key) prev_net FROM z) SELECT store_id,month_key,headcount,net net_cents,ROUND(100.0*(headcount-prev_h)/NULLIF(prev_h,0),2) headcount_change_pct,ROUND(100.0*(net-prev_net)/NULLIF(prev_net,0),2) sales_change_pct,CASE WHEN headcount>prev_h AND net<prev_net THEN 1 ELSE 0 END review_flag FROM p WHERE month_key>='2025-01' ORDER BY store_id,month_key",
+  "sqliteSql": "WITH m AS (SELECT month_key,MAX(day) last_day FROM calendar_days WHERE month_key>='2024-12' GROUP BY month_key), h AS (SELECT s.store_id,m.month_key,COUNT(e.employee_id) headcount FROM stores s CROSS JOIN m LEFT JOIN employment_history e ON e.store_id=s.store_id AND e.start_date<=m.last_day AND (e.end_date IS NULL OR e.end_date>m.last_day) GROUP BY s.store_id,m.month_key), a AS (SELECT store_id,SUBSTR(order_date,1,7) m,SUM(net_cents) net FROM v_sales_lines WHERE channel='store' AND order_date>='2024-12-01' GROUP BY store_id,SUBSTR(order_date,1,7)), z AS (SELECT h.*,COALESCE(a.net,0) net FROM h LEFT JOIN a ON a.store_id=h.store_id AND a.m=h.month_key), p AS (SELECT *,LAG(headcount) OVER(PARTITION BY store_id ORDER BY month_key) prev_h,LAG(net) OVER(PARTITION BY store_id ORDER BY month_key) prev_net FROM z) SELECT store_id,month_key,headcount,net net_cents,ROUND(100.0*(headcount-prev_h)/NULLIF(prev_h,0),2) headcount_change_pct,ROUND(100.0*(net-prev_net)/NULLIF(prev_net,0),2) sales_change_pct,CASE WHEN headcount>prev_h AND net<prev_net THEN 1 ELSE 0 END review_flag FROM p WHERE month_key>='2025-01' ORDER BY store_id,month_key",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "store_id",
+    "month_key",
+    "headcount",
+    "net_cents",
+    "headcount_change_pct",
+    "sales_change_pct",
+    "review_flag"
+  ],
+  "id": "BP48",
+  "chapterId": "ch20",
+  "knowledgePointIds": [
+    "kp20-22"
+  ],
+  "datasetId": "enterprise-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP48.json",
+  "expectedRowCount": 144,
+  "expectedColumns": [
+    "store_id",
+    "month_key",
+    "headcount",
+    "net_cents",
+    "headcount_change_pct",
+    "sales_change_pct",
+    "review_flag"
+  ],
+  "sourceTables": [
+    "calendar_days",
+    "employment_history",
+    "stores",
+    "v_sales_lines"
+  ],
+  "dependencyTables": [
+    "calendar_days",
+    "categories",
+    "customer_sessions",
+    "customers",
+    "departments",
+    "employees",
+    "employment_history",
+    "order_items",
+    "orders",
+    "positions",
+    "products",
+    "promotions",
+    "returns",
+    "stores",
+    "traffic_sources",
+    "v_sales_lines"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH m AS (SELECT month_key,MAX(day) last_day FROM calendar_days WHERE month_key>='2024-12' GROUP BY month_key), h AS (SELECT s.store_id,m.month_key,COUNT(e.employee_id) headcount FROM stores s CROSS JOIN m LEFT JOIN employment_history e ON e.store_id=s.store_id AND e.start_date<=m.last_day AND (e.end_date IS NULL OR e.end_date>m.last_day) GROUP BY s.store_id,m.month_key), a AS (SELECT store_id,SUBSTR(order_date,1,7) m,SUM(net_cents) net FROM v_sales_lines WHERE channel='store' AND order_date>='2024-12-01' GROUP BY store_id,SUBSTR(order_date,1,7)), z AS (SELECT h.*,COALESCE(a.net,0) net FROM h LEFT JOIN a ON a.store_id=h.store_id AND a.m=h.month_key), p AS (SELECT *,LAG(headcount) OVER(PARTITION BY store_id ORDER BY month_key) prev_h,LAG(net) OVER(PARTITION BY store_id ORDER BY month_key) prev_net FROM z) SELECT store_id,month_key,headcount,net net_cents,ROUND(100.0*(headcount-prev_h)/NULLIF(prev_h,0),2) headcount_change_pct,ROUND(100.0*(net-prev_net)/NULLIF(prev_net,0),2) sales_change_pct,CASE WHEN headcount>prev_h AND net<prev_net THEN 1 ELSE 0 END review_flag FROM p WHERE month_key>='2025-01' ORDER BY store_id,month_key",
+      "sqliteSql": "WITH m AS (SELECT month_key,MAX(day) last_day FROM calendar_days WHERE month_key>='2024-12' GROUP BY month_key), h AS (SELECT s.store_id,m.month_key,COUNT(e.employee_id) headcount FROM stores s CROSS JOIN m LEFT JOIN employment_history e ON e.store_id=s.store_id AND e.start_date<=m.last_day AND (e.end_date IS NULL OR e.end_date>m.last_day) GROUP BY s.store_id,m.month_key), a AS (SELECT store_id,SUBSTR(order_date,1,7) m,SUM(net_cents) net FROM v_sales_lines WHERE channel='store' AND order_date>='2024-12-01' GROUP BY store_id,SUBSTR(order_date,1,7)), z AS (SELECT h.*,COALESCE(a.net,0) net FROM h LEFT JOIN a ON a.store_id=h.store_id AND a.m=h.month_key), p AS (SELECT *,LAG(headcount) OVER(PARTITION BY store_id ORDER BY month_key) prev_h,LAG(net) OVER(PARTITION BY store_id ORDER BY month_key) prev_net FROM z) SELECT store_id,month_key,headcount,net net_cents,ROUND(100.0*(headcount-prev_h)/NULLIF(prev_h,0),2) headcount_change_pct,ROUND(100.0*(net-prev_net)/NULLIF(prev_net,0),2) sales_change_pct,CASE WHEN headcount>prev_h AND net<prev_net THEN 1 ELSE 0 END review_flag FROM p WHERE month_key>='2025-01' ORDER BY store_id,month_key"
+    }
+  ],
+  "hints": [
+    "重建历史人数",
+    "重建历史人数；独立月份销售",
+    "重点核对输出粒度：门店×月"
+  ],
+  "explanation": "重建历史人数；独立月份销售；窗口比较；生成复核标志。人力变动与销售变化相关并不证明因果。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 44.2
+}

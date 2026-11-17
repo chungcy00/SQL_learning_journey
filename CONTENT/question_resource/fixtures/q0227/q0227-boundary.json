@@ -1,0 +1,128 @@
+{
+  "visibility": "hidden",
+  "variant": "boundary",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "raw_data",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "name",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "amount",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "category",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        }
+      ],
+      "rows": [
+        [
+          11,
+          "  Mask A  ",
+          "15",
+          " SKIN "
+        ],
+        [
+          12,
+          "Mask A",
+          "15",
+          "skin"
+        ],
+        [
+          13,
+          "古晋",
+          null,
+          "Skin"
+        ],
+        [
+          14,
+          "S%",
+          "-5",
+          "HOME"
+        ],
+        [
+          15,
+          "  ",
+          "0",
+          "home"
+        ],
+        [
+          16,
+          null,
+          "25",
+          null
+        ],
+        [
+          17,
+          "A_B",
+          "0",
+          "makeup"
+        ],
+        [
+          18,
+          "张 三",
+          "100.25",
+          " OTHER "
+        ],
+        [
+          19,
+          "S%",
+          "-5",
+          "home"
+        ],
+        [
+          20,
+          "",
+          "20",
+          "home"
+        ]
+      ]
+    }
+  ],
+  "id": "q0227-boundary",
+  "questionId": "q0227",
+  "datasetId": "q0227-lesson",
+  "expected": {
+    "columns": [
+      "clean_name",
+      "amount",
+      "n"
+    ],
+    "rows": [
+      [
+        "Mask A",
+        "15",
+        2
+      ],
+      [
+        "S%",
+        "-5",
+        2
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

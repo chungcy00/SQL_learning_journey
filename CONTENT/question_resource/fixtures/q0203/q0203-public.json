@@ -1,0 +1,77 @@
+{
+  "visibility": "public",
+  "variant": "public",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "monthly",
+      "columns": [
+        {
+          "name": "month",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "sales",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          "2026-01",
+          1000
+        ],
+        [
+          "2026-02",
+          1500
+        ],
+        [
+          "2026-03",
+          1500
+        ],
+        [
+          "2026-04",
+          900
+        ]
+      ]
+    }
+  ],
+  "id": "q0203-public",
+  "questionId": "q0203",
+  "datasetId": "q0203-lesson",
+  "expected": {
+    "columns": [
+      "month",
+      "avg2"
+    ],
+    "rows": [
+      [
+        "2026-01",
+        1000.0
+      ],
+      [
+        "2026-02",
+        1250.0
+      ],
+      [
+        "2026-03",
+        1500.0
+      ],
+      [
+        "2026-04",
+        1200.0
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

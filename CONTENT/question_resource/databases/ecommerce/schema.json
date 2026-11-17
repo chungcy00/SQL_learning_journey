@@ -1,0 +1,825 @@
+{
+  "datasetId": "ecommerce-v2",
+  "schemaVersion": 2,
+  "tables": {
+    "calendar_days": {
+      "description": "连续日期维度",
+      "rowCount": 1096,
+      "columns": [
+        {
+          "name": "day",
+          "description": "日历日期",
+          "sqliteType": "TEXT",
+          "mysqlType": "DATE",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "month_key",
+          "description": "统计月份 YYYY-MM",
+          "sqliteType": "TEXT",
+          "mysqlType": "CHAR(7)",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "day_index",
+          "description": "从2023-01-01开始的日序号（0起）",
+          "sqliteType": "INTEGER",
+          "mysqlType": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE calendar_days (day TEXT PRIMARY KEY, month_key TEXT NOT NULL, day_index INTEGER NOT NULL UNIQUE)",
+      "mysqlDDL": "CREATE TABLE calendar_days (\n  day DATE PRIMARY KEY,\n  month_key CHAR(7) NOT NULL,\n  day_index INT NOT NULL UNIQUE\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": []
+    },
+    "stores": {
+      "description": "门店主档",
+      "rowCount": 12,
+      "columns": [
+        {
+          "name": "store_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "store_name",
+          "description": "名称",
+          "sqliteType": "TEXT",
+          "mysqlType": "VARCHAR(160)",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "city",
+          "description": "业务字段",
+          "sqliteType": "TEXT",
+          "mysqlType": "VARCHAR(160)",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE stores (store_id INTEGER PRIMARY KEY, store_name TEXT NOT NULL, city TEXT NOT NULL)",
+      "mysqlDDL": "CREATE TABLE stores (\n  store_id BIGINT PRIMARY KEY,\n  store_name VARCHAR(160) NOT NULL,\n  city VARCHAR(160) NOT NULL\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": []
+    },
+    "categories": {
+      "description": "商品分类",
+      "rowCount": 15,
+      "columns": [
+        {
+          "name": "category_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "category_name",
+          "description": "名称",
+          "sqliteType": "TEXT",
+          "mysqlType": "VARCHAR(160)",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE categories (category_id INTEGER PRIMARY KEY, category_name TEXT NOT NULL)",
+      "mysqlDDL": "CREATE TABLE categories (\n  category_id BIGINT PRIMARY KEY,\n  category_name VARCHAR(160) NOT NULL\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": []
+    },
+    "products": {
+      "description": "商品主档",
+      "rowCount": 500,
+      "columns": [
+        {
+          "name": "product_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "category_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": {
+            "table": "categories",
+            "column": "category_id"
+          },
+          "default": null
+        },
+        {
+          "name": "product_name",
+          "description": "名称",
+          "sqliteType": "TEXT",
+          "mysqlType": "VARCHAR(160)",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "list_price_cents",
+          "description": "金额（马币分）",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "reorder_level",
+          "description": "业务字段",
+          "sqliteType": "INTEGER",
+          "mysqlType": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "active",
+          "description": "有效标志 1/0",
+          "sqliteType": "INTEGER",
+          "mysqlType": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE products (product_id INTEGER PRIMARY KEY, category_id INTEGER NOT NULL REFERENCES categories(category_id), product_name TEXT NOT NULL, list_price_cents INTEGER NOT NULL CHECK(list_price_cents>=0), reorder_level INTEGER NOT NULL CHECK(reorder_level>=0), active INTEGER NOT NULL CHECK(active IN (0,1)))",
+      "mysqlDDL": "CREATE TABLE products (\n  product_id BIGINT PRIMARY KEY,\n  category_id BIGINT NOT NULL,\n  product_name VARCHAR(160) NOT NULL,\n  list_price_cents BIGINT NOT NULL CHECK(list_price_cents>=0),\n  reorder_level INT NOT NULL CHECK(reorder_level>=0),\n  active INT NOT NULL CHECK(active IN (0,1)),\n  FOREIGN KEY (category_id) REFERENCES categories(category_id)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": [
+        "CREATE INDEX ix_products_category_id ON products(category_id)"
+      ]
+    },
+    "customers": {
+      "description": "客户主档（虚构）",
+      "rowCount": 5000,
+      "columns": [
+        {
+          "name": "customer_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "customer_name",
+          "description": "名称",
+          "sqliteType": "TEXT",
+          "mysqlType": "VARCHAR(160)",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "signup_date",
+          "description": "日期（YYYY-MM-DD）",
+          "sqliteType": "TEXT",
+          "mysqlType": "DATE",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "region",
+          "description": "区域（客户可缺失）",
+          "sqliteType": "TEXT",
+          "mysqlType": "VARCHAR(160)",
+          "nullable": true,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE customers (customer_id INTEGER PRIMARY KEY, customer_name TEXT NOT NULL, signup_date TEXT NOT NULL, region TEXT)",
+      "mysqlDDL": "CREATE TABLE customers (\n  customer_id BIGINT PRIMARY KEY,\n  customer_name VARCHAR(160) NOT NULL,\n  signup_date DATE NOT NULL,\n  region VARCHAR(160)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": [
+        "CREATE INDEX ix_customers_signup_date ON customers(signup_date)"
+      ]
+    },
+    "promotions": {
+      "description": "促销期间",
+      "rowCount": 36,
+      "columns": [
+        {
+          "name": "promotion_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "promotion_name",
+          "description": "名称",
+          "sqliteType": "TEXT",
+          "mysqlType": "VARCHAR(160)",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "start_date",
+          "description": "日期（YYYY-MM-DD）",
+          "sqliteType": "TEXT",
+          "mysqlType": "DATE",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "end_date",
+          "description": "日期（YYYY-MM-DD）",
+          "sqliteType": "TEXT",
+          "mysqlType": "DATE",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE promotions (promotion_id INTEGER PRIMARY KEY, promotion_name TEXT NOT NULL, start_date TEXT NOT NULL, end_date TEXT NOT NULL)",
+      "mysqlDDL": "CREATE TABLE promotions (\n  promotion_id BIGINT PRIMARY KEY,\n  promotion_name VARCHAR(160) NOT NULL,\n  start_date DATE NOT NULL,\n  end_date DATE NOT NULL\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": [
+        "CREATE INDEX ix_promotions_end_date ON promotions(end_date)",
+        "CREATE INDEX ix_promotions_start_date ON promotions(start_date)"
+      ]
+    },
+    "traffic_sources": {
+      "description": "线上访问渠道",
+      "rowCount": 5,
+      "columns": [
+        {
+          "name": "source_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "source_name",
+          "description": "名称",
+          "sqliteType": "TEXT",
+          "mysqlType": "VARCHAR(160)",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE traffic_sources (source_id INTEGER PRIMARY KEY, source_name TEXT NOT NULL)",
+      "mysqlDDL": "CREATE TABLE traffic_sources (\n  source_id BIGINT PRIMARY KEY,\n  source_name VARCHAR(160) NOT NULL\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": []
+    },
+    "marketing_campaigns": {
+      "description": "渠道月广告支出",
+      "rowCount": 180,
+      "columns": [
+        {
+          "name": "campaign_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "source_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": {
+            "table": "traffic_sources",
+            "column": "source_id"
+          },
+          "default": null
+        },
+        {
+          "name": "month_key",
+          "description": "统计月份 YYYY-MM",
+          "sqliteType": "TEXT",
+          "mysqlType": "CHAR(7)",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "spend_cents",
+          "description": "金额（马币分）",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE marketing_campaigns (campaign_id INTEGER PRIMARY KEY, source_id INTEGER NOT NULL REFERENCES traffic_sources(source_id), month_key TEXT NOT NULL, spend_cents INTEGER NOT NULL CHECK(spend_cents>=0), UNIQUE(source_id,month_key))",
+      "mysqlDDL": "CREATE TABLE marketing_campaigns (\n  campaign_id BIGINT PRIMARY KEY,\n  source_id BIGINT NOT NULL,\n  month_key CHAR(7) NOT NULL,\n  spend_cents BIGINT NOT NULL CHECK(spend_cents>=0),\n  UNIQUE(source_id,month_key),\n  FOREIGN KEY (source_id) REFERENCES traffic_sources(source_id)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": [
+        "CREATE INDEX ix_marketing_campaigns_source_id ON marketing_campaigns(source_id)"
+      ]
+    },
+    "customer_sessions": {
+      "description": "访问会话",
+      "rowCount": 50000,
+      "columns": [
+        {
+          "name": "session_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "customer_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": {
+            "table": "customers",
+            "column": "customer_id"
+          },
+          "default": null
+        },
+        {
+          "name": "source_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": {
+            "table": "traffic_sources",
+            "column": "source_id"
+          },
+          "default": null
+        },
+        {
+          "name": "session_date",
+          "description": "日期（YYYY-MM-DD）",
+          "sqliteType": "TEXT",
+          "mysqlType": "DATE",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE customer_sessions (session_id INTEGER PRIMARY KEY, customer_id INTEGER NOT NULL REFERENCES customers(customer_id), source_id INTEGER NOT NULL REFERENCES traffic_sources(source_id), session_date TEXT NOT NULL)",
+      "mysqlDDL": "CREATE TABLE customer_sessions (\n  session_id BIGINT PRIMARY KEY,\n  customer_id BIGINT NOT NULL,\n  source_id BIGINT NOT NULL,\n  session_date DATE NOT NULL,\n  FOREIGN KEY (customer_id) REFERENCES customers(customer_id),\n  FOREIGN KEY (source_id) REFERENCES traffic_sources(source_id)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": [
+        "CREATE INDEX ix_customer_sessions_customer_id ON customer_sessions(customer_id)",
+        "CREATE INDEX ix_customer_sessions_session_date ON customer_sessions(session_date)",
+        "CREATE INDEX ix_customer_sessions_source_id ON customer_sessions(source_id)"
+      ]
+    },
+    "orders": {
+      "description": "销售订单（线上线下统一）",
+      "rowCount": 30000,
+      "columns": [
+        {
+          "name": "order_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "store_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": true,
+          "primaryKey": false,
+          "foreignKey": {
+            "table": "stores",
+            "column": "store_id"
+          },
+          "default": null
+        },
+        {
+          "name": "customer_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": true,
+          "primaryKey": false,
+          "foreignKey": {
+            "table": "customers",
+            "column": "customer_id"
+          },
+          "default": null
+        },
+        {
+          "name": "session_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": true,
+          "primaryKey": false,
+          "foreignKey": {
+            "table": "customer_sessions",
+            "column": "session_id"
+          },
+          "default": null
+        },
+        {
+          "name": "order_date",
+          "description": "日期（YYYY-MM-DD）",
+          "sqliteType": "TEXT",
+          "mysqlType": "DATE",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "channel",
+          "description": "store 线下 / online 线上",
+          "sqliteType": "TEXT",
+          "mysqlType": "VARCHAR(160)",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "status",
+          "description": "业务状态（见表约束及口径）",
+          "sqliteType": "TEXT",
+          "mysqlType": "VARCHAR(160)",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE orders (order_id INTEGER PRIMARY KEY, store_id INTEGER REFERENCES stores(store_id), customer_id INTEGER REFERENCES customers(customer_id), session_id INTEGER REFERENCES customer_sessions(session_id), order_date TEXT NOT NULL, channel TEXT NOT NULL CHECK(channel IN ('store','online')), status TEXT NOT NULL CHECK(status IN ('completed','cancelled','pending')), CHECK((channel='online' AND store_id IS NULL AND session_id IS NOT NULL) OR (channel='store' AND store_id IS NOT NULL AND session_id IS NULL)))",
+      "mysqlDDL": "CREATE TABLE orders (\n  order_id BIGINT PRIMARY KEY,\n  store_id BIGINT,\n  customer_id BIGINT,\n  session_id BIGINT,\n  order_date DATE NOT NULL,\n  channel VARCHAR(160) NOT NULL CHECK(channel IN ('store','online')),\n  status VARCHAR(160) NOT NULL CHECK(status IN ('completed','cancelled','pending')),\n  CHECK((channel='online' AND store_id IS NULL AND session_id IS NOT NULL) OR (channel='store' AND store_id IS NOT NULL AND session_id IS NULL)),\n  FOREIGN KEY (store_id) REFERENCES stores(store_id),\n  FOREIGN KEY (customer_id) REFERENCES customers(customer_id),\n  FOREIGN KEY (session_id) REFERENCES customer_sessions(session_id)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": [
+        "CREATE INDEX ix_orders_customer_id ON orders(customer_id)",
+        "CREATE INDEX ix_orders_order_date ON orders(order_date)",
+        "CREATE INDEX ix_orders_session_id ON orders(session_id)",
+        "CREATE INDEX ix_orders_store_id ON orders(store_id)"
+      ]
+    },
+    "order_items": {
+      "description": "销售明细",
+      "rowCount": 90074,
+      "columns": [
+        {
+          "name": "order_item_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "order_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": {
+            "table": "orders",
+            "column": "order_id"
+          },
+          "default": null
+        },
+        {
+          "name": "product_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": {
+            "table": "products",
+            "column": "product_id"
+          },
+          "default": null
+        },
+        {
+          "name": "promotion_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": true,
+          "primaryKey": false,
+          "foreignKey": {
+            "table": "promotions",
+            "column": "promotion_id"
+          },
+          "default": null
+        },
+        {
+          "name": "quantity",
+          "description": "数量（件）",
+          "sqliteType": "INTEGER",
+          "mysqlType": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "unit_price_cents",
+          "description": "金额（马币分）",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "discount_cents",
+          "description": "金额（马币分）",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "unit_cost_cents",
+          "description": "金额（马币分）",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE order_items (order_item_id INTEGER PRIMARY KEY, order_id INTEGER NOT NULL REFERENCES orders(order_id), product_id INTEGER NOT NULL REFERENCES products(product_id), promotion_id INTEGER REFERENCES promotions(promotion_id), quantity INTEGER NOT NULL CHECK(quantity>0), unit_price_cents INTEGER NOT NULL CHECK(unit_price_cents>=0), discount_cents INTEGER NOT NULL CHECK(discount_cents>=0), unit_cost_cents INTEGER NOT NULL CHECK(unit_cost_cents>=0), CHECK(discount_cents<=quantity*unit_price_cents))",
+      "mysqlDDL": "CREATE TABLE order_items (\n  order_item_id BIGINT PRIMARY KEY,\n  order_id BIGINT NOT NULL,\n  product_id BIGINT NOT NULL,\n  promotion_id BIGINT,\n  quantity INT NOT NULL CHECK(quantity>0),\n  unit_price_cents BIGINT NOT NULL CHECK(unit_price_cents>=0),\n  discount_cents BIGINT NOT NULL CHECK(discount_cents>=0),\n  unit_cost_cents BIGINT NOT NULL CHECK(unit_cost_cents>=0),\n  CHECK(discount_cents<=quantity*unit_price_cents),\n  FOREIGN KEY (order_id) REFERENCES orders(order_id),\n  FOREIGN KEY (product_id) REFERENCES products(product_id),\n  FOREIGN KEY (promotion_id) REFERENCES promotions(promotion_id)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": [
+        "CREATE INDEX ix_order_items_order_id ON order_items(order_id)",
+        "CREATE INDEX ix_order_items_product_id ON order_items(product_id)",
+        "CREATE INDEX ix_order_items_promotion_id ON order_items(promotion_id)"
+      ]
+    },
+    "returns": {
+      "description": "退货/退款",
+      "rowCount": 6117,
+      "columns": [
+        {
+          "name": "return_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "order_item_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": {
+            "table": "order_items",
+            "column": "order_item_id"
+          },
+          "default": null
+        },
+        {
+          "name": "return_date",
+          "description": "日期（YYYY-MM-DD）",
+          "sqliteType": "TEXT",
+          "mysqlType": "DATE",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "quantity",
+          "description": "数量（件）",
+          "sqliteType": "INTEGER",
+          "mysqlType": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "refund_cents",
+          "description": "金额（马币分）",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE returns (return_id INTEGER PRIMARY KEY, order_item_id INTEGER NOT NULL REFERENCES order_items(order_item_id), return_date TEXT NOT NULL, quantity INTEGER NOT NULL CHECK(quantity>0), refund_cents INTEGER NOT NULL CHECK(refund_cents>=0))",
+      "mysqlDDL": "CREATE TABLE returns (\n  return_id BIGINT PRIMARY KEY,\n  order_item_id BIGINT NOT NULL,\n  return_date DATE NOT NULL,\n  quantity INT NOT NULL CHECK(quantity>0),\n  refund_cents BIGINT NOT NULL CHECK(refund_cents>=0),\n  FOREIGN KEY (order_item_id) REFERENCES order_items(order_item_id)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": [
+        "CREATE INDEX ix_returns_order_item_id ON returns(order_item_id)",
+        "CREATE INDEX ix_returns_return_date ON returns(return_date)"
+      ]
+    },
+    "payments": {
+      "description": "订单支付",
+      "rowCount": 31521,
+      "columns": [
+        {
+          "name": "payment_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "order_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": {
+            "table": "orders",
+            "column": "order_id"
+          },
+          "default": null
+        },
+        {
+          "name": "payment_date",
+          "description": "日期（YYYY-MM-DD）",
+          "sqliteType": "TEXT",
+          "mysqlType": "DATE",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "amount_cents",
+          "description": "金额（马币分）",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "status",
+          "description": "业务状态（见表约束及口径）",
+          "sqliteType": "TEXT",
+          "mysqlType": "VARCHAR(160)",
+          "nullable": false,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE payments (payment_id INTEGER PRIMARY KEY, order_id INTEGER NOT NULL REFERENCES orders(order_id), payment_date TEXT NOT NULL, amount_cents INTEGER NOT NULL CHECK(amount_cents>=0), status TEXT NOT NULL CHECK(status IN ('settled','failed')))",
+      "mysqlDDL": "CREATE TABLE payments (\n  payment_id BIGINT PRIMARY KEY,\n  order_id BIGINT NOT NULL,\n  payment_date DATE NOT NULL,\n  amount_cents BIGINT NOT NULL CHECK(amount_cents>=0),\n  status VARCHAR(160) NOT NULL CHECK(status IN ('settled','failed')),\n  FOREIGN KEY (order_id) REFERENCES orders(order_id)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": [
+        "CREATE INDEX ix_payments_order_id ON payments(order_id)",
+        "CREATE INDEX ix_payments_payment_date ON payments(payment_date)"
+      ]
+    },
+    "raw_order_import": {
+      "description": "原始导入脏数据隔离区",
+      "rowCount": 400,
+      "columns": [
+        {
+          "name": "raw_id",
+          "description": "主键/标识",
+          "sqliteType": "INTEGER",
+          "mysqlType": "BIGINT",
+          "nullable": false,
+          "primaryKey": true,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "source_ref",
+          "description": "原始导入参考号",
+          "sqliteType": "TEXT",
+          "mysqlType": "VARCHAR(160)",
+          "nullable": true,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "raw_date",
+          "description": "未经清洗日期",
+          "sqliteType": "TEXT",
+          "mysqlType": "VARCHAR(160)",
+          "nullable": true,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "raw_customer",
+          "description": "未经清洗客户文本",
+          "sqliteType": "TEXT",
+          "mysqlType": "VARCHAR(160)",
+          "nullable": true,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        },
+        {
+          "name": "raw_amount",
+          "description": "未经清洗金额文本",
+          "sqliteType": "TEXT",
+          "mysqlType": "VARCHAR(160)",
+          "nullable": true,
+          "primaryKey": false,
+          "foreignKey": null,
+          "default": null
+        }
+      ],
+      "sqliteDDL": "CREATE TABLE raw_order_import (raw_id INTEGER PRIMARY KEY, source_ref TEXT, raw_date TEXT, raw_customer TEXT, raw_amount TEXT)",
+      "mysqlDDL": "CREATE TABLE raw_order_import (\n  raw_id BIGINT PRIMARY KEY,\n  source_ref VARCHAR(160),\n  raw_date VARCHAR(160),\n  raw_customer VARCHAR(160),\n  raw_amount VARCHAR(160)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;",
+      "indexes": [
+        "CREATE INDEX ix_raw_order_import_raw_date ON raw_order_import(raw_date)"
+      ]
+    }
+  },
+  "views": {
+    "v_sales_lines": "CREATE VIEW v_sales_lines AS SELECT i.order_item_id,o.order_id,o.store_id,o.customer_id,o.session_id,o.channel,o.order_date,i.product_id,i.promotion_id,i.quantity-COALESCE(r.qty,0) AS net_qty,i.quantity*i.unit_price_cents-i.discount_cents-COALESCE(r.refund,0) AS net_cents,(i.quantity-COALESCE(r.qty,0))*i.unit_cost_cents AS cost_cents,i.discount_cents,COALESCE(r.refund,0) AS refund_cents FROM orders o JOIN order_items i ON o.order_id=i.order_id LEFT JOIN (SELECT order_item_id,SUM(quantity) qty,SUM(refund_cents) refund FROM returns WHERE return_date<='2025-12-31' GROUP BY order_item_id) r ON r.order_item_id=i.order_item_id WHERE o.status='completed'",
+    "v_order_net": "CREATE VIEW v_order_net AS SELECT order_id,store_id,customer_id,session_id,channel,order_date,SUM(net_cents) net_cents,SUM(cost_cents) cost_cents FROM v_sales_lines GROUP BY order_id,store_id,customer_id,session_id,channel,order_date"
+  },
+  "cutoff": "2025-12-31",
+  "currency": "MYR",
+  "moneyUnit": "cent"
+}

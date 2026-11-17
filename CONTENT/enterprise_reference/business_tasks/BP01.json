@@ -1,0 +1,84 @@
+{
+  "projectId": "retail",
+  "title": "门店净销售、利润与目标达成",
+  "context": "区域经理需要2025年门店经营表。",
+  "requirements": "每门店一行；有效线下订单，按原订单日期归属截至年底退货；毛利=净销售-退货冲减后成本；毛利率和目标达成率使用百分比，分母为0返回NULL；金额单位分。保留无销售门店。",
+  "grain": "门店",
+  "commonError": "直接连接月目标与订单明细会重复累计目标。",
+  "executionSteps": [
+    "先按门店聚合销售与成本",
+    "独立累计目标",
+    "左连接门店",
+    "计算比率"
+  ],
+  "difficulty": "中等",
+  "mysqlSql": "WITH a AS (SELECT store_id,SUM(net_cents) net,SUM(cost_cents) cost FROM v_sales_lines WHERE channel='store' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY store_id), b AS (SELECT store_id,SUM(target_cents) target FROM sales_targets WHERE month_key BETWEEN '2025-01' AND '2025-12' GROUP BY store_id) SELECT s.store_id,COALESCE(a.net,0) net_cents,COALESCE(a.net-a.cost,0) gross_cents,ROUND(100.0*(a.net-a.cost)/NULLIF(a.net,0),2) margin_pct,b.target target_cents,ROUND(100.0*COALESCE(a.net,0)/NULLIF(b.target,0),2) achievement_pct FROM stores s LEFT JOIN a ON a.store_id=s.store_id LEFT JOIN b ON b.store_id=s.store_id ORDER BY s.store_id",
+  "sqliteSql": "WITH a AS (SELECT store_id,SUM(net_cents) net,SUM(cost_cents) cost FROM v_sales_lines WHERE channel='store' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY store_id), b AS (SELECT store_id,SUM(target_cents) target FROM sales_targets WHERE month_key BETWEEN '2025-01' AND '2025-12' GROUP BY store_id) SELECT s.store_id,COALESCE(a.net,0) net_cents,COALESCE(a.net-a.cost,0) gross_cents,ROUND(100.0*(a.net-a.cost)/NULLIF(a.net,0),2) margin_pct,b.target target_cents,ROUND(100.0*COALESCE(a.net,0)/NULLIF(b.target,0),2) achievement_pct FROM stores s LEFT JOIN a ON a.store_id=s.store_id LEFT JOIN b ON b.store_id=s.store_id ORDER BY s.store_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "store_id",
+    "net_cents",
+    "gross_cents",
+    "margin_pct",
+    "target_cents",
+    "achievement_pct"
+  ],
+  "id": "BP01",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-31"
+  ],
+  "datasetId": "retail-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP01.json",
+  "expectedRowCount": 12,
+  "expectedColumns": [
+    "store_id",
+    "net_cents",
+    "gross_cents",
+    "margin_pct",
+    "target_cents",
+    "achievement_pct"
+  ],
+  "sourceTables": [
+    "sales_targets",
+    "stores",
+    "v_sales_lines"
+  ],
+  "dependencyTables": [
+    "categories",
+    "customer_sessions",
+    "customers",
+    "order_items",
+    "orders",
+    "products",
+    "promotions",
+    "returns",
+    "sales_targets",
+    "stores",
+    "traffic_sources",
+    "v_sales_lines"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH a AS (SELECT store_id,SUM(net_cents) net,SUM(cost_cents) cost FROM v_sales_lines WHERE channel='store' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY store_id), b AS (SELECT store_id,SUM(target_cents) target FROM sales_targets WHERE month_key BETWEEN '2025-01' AND '2025-12' GROUP BY store_id) SELECT s.store_id,COALESCE(a.net,0) net_cents,COALESCE(a.net-a.cost,0) gross_cents,ROUND(100.0*(a.net-a.cost)/NULLIF(a.net,0),2) margin_pct,b.target target_cents,ROUND(100.0*COALESCE(a.net,0)/NULLIF(b.target,0),2) achievement_pct FROM stores s LEFT JOIN a ON a.store_id=s.store_id LEFT JOIN b ON b.store_id=s.store_id ORDER BY s.store_id",
+      "sqliteSql": "WITH a AS (SELECT store_id,SUM(net_cents) net,SUM(cost_cents) cost FROM v_sales_lines WHERE channel='store' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY store_id), b AS (SELECT store_id,SUM(target_cents) target FROM sales_targets WHERE month_key BETWEEN '2025-01' AND '2025-12' GROUP BY store_id) SELECT s.store_id,COALESCE(a.net,0) net_cents,COALESCE(a.net-a.cost,0) gross_cents,ROUND(100.0*(a.net-a.cost)/NULLIF(a.net,0),2) margin_pct,b.target target_cents,ROUND(100.0*COALESCE(a.net,0)/NULLIF(b.target,0),2) achievement_pct FROM stores s LEFT JOIN a ON a.store_id=s.store_id LEFT JOIN b ON b.store_id=s.store_id ORDER BY s.store_id"
+    }
+  ],
+  "hints": [
+    "先按门店聚合销售与成本",
+    "先按门店聚合销售与成本；独立累计目标",
+    "重点核对输出粒度：门店"
+  ],
+  "explanation": "先按门店聚合销售与成本；独立累计目标；左连接门店；计算比率。直接连接月目标与订单明细会重复累计目标。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 33.2
+}

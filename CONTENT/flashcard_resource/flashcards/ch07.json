@@ -1,0 +1,890 @@
+{
+  "chapterId": "ch07",
+  "title": "分组统计",
+  "count": 7,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "cards": [
+    {
+      "id": "fc0044",
+      "chapterId": "ch07",
+      "knowledgePointIds": [
+        "kp07-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp07-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0078",
+        "q0079",
+        "q0082",
+        "q0088"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "中等",
+      "front": {
+        "question": "分组前应该先写下哪一条业务约定？"
+      },
+      "back": {
+        "answer": "结果每行代表的分组粒度。",
+        "explanation": "例如每门店每月一行，必须同时按门店和月份分组。"
+      },
+      "tags": [
+        "GROUP BY 分组",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "GROUP BY 分组"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0045",
+      "chapterId": "ch07",
+      "knowledgePointIds": [
+        "kp07-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp07-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0078",
+        "q0079",
+        "q0081"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "中等",
+      "front": {
+        "question": "回忆按类别计算商品数量的基本分组结构。",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "SELECT 分组键, 聚合函数 FROM 表 GROUP BY 分组键",
+        "explanation": "类别决定分组，每组内部计数。",
+        "code": "SELECT category,COUNT(*) AS n FROM items GROUP BY category ORDER BY category",
+        "sqliteCode": "SELECT category,COUNT(*) AS n FROM items GROUP BY category ORDER BY category",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "category",
+            "n"
+          ],
+          "rows": [
+            [
+              "A",
+              3
+            ],
+            [
+              "B",
+              2
+            ],
+            [
+              "C",
+              1
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "GROUP BY 分组",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "b4225bdc46215bda586c9ffacfb39f5b78ebd6061d24a9c5941f3e4996757fbb",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0045-demo"
+      ],
+      "fixturePath": "fixtures/fc0045.json",
+      "referenceTopicNames": [
+        "GROUP BY 分组"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0045.sql"
+    },
+    {
+      "id": "fc0046",
+      "chapterId": "ch07",
+      "knowledgePointIds": [
+        "kp07-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp07-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0076",
+        "q0084",
+        "q0087",
+        "q0089",
+        "q0093"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "中等",
+      "front": {
+        "question": "回忆只保留商品数不少于2的类别的语法。",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "GROUP BY 分组键 HAVING 聚合条件",
+        "explanation": "HAVING 对聚合后的组判断，不对原始行判断。",
+        "code": "SELECT category,COUNT(*) AS n FROM items GROUP BY category HAVING COUNT(*)>=2 ORDER BY category",
+        "sqliteCode": "SELECT category,COUNT(*) AS n FROM items GROUP BY category HAVING COUNT(*)>=2 ORDER BY category",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "category",
+            "n"
+          ],
+          "rows": [
+            [
+              "A",
+              3
+            ],
+            [
+              "B",
+              2
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "HAVING 与 WHERE",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "5a2aa36518565a9e2ade134cb45af177810eea0de9cdbba09b7ec1300f70d9b5",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0046-demo"
+      ],
+      "fixturePath": "fixtures/fc0046.json",
+      "referenceTopicNames": [
+        "HAVING 与 WHERE"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0046.sql"
+    },
+    {
+      "id": "fc0047",
+      "chapterId": "ch07",
+      "knowledgePointIds": [
+        "kp07-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp07-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0076",
+        "q0084",
+        "q0090"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "中等",
+      "front": {
+        "question": "筛有效订单和筛销售额大于100的门店，应分别放在哪里？"
+      },
+      "back": {
+        "answer": "前者放 WHERE，后者放 HAVING。",
+        "explanation": "先排除无效交易，再检查汇总值；不能交换两个筛选阶段。"
+      },
+      "tags": [
+        "HAVING 与 WHERE",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "HAVING 与 WHERE"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0048",
+      "chapterId": "ch07",
+      "knowledgePointIds": [
+        "kp07-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp07-03"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0077",
+        "q0080",
+        "q0085",
+        "q0091"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "中等",
+      "front": {
+        "question": "按门店及订单状态统计金额；补齐第二个分组键。",
+        "code": "SELECT store_id,status,SUM(amount) AS s FROM sales GROUP BY store_id,□ ORDER BY store_id,status",
+        "sourceTables": [
+          {
+            "name": "sales",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "client_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "store_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "amount",
+                "type": "INTEGER"
+              },
+              {
+                "name": "day",
+                "type": "TEXT"
+              },
+              {
+                "name": "status",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                1,
+                40,
+                "2025-01-02",
+                "completed"
+              ],
+              [
+                2,
+                1,
+                1,
+                60,
+                "2025-01-15",
+                "completed"
+              ],
+              [
+                3,
+                2,
+                2,
+                30,
+                "2025-02-01",
+                "completed"
+              ],
+              [
+                4,
+                null,
+                2,
+                0,
+                "2025-02-02",
+                "completed"
+              ],
+              [
+                5,
+                3,
+                1,
+                100,
+                "2025-03-01",
+                "cancelled"
+              ],
+              [
+                6,
+                2,
+                1,
+                60,
+                "2025-03-05",
+                "completed"
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "status",
+        "explanation": "组合分组键保证同一门店不同状态不混加。",
+        "acceptedBlanks": [
+          "status"
+        ],
+        "code": "SELECT store_id,status,SUM(amount) AS s FROM sales GROUP BY store_id,status ORDER BY store_id,status",
+        "sqliteCode": "SELECT store_id,status,SUM(amount) AS s FROM sales GROUP BY store_id,status ORDER BY store_id,status",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "store_id",
+            "status",
+            "s"
+          ],
+          "rows": [
+            [
+              1,
+              "cancelled",
+              100
+            ],
+            [
+              1,
+              "completed",
+              160
+            ],
+            [
+              2,
+              "completed",
+              30
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "多字段分组与严格分组",
+        "代码填空"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "edcf40bf1ef189d86e9ae6de22b3076074c27878e676974a731ef02e127cbef4",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0048-demo"
+      ],
+      "fixturePath": "fixtures/fc0048.json",
+      "referenceTopicNames": [
+        "多字段分组与严格分组"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0048.sql"
+    },
+    {
+      "id": "fc0049",
+      "chapterId": "ch07",
+      "knowledgePointIds": [
+        "kp07-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp07-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0078",
+        "q0079",
+        "q0083"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "结果预测",
+      "difficulty": "中等",
+      "front": {
+        "question": "预测先筛价格已知再分组后的计数。",
+        "code": "SELECT category,COUNT(*) AS n FROM items WHERE price IS NOT NULL GROUP BY category ORDER BY category",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "返回以下结果。",
+        "explanation": "WHERE 先移除未知价格行，再统计各组。",
+        "code": "SELECT category,COUNT(*) AS n FROM items WHERE price IS NOT NULL GROUP BY category ORDER BY category",
+        "sqliteCode": "SELECT category,COUNT(*) AS n FROM items WHERE price IS NOT NULL GROUP BY category ORDER BY category",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "category",
+            "n"
+          ],
+          "rows": [
+            [
+              "A",
+              3
+            ],
+            [
+              "B",
+              1
+            ],
+            [
+              "C",
+              1
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "GROUP BY 分组",
+        "结果预测"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "9f488ba5fdb7f87daee73c8e09be693360516443b6ba0e1c0aab024217d777d4",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0049-demo"
+      ],
+      "fixturePath": "fixtures/fc0049.json",
+      "referenceTopicNames": [
+        "GROUP BY 分组"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0049.sql"
+    },
+    {
+      "id": "fc0050",
+      "chapterId": "ch07",
+      "knowledgePointIds": [
+        "kp07-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp07-03"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0077",
+        "q0080",
+        "q0086",
+        "q0092"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "错误纠正",
+      "difficulty": "中等",
+      "front": {
+        "question": "目标：每个类别返回总价格，不展示任意一件商品名。修正非聚合列。",
+        "code": "SELECT category,name,SUM(price) AS s FROM items GROUP BY category ORDER BY category",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "改用背面的修正语句。",
+        "explanation": "name 未由类别唯一决定；SQLite可能任意选值，MySQL默认严格分组模式会拒绝。",
+        "code": "SELECT category,SUM(price) AS s FROM items GROUP BY category ORDER BY category",
+        "sqliteCode": "SELECT category,SUM(price) AS s FROM items GROUP BY category ORDER BY category",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "category",
+            "s"
+          ],
+          "rows": [
+            [
+              "A",
+              52
+            ],
+            [
+              "B",
+              12
+            ],
+            [
+              "C",
+              30
+            ]
+          ]
+        },
+        "wrongResult": {
+          "kind": "result",
+          "columns": [
+            "category",
+            "name",
+            "s"
+          ],
+          "rows": [
+            [
+              "A",
+              "Tea",
+              52
+            ],
+            [
+              "B",
+              "Soap",
+              12
+            ],
+            [
+              "C",
+              "Bag",
+              30
+            ]
+          ]
+        },
+        "correctionReason": "name 未由类别唯一决定；SQLite可能任意选值，MySQL默认严格分组模式会拒绝。"
+      },
+      "tags": [
+        "多字段分组与严格分组",
+        "错误纠正"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "SQLite 宽松分组不等于 MySQL ONLY_FULL_GROUP_BY；修正语句已执行。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "4ebfb3eb3c745f86862a001c9623a543b99fd365b55b6b857dbb84f30449d4d6",
+        "mysqlNative": "未执行",
+        "wrongRejected": true,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0050-demo"
+      ],
+      "fixturePath": "fixtures/fc0050.json",
+      "referenceTopicNames": [
+        "多字段分组与严格分组"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0050.sql"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "id": "fc0117-demo",
+  "tables": [
+    {
+      "name": "events",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "day",
+          "type": "TEXT"
+        },
+        {
+          "name": "value",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "2025-01-01",
+          10
+        ],
+        [
+          2,
+          "2025-01-01",
+          20
+        ],
+        [
+          3,
+          "2025-01-02",
+          30
+        ],
+        [
+          4,
+          "2025-01-03",
+          40
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT id,SUM(value) OVER(ORDER BY day RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS total FROM events ORDER BY id",
+  "mysqlSql": "SELECT id,SUM(value) OVER(ORDER BY day RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS total FROM events ORDER BY id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      30
+    ],
+    [
+      2,
+      30
+    ],
+    [
+      3,
+      60
+    ],
+    [
+      4,
+      100
+    ]
+  ],
+  "expectedColumns": [
+    "id",
+    "total"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

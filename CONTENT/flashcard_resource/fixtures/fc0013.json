@@ -1,0 +1,145 @@
+{
+  "id": "fc0013-demo",
+  "tables": [
+    {
+      "name": "items",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "name",
+          "type": "TEXT"
+        },
+        {
+          "name": "category",
+          "type": "TEXT"
+        },
+        {
+          "name": "price",
+          "type": "INTEGER"
+        },
+        {
+          "name": "stock",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "Tea",
+          "A",
+          12,
+          0
+        ],
+        [
+          2,
+          "Rice",
+          "A",
+          20,
+          8
+        ],
+        [
+          3,
+          "Soap",
+          "B",
+          12,
+          3
+        ],
+        [
+          4,
+          "Milk",
+          "B",
+          null,
+          0
+        ],
+        [
+          5,
+          "Bag",
+          "C",
+          30,
+          null
+        ],
+        [
+          6,
+          "Tea_2",
+          "A",
+          20,
+          6
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT id,price+3 AS new_price FROM items ORDER BY id",
+  "mysqlSql": "SELECT id,price+3 AS new_price FROM items ORDER BY id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      15
+    ],
+    [
+      2,
+      23
+    ],
+    [
+      3,
+      15
+    ],
+    [
+      4,
+      null
+    ],
+    [
+      5,
+      33
+    ],
+    [
+      6,
+      23
+    ]
+  ],
+  "expectedColumns": [
+    "id",
+    "new_price"
+  ],
+  "wrongSqlite": "SELECT id,price AS new_price FROM items ORDER BY id",
+  "wrongMysql": "SELECT id,price AS new_price FROM items ORDER BY id",
+  "wrongResult": {
+    "kind": "result",
+    "columns": [
+      "id",
+      "new_price"
+    ],
+    "rows": [
+      [
+        1,
+        12
+      ],
+      [
+        2,
+        20
+      ],
+      [
+        3,
+        12
+      ],
+      [
+        4,
+        null
+      ],
+      [
+        5,
+        30
+      ],
+      [
+        6,
+        20
+      ]
+    ]
+  },
+  "independentAuthorExpectation": true
+}

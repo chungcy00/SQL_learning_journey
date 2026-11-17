@@ -1,0 +1,7 @@
+-- 最近消费、频率、金额客户分层
+-- 原生MySQL 8.4未执行。先从第二部分资源导入对应隔离数据库。
+-- 公开基准参考解；独立执行等价解，不得变动原库。
+WITH a AS (SELECT customer_id,MAX(order_date) last_day,COUNT(*) freq,SUM(net_cents) money FROM v_order_net WHERE channel='online' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY customer_id), b AS (SELECT *,6-NTILE(5) OVER(ORDER BY last_day DESC,customer_id) r_score,6-NTILE(5) OVER(ORDER BY freq DESC,customer_id) f_score,6-NTILE(5) OVER(ORDER BY money DESC,customer_id) m_score FROM a) SELECT b.customer_id,1095-d.day_index recency_days,freq,money net_cents,r_score,f_score,m_score,CASE WHEN r_score+f_score+m_score>=13 THEN 'high_value' WHEN r_score+f_score+m_score<=6 THEN 'low_activity' ELSE 'regular' END segment FROM b JOIN calendar_days d ON d.day=b.last_day ORDER BY b.customer_id;
+
+-- 等价解（SQLite已验证，MySQL待复验）
+WITH a AS (SELECT customer_id,MAX(order_date) last_day,COUNT(*) freq,SUM(net_cents) money FROM v_order_net WHERE channel='online' AND (order_date>='2025-01-01' AND order_date<='2025-12-31') GROUP BY customer_id), b AS (SELECT *,6-NTILE(5) OVER(ORDER BY last_day DESC,customer_id) r_score,6-NTILE(5) OVER(ORDER BY freq DESC,customer_id) f_score,6-NTILE(5) OVER(ORDER BY money DESC,customer_id) m_score FROM a) SELECT b.customer_id,1095-d.day_index recency_days,freq,money net_cents,r_score,f_score,m_score,CASE WHEN r_score+f_score+m_score>=13 THEN 'high_value' WHEN r_score+f_score+m_score<=6 THEN 'low_activity' ELSE 'regular' END segment FROM b JOIN calendar_days d ON d.day=b.last_day ORDER BY b.customer_id;

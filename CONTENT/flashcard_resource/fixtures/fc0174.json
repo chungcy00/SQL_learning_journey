@@ -1,0 +1,100 @@
+{
+  "id": "fc0174-demo",
+  "tables": [
+    {
+      "name": "price_history",
+      "columns": [
+        {
+          "name": "po_item_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "supplier_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "order_date",
+          "type": "TEXT"
+        },
+        {
+          "name": "unit_price_cents",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          1,
+          1,
+          "2025-01-01",
+          100
+        ],
+        [
+          2,
+          2,
+          1,
+          "2025-01-02",
+          130
+        ],
+        [
+          3,
+          1,
+          1,
+          "2025-01-03",
+          110
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT po_item_id,LAG(unit_price_cents) OVER(PARTITION BY supplier_id,product_id ORDER BY order_date,po_item_id) AS prev FROM price_history ORDER BY po_item_id",
+  "mysqlSql": "SELECT po_item_id,LAG(unit_price_cents) OVER(PARTITION BY supplier_id,product_id ORDER BY order_date,po_item_id) AS prev FROM price_history ORDER BY po_item_id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      null
+    ],
+    [
+      2,
+      null
+    ],
+    [
+      3,
+      100
+    ]
+  ],
+  "expectedColumns": [
+    "po_item_id",
+    "prev"
+  ],
+  "wrongSqlite": "SELECT po_item_id,LAG(unit_price_cents) OVER(PARTITION BY product_id ORDER BY order_date,po_item_id) AS prev FROM price_history ORDER BY po_item_id",
+  "wrongMysql": "SELECT po_item_id,LAG(unit_price_cents) OVER(PARTITION BY product_id ORDER BY order_date,po_item_id) AS prev FROM price_history ORDER BY po_item_id",
+  "wrongResult": {
+    "kind": "result",
+    "columns": [
+      "po_item_id",
+      "prev"
+    ],
+    "rows": [
+      [
+        1,
+        null
+      ],
+      [
+        2,
+        100
+      ],
+      [
+        3,
+        130
+      ]
+    ]
+  },
+  "independentAuthorExpectation": true
+}

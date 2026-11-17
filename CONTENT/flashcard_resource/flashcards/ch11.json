@@ -1,0 +1,668 @@
+{
+  "chapterId": "ch11",
+  "title": "字符串处理",
+  "count": 7,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "cards": [
+    {
+      "id": "fc0079",
+      "chapterId": "ch11",
+      "knowledgePointIds": [
+        "kp11-04"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp11-04"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0152",
+        "q0156",
+        "q0160"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "中等",
+      "front": {
+        "question": "一个汉字在 UTF-8 下的字符数与字节数通常相同吗？"
+      },
+      "back": {
+        "answer": "不相同。常见汉字一个字符占3字节。",
+        "explanation": "MySQL CHAR_LENGTH 计字符，LENGTH 计字节；还需以实际编码为准。"
+      },
+      "tags": [
+        "CHAR_LENGTH 与 LENGTH",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "SQLite LENGTH(文本)按字符计；字节数可对BLOB求长度。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "CHAR_LENGTH 与 LENGTH"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0080",
+      "chapterId": "ch11",
+      "knowledgePointIds": [
+        "kp11-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp11-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0157",
+        "q0158"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "中等",
+      "front": {
+        "question": "回忆多字段字符串拼接结构：把编号与商品名以冒号连接，仅展示编号3。",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "CONCAT(值1, 分隔符, 值2, …)",
+        "explanation": "MySQL CONCAT 任一参数为NULL则返回NULL。",
+        "code": "SELECT CONCAT(id,':',name) AS label FROM items WHERE id=3",
+        "sqliteCode": "SELECT CAST(id AS TEXT)||':'||name AS label FROM items WHERE id=3",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "label"
+          ],
+          "rows": [
+            [
+              "3:Soap"
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "CONCAT 字符串拼接",
+        "语法结构"
+      ],
+      "supportStatus": "转换执行",
+      "compatibility": "本示例使用SQLite对应写法或注册兼容函数；MySQL 8.4原生尚未执行。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "ea6ba30a3c70c0d626d5e69f1c8615bdae6c2671de2074b5bae4bd2718b91ea1",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0080-demo"
+      ],
+      "fixturePath": "fixtures/fc0080.json",
+      "referenceTopicNames": [
+        "CONCAT 字符串拼接"
+      ],
+      "supportStatusLabel": "使用本地等价转换",
+      "mysqlVerificationScript": "validation/mysql/fc0080.sql"
+    },
+    {
+      "id": "fc0081",
+      "chapterId": "ch11",
+      "knowledgePointIds": [
+        "kp11-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp11-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0153",
+        "q0155"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "中等",
+      "front": {
+        "question": "回忆从第2个字符起截3个字符的写法，用商品Rice。",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "SUBSTRING(字符串, 起始位置, 长度)",
+        "explanation": "正起始位置从1计；超出长度时只返回可用字符。",
+        "code": "SELECT SUBSTRING(name,2,3) AS part FROM items WHERE id=2",
+        "sqliteCode": "SELECT substr(name,2,3) AS part FROM items WHERE id=2",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "part"
+          ],
+          "rows": [
+            [
+              "ice"
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "SUBSTRING 截取文本",
+        "语法结构"
+      ],
+      "supportStatus": "转换执行",
+      "compatibility": "本示例使用SQLite对应写法或注册兼容函数；MySQL 8.4原生尚未执行。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "997dade998206a4a662be93d172a0a2477252bcb0e728b235909678574fb2e50",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0081-demo"
+      ],
+      "fixturePath": "fixtures/fc0081.json",
+      "referenceTopicNames": [
+        "SUBSTRING 截取文本"
+      ],
+      "supportStatusLabel": "使用本地等价转换",
+      "mysqlVerificationScript": "validation/mysql/fc0081.sql"
+    },
+    {
+      "id": "fc0082",
+      "chapterId": "ch11",
+      "knowledgePointIds": [
+        "kp11-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp11-03"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0151",
+        "q0154",
+        "q0159"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "中等",
+      "front": {
+        "question": "TRIM 和 REPLACE 对文本中的空格分别做什么？"
+      },
+      "back": {
+        "answer": "TRIM 默认去除首尾空格；REPLACE 替换所有匹配子串。",
+        "explanation": "清洗名称时不要删除有意义的内部空格。MySQL 可指定重复移除的完整首尾子串；SQLite trim(X,Y) 将 Y 理解为待移除的字符集合，两者自定义参数语义不同。"
+      },
+      "tags": [
+        "TRIM、REPLACE 与大小写",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "TRIM、REPLACE 与大小写"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0083",
+      "chapterId": "ch11",
+      "knowledgePointIds": [
+        "kp11-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp11-03"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0151",
+        "q0154"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "中等",
+      "front": {
+        "question": "将原始名称统一去首尾空格并转小写，填入外层函数。",
+        "code": "SELECT id,□(TRIM(label)) AS normalized FROM raw_names ORDER BY id",
+        "sourceTables": [
+          {
+            "name": "raw_names",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "label",
+                "type": "TEXT"
+              },
+              {
+                "name": "ref",
+                "type": "TEXT"
+              },
+              {
+                "name": "updated",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "  tea ",
+                "A",
+                "2025-01-01"
+              ],
+              [
+                2,
+                "TEA",
+                "A",
+                "2025-02-01"
+              ],
+              [
+                3,
+                "Rice",
+                "B",
+                "2025-01-01"
+              ],
+              [
+                4,
+                "",
+                "C",
+                "2025-01-01"
+              ],
+              [
+                5,
+                null,
+                "D",
+                "2025-01-01"
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "LOWER",
+        "explanation": "先去首尾空格，再统一大小写；空字符串和NULL仍不同。",
+        "acceptedBlanks": [
+          "LOWER"
+        ],
+        "code": "SELECT id,LOWER(TRIM(label)) AS normalized FROM raw_names ORDER BY id",
+        "sqliteCode": "SELECT id,LOWER(TRIM(label)) AS normalized FROM raw_names ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "normalized"
+          ],
+          "rows": [
+            [
+              1,
+              "tea"
+            ],
+            [
+              2,
+              "tea"
+            ],
+            [
+              3,
+              "rice"
+            ],
+            [
+              4,
+              ""
+            ],
+            [
+              5,
+              null
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "TRIM、REPLACE 与大小写",
+        "代码填空"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "5f970f2326ea1b161e7eff9c85837cf718887a4078393c06fcf4322292936616",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0083-demo"
+      ],
+      "fixturePath": "fixtures/fc0083.json",
+      "referenceTopicNames": [
+        "TRIM、REPLACE 与大小写"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0083.sql"
+    },
+    {
+      "id": "fc0084",
+      "chapterId": "ch11",
+      "knowledgePointIds": [
+        "kp11-04"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp11-04"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0152",
+        "q0156"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "结果预测",
+      "difficulty": "中等",
+      "front": {
+        "question": "用 MySQL utf8mb4 语义预测“茶A”的字符数与字节数。",
+        "code": "SELECT CHAR_LENGTH('茶A') AS chars,LENGTH('茶A') AS bytes",
+        "sourceTables": [],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "返回以下结果。",
+        "explanation": "茶占3字节，A占1字节；字符数量是2。",
+        "code": "SELECT CHAR_LENGTH('茶A') AS chars,LENGTH('茶A') AS bytes",
+        "sqliteCode": "SELECT length('茶A') AS chars,length(CAST('茶A' AS BLOB)) AS bytes",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "chars",
+            "bytes"
+          ],
+          "rows": [
+            [
+              2,
+              4
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "CHAR_LENGTH 与 LENGTH",
+        "结果预测"
+      ],
+      "supportStatus": "转换执行",
+      "compatibility": "本示例使用SQLite对应写法或注册兼容函数；MySQL 8.4原生尚未执行。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "571e16eba97f151d66ec93dda0280cfbed3713902c1feffae7015a3198a3ddd8",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0084-demo"
+      ],
+      "fixturePath": "fixtures/fc0084.json",
+      "referenceTopicNames": [
+        "CHAR_LENGTH 与 LENGTH"
+      ],
+      "supportStatusLabel": "使用本地等价转换",
+      "mysqlVerificationScript": "validation/mysql/fc0084.sql"
+    },
+    {
+      "id": "fc0085",
+      "chapterId": "ch11",
+      "knowledgePointIds": [
+        "kp11-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp11-03"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0151",
+        "q0154"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "错误纠正",
+      "difficulty": "中等",
+      "front": {
+        "question": "目标：把首尾空白去掉，但保留“红 茶”中间的空格。纠正全局替换。",
+        "code": "SELECT REPLACE('  红 茶  ',' ','') AS label",
+        "sourceTables": [],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "改用背面的修正语句。",
+        "explanation": "全局替换会删除业务文本内部有意义的分隔。",
+        "code": "SELECT TRIM('  红 茶  ') AS label",
+        "sqliteCode": "SELECT TRIM('  红 茶  ') AS label",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "label"
+          ],
+          "rows": [
+            [
+              "红 茶"
+            ]
+          ]
+        },
+        "wrongResult": {
+          "kind": "result",
+          "columns": [
+            "label"
+          ],
+          "rows": [
+            [
+              "红茶"
+            ]
+          ]
+        },
+        "correctionReason": "全局替换会删除业务文本内部有意义的分隔。"
+      },
+      "tags": [
+        "TRIM、REPLACE 与大小写",
+        "错误纠正"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "16dbb6dad8cda7799e1b873ec5966cba4a5dedba3daf648d24277d3c0885e221",
+        "mysqlNative": "未执行",
+        "wrongRejected": true,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0085-demo"
+      ],
+      "fixturePath": "fixtures/fc0085.json",
+      "referenceTopicNames": [
+        "TRIM、REPLACE 与大小写"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0085.sql"
+    }
+  ]
+}

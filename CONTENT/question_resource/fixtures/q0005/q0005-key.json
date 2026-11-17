@@ -1,0 +1,33 @@
+{
+  "id": "q0005-key",
+  "questionId": "q0005",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "INT（以元为单位）",
+      "explanation": "以元为单位的整型会丢失小数部分。"
+    },
+    {
+      "id": "B",
+      "text": "FLOAT",
+      "explanation": "二进制浮点数可能产生分币舍入误差。"
+    },
+    {
+      "id": "C",
+      "text": "DATE",
+      "explanation": "日期类型不能表达货币金额。"
+    },
+    {
+      "id": "D",
+      "text": "DECIMAL(12,2)",
+      "explanation": "定点十进制能按声明的小数位保存精确金额。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "D"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

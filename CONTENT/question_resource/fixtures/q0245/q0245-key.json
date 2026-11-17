@@ -1,0 +1,33 @@
+{
+  "id": "q0245-key",
+  "questionId": "q0245",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "store_id 等值且 order_date 在一个日期范围",
+      "explanation": "等值前缀配合后续范围是典型候选。"
+    },
+    {
+      "id": "B",
+      "text": "只查询不在索引中的商品名称",
+      "explanation": "索引不包含商品名称。"
+    },
+    {
+      "id": "C",
+      "text": "对 order_date 套复杂函数且完全不限制 store_id",
+      "explanation": "缺少前缀且函数可能阻碍普通范围搜索。"
+    },
+    {
+      "id": "D",
+      "text": "不加任何条件就保证按全表任意字段排序",
+      "explanation": "该索引无法保证所有字段的排序，执行仍由优化器决定。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "A"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

@@ -1,0 +1,7 @@
+account_id,account_name,account_type
+1,租金,expense
+2,水电,expense
+3,营销,expense
+4,行政,expense
+5,运输,expense
+6,银行存款,cash

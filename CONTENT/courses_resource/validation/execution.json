@@ -1,0 +1,1352 @@
+{
+  "engine": "SQLite 3.46.1",
+  "mysqlNativeExecuted": false,
+  "checks": [
+    {
+      "id": "kp01-01",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 5,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp01-02",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 6,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp01-03",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 4,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp01-04",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp02-01",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 6,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp02-02",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 3,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp02-03",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 6,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp03-01",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 3,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp03-02",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 3,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp03-03",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 3,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp03-04",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp04-01",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 6,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp04-02",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp05-01",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp05-02",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 4,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp06-01",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          4,
+          3,
+          2
+        ]
+      ]
+    },
+    {
+      "id": "kp06-02",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp06-03",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp07-01",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 3,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          "日用品",
+          1500
+        ],
+        [
+          "护肤品",
+          1400
+        ],
+        [
+          "化妆品",
+          700
+        ]
+      ]
+    },
+    {
+      "id": "kp07-02",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          "日用品",
+          1500
+        ],
+        [
+          "护肤品",
+          1400
+        ]
+      ]
+    },
+    {
+      "id": "kp07-03",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 3,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp08-01",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 4,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp08-02",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 5,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp08-03",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 4,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp08-04",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 4,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp08-05",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 4,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp09-01",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 6,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp09-02",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp09-03",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 6,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp10-01",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 3,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp10-02",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp10-03",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 3,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp10-04",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          4
+        ]
+      ]
+    },
+    {
+      "id": "kp11-01",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 6,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp11-02",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 6,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp11-03",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 6,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp11-04",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          2,
+          6
+        ]
+      ]
+    },
+    {
+      "id": "kp12-01",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp12-02",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 5,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp12-03",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          3,
+          3
+        ]
+      ]
+    },
+    {
+      "id": "kp12-04",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          2400
+        ]
+      ]
+    },
+    {
+      "id": "kp13-01",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 7,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp13-02",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ]
+    },
+    {
+      "id": "kp13-03",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1
+        ]
+      ]
+    },
+    {
+      "id": "kp14-01",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp14-02",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 4,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp15-01",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 5,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp15-02",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 4,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          8000,
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          5000,
+          2,
+          2,
+          2
+        ],
+        [
+          3,
+          5000,
+          3,
+          2,
+          2
+        ],
+        [
+          4,
+          3000,
+          4,
+          4,
+          3
+        ]
+      ]
+    },
+    {
+      "id": "kp15-03",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 4,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp15-04",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 4,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp15-05",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 4,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp16-01",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp16-02",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 6,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp16-03",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 6,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp17-01",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          20
+        ]
+      ]
+    },
+    {
+      "id": "kp17-02",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          25
+        ]
+      ]
+    },
+    {
+      "id": "kp17-03",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          null
+        ]
+      ]
+    },
+    {
+      "id": "kp17-04",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          12
+        ]
+      ]
+    },
+    {
+      "id": "kp18-01",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp18-02",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp18-03",
+      "status": "理论未执行"
+    },
+    {
+      "id": "kp19-01",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 3,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          340
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "kp19-02",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          0.5
+        ]
+      ]
+    },
+    {
+      "id": "kp19-03",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          2,
+          1,
+          50.0
+        ]
+      ]
+    },
+    {
+      "id": "kp19-04",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          60
+        ],
+        [
+          2,
+          200
+        ]
+      ]
+    },
+    {
+      "id": "kp19-05",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "kp19-06",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "kp20-01",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp20-02",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 5,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp20-03",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 5,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp20-04",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp08-06",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 4,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "kp08-07",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 12,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp09-04",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 4,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp12-05",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          3.5,
+          3,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "kp13-04",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 4,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ]
+      ]
+    },
+    {
+      "id": "kp15-06",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 4,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          4,
+          3000,
+          3000,
+          3000
+        ],
+        [
+          2,
+          5000,
+          13000,
+          8000
+        ],
+        [
+          3,
+          5000,
+          13000,
+          13000
+        ],
+        [
+          1,
+          8000,
+          21000,
+          21000
+        ]
+      ]
+    },
+    {
+      "id": "kp17-05",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "kp19-07",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          "护肤品",
+          190
+        ],
+        [
+          "日用品",
+          150
+        ]
+      ]
+    },
+    {
+      "id": "kp19-08",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          "2026-01",
+          190,
+          null
+        ],
+        [
+          "2026-02",
+          150,
+          -21.05
+        ]
+      ]
+    },
+    {
+      "id": "kp19-09",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          1,
+          190,
+          1
+        ],
+        [
+          1,
+          2,
+          150,
+          2
+        ]
+      ]
+    },
+    {
+      "id": "kp19-10",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          "护肤品",
+          190,
+          55.88
+        ],
+        [
+          "日用品",
+          150,
+          44.12
+        ]
+      ]
+    },
+    {
+      "id": "kp19-11",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          1,
+          60
+        ]
+      ]
+    },
+    {
+      "id": "kp19-12",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          1,
+          60,
+          80
+        ]
+      ]
+    },
+    {
+      "id": "kp19-13",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          2,
+          1,
+          20
+        ]
+      ]
+    },
+    {
+      "id": "kp19-14",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          700
+        ]
+      ]
+    },
+    {
+      "id": "kp19-15",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          3,
+          113.33
+        ]
+      ]
+    },
+    {
+      "id": "kp19-16",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          290,
+          "高消费"
+        ],
+        [
+          2,
+          50,
+          "低消费"
+        ]
+      ]
+    },
+    {
+      "id": "kp19-17",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          1,
+          100.0
+        ]
+      ]
+    },
+    {
+      "id": "kp19-18",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          290,
+          1
+        ],
+        [
+          2,
+          50,
+          2
+        ]
+      ]
+    },
+    {
+      "id": "kp19-19",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          "租金",
+          400
+        ],
+        [
+          "运费",
+          75
+        ]
+      ]
+    },
+    {
+      "id": "kp19-20",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          "2026-01",
+          1000,
+          null
+        ],
+        [
+          "2026-02",
+          1200,
+          20.0
+        ]
+      ]
+    },
+    {
+      "id": "kp19-21",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          5,
+          1,
+          300
+        ]
+      ]
+    },
+    {
+      "id": "kp19-22",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          350,
+          400,
+          50
+        ],
+        [
+          3,
+          100,
+          75,
+          -25
+        ]
+      ]
+    },
+    {
+      "id": "kp19-23",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          1,
+          4500,
+          1
+        ],
+        [
+          1,
+          2,
+          3000,
+          2
+        ]
+      ]
+    },
+    {
+      "id": "kp19-24",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          2,
+          2,
+          1,
+          50.0
+        ]
+      ]
+    },
+    {
+      "id": "kp19-25",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          "销售部",
+          2,
+          3750.0
+        ]
+      ]
+    },
+    {
+      "id": "kp19-26",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": false,
+      "authoredExpectedRows": null
+    },
+    {
+      "id": "kp19-27",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          180
+        ]
+      ]
+    },
+    {
+      "id": "kp19-28",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          2,
+          0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "id": "kp19-29",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 2,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          null,
+          20
+        ],
+        [
+          2,
+          null,
+          20
+        ]
+      ]
+    },
+    {
+      "id": "kp19-30",
+      "status": "通过",
+      "engine": "3.46.1",
+      "rows": 1,
+      "authoredExpectedAssertion": true,
+      "authoredExpectedRows": [
+        [
+          1,
+          180,
+          170,
+          10
+        ]
+      ]
+    }
+  ],
+  "manualExpectedAssertions": "部分重点示例包含独立写出的预期结果断言；其余结果由引擎生成。",
+  "replayFromExportedJson": {
+    "count": 101,
+    "status": "全部通过",
+    "ids": [
+      "kp01-01",
+      "kp01-02",
+      "kp01-03",
+      "kp01-04",
+      "kp02-01",
+      "kp02-02",
+      "kp02-03",
+      "kp03-01",
+      "kp03-02",
+      "kp03-03",
+      "kp03-04",
+      "kp04-01",
+      "kp04-02",
+      "kp05-01",
+      "kp05-02",
+      "kp06-01",
+      "kp06-02",
+      "kp06-03",
+      "kp07-01",
+      "kp07-02",
+      "kp07-03",
+      "kp08-01",
+      "kp08-02",
+      "kp08-03",
+      "kp08-04",
+      "kp08-05",
+      "kp08-06",
+      "kp08-07",
+      "kp09-01",
+      "kp09-02",
+      "kp09-03",
+      "kp09-04",
+      "kp10-01",
+      "kp10-02",
+      "kp10-03",
+      "kp10-04",
+      "kp11-01",
+      "kp11-02",
+      "kp11-03",
+      "kp11-04",
+      "kp12-01",
+      "kp12-02",
+      "kp12-03",
+      "kp12-04",
+      "kp12-05",
+      "kp13-01",
+      "kp13-02",
+      "kp13-03",
+      "kp13-04",
+      "kp14-01",
+      "kp14-02",
+      "kp15-01",
+      "kp15-02",
+      "kp15-03",
+      "kp15-04",
+      "kp15-05",
+      "kp15-06",
+      "kp16-01",
+      "kp16-02",
+      "kp16-03",
+      "kp17-01",
+      "kp17-02",
+      "kp17-03",
+      "kp17-04",
+      "kp17-05",
+      "kp18-01",
+      "kp18-02",
+      "kp19-01",
+      "kp19-02",
+      "kp19-03",
+      "kp19-04",
+      "kp19-05",
+      "kp19-06",
+      "kp19-07",
+      "kp19-08",
+      "kp19-09",
+      "kp19-10",
+      "kp19-11",
+      "kp19-12",
+      "kp19-13",
+      "kp19-14",
+      "kp19-15",
+      "kp19-16",
+      "kp19-17",
+      "kp19-18",
+      "kp19-19",
+      "kp19-20",
+      "kp19-21",
+      "kp19-22",
+      "kp19-23",
+      "kp19-24",
+      "kp19-25",
+      "kp19-26",
+      "kp19-27",
+      "kp19-28",
+      "kp19-29",
+      "kp19-30",
+      "kp20-01",
+      "kp20-02",
+      "kp20-03",
+      "kp20-04"
+    ]
+  }
+}

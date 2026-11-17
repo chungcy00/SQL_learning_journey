@@ -1,0 +1,662 @@
+{
+  "id": "ch09",
+  "number": 9,
+  "title": "条件表达式",
+  "stage": "核心",
+  "objective": "分类、条件计数以及安全处理分母。",
+  "prerequisites": [
+    "ch08"
+  ],
+  "knowledgePoints": [
+    {
+      "id": "kp09-01",
+      "chapterId": "ch09",
+      "title": "CASE WHEN 分类",
+      "learningObjective": "能够运用本节知识完成：生成库存状态标签",
+      "prerequisites": [
+        "ch08"
+      ],
+      "concept": "按顺序检查 WHEN，返回首个为真的分支；ELSE 提供默认结果。",
+      "syntax": "CASE WHEN condition THEN value ELSE other END",
+      "parameters": {
+        "condition": "分类条件",
+        "value": "返回值"
+      },
+      "fixtureIds": [
+        "lesson-products"
+      ],
+      "sourceTables": [
+        {
+          "name": "products",
+          "columns": [
+            {
+              "name": "product_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "product_name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "price",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "stock",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "Mask",
+              "护肤品",
+              15,
+              150
+            ],
+            [
+              2,
+              "Serum",
+              "护肤品",
+              89,
+              40
+            ],
+            [
+              3,
+              "Cleanser",
+              "护肤品",
+              35,
+              200
+            ],
+            [
+              4,
+              "Cream",
+              "化妆品",
+              65,
+              180
+            ],
+            [
+              5,
+              "Sunscreen",
+              "化妆品",
+              45,
+              80
+            ],
+            [
+              6,
+              "Soap_1",
+              "日用品",
+              15,
+              0
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT product_id, CASE WHEN stock=0 THEN '缺货' WHEN stock<50 THEN '低库存' ELSE '正常' END AS stock_level FROM products ORDER BY product_id;",
+      "sqliteSql": "SELECT product_id, CASE WHEN stock=0 THEN '缺货' WHEN stock<50 THEN '低库存' ELSE '正常' END AS stock_level FROM products ORDER BY product_id;",
+      "executionSteps": [
+        "先判零库存",
+        "再判小于50",
+        "其余归正常"
+      ],
+      "useCase": "生成库存状态标签",
+      "comparison": "CASE 是表达式而非过滤语句。",
+      "commonError": {
+        "example": "先 WHEN stock<50 再 WHEN stock=0",
+        "correction": "把更具体的零库存条件放前面"
+      },
+      "notes": "省略 ELSE 时未匹配返回 NULL。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0120",
+        "q0123",
+        "q0125",
+        "q0128",
+        "q0129"
+      ],
+      "relatedFlashcardIds": [
+        "fc0062",
+        "fc0063",
+        "fc0068",
+        "fc0069"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp03-01",
+        "kp05-01",
+        "kp06-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "product_id",
+          "stock_level"
+        ],
+        "rows": [
+          [
+            1,
+            "正常"
+          ],
+          [
+            2,
+            "低库存"
+          ],
+          [
+            3,
+            "正常"
+          ],
+          [
+            4,
+            "正常"
+          ],
+          [
+            5,
+            "正常"
+          ],
+          [
+            6,
+            "缺货"
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp09-01.sql",
+      "primaryQuestionIds": [
+        "q0120",
+        "q0123",
+        "q0125",
+        "q0128",
+        "q0129"
+      ],
+      "primaryFlashcardIds": [
+        "fc0062",
+        "fc0063",
+        "fc0068",
+        "fc0069"
+      ]
+    },
+    {
+      "id": "kp09-02",
+      "chapterId": "ch09",
+      "title": "IF 与条件聚合",
+      "learningObjective": "能够运用本节知识完成：同时统计不同库存区间",
+      "prerequisites": [
+        "kp09-01"
+      ],
+      "concept": "MySQL IF(condition,a,b) 可用于简单二选一；CASE 更通用。SUM(CASE...) 可在同一查询统计不同子集。",
+      "syntax": "SUM(CASE WHEN p THEN 1 ELSE 0 END)",
+      "parameters": {
+        "p": "目标条件"
+      },
+      "fixtureIds": [
+        "lesson-products"
+      ],
+      "sourceTables": [
+        {
+          "name": "products",
+          "columns": [
+            {
+              "name": "product_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "product_name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "price",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "stock",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "Mask",
+              "护肤品",
+              15,
+              150
+            ],
+            [
+              2,
+              "Serum",
+              "护肤品",
+              89,
+              40
+            ],
+            [
+              3,
+              "Cleanser",
+              "护肤品",
+              35,
+              200
+            ],
+            [
+              4,
+              "Cream",
+              "化妆品",
+              65,
+              180
+            ],
+            [
+              5,
+              "Sunscreen",
+              "化妆品",
+              45,
+              80
+            ],
+            [
+              6,
+              "Soap_1",
+              "日用品",
+              15,
+              0
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT SUM(CASE WHEN stock<50 THEN 1 ELSE 0 END) AS low_count, SUM(CASE WHEN stock>=50 THEN 1 ELSE 0 END) AS normal_count FROM products;",
+      "sqliteSql": "SELECT SUM(CASE WHEN stock<50 THEN 1 ELSE 0 END) AS low_count, SUM(CASE WHEN stock>=50 THEN 1 ELSE 0 END) AS normal_count FROM products;",
+      "executionSteps": [
+        "每行映射为0或1",
+        "分别求和"
+      ],
+      "useCase": "同时统计不同库存区间",
+      "comparison": "COUNT(CASE WHEN p THEN 1 ELSE 0 END) 会计入所有行。",
+      "commonError": {
+        "example": "COUNT(CASE WHEN stock<50 THEN 1 ELSE 0 END)",
+        "correction": "SUM(CASE WHEN stock<50 THEN 1 ELSE 0 END)"
+      },
+      "notes": "MySQL IF 可换写 CASE；NULL 条件走 ELSE。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0126",
+        "q0127",
+        "q0130"
+      ],
+      "relatedFlashcardIds": [
+        "fc0065",
+        "fc0066"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp03-01",
+        "kp05-01",
+        "kp06-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "low_count",
+          "normal_count"
+        ],
+        "rows": [
+          [
+            2,
+            4
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp09-02.sql",
+      "primaryQuestionIds": [
+        "q0126",
+        "q0127",
+        "q0130"
+      ],
+      "primaryFlashcardIds": [
+        "fc0065",
+        "fc0066"
+      ]
+    },
+    {
+      "id": "kp09-03",
+      "chapterId": "ch09",
+      "title": "NULLIF 与安全除法",
+      "learningObjective": "能够运用本节知识完成：构建有定义的比率指标",
+      "prerequisites": [
+        "kp09-02"
+      ],
+      "concept": "NULLIF(a,b) 相等时返回 NULL，否则返回 a；用来避免零作分母。",
+      "syntax": "numerator / NULLIF(denominator,0)",
+      "parameters": {
+        "denominator": "可能为零的分母"
+      },
+      "fixtureIds": [
+        "lesson-products"
+      ],
+      "sourceTables": [
+        {
+          "name": "products",
+          "columns": [
+            {
+              "name": "product_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "product_name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "price",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "stock",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "Mask",
+              "护肤品",
+              15,
+              150
+            ],
+            [
+              2,
+              "Serum",
+              "护肤品",
+              89,
+              40
+            ],
+            [
+              3,
+              "Cleanser",
+              "护肤品",
+              35,
+              200
+            ],
+            [
+              4,
+              "Cream",
+              "化妆品",
+              65,
+              180
+            ],
+            [
+              5,
+              "Sunscreen",
+              "化妆品",
+              45,
+              80
+            ],
+            [
+              6,
+              "Soap_1",
+              "日用品",
+              15,
+              0
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT product_id, ROUND(1.0*price/NULLIF(stock,0),2) AS ratio FROM products ORDER BY product_id;",
+      "sqliteSql": "SELECT product_id, ROUND(1.0*price/NULLIF(stock,0),2) AS ratio FROM products ORDER BY product_id;",
+      "executionSteps": [
+        "分母为0转NULL",
+        "其他记录进行小数除法",
+        "保留两位"
+      ],
+      "useCase": "构建有定义的比率指标",
+      "comparison": "IFNULL 把缺失变成默认值，NULLIF 把特定值变为缺失。",
+      "commonError": {
+        "example": "price/stock 不处理零库存",
+        "correction": "price/NULLIF(stock,0)"
+      },
+      "notes": "示例比率只演示语法，不是业务库存指标；SQLite 整数除法需提升类型。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0119",
+        "q0121"
+      ],
+      "relatedFlashcardIds": [
+        "fc0067"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp03-01",
+        "kp05-01",
+        "kp06-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "product_id",
+          "ratio"
+        ],
+        "rows": [
+          [
+            1,
+            0.1
+          ],
+          [
+            2,
+            2.23
+          ],
+          [
+            3,
+            0.17
+          ],
+          [
+            4,
+            0.36
+          ],
+          [
+            5,
+            0.56
+          ],
+          [
+            6,
+            null
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp09-03.sql",
+      "primaryQuestionIds": [
+        "q0119",
+        "q0121"
+      ],
+      "primaryFlashcardIds": [
+        "fc0067"
+      ]
+    },
+    {
+      "id": "kp09-04",
+      "chapterId": "ch09",
+      "title": "IF 二选一",
+      "learningObjective": "能够运用本节知识完成：生成简单二分类标签",
+      "prerequisites": [
+        "kp09-03"
+      ],
+      "concept": "MySQL IF(expr,a,b) 在 expr 为真时返回 a，否则返回 b；未知条件也走否定分支。",
+      "syntax": "IF(condition,true_value,false_value)",
+      "parameters": {
+        "condition": "判断条件",
+        "true_value": "成立时的值",
+        "false_value": "不成立或未知时的值"
+      },
+      "fixtureIds": [
+        "lesson-nullable_values"
+      ],
+      "sourceTables": [
+        {
+          "name": "nullable_values",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "value",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "note",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              null,
+              null
+            ],
+            [
+              2,
+              0,
+              ""
+            ],
+            [
+              3,
+              10,
+              "ok"
+            ],
+            [
+              4,
+              10,
+              "ok"
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT id,IF(value>0,'正值','非正值或缺失') AS label FROM nullable_values ORDER BY id;",
+      "sqliteSql": "SELECT id,CASE WHEN value>0 THEN '正值' ELSE '非正值或缺失' END AS label FROM nullable_values ORDER BY id;",
+      "executionSteps": [
+        "对每行判断 value>0",
+        "空值条件未知",
+        "零值和空值均走第二分支"
+      ],
+      "useCase": "生成简单二分类标签",
+      "comparison": "IF 适用于二选一；CASE 可处理多分支，并具备更广泛的可移植性。",
+      "commonError": {
+        "example": "IF(value>0,'正值','零值') 把NULL误归为零",
+        "correction": "使用 CASE WHEN value IS NULL THEN ... 明确缺失类别"
+      },
+      "notes": "本例采用文本输出，避免两分支混合类型导致引擎推断差异。",
+      "compatibility": {
+        "status": "转换执行",
+        "detail": "需要明确转换或原生环境验证。"
+      },
+      "relatedQuestionIds": [
+        "q0122",
+        "q0124"
+      ],
+      "relatedFlashcardIds": [
+        "fc0064"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp03-01",
+        "kp05-01",
+        "kp06-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "id",
+          "label"
+        ],
+        "rows": [
+          [
+            1,
+            "非正值或缺失"
+          ],
+          [
+            2,
+            "非正值或缺失"
+          ],
+          [
+            3,
+            "正值"
+          ],
+          [
+            4,
+            "正值"
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp09-04.sql",
+      "primaryQuestionIds": [
+        "q0122",
+        "q0124"
+      ],
+      "primaryFlashcardIds": [
+        "fc0064"
+      ]
+    }
+  ],
+  "plannedQuestionCount": 12,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "dialect": "MySQL 8.4",
+  "summary": "完成本章后：分类、条件计数以及安全处理分母。",
+  "sources": [
+    "https://dev.mysql.com/doc/refman/8.4/en/",
+    "https://dev.mysql.com/doc/refman/8.4/en/functions.html"
+  ],
+  "knowledgePointCount": 4
+}

@@ -1,0 +1,47 @@
+{
+  "id": "q0254-public",
+  "questionId": "q0254",
+  "visibility": "public",
+  "variant": "public",
+  "kind": "database_delta",
+  "datasetId": "retail-v2",
+  "baseDatabase": "databases/retail/retail.sqlite",
+  "baseSha256": "649e1e06b63851702adc525d689d0319e5f10de164733998f9c5ffc81c03cbc8",
+  "patchSql": [],
+  "patchDescription": "不更改上一阶段的正式模拟企业库",
+  "patchRowChanges": 0,
+  "testIsolation": "每次使用全新数据库副本；夹具可故意引入对账差异或改变业务记录，仅用于判题，绝不可写入基准库",
+  "expected": {
+    "columns": [
+      "promo",
+      "days",
+      "daily_net_cents",
+      "daily_units",
+      "margin_pct"
+    ],
+    "rows": [
+      [
+        0,
+        269,
+        1355337.83,
+        150.38,
+        41.19
+      ],
+      [
+        1,
+        96,
+        1201117.4,
+        152.91,
+        32.5
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

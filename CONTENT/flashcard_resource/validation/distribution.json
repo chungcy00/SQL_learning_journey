@@ -1,0 +1,59 @@
+{
+  "total": 200,
+  "byType": {
+    "概念记忆": 40,
+    "语法结构": 35,
+    "用法辨析": 35,
+    "代码填空": 35,
+    "结果预测": 30,
+    "错误纠正": 25
+  },
+  "byDifficulty": {
+    "入门": 13,
+    "简单": 22,
+    "中等": 82,
+    "困难": 70,
+    "挑战": 13
+  },
+  "byChapter": {
+    "ch01": 7,
+    "ch02": 6,
+    "ch03": 10,
+    "ch04": 6,
+    "ch05": 6,
+    "ch06": 8,
+    "ch07": 7,
+    "ch08": 11,
+    "ch09": 8,
+    "ch10": 9,
+    "ch11": 7,
+    "ch12": 10,
+    "ch13": 7,
+    "ch14": 7,
+    "ch15": 11,
+    "ch16": 7,
+    "ch17": 8,
+    "ch18": 5,
+    "ch19": 38,
+    "ch20": 22
+  },
+  "primaryKnowledgePoints": 152,
+  "linkedQuestions": 300,
+  "businessTasks": 50,
+  "supportStatus": {
+    "仅理论": 75,
+    "直接兼容": 111,
+    "转换执行": 14
+  },
+  "executable": 125,
+  "correctExecuted": 125,
+  "wrongRejected": 25,
+  "exactDuplicatePrompts": 0,
+  "exactDuplicateSql": 0,
+  "exactReferenceSqlOverlapWithQuestions": 0,
+  "sourceDatabaseHashesMatched": 7,
+  "legacySummaryHashMismatches": [
+    "enterprise"
+  ],
+  "jsonSchemaLibraryValidated": true
+}

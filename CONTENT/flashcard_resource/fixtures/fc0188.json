@@ -1,0 +1,63 @@
+{
+  "id": "fc0188-demo",
+  "tables": [
+    {
+      "name": "store_contrib",
+      "columns": [
+        {
+          "name": "store_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "net_cents",
+          "type": "INTEGER"
+        },
+        {
+          "name": "cost_cents",
+          "type": "INTEGER"
+        },
+        {
+          "name": "expense_cents",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          100000,
+          60000,
+          15000
+        ],
+        [
+          2,
+          50000,
+          35000,
+          20000
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT store_id,net_cents-cost_cents-expense_cents AS contribution FROM store_contrib ORDER BY store_id",
+  "mysqlSql": "SELECT store_id,net_cents-cost_cents-expense_cents AS contribution FROM store_contrib ORDER BY store_id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      25000
+    ],
+    [
+      2,
+      -5000
+    ]
+  ],
+  "expectedColumns": [
+    "store_id",
+    "contribution"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

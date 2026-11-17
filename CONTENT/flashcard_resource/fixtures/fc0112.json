@@ -1,0 +1,101 @@
+{
+  "id": "fc0112-demo",
+  "tables": [
+    {
+      "name": "items",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "name",
+          "type": "TEXT"
+        },
+        {
+          "name": "category",
+          "type": "TEXT"
+        },
+        {
+          "name": "price",
+          "type": "INTEGER"
+        },
+        {
+          "name": "stock",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "Tea",
+          "A",
+          12,
+          0
+        ],
+        [
+          2,
+          "Rice",
+          "A",
+          20,
+          8
+        ],
+        [
+          3,
+          "Soap",
+          "B",
+          12,
+          3
+        ],
+        [
+          4,
+          "Milk",
+          "B",
+          null,
+          0
+        ],
+        [
+          5,
+          "Bag",
+          "C",
+          30,
+          null
+        ],
+        [
+          6,
+          "Tea_2",
+          "A",
+          20,
+          6
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "WITH x AS (SELECT id,AVG(price) OVER(PARTITION BY category) AS avg_p FROM items) SELECT id,ROUND(avg_p,2) AS avg_p FROM x WHERE id<=3 ORDER BY id",
+  "mysqlSql": "WITH x AS (SELECT id,AVG(price) OVER(PARTITION BY category) AS avg_p FROM items) SELECT id,ROUND(avg_p,2) AS avg_p FROM x WHERE id<=3 ORDER BY id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      17.33
+    ],
+    [
+      2,
+      17.33
+    ],
+    [
+      3,
+      12.0
+    ]
+  ],
+  "expectedColumns": [
+    "id",
+    "avg_p"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

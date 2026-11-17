@@ -1,0 +1,33 @@
+{
+  "id": "q0232-key",
+  "questionId": "q0232",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "永久保留刚更新的数据",
+      "explanation": "未提交普通DML可回滚。"
+    },
+    {
+      "id": "B",
+      "text": "撤销该事务未提交的更新",
+      "explanation": "事务回滚恢复提交前状态。"
+    },
+    {
+      "id": "C",
+      "text": "自动创建一个备份文件",
+      "explanation": "ROLLBACK不是文件导出功能。"
+    },
+    {
+      "id": "D",
+      "text": "删除整个表结构",
+      "explanation": "回滚更新不等于DROP TABLE。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "B"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "algorithm": "FSRS",
+  "implementationVersion": null,
+  "runtimeStatus": "待Codex集成和测试",
+  "ratings": [
+    {
+      "id": "again",
+      "label": "忘记",
+      "fsrsGrade": 1
+    },
+    {
+      "id": "hard",
+      "label": "困难",
+      "fsrsGrade": 2
+    },
+    {
+      "id": "good",
+      "label": "记得",
+      "fsrsGrade": 3
+    },
+    {
+      "id": "easy",
+      "label": "熟练",
+      "fsrsGrade": 4
+    }
+  ],
+  "modes": [
+    {
+      "id": "due",
+      "label": "每日到期"
+    },
+    {
+      "id": "new",
+      "label": "新卡"
+    },
+    {
+      "id": "chapter",
+      "label": "章节"
+    },
+    {
+      "id": "weak",
+      "label": "薄弱"
+    },
+    {
+      "id": "random",
+      "label": "随机"
+    },
+    {
+      "id": "favorite",
+      "label": "收藏"
+    },
+    {
+      "id": "custom",
+      "label": "自定义"
+    }
+  ],
+  "policy": {
+    "requireFlipBeforeRating": true,
+    "scheduleFromAlgorithmOutput": true,
+    "hardcodedIntervals": false,
+    "isolatedUserState": true,
+    "atomicRatingEvent": true,
+    "duplicateRatingGuard": true,
+    "skipWithoutScheduleUpdate": true,
+    "previousWithoutScheduleUpdate": true,
+    "pauseWithoutScheduleUpdate": true,
+    "returnRatedCardReadOnly": true,
+    "reratingRequiresExplicitUndo": true,
+    "resumeSession": true,
+    "dueBeforeNew": true,
+    "freeReviewMayOptOutOfSchedule": true,
+    "userOwnedCustomCardsSeparate": true,
+    "builtInCardsReadOnly": true,
+    "offline": true
+  },
+  "defaults": {
+    "desiredRetention": null,
+    "dailyNewLimit": null,
+    "dailyReviewLimit": null,
+    "parameters": null,
+    "note": "原规范未锁定具体数值及FSRS实现版本；由开发阶段验证、锁定并保存版本化参数，不伪造固定间隔。"
+  },
+  "reviewStateFields": [
+    "cardId",
+    "contentVersion",
+    "algorithmVersion",
+    "due",
+    "stability",
+    "difficulty",
+    "lastReview",
+    "reps",
+    "lapses",
+    "state",
+    "updatedAt"
+  ],
+  "reviewEventFields": [
+    "eventId",
+    "cardId",
+    "rating",
+    "reviewedAt",
+    "algorithmVersion",
+    "previousState",
+    "nextState",
+    "sessionId"
+  ],
+  "sessionFields": [
+    "sessionId",
+    "mode",
+    "cardIds",
+    "currentPosition",
+    "startedAt",
+    "endedAt",
+    "countTowardsSchedule"
+  ],
+  "source": "reference/FLASHCARDS.md"
+}

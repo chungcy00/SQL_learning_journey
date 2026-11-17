@@ -1,0 +1,129 @@
+{
+  "visibility": "public",
+  "variant": "public",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "products",
+      "columns": [
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "product_name",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "category",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "price",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "stock",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "Mask",
+          "护肤品",
+          15,
+          150
+        ],
+        [
+          2,
+          "Serum",
+          "护肤品",
+          89,
+          40
+        ],
+        [
+          3,
+          "Cleanser",
+          "护肤品",
+          35,
+          200
+        ],
+        [
+          4,
+          "Cream",
+          "化妆品",
+          65,
+          180
+        ],
+        [
+          5,
+          "Sunscreen",
+          "化妆品",
+          45,
+          80
+        ],
+        [
+          6,
+          "Soap_1",
+          "日用品",
+          15,
+          0
+        ]
+      ]
+    }
+  ],
+  "id": "q0128-public",
+  "questionId": "q0128",
+  "datasetId": "q0128-lesson",
+  "expected": {
+    "columns": [
+      "product_id",
+      "alert"
+    ],
+    "rows": [
+      [
+        1,
+        "充足"
+      ],
+      [
+        2,
+        "偏低"
+      ],
+      [
+        3,
+        "充足"
+      ],
+      [
+        4,
+        "充足"
+      ],
+      [
+        5,
+        "充足"
+      ],
+      [
+        6,
+        "缺货"
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "q0050-key",
+  "questionId": "q0050",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "去掉 ORDER BY",
+      "explanation": "数据库不保证默认行顺序。"
+    },
+    {
+      "id": "B",
+      "text": "对 amount 使用 DISTINCT",
+      "explanation": "这会改变记录粒度且可能丢失订单。"
+    },
+    {
+      "id": "C",
+      "text": "在 ORDER BY 中添加唯一 id 作为第二排序键",
+      "explanation": "唯一决胜键使行顺序确定。"
+    },
+    {
+      "id": "D",
+      "text": "只增加 LIMIT 的大小",
+      "explanation": "增加页长不能解决并列顺序。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "C"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

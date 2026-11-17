@@ -1,0 +1,41 @@
+{
+  "id": "lesson-accounts",
+  "table": "accounts",
+  "columns": [
+    {
+      "name": "account_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "account_name",
+      "type": "TEXT",
+      "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+      "sqliteType": "TEXT"
+    },
+    {
+      "name": "account_type",
+      "type": "TEXT",
+      "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+      "sqliteType": "TEXT"
+    }
+  ],
+  "rows": [
+    [
+      1,
+      "租金",
+      "expense"
+    ],
+    [
+      2,
+      "销售",
+      "income"
+    ],
+    [
+      3,
+      "运费",
+      "expense"
+    ]
+  ]
+}

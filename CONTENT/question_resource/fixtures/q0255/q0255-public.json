@@ -1,0 +1,143 @@
+{
+  "id": "q0255-public",
+  "questionId": "q0255",
+  "visibility": "public",
+  "variant": "public",
+  "kind": "database_delta",
+  "datasetId": "retail-v2",
+  "baseDatabase": "databases/retail/retail.sqlite",
+  "baseSha256": "649e1e06b63851702adc525d689d0319e5f10de164733998f9c5ffc81c03cbc8",
+  "patchSql": [],
+  "patchDescription": "不更改上一阶段的正式模拟企业库",
+  "patchRowChanges": 0,
+  "testIsolation": "每次使用全新数据库副本；夹具可故意引入对账差异或改变业务记录，仅用于判题，绝不可写入基准库",
+  "expected": {
+    "columns": [
+      "store_id",
+      "net_cents",
+      "margin_pct",
+      "achievement_pct",
+      "refund_pct",
+      "flags",
+      "sales_rank"
+    ],
+    "rows": [
+      [
+        9,
+        6199030,
+        37.99,
+        87.54,
+        5.67,
+        1,
+        10
+      ],
+      [
+        1,
+        17642580,
+        39.13,
+        99.42,
+        3.87,
+        0,
+        1
+      ],
+      [
+        2,
+        14575255,
+        38.93,
+        95.23,
+        5.41,
+        0,
+        2
+      ],
+      [
+        3,
+        12747835,
+        39.12,
+        103.04,
+        6.07,
+        0,
+        4
+      ],
+      [
+        4,
+        13184185,
+        38.91,
+        94.31,
+        4.98,
+        0,
+        3
+      ],
+      [
+        5,
+        9680110,
+        38.73,
+        95.79,
+        5.35,
+        0,
+        7
+      ],
+      [
+        6,
+        11056780,
+        39.41,
+        97.89,
+        4.67,
+        0,
+        6
+      ],
+      [
+        7,
+        11630585,
+        39.75,
+        91.2,
+        4.47,
+        0,
+        5
+      ],
+      [
+        8,
+        8495245,
+        38.52,
+        95.56,
+        5.31,
+        0,
+        8
+      ],
+      [
+        10,
+        7343040,
+        39.56,
+        108.37,
+        4.61,
+        0,
+        9
+      ],
+      [
+        11,
+        5244130,
+        38.13,
+        96.82,
+        6.15,
+        0,
+        11
+      ],
+      [
+        12,
+        3773775,
+        38.73,
+        100.09,
+        1.88,
+        0,
+        12
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

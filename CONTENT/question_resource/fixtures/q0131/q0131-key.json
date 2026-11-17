@@ -1,0 +1,33 @@
+{
+  "id": "q0131-key",
+  "questionId": "q0131",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "语法错误",
+      "explanation": "含NULL的子查询是合法的。"
+    },
+    {
+      "id": "B",
+      "text": "UNKNOWN，WHERE 不保留该行",
+      "explanation": "与NULL的比较产生未知，NOT IN不是无条件为真。"
+    },
+    {
+      "id": "C",
+      "text": "TRUE，因为1不等于2",
+      "explanation": "集合还含NULL，无法确认1与全部值不等。"
+    },
+    {
+      "id": "D",
+      "text": "FALSE，因为1等于2",
+      "explanation": "1不等于2，关键是未知而非相等。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "B"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

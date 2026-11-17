@@ -1,0 +1,33 @@
+{
+  "id": "q0003-key",
+  "questionId": "q0003",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "索引执行时间日志",
+      "explanation": "执行时间不说明字段业务语义和金额单位。"
+    },
+    {
+      "id": "B",
+      "text": "数据字典",
+      "explanation": "数据字典记录字段类型、约束、含义及单位。"
+    },
+    {
+      "id": "C",
+      "text": "查询结果截图",
+      "explanation": "截图展示样本结果，不能完整说明约束。"
+    },
+    {
+      "id": "D",
+      "text": "用户登录历史",
+      "explanation": "登录历史与业务字段规范无关。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "B"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

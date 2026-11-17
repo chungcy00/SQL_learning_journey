@@ -1,0 +1,1474 @@
+{
+  "chapterId": "ch08",
+  "title": "多表连接",
+  "count": 11,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "cards": [
+    {
+      "id": "fc0051",
+      "chapterId": "ch08",
+      "knowledgePointIds": [
+        "kp08-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp08-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0097",
+        "q0098"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "中等",
+      "front": {
+        "question": "连接两张表前，为什么要检查连接键是否唯一？"
+      },
+      "back": {
+        "answer": "连接输出行数取决于键的匹配基数。",
+        "explanation": "两边都重复的键可能产生多对多组合，导致金额被放大。"
+      },
+      "tags": [
+        "INNER JOIN 与 ON",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "INNER JOIN 与 ON"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0052",
+      "chapterId": "ch08",
+      "knowledgePointIds": [
+        "kp08-07"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp08-07"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0096",
+        "q0100",
+        "q0103"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "中等",
+      "front": {
+        "question": "为什么为了展示所有门店所有月份，需要先构造完整组合？"
+      },
+      "back": {
+        "answer": "事实表缺行时，直接分组不会出现该组合。",
+        "explanation": "门店与月份的笛卡尔积作为骨架，再左连接聚合事实。"
+      },
+      "tags": [
+        "笛卡尔积与完整维度",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "笛卡尔积与完整维度"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0053",
+      "chapterId": "ch08",
+      "knowledgePointIds": [
+        "kp08-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp08-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0097",
+        "q0098",
+        "q0105",
+        "q0106"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "中等",
+      "front": {
+        "question": "回忆仅保留匹配客户及订单的连接结构。",
+        "sourceTables": [
+          {
+            "name": "sales",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "client_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "store_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "amount",
+                "type": "INTEGER"
+              },
+              {
+                "name": "day",
+                "type": "TEXT"
+              },
+              {
+                "name": "status",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                1,
+                40,
+                "2025-01-02",
+                "completed"
+              ],
+              [
+                2,
+                1,
+                1,
+                60,
+                "2025-01-15",
+                "completed"
+              ],
+              [
+                3,
+                2,
+                2,
+                30,
+                "2025-02-01",
+                "completed"
+              ],
+              [
+                4,
+                null,
+                2,
+                0,
+                "2025-02-02",
+                "completed"
+              ],
+              [
+                5,
+                3,
+                1,
+                100,
+                "2025-03-01",
+                "cancelled"
+              ],
+              [
+                6,
+                2,
+                1,
+                60,
+                "2025-03-05",
+                "completed"
+              ]
+            ],
+            "constraints": ""
+          },
+          {
+            "name": "clients",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "林"
+              ],
+              [
+                2,
+                "陈"
+              ],
+              [
+                3,
+                "周"
+              ],
+              [
+                4,
+                "王"
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "FROM 左表 JOIN 右表 ON 左键=右键",
+        "explanation": "匿名订单未匹配客户，内连接将它排除。",
+        "code": "SELECT s.id,c.name FROM sales s JOIN clients c ON s.client_id=c.id ORDER BY s.id",
+        "sqliteCode": "SELECT s.id,c.name FROM sales s JOIN clients c ON s.client_id=c.id ORDER BY s.id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "name"
+          ],
+          "rows": [
+            [
+              1,
+              "林"
+            ],
+            [
+              2,
+              "林"
+            ],
+            [
+              3,
+              "陈"
+            ],
+            [
+              5,
+              "周"
+            ],
+            [
+              6,
+              "陈"
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "INNER JOIN 与 ON",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "3274e3cad157308c2c445e57b6a0edeab0a4776174f521c54cffe7a9c8b841cb",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0053-demo"
+      ],
+      "fixturePath": "fixtures/fc0053.json",
+      "referenceTopicNames": [
+        "INNER JOIN 与 ON"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0053.sql"
+    },
+    {
+      "id": "fc0054",
+      "chapterId": "ch08",
+      "knowledgePointIds": [
+        "kp08-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp08-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0094",
+        "q0099",
+        "q0101",
+        "q0107",
+        "q0109"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "中等",
+      "front": {
+        "question": "回忆保留所有客户并匹配订单的左连接结构。",
+        "sourceTables": [
+          {
+            "name": "clients",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "林"
+              ],
+              [
+                2,
+                "陈"
+              ],
+              [
+                3,
+                "周"
+              ],
+              [
+                4,
+                "王"
+              ]
+            ],
+            "constraints": ""
+          },
+          {
+            "name": "sales",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "client_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "store_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "amount",
+                "type": "INTEGER"
+              },
+              {
+                "name": "day",
+                "type": "TEXT"
+              },
+              {
+                "name": "status",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                1,
+                40,
+                "2025-01-02",
+                "completed"
+              ],
+              [
+                2,
+                1,
+                1,
+                60,
+                "2025-01-15",
+                "completed"
+              ],
+              [
+                3,
+                2,
+                2,
+                30,
+                "2025-02-01",
+                "completed"
+              ],
+              [
+                4,
+                null,
+                2,
+                0,
+                "2025-02-02",
+                "completed"
+              ],
+              [
+                5,
+                3,
+                1,
+                100,
+                "2025-03-01",
+                "cancelled"
+              ],
+              [
+                6,
+                2,
+                1,
+                60,
+                "2025-03-05",
+                "completed"
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "FROM 保留表 LEFT JOIN 匹配表 ON 连接条件",
+        "explanation": "客户4没有订单仍保留一行，其右侧字段为NULL。",
+        "code": "SELECT c.id,s.id AS sale_id FROM clients c LEFT JOIN sales s ON c.id=s.client_id ORDER BY c.id,s.id",
+        "sqliteCode": "SELECT c.id,s.id AS sale_id FROM clients c LEFT JOIN sales s ON c.id=s.client_id ORDER BY c.id,s.id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "sale_id"
+          ],
+          "rows": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              4,
+              null
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "LEFT JOIN 与 RIGHT JOIN",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "4a101b162158ab2e4c499124d6cc86e156fe77ef31bd001b57caa51cb3938148",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0054-demo"
+      ],
+      "fixturePath": "fixtures/fc0054.json",
+      "referenceTopicNames": [
+        "LEFT JOIN 与 RIGHT JOIN"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0054.sql"
+    },
+    {
+      "id": "fc0055",
+      "chapterId": "ch08",
+      "knowledgePointIds": [
+        "kp08-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp08-03"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0112",
+        "q0113"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "中等",
+      "front": {
+        "question": "LEFT JOIN 的右表条件放 ON 与放 WHERE，为什么结果可能不同？"
+      },
+      "back": {
+        "answer": "ON 限定匹配；WHERE 在连接后过滤。",
+        "explanation": "右表未匹配时生成NULL，WHERE右表普通条件会排除这些左表记录。"
+      },
+      "tags": [
+        "外连接的 ON 与 WHERE",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "外连接的 ON 与 WHERE"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0056",
+      "chapterId": "ch08",
+      "knowledgePointIds": [
+        "kp08-05"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp08-05"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0095",
+        "q0114",
+        "q0116",
+        "q0118"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "中等",
+      "front": {
+        "question": "订单有两条明细及两次支付，为什么不能直接连接两张明细表后求和？"
+      },
+      "back": {
+        "answer": "每条明细与每笔支付交叉组合，金额会重复。",
+        "explanation": "分别聚合到订单粒度，再连接两份汇总。"
+      },
+      "tags": [
+        "连接膨胀与预聚合",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "连接膨胀与预聚合"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0057",
+      "chapterId": "ch08",
+      "knowledgePointIds": [
+        "kp08-06"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp08-06"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0102",
+        "q0104"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "中等",
+      "front": {
+        "question": "保留右侧全部门店，包括没有订单的门店，填入连接方向。",
+        "code": "SELECT s.id AS sale_id,t.id AS store_id FROM sales s □ stores t ON s.store_id=t.id ORDER BY t.id,s.id",
+        "sourceTables": [
+          {
+            "name": "sales",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "client_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "store_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "amount",
+                "type": "INTEGER"
+              },
+              {
+                "name": "day",
+                "type": "TEXT"
+              },
+              {
+                "name": "status",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                1,
+                40,
+                "2025-01-02",
+                "completed"
+              ],
+              [
+                2,
+                1,
+                1,
+                60,
+                "2025-01-15",
+                "completed"
+              ],
+              [
+                3,
+                2,
+                2,
+                30,
+                "2025-02-01",
+                "completed"
+              ],
+              [
+                4,
+                null,
+                2,
+                0,
+                "2025-02-02",
+                "completed"
+              ],
+              [
+                5,
+                3,
+                1,
+                100,
+                "2025-03-01",
+                "cancelled"
+              ],
+              [
+                6,
+                2,
+                1,
+                60,
+                "2025-03-05",
+                "completed"
+              ]
+            ],
+            "constraints": ""
+          },
+          {
+            "name": "stores",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "甲店"
+              ],
+              [
+                2,
+                "乙店"
+              ],
+              [
+                3,
+                "丙店"
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "RIGHT JOIN",
+        "explanation": "右连接保留右表；也可交换两表使用左连接。",
+        "acceptedBlanks": [
+          "RIGHT JOIN",
+          "RIGHT OUTER JOIN"
+        ],
+        "code": "SELECT s.id AS sale_id,t.id AS store_id FROM sales s RIGHT JOIN stores t ON s.store_id=t.id ORDER BY t.id,s.id",
+        "sqliteCode": "SELECT s.id AS sale_id,t.id AS store_id FROM stores t LEFT JOIN sales s ON s.store_id=t.id ORDER BY t.id,s.id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "sale_id",
+            "store_id"
+          ],
+          "rows": [
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              6,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              null,
+              3
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "RIGHT JOIN 与 CROSS JOIN 实操",
+        "代码填空"
+      ],
+      "supportStatus": "转换执行",
+      "compatibility": "MySQL 原生 RIGHT JOIN；本地以交换左右表的 LEFT JOIN 验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "bbd470b319fc6f3bbfeb1f2d9367d3f55a1a766b9562bf83ef696e3f746742c7",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0057-demo"
+      ],
+      "fixturePath": "fixtures/fc0057.json",
+      "referenceTopicNames": [
+        "RIGHT JOIN 与 CROSS JOIN 实操"
+      ],
+      "supportStatusLabel": "使用本地等价转换",
+      "mysqlVerificationScript": "validation/mysql/fc0057.sql"
+    },
+    {
+      "id": "fc0058",
+      "chapterId": "ch08",
+      "knowledgePointIds": [
+        "kp08-04",
+        "kp08-07"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp08-04",
+        "kp08-07"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0096",
+        "q0100",
+        "q0108",
+        "q0110"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "中等",
+      "front": {
+        "question": "生成所有门店与两种颜色组合，填入无需连接条件的连接类型。",
+        "code": "SELECT s.id,d.id AS color_id FROM stores s □ dim d ORDER BY s.id,d.id",
+        "sourceTables": [
+          {
+            "name": "stores",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "甲店"
+              ],
+              [
+                2,
+                "乙店"
+              ],
+              [
+                3,
+                "丙店"
+              ]
+            ],
+            "constraints": ""
+          },
+          {
+            "name": "dim",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "label",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "红"
+              ],
+              [
+                2,
+                "蓝"
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "CROSS JOIN",
+        "explanation": "3×2得到6个组合，可用于生成完整维度。",
+        "acceptedBlanks": [
+          "CROSS JOIN"
+        ],
+        "code": "SELECT s.id,d.id AS color_id FROM stores s CROSS JOIN dim d ORDER BY s.id,d.id",
+        "sqliteCode": "SELECT s.id,d.id AS color_id FROM stores s CROSS JOIN dim d ORDER BY s.id,d.id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "color_id"
+          ],
+          "rows": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "CROSS JOIN 与自连接",
+        "代码填空"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "c8564515c2653e126ff144a825652ffbaf47e81e8bcea390461ff656b6c3b261",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0058-demo"
+      ],
+      "fixturePath": "fixtures/fc0058.json",
+      "referenceTopicNames": [
+        "CROSS JOIN 与自连接",
+        "笛卡尔积与完整维度"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0058.sql"
+    },
+    {
+      "id": "fc0059",
+      "chapterId": "ch08",
+      "knowledgePointIds": [
+        "kp08-04"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp08-04"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0108",
+        "q0110",
+        "q0111"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "结果预测",
+      "difficulty": "中等",
+      "front": {
+        "question": "自连接中，只输出同类商品编号的无序配对（每对仅一次）。预测返回。",
+        "code": "SELECT a.id,b.id AS other_id FROM items a JOIN items b ON a.category=b.category AND a.id<b.id ORDER BY a.id,b.id",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "返回以下结果。",
+        "explanation": "id小于另一编号排除自己和反向重复配对。",
+        "code": "SELECT a.id,b.id AS other_id FROM items a JOIN items b ON a.category=b.category AND a.id<b.id ORDER BY a.id,b.id",
+        "sqliteCode": "SELECT a.id,b.id AS other_id FROM items a JOIN items b ON a.category=b.category AND a.id<b.id ORDER BY a.id,b.id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "other_id"
+          ],
+          "rows": [
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "CROSS JOIN 与自连接",
+        "结果预测"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "cbdd69c12aee942a67fddccc8dd45430f2c9572ff1bf16d36ce5362e97a85bd4",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0059-demo"
+      ],
+      "fixturePath": "fixtures/fc0059.json",
+      "referenceTopicNames": [
+        "CROSS JOIN 与自连接"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0059.sql"
+    },
+    {
+      "id": "fc0060",
+      "chapterId": "ch08",
+      "knowledgePointIds": [
+        "kp08-05"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp08-05"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0095",
+        "q0114",
+        "q0117"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "结果预测",
+      "difficulty": "中等",
+      "front": {
+        "question": "先将订单明细汇总，再与支付汇总匹配。预测订单1的明细额及实付额。",
+        "code": "WITH l AS (SELECT order_id,SUM(amount) AS s FROM lines GROUP BY order_id),p AS (SELECT order_id,SUM(paid) AS p FROM receipts GROUP BY order_id) SELECT l.order_id,l.s,p.p FROM l JOIN p ON l.order_id=p.order_id WHERE l.order_id=1",
+        "sourceTables": [
+          {
+            "name": "lines",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "order_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "quantity",
+                "type": "INTEGER"
+              },
+              {
+                "name": "amount",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                2,
+                30
+              ],
+              [
+                2,
+                1,
+                1,
+                10
+              ],
+              [
+                3,
+                2,
+                3,
+                60
+              ],
+              [
+                4,
+                3,
+                1,
+                30
+              ]
+            ],
+            "constraints": ""
+          },
+          {
+            "name": "receipts",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "order_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "paid",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                15
+              ],
+              [
+                2,
+                1,
+                25
+              ],
+              [
+                3,
+                2,
+                60
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "返回以下结果。",
+        "explanation": "两张一对多表各自聚合，避免明细与支付重复。",
+        "code": "WITH l AS (SELECT order_id,SUM(amount) AS s FROM lines GROUP BY order_id),p AS (SELECT order_id,SUM(paid) AS p FROM receipts GROUP BY order_id) SELECT l.order_id,l.s,p.p FROM l JOIN p ON l.order_id=p.order_id WHERE l.order_id=1",
+        "sqliteCode": "WITH l AS (SELECT order_id,SUM(amount) AS s FROM lines GROUP BY order_id),p AS (SELECT order_id,SUM(paid) AS p FROM receipts GROUP BY order_id) SELECT l.order_id,l.s,p.p FROM l JOIN p ON l.order_id=p.order_id WHERE l.order_id=1",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "order_id",
+            "s",
+            "p"
+          ],
+          "rows": [
+            [
+              1,
+              40,
+              40
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "连接膨胀与预聚合",
+        "结果预测"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "88e359adbb2b8bccbe3bef92b575ced7c6600d0a995ad87f0376b150618781cc",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0060-demo"
+      ],
+      "fixturePath": "fixtures/fc0060.json",
+      "referenceTopicNames": [
+        "连接膨胀与预聚合"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0060.sql"
+    },
+    {
+      "id": "fc0061",
+      "chapterId": "ch08",
+      "knowledgePointIds": [
+        "kp08-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp08-03"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0112",
+        "q0113",
+        "q0115"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "错误纠正",
+      "difficulty": "中等",
+      "front": {
+        "question": "要求包含未完成任何有效订单的客户，显示有效订单数量。修正把有效状态放在错误位置的查询。",
+        "code": "SELECT c.id,COUNT(s.id) AS n FROM clients c LEFT JOIN sales s ON c.id=s.client_id WHERE s.status='completed' GROUP BY c.id ORDER BY c.id",
+        "sourceTables": [
+          {
+            "name": "clients",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "林"
+              ],
+              [
+                2,
+                "陈"
+              ],
+              [
+                3,
+                "周"
+              ],
+              [
+                4,
+                "王"
+              ]
+            ],
+            "constraints": ""
+          },
+          {
+            "name": "sales",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "client_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "store_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "amount",
+                "type": "INTEGER"
+              },
+              {
+                "name": "day",
+                "type": "TEXT"
+              },
+              {
+                "name": "status",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                1,
+                40,
+                "2025-01-02",
+                "completed"
+              ],
+              [
+                2,
+                1,
+                1,
+                60,
+                "2025-01-15",
+                "completed"
+              ],
+              [
+                3,
+                2,
+                2,
+                30,
+                "2025-02-01",
+                "completed"
+              ],
+              [
+                4,
+                null,
+                2,
+                0,
+                "2025-02-02",
+                "completed"
+              ],
+              [
+                5,
+                3,
+                1,
+                100,
+                "2025-03-01",
+                "cancelled"
+              ],
+              [
+                6,
+                2,
+                1,
+                60,
+                "2025-03-05",
+                "completed"
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "改用背面的修正语句。",
+        "explanation": "右表筛选放ON保留未匹配客户，再用COUNT(s.id)而不是COUNT(*)。",
+        "code": "SELECT c.id,COUNT(s.id) AS n FROM clients c LEFT JOIN sales s ON c.id=s.client_id AND s.status='completed' GROUP BY c.id ORDER BY c.id",
+        "sqliteCode": "SELECT c.id,COUNT(s.id) AS n FROM clients c LEFT JOIN sales s ON c.id=s.client_id AND s.status='completed' GROUP BY c.id ORDER BY c.id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "n"
+          ],
+          "rows": [
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              4,
+              0
+            ]
+          ]
+        },
+        "wrongResult": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "n"
+          ],
+          "rows": [
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              2
+            ]
+          ]
+        },
+        "correctionReason": "右表筛选放ON保留未匹配客户，再用COUNT(s.id)而不是COUNT(*)。"
+      },
+      "tags": [
+        "外连接的 ON 与 WHERE",
+        "错误纠正"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "da06ec42a6596d5578b0d8b7d525d972c6095ff4f517941b419b127ef8a9f3f5",
+        "mysqlNative": "未执行",
+        "wrongRejected": true,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0061-demo"
+      ],
+      "fixturePath": "fixtures/fc0061.json",
+      "referenceTopicNames": [
+        "外连接的 ON 与 WHERE"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0061.sql"
+    }
+  ]
+}

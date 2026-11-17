@@ -1,0 +1,113 @@
+{
+  "id": "fc0063-demo",
+  "tables": [
+    {
+      "name": "items",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "name",
+          "type": "TEXT"
+        },
+        {
+          "name": "category",
+          "type": "TEXT"
+        },
+        {
+          "name": "price",
+          "type": "INTEGER"
+        },
+        {
+          "name": "stock",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "Tea",
+          "A",
+          12,
+          0
+        ],
+        [
+          2,
+          "Rice",
+          "A",
+          20,
+          8
+        ],
+        [
+          3,
+          "Soap",
+          "B",
+          12,
+          3
+        ],
+        [
+          4,
+          "Milk",
+          "B",
+          null,
+          0
+        ],
+        [
+          5,
+          "Bag",
+          "C",
+          30,
+          null
+        ],
+        [
+          6,
+          "Tea_2",
+          "A",
+          20,
+          6
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT id,CASE WHEN stock=0 THEN '零' WHEN stock IS NULL THEN '未知' ELSE '其他' END AS label FROM items ORDER BY id",
+  "mysqlSql": "SELECT id,CASE WHEN stock=0 THEN '零' WHEN stock IS NULL THEN '未知' ELSE '其他' END AS label FROM items ORDER BY id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      "零"
+    ],
+    [
+      2,
+      "其他"
+    ],
+    [
+      3,
+      "其他"
+    ],
+    [
+      4,
+      "零"
+    ],
+    [
+      5,
+      "未知"
+    ],
+    [
+      6,
+      "其他"
+    ]
+  ],
+  "expectedColumns": [
+    "id",
+    "label"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

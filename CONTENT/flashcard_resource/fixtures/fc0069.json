@@ -1,0 +1,125 @@
+{
+  "id": "fc0069-demo",
+  "tables": [
+    {
+      "name": "scores",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "team",
+          "type": "TEXT"
+        },
+        {
+          "name": "score",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "A",
+          90
+        ],
+        [
+          2,
+          "A",
+          90
+        ],
+        [
+          3,
+          "A",
+          70
+        ],
+        [
+          4,
+          "A",
+          60
+        ],
+        [
+          5,
+          "B",
+          80
+        ],
+        [
+          6,
+          "B",
+          60
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT id,CASE WHEN score>=80 THEN '良好' WHEN score>=60 THEN '及格' ELSE '未及格' END AS label FROM scores ORDER BY id",
+  "mysqlSql": "SELECT id,CASE WHEN score>=80 THEN '良好' WHEN score>=60 THEN '及格' ELSE '未及格' END AS label FROM scores ORDER BY id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      "良好"
+    ],
+    [
+      2,
+      "良好"
+    ],
+    [
+      3,
+      "及格"
+    ],
+    [
+      4,
+      "及格"
+    ],
+    [
+      5,
+      "良好"
+    ],
+    [
+      6,
+      "及格"
+    ]
+  ],
+  "expectedColumns": [
+    "id",
+    "label"
+  ],
+  "wrongSqlite": "SELECT id,CASE WHEN score>=60 THEN '及格' WHEN score>=80 THEN '良好' ELSE '未及格' END AS label FROM scores ORDER BY id",
+  "wrongMysql": "SELECT id,CASE WHEN score>=60 THEN '及格' WHEN score>=80 THEN '良好' ELSE '未及格' END AS label FROM scores ORDER BY id",
+  "wrongResult": {
+    "kind": "result",
+    "columns": [
+      "id",
+      "label"
+    ],
+    "rows": [
+      [
+        1,
+        "及格"
+      ],
+      [
+        2,
+        "及格"
+      ],
+      [
+        3,
+        "及格"
+      ],
+      [
+        4,
+        "及格"
+      ],
+      [
+        5,
+        "及格"
+      ],
+      [
+        6,
+        "及格"
+      ]
+    ]
+  },
+  "independentAuthorExpectation": true
+}

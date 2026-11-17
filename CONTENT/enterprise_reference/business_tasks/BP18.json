@@ -1,0 +1,76 @@
+{
+  "projectId": "finance",
+  "title": "应付账款账龄",
+  "context": "财务负责人评估逾期支付压力。",
+  "requirements": "截至2025-12-31，余额>0；按到期日分为未逾期（到期日≥截止日）、1—30、31—60、61—90、90日以上；按供应商与账龄汇总发票数及应付余额。日期差用日历索引；到期日可能超出年底，先判未逾期。",
+  "grain": "供应商×账龄",
+  "commonError": "账龄基于到期日，不是发票日期；未到期不能算逾期。",
+  "executionSteps": [
+    "先取截止日余额",
+    "按固定日期边界分箱",
+    "聚合供应商应付"
+  ],
+  "difficulty": "困难",
+  "mysqlSql": "WITH a AS (SELECT v.*,CASE WHEN due_date>='2025-12-31' THEN 'current' WHEN due_date>='2025-12-01' THEN '01-30' WHEN due_date>='2025-11-01' THEN '31-60' WHEN due_date>='2025-10-02' THEN '61-90' ELSE '90+' END bucket FROM v_invoice_balance v WHERE balance_cents>0) SELECT supplier_id,bucket,COUNT(*) invoices,SUM(balance_cents) outstanding_cents FROM a GROUP BY supplier_id,bucket ORDER BY supplier_id,bucket",
+  "sqliteSql": "WITH a AS (SELECT v.*,CASE WHEN due_date>='2025-12-31' THEN 'current' WHEN due_date>='2025-12-01' THEN '01-30' WHEN due_date>='2025-11-01' THEN '31-60' WHEN due_date>='2025-10-02' THEN '61-90' ELSE '90+' END bucket FROM v_invoice_balance v WHERE balance_cents>0) SELECT supplier_id,bucket,COUNT(*) invoices,SUM(balance_cents) outstanding_cents FROM a GROUP BY supplier_id,bucket ORDER BY supplier_id,bucket",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "supplier_id",
+    "bucket",
+    "invoices",
+    "outstanding_cents"
+  ],
+  "id": "BP18",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-48"
+  ],
+  "datasetId": "finance-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP18.json",
+  "expectedRowCount": 197,
+  "expectedColumns": [
+    "supplier_id",
+    "bucket",
+    "invoices",
+    "outstanding_cents"
+  ],
+  "sourceTables": [
+    "v_invoice_balance"
+  ],
+  "dependencyTables": [
+    "categories",
+    "products",
+    "purchase_order_items",
+    "purchase_orders",
+    "supplier_contracts",
+    "supplier_invoice_items",
+    "supplier_invoices",
+    "supplier_payments",
+    "suppliers",
+    "v_invoice_balance",
+    "warehouses"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH a AS (SELECT v.*,CASE WHEN due_date>='2025-12-31' THEN 'current' WHEN due_date>='2025-12-01' THEN '01-30' WHEN due_date>='2025-11-01' THEN '31-60' WHEN due_date>='2025-10-02' THEN '61-90' ELSE '90+' END bucket FROM v_invoice_balance v WHERE balance_cents>0) SELECT supplier_id,bucket,COUNT(*) invoices,SUM(balance_cents) outstanding_cents FROM a GROUP BY supplier_id,bucket ORDER BY supplier_id,bucket",
+      "sqliteSql": "WITH a AS (SELECT v.*,CASE WHEN due_date>='2025-12-31' THEN 'current' WHEN due_date>='2025-12-01' THEN '01-30' WHEN due_date>='2025-11-01' THEN '31-60' WHEN due_date>='2025-10-02' THEN '61-90' ELSE '90+' END bucket FROM v_invoice_balance v WHERE balance_cents>0) SELECT supplier_id,bucket,COUNT(*) invoices,SUM(balance_cents) outstanding_cents FROM a GROUP BY supplier_id,bucket ORDER BY supplier_id,bucket"
+    }
+  ],
+  "hints": [
+    "先取截止日余额",
+    "先取截止日余额；按固定日期边界分箱",
+    "重点核对输出粒度：供应商×账龄"
+  ],
+  "explanation": "先取截止日余额；按固定日期边界分箱；聚合供应商应付。账龄基于到期日，不是发票日期；未到期不能算逾期。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 8.5
+}

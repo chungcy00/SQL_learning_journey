@@ -1,0 +1,74 @@
+{
+  "id": "fc0115-demo",
+  "tables": [
+    {
+      "name": "scores",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "team",
+          "type": "TEXT"
+        },
+        {
+          "name": "score",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "A",
+          90
+        ],
+        [
+          2,
+          "A",
+          90
+        ],
+        [
+          3,
+          "A",
+          70
+        ],
+        [
+          4,
+          "A",
+          60
+        ],
+        [
+          5,
+          "B",
+          80
+        ],
+        [
+          6,
+          "B",
+          60
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "WITH x AS (SELECT id,team,ROW_NUMBER() OVER(PARTITION BY team ORDER BY score DESC,id) AS rn FROM scores) SELECT id FROM x WHERE rn=1 ORDER BY id",
+  "mysqlSql": "WITH x AS (SELECT id,team,ROW_NUMBER() OVER(PARTITION BY team ORDER BY score DESC,id) AS rn FROM scores) SELECT id FROM x WHERE rn=1 ORDER BY id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1
+    ],
+    [
+      5
+    ]
+  ],
+  "expectedColumns": [
+    "id"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

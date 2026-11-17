@@ -1,0 +1,85 @@
+{
+  "projectId": "retail",
+  "title": "门店月度环比同比与持续下滑",
+  "context": "经营主管希望识别连续三个月环比负增长的门店。",
+  "requirements": "构造2023—2025完整门店月份轴；2025年逐月返回净销售、环比、同比及连续三月负增长标志；上期零或缺失时比率NULL。",
+  "grain": "门店×月",
+  "commonError": "先筛2025再计算窗口会丢失去年和上月。",
+  "executionSteps": [
+    "构造月份轴",
+    "汇总销售并补零",
+    "计算两个历史窗口",
+    "滚动检查连续下滑",
+    "最后筛2025"
+  ],
+  "difficulty": "困难",
+  "mysqlSql": "WITH m AS (SELECT DISTINCT month_key FROM calendar_days), a AS (SELECT store_id,SUBSTR(order_date,1,7) m,SUM(net_cents) net FROM v_sales_lines WHERE channel='store' GROUP BY store_id,SUBSTR(order_date,1,7)), b AS (SELECT s.store_id,m.month_key,COALESCE(a.net,0) net FROM stores s CROSS JOIN m LEFT JOIN a ON a.store_id=s.store_id AND a.m=m.month_key), p AS (SELECT *,LAG(net) OVER(PARTITION BY store_id ORDER BY month_key) prev,LAG(net,12) OVER(PARTITION BY store_id ORDER BY month_key) prior_year FROM b), q AS (SELECT *,CASE WHEN prev>0 AND net<prev THEN 1 ELSE 0 END falling FROM p), z AS (SELECT *,SUM(falling) OVER(PARTITION BY store_id ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) fall3 FROM q) SELECT store_id,month_key,net net_cents,ROUND(100.0*(net-prev)/NULLIF(prev,0),2) mom_pct,ROUND(100.0*(net-prior_year)/NULLIF(prior_year,0),2) yoy_pct,CASE WHEN fall3=3 THEN 1 ELSE 0 END three_declines FROM z WHERE month_key>='2025-01' ORDER BY store_id,month_key",
+  "sqliteSql": "WITH m AS (SELECT DISTINCT month_key FROM calendar_days), a AS (SELECT store_id,SUBSTR(order_date,1,7) m,SUM(net_cents) net FROM v_sales_lines WHERE channel='store' GROUP BY store_id,SUBSTR(order_date,1,7)), b AS (SELECT s.store_id,m.month_key,COALESCE(a.net,0) net FROM stores s CROSS JOIN m LEFT JOIN a ON a.store_id=s.store_id AND a.m=m.month_key), p AS (SELECT *,LAG(net) OVER(PARTITION BY store_id ORDER BY month_key) prev,LAG(net,12) OVER(PARTITION BY store_id ORDER BY month_key) prior_year FROM b), q AS (SELECT *,CASE WHEN prev>0 AND net<prev THEN 1 ELSE 0 END falling FROM p), z AS (SELECT *,SUM(falling) OVER(PARTITION BY store_id ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) fall3 FROM q) SELECT store_id,month_key,net net_cents,ROUND(100.0*(net-prev)/NULLIF(prev,0),2) mom_pct,ROUND(100.0*(net-prior_year)/NULLIF(prior_year,0),2) yoy_pct,CASE WHEN fall3=3 THEN 1 ELSE 0 END three_declines FROM z WHERE month_key>='2025-01' ORDER BY store_id,month_key",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "store_id",
+    "month_key",
+    "net_cents",
+    "mom_pct",
+    "yoy_pct",
+    "three_declines"
+  ],
+  "id": "BP02",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-32"
+  ],
+  "datasetId": "retail-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP02.json",
+  "expectedRowCount": 144,
+  "expectedColumns": [
+    "store_id",
+    "month_key",
+    "net_cents",
+    "mom_pct",
+    "yoy_pct",
+    "three_declines"
+  ],
+  "sourceTables": [
+    "calendar_days",
+    "stores",
+    "v_sales_lines"
+  ],
+  "dependencyTables": [
+    "calendar_days",
+    "categories",
+    "customer_sessions",
+    "customers",
+    "order_items",
+    "orders",
+    "products",
+    "promotions",
+    "returns",
+    "stores",
+    "traffic_sources",
+    "v_sales_lines"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH m AS (SELECT DISTINCT month_key FROM calendar_days), a AS (SELECT store_id,SUBSTR(order_date,1,7) m,SUM(net_cents) net FROM v_sales_lines WHERE channel='store' GROUP BY store_id,SUBSTR(order_date,1,7)), b AS (SELECT s.store_id,m.month_key,COALESCE(a.net,0) net FROM stores s CROSS JOIN m LEFT JOIN a ON a.store_id=s.store_id AND a.m=m.month_key), p AS (SELECT *,LAG(net) OVER(PARTITION BY store_id ORDER BY month_key) prev,LAG(net,12) OVER(PARTITION BY store_id ORDER BY month_key) prior_year FROM b), q AS (SELECT *,CASE WHEN prev>0 AND net<prev THEN 1 ELSE 0 END falling FROM p), z AS (SELECT *,SUM(falling) OVER(PARTITION BY store_id ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) fall3 FROM q) SELECT store_id,month_key,net net_cents,ROUND(100.0*(net-prev)/NULLIF(prev,0),2) mom_pct,ROUND(100.0*(net-prior_year)/NULLIF(prior_year,0),2) yoy_pct,CASE WHEN fall3=3 THEN 1 ELSE 0 END three_declines FROM z WHERE month_key>='2025-01' ORDER BY store_id,month_key",
+      "sqliteSql": "WITH m AS (SELECT DISTINCT month_key FROM calendar_days), a AS (SELECT store_id,SUBSTR(order_date,1,7) m,SUM(net_cents) net FROM v_sales_lines WHERE channel='store' GROUP BY store_id,SUBSTR(order_date,1,7)), b AS (SELECT s.store_id,m.month_key,COALESCE(a.net,0) net FROM stores s CROSS JOIN m LEFT JOIN a ON a.store_id=s.store_id AND a.m=m.month_key), p AS (SELECT *,LAG(net) OVER(PARTITION BY store_id ORDER BY month_key) prev,LAG(net,12) OVER(PARTITION BY store_id ORDER BY month_key) prior_year FROM b), q AS (SELECT *,CASE WHEN prev>0 AND net<prev THEN 1 ELSE 0 END falling FROM p), z AS (SELECT *,SUM(falling) OVER(PARTITION BY store_id ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) fall3 FROM q) SELECT store_id,month_key,net net_cents,ROUND(100.0*(net-prev)/NULLIF(prev,0),2) mom_pct,ROUND(100.0*(net-prior_year)/NULLIF(prior_year,0),2) yoy_pct,CASE WHEN fall3=3 THEN 1 ELSE 0 END three_declines FROM z WHERE month_key>='2025-01' ORDER BY store_id,month_key"
+    }
+  ],
+  "hints": [
+    "构造月份轴",
+    "构造月份轴；汇总销售并补零",
+    "重点核对输出粒度：门店×月"
+  ],
+  "explanation": "构造月份轴；汇总销售并补零；计算两个历史窗口；滚动检查连续下滑；最后筛2025。先筛2025再计算窗口会丢失去年和上月。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 78.0
+}

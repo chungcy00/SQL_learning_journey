@@ -1,0 +1,33 @@
+{
+  "id": "q0074-key",
+  "questionId": "q0074",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "2",
+      "explanation": "不同非空值只有0和10。"
+    },
+    {
+      "id": "B",
+      "text": "1",
+      "explanation": "不能排除有效的零值。"
+    },
+    {
+      "id": "C",
+      "text": "3",
+      "explanation": "非空值行数为3，不是不同值数量。"
+    },
+    {
+      "id": "D",
+      "text": "4",
+      "explanation": "总行数才是4。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "A"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "q0095-key",
+  "questionId": "q0095",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "数据库自动根据主键消除金额重复",
+      "explanation": "主键约束不自动替聚合去重。"
+    },
+    {
+      "id": "B",
+      "text": "每个订单只留下第一条明细",
+      "explanation": "普通连接会返回全部匹配记录。"
+    },
+    {
+      "id": "C",
+      "text": "金额一定减半",
+      "explanation": "重复次数与明细数有关，不存在固定减半。"
+    },
+    {
+      "id": "D",
+      "text": "订单头金额按明细条数重复累计",
+      "explanation": "一对多连接改变结果粒度。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "D"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

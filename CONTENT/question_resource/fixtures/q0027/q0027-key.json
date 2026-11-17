@@ -1,0 +1,33 @@
+{
+  "id": "q0027-key",
+  "questionId": "q0027",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "a=1 AND (b=2 OR c=3)",
+      "explanation": "连接词和分组均与原式不同。"
+    },
+    {
+      "id": "B",
+      "text": "a=1 OR (b=2 AND c=3)",
+      "explanation": "AND优先级高于OR。"
+    },
+    {
+      "id": "C",
+      "text": "(a=1 AND b=2) OR c=3",
+      "explanation": "原语句未这样组合。"
+    },
+    {
+      "id": "D",
+      "text": "(a=1 OR b=2) AND c=3",
+      "explanation": "这个写法改变了原表达式组合。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "B"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

@@ -1,0 +1,131 @@
+{
+  "visibility": "public",
+  "variant": "public",
+  "kind": "database_state",
+  "setupSql": "CREATE TABLE guard(id INT PRIMARY KEY); INSERT INTO guard VALUES(99);",
+  "probes": [
+    {
+      "sql": "INSERT INTO practice_stock VALUES(10,-1)",
+      "mustReject": true
+    },
+    {
+      "sql": "INSERT INTO practice_stock VALUES(10,NULL)",
+      "mustReject": true
+    },
+    {
+      "sql": "INSERT INTO practice_stock VALUES(NULL,1)",
+      "mustReject": true
+    },
+    {
+      "sql": "INSERT INTO practice_stock VALUES(10,0)",
+      "mustReject": false
+    },
+    {
+      "sql": "INSERT INTO practice_stock VALUES(10,1); INSERT INTO practice_stock VALUES(10,2)",
+      "mustReject": true
+    }
+  ],
+  "id": "q0238-public",
+  "questionId": "q0238",
+  "datasetId": "q0238-lesson",
+  "expected": {
+    "tables": {
+      "guard": {
+        "columns": [
+          [
+            "id",
+            "INT",
+            0,
+            null,
+            1
+          ]
+        ],
+        "foreignKeys": [],
+        "indexes": [
+          {
+            "name": null,
+            "unique": 1,
+            "origin": "pk",
+            "partial": 0,
+            "keys": [
+              [
+                "id",
+                0
+              ]
+            ]
+          }
+        ],
+        "rows": [
+          [
+            99
+          ]
+        ]
+      },
+      "practice_stock": {
+        "columns": [
+          [
+            "product_id",
+            "INT",
+            1,
+            null,
+            1
+          ],
+          [
+            "qty",
+            "INT",
+            1,
+            null,
+            0
+          ]
+        ],
+        "foreignKeys": [],
+        "indexes": [
+          {
+            "name": null,
+            "unique": 1,
+            "origin": "pk",
+            "partial": 0,
+            "keys": [
+              [
+                "product_id",
+                0
+              ]
+            ]
+          }
+        ],
+        "rows": []
+      }
+    },
+    "probes": [
+      {
+        "rejected": true,
+        "observation": null
+      },
+      {
+        "rejected": true,
+        "observation": null
+      },
+      {
+        "rejected": true,
+        "observation": null
+      },
+      {
+        "rejected": false,
+        "observation": null
+      },
+      {
+        "rejected": true,
+        "observation": null
+      }
+    ],
+    "transactionOpen": false
+  },
+  "orderPolicy": "not_applicable",
+  "columnPolicy": "state",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

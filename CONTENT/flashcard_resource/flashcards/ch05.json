@@ -1,0 +1,623 @@
+{
+  "chapterId": "ch05",
+  "title": "空值处理",
+  "count": 6,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "cards": [
+    {
+      "id": "fc0030",
+      "chapterId": "ch05",
+      "knowledgePointIds": [
+        "kp05-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp05-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0051",
+        "q0052",
+        "q0053"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "简单",
+      "front": {
+        "question": "为什么对 NULL 使用普通等号通常找不到缺失值？"
+      },
+      "back": {
+        "answer": "NULL 代表未知；普通等号比较未知值返回 UNKNOWN。",
+        "explanation": "WHERE 只保留真值；应使用 IS NULL 或 IS NOT NULL。"
+      },
+      "tags": [
+        "IS NULL 与三值逻辑",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "IS NULL 与三值逻辑"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0031",
+      "chapterId": "ch05",
+      "knowledgePointIds": [
+        "kp05-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp05-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0054",
+        "q0057",
+        "q0058"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "简单",
+      "front": {
+        "question": "回忆优先使用首个非空值的通用函数。若价格缺失，用库存量作演示备用值，再缺失用0。",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "COALESCE(值1, 值2, …, 默认值)",
+        "explanation": "COALESCE 返回第一个非 NULL 参数；这里只演示函数，不表示库存量能替代价格。",
+        "code": "SELECT id,COALESCE(price,stock,0) AS chosen FROM items ORDER BY id",
+        "sqliteCode": "SELECT id,COALESCE(price,stock,0) AS chosen FROM items ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "chosen"
+          ],
+          "rows": [
+            [
+              1,
+              12
+            ],
+            [
+              2,
+              20
+            ],
+            [
+              3,
+              12
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              5,
+              30
+            ],
+            [
+              6,
+              20
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "IFNULL 与 COALESCE",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "0b1a50ebed643078e565674e4f00facc485c748bc20662bb9f53c826f1ec60aa",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0031-demo"
+      ],
+      "fixturePath": "fixtures/fc0031.json",
+      "referenceTopicNames": [
+        "IFNULL 与 COALESCE"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0031.sql"
+    },
+    {
+      "id": "fc0032",
+      "chapterId": "ch05",
+      "knowledgePointIds": [
+        "kp05-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp05-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0054",
+        "q0057"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "简单",
+      "front": {
+        "question": "IFNULL(x,y) 与 COALESCE(x,y,z) 有什么区别？"
+      },
+      "back": {
+        "answer": "前者两个参数；后者支持多个参数，从左到右选首个非空值。",
+        "explanation": "二者在兼容示例中都可执行，仍需注意 MySQL 类型推导与 SQLite 不同。"
+      },
+      "tags": [
+        "IFNULL 与 COALESCE",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "IFNULL 与 COALESCE"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0033",
+      "chapterId": "ch05",
+      "knowledgePointIds": [
+        "kp05-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp05-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0051",
+        "q0052",
+        "q0055",
+        "q0059"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "简单",
+      "front": {
+        "question": "查找未知库存，不把库存为零的商品算作缺失。",
+        "code": "SELECT id FROM items WHERE stock □ ORDER BY id",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "IS NULL",
+        "explanation": "零是已知值，NULL 是未知值。",
+        "acceptedBlanks": [
+          "IS NULL"
+        ],
+        "code": "SELECT id FROM items WHERE stock IS NULL ORDER BY id",
+        "sqliteCode": "SELECT id FROM items WHERE stock IS NULL ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id"
+          ],
+          "rows": [
+            [
+              5
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "IS NULL 与三值逻辑",
+        "代码填空"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "cbf4e5ee4015c65a5a8e224af1fde2f3ac51d29ee7fbfe053cb186d23bfd713e",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0033-demo"
+      ],
+      "fixturePath": "fixtures/fc0033.json",
+      "referenceTopicNames": [
+        "IS NULL 与三值逻辑"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0033.sql"
+    },
+    {
+      "id": "fc0034",
+      "chapterId": "ch05",
+      "knowledgePointIds": [
+        "kp05-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp05-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0054",
+        "q0057",
+        "q0060"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "结果预测",
+      "difficulty": "简单",
+      "front": {
+        "question": "预测 NULLIF 对相同值和不同值的结果。",
+        "code": "SELECT NULLIF(5,5) AS a,NULLIF(5,0) AS b,COALESCE(NULL,0,7) AS c",
+        "sourceTables": [],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "返回以下结果。",
+        "explanation": "NULLIF 相等返回 NULL；COALESCE 认为0不是缺失值。",
+        "code": "SELECT NULLIF(5,5) AS a,NULLIF(5,0) AS b,COALESCE(NULL,0,7) AS c",
+        "sqliteCode": "SELECT NULLIF(5,5) AS a,NULLIF(5,0) AS b,COALESCE(NULL,0,7) AS c",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "a",
+            "b",
+            "c"
+          ],
+          "rows": [
+            [
+              null,
+              5,
+              0
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "IFNULL 与 COALESCE",
+        "结果预测"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "4263516cd82c3541fce528e2e9ab0b7adbb7ead8cad288c150f80a1348597402",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0034-demo"
+      ],
+      "fixturePath": "fixtures/fc0034.json",
+      "referenceTopicNames": [
+        "IFNULL 与 COALESCE"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0034.sql"
+    },
+    {
+      "id": "fc0035",
+      "chapterId": "ch05",
+      "knowledgePointIds": [
+        "kp05-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp05-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0051",
+        "q0052",
+        "q0056"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "错误纠正",
+      "difficulty": "简单",
+      "front": {
+        "question": "筛选价格未填写的商品。纠正使用等号比较空值的代码。",
+        "code": "SELECT id FROM items WHERE price=NULL ORDER BY id",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "改用背面的修正语句。",
+        "explanation": "普通比较传播未知；IS NULL 才检查缺失状态。",
+        "code": "SELECT id FROM items WHERE price IS NULL ORDER BY id",
+        "sqliteCode": "SELECT id FROM items WHERE price IS NULL ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id"
+          ],
+          "rows": [
+            [
+              4
+            ]
+          ]
+        },
+        "wrongResult": {
+          "kind": "result",
+          "columns": [
+            "id"
+          ],
+          "rows": []
+        },
+        "correctionReason": "普通比较传播未知；IS NULL 才检查缺失状态。"
+      },
+      "tags": [
+        "IS NULL 与三值逻辑",
+        "错误纠正"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "c6718947dcfe0938c9533b98eb5cbbd6e85e950484839f28f106b46d838ccfd5",
+        "mysqlNative": "未执行",
+        "wrongRejected": true,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0035-demo"
+      ],
+      "fixturePath": "fixtures/fc0035.json",
+      "referenceTopicNames": [
+        "IS NULL 与三值逻辑"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0035.sql"
+    }
+  ]
+}

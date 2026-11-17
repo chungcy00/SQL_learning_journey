@@ -1,0 +1,33 @@
+{
+  "id": "q0002-key",
+  "questionId": "q0002",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "0 表示字段还没填写",
+      "explanation": "0本身是合法的已知值。"
+    },
+    {
+      "id": "B",
+      "text": "二者都代表零金额",
+      "explanation": "NULL参与计算通常传播未知。"
+    },
+    {
+      "id": "C",
+      "text": "NULL 表示未提供或未知，0是已知的零金额",
+      "explanation": "缺失与已知数值的业务含义不同。"
+    },
+    {
+      "id": "D",
+      "text": "NULL 表示负数",
+      "explanation": "NULL不是一个可比较的负数值。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "C"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

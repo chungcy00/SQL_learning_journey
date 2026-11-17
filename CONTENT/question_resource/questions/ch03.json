@@ -1,0 +1,4148 @@
+{
+  "chapterId": "ch03",
+  "title": "条件筛选",
+  "count": 22,
+  "schemaVersion": 3,
+  "contentVersion": "3.0.0",
+  "questions": [
+    {
+      "id": "q0021",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-01"
+      ],
+      "difficulty": "入门",
+      "type": "独立编写",
+      "title": "显示非指定门店的订单",
+      "context": "使用课程中小型订单数据练习显示非指定门店的订单。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "排除门店1，仅保留其他非空门店订单，返回 id、store_id，按编号升序。\n输出列名称及顺序：id, store_id。按题设排序；参考排序键：id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0021-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "orders"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "id",
+          "store_id"
+        ],
+        "rows": [
+          [
+            2,
+            2
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "rowCount": 2
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT id,store_id FROM orders WHERE store_id<>1 ORDER BY id",
+          "sqliteSql": "SELECT id,store_id FROM orders WHERE store_id<>1 ORDER BY id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT id,store_id FROM orders WHERE NOT (store_id=1) ORDER BY id",
+          "sqliteSql": "SELECT id,store_id FROM orders WHERE NOT (store_id=1) ORDER BY id",
+          "explanation": "用反向比较并取 NOT 表达相同三值逻辑。"
+        }
+      ],
+      "hints": [
+        "将题设条件逐项翻译为真假判断，特别注意边界值和括号。",
+        "结合《WHERE 与比较运算》：WHERE 对每行计算条件，只保留真值；比较符包括 =、<>、!=、>、>=、<、<=。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nSELECT id,store_id FROM orders WHERE □□□ ORDER BY id"
+      ],
+      "explanation": "排除条件与包含条件方向相反。\n执行思路：确认orders的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出id、store_id列；遵循题设排序和并列规则。\n公开夹具实际返回 2 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：用反向比较并取 NOT 表达相同三值逻辑。",
+      "commonErrors": [
+        {
+          "sql": "SELECT id,store_id FROM orders WHERE store_id=1 ORDER BY id",
+          "reason": "排除条件与包含条件方向相反。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0021-public",
+        "q0021-boundary",
+        "q0021-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0021-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0021/q0021-public.json",
+          "sha256": "1f4b3cdc4632883c3432ed095bc7b93c4481c724815c110bf6b1adefd46ab24f"
+        },
+        {
+          "id": "q0021-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0021/q0021-boundary.json",
+          "sha256": "46d3a5ca1bec01645f17701a8131c537e3977d8ba5b020e25cd5a8d42fa95ca6"
+        },
+        {
+          "id": "q0021-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0021/q0021-empty.json",
+          "sha256": "b0fe2808324e9a79afa04c50ef44e08436534aaf395f3d57341cea7a524b16ee"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "WHERE 与比较运算",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0021-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "dcb25df6befe4a128a04fd06f8bfb25e2c39eab70fb45cd49e4cb7dca99da7d6",
+              "rowCount": 2
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "dcb25df6befe4a128a04fd06f8bfb25e2c39eab70fb45cd49e4cb7dca99da7d6",
+              "rows": 2
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "f738858dfe3e3a512f464e5f6f46e28fa1b682f82a0d4b3912e15e2679b5f41c",
+              "rows": 3
+            }
+          },
+          {
+            "fixtureId": "q0021-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "f79083636556cd32b5ec0ff7e55ee645904cd81b993bf87777e477a6e13a01ed",
+              "rowCount": 9
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "f79083636556cd32b5ec0ff7e55ee645904cd81b993bf87777e477a6e13a01ed",
+              "rows": 9
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "475ea1233e18ea3f29b7acd07a1a9aa4e965070e5479a6f4098952c5583bffac",
+              "rows": 4
+            }
+          },
+          {
+            "fixtureId": "q0021-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "ca47a85154824db8faf18a3ac9eb571396675f9ca0bd7ca06f1dce694669c63e",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "ca47a85154824db8faf18a3ac9eb571396675f9ca0bd7ca06f1dce694669c63e",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "ca47a85154824db8faf18a3ac9eb571396675f9ca0bd7ca06f1dce694669c63e",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0014",
+        "fc0015"
+      ]
+    },
+    {
+      "id": "q0022",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-03"
+      ],
+      "difficulty": "入门",
+      "type": "结果预测",
+      "title": "闭区间销售金额",
+      "context": "使用课程中小型订单数据练习闭区间销售金额。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "不运行下方SQL，手工推算其在公开夹具中的完整返回结果。保留列名和重复行；明确区分NULL、空字符串和数值。\n销售额在300至800之间（包含两端）的订单，返回 id、sales，按编号升序。\n输出列名称及顺序：id, sales。按题设排序；参考排序键：id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0022-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "orders"
+      ],
+      "initialCode": "SELECT id,sales FROM orders WHERE sales BETWEEN 300 AND 800 ORDER BY id",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "id",
+          "sales"
+        ],
+        "rows": [
+          [
+            1,
+            800
+          ],
+          [
+            2,
+            400
+          ],
+          [
+            3,
+            600
+          ],
+          [
+            4,
+            300
+          ]
+        ],
+        "rowCount": 4
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT id,sales FROM orders WHERE sales BETWEEN 300 AND 800 ORDER BY id",
+          "sqliteSql": "SELECT id,sales FROM orders WHERE sales BETWEEN 300 AND 800 ORDER BY id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT id,sales FROM orders WHERE (sales>=300 AND sales<=800) ORDER BY id",
+          "sqliteSql": "SELECT id,sales FROM orders WHERE (sales>=300 AND sales<=800) ORDER BY id",
+          "explanation": "用闭区间的两个比较（或区间外的 OR）替换 BETWEEN。"
+        }
+      ],
+      "hints": [
+        "将题设条件逐项翻译为真假判断，特别注意边界值和括号。",
+        "结合《IN 与 BETWEEN》：IN 判断是否属于集合；BETWEEN 包含上下端点。",
+        "逐行标记输入是否命中条件，再根据查询的分组、窗口或投影阶段逐一计算；最后按题设顺序整理结果。"
+      ],
+      "explanation": "BETWEEN 是闭区间，端点记录必须保留。\n执行思路：确认orders的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出id、sales列；遵循题设排序和并列规则。\n公开夹具实际返回 4 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：用闭区间的两个比较（或区间外的 OR）替换 BETWEEN。",
+      "commonErrors": [
+        {
+          "sql": "SELECT id,sales FROM orders WHERE sales>300 AND sales<800 ORDER BY id",
+          "reason": "BETWEEN 是闭区间，端点记录必须保留。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0022-public",
+        "q0022-boundary",
+        "q0022-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0022-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0022/q0022-public.json",
+          "sha256": "0c2c9a88cd72293ad6be9eb5c9a0dbf3f3953ff848f04297351377f8ab08f462"
+        },
+        {
+          "id": "q0022-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0022/q0022-boundary.json",
+          "sha256": "5ef680a7223324918c97fdfaac4e27b7b776e344b3c99b9a1fa7bc5a533255bb"
+        },
+        {
+          "id": "q0022-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0022/q0022-empty.json",
+          "sha256": "5aff52960e634b915c730ab770c425047c84f828bbdbfd24fdc156e2818372bb"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "predict_public_result",
+      "runAllowedBeforeSubmit": false,
+      "hiddenFixturePolicy": "参考逻辑验证；用户只预测公开结果",
+      "interviewTag": "IN 与 BETWEEN",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0022-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "f14b0acb6d4ea421b0cbc8588104838be671fc5d9782690cd8c5bc7222afc1cb",
+              "rowCount": 4
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "f14b0acb6d4ea421b0cbc8588104838be671fc5d9782690cd8c5bc7222afc1cb",
+              "rows": 4
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "142390563f04e93bfd578ac10404e34ca32f1bec8d27ccde0397f806ca5f97a8",
+              "rows": 2
+            }
+          },
+          {
+            "fixtureId": "q0022-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "aabb0d1d0dc26bee354d2c742716895976c6e2066322068e7e6faa3f17c8748d",
+              "rowCount": 6
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "aabb0d1d0dc26bee354d2c742716895976c6e2066322068e7e6faa3f17c8748d",
+              "rows": 6
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "eec389c2f84e4c7e1e7afac23628bf15c15f1afa29d5a6b64360c0b45eaeeb42",
+              "rows": 2
+            }
+          },
+          {
+            "fixtureId": "q0022-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5d8c27cf2528c05af4a205484319757b5d174fd49c0f44cbddb556c229dc6cef",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5d8c27cf2528c05af4a205484319757b5d174fd49c0f44cbddb556c229dc6cef",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5d8c27cf2528c05af4a205484319757b5d174fd49c0f44cbddb556c229dc6cef",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html",
+        "independentPythonAssertions": [
+          {
+            "fixtureId": "q0022-public",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          },
+          {
+            "fixtureId": "q0022-boundary",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          },
+          {
+            "fixtureId": "q0022-empty",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          }
+        ]
+      },
+      "relatedFlashcardIds": [
+        "fc0017",
+        "fc0019",
+        "fc0023"
+      ]
+    },
+    {
+      "id": "q0023",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-04"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-04"
+      ],
+      "difficulty": "入门",
+      "type": "选择",
+      "title": "LIKE、通配符与转义 · LIKE 模式 'A__' 不含其他通配符时，在区分…",
+      "context": "本题考查《LIKE、通配符与转义》中实际使用时容易混淆的规则。",
+      "requirements": "LIKE 模式 'A__' 不含其他通配符时，在区分大小写的规则下匹配什么文本？",
+      "datasetId": null,
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "initialCode": null,
+      "options": [
+        {
+          "id": "A",
+          "text": "所有长度为2的文本",
+          "explanation": "模式共有三个字符位置且首字母固定。"
+        },
+        {
+          "id": "B",
+          "text": "名称必须含两个字面下划线",
+          "explanation": "不加转义的下划线是通配符。"
+        },
+        {
+          "id": "C",
+          "text": "以大写A开头且后面恰有两个字符",
+          "explanation": "每个下划线匹配一个字符。"
+        },
+        {
+          "id": "D",
+          "text": "以A开头且后面可以是任意长度",
+          "explanation": "任意长度应使用百分号。"
+        }
+      ],
+      "correctOptionId": "C",
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "objective_choice",
+        "correctOptionId": "C"
+      },
+      "referenceSolutions": [
+        {
+          "kind": "choice",
+          "optionId": "C",
+          "answer": "以大写A开头且后面恰有两个字符",
+          "explanation": "每个下划线匹配一个字符。"
+        }
+      ],
+      "hints": [
+        "将题设条件逐项翻译为真假判断，特别注意边界值和括号。",
+        "回想本章《LIKE、通配符与转义》中定义的运算对象和限制，再逐个排除不满足题设的选项。",
+        "将每个候选与题设的明确条件对照，不能把偶然成立的情况当成通用规则。"
+      ],
+      "explanation": "每个下划线匹配一个字符。\nA. 模式共有三个字符位置且首字母固定。\nB. 不加转义的下划线是通配符。\nC. 每个下划线匹配一个字符。\nD. 任意长度应使用百分号。",
+      "commonErrors": [
+        {
+          "optionId": "A",
+          "reason": "模式共有三个字符位置且首字母固定。"
+        },
+        {
+          "optionId": "B",
+          "reason": "不加转义的下划线是通配符。"
+        },
+        {
+          "optionId": "D",
+          "reason": "任意长度应使用百分号。"
+        }
+      ],
+      "testFixtureIds": [
+        "q0023-key"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0023-key",
+          "visibility": "hidden",
+          "variant": "objective_key",
+          "path": "fixtures/q0023/q0023-key.json",
+          "sha256": "5e8a518361820d4d90eaab25cf8567c037dd70ec9ab00abca58791956694f017"
+        }
+      ],
+      "orderPolicy": "not_applicable",
+      "columnPolicy": "not_applicable",
+      "numericTolerance": null,
+      "requiredAstFeatures": [],
+      "supportStatus": "仅理论",
+      "executionMode": "objective_choice",
+      "interviewTag": "概念辨析",
+      "validationStatus": "客观答案键检查（人工编写事实依据；无原生执行）",
+      "mysqlVerification": "不适用：客观概念题",
+      "validation": {
+        "kind": "objective_key",
+        "options": [
+          {
+            "optionId": "A",
+            "expectedAccepted": false,
+            "passed": true
+          },
+          {
+            "optionId": "B",
+            "expectedAccepted": false,
+            "passed": true
+          },
+          {
+            "optionId": "C",
+            "expectedAccepted": true,
+            "passed": true
+          },
+          {
+            "optionId": "D",
+            "expectedAccepted": false,
+            "passed": true
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html"
+      },
+      "relatedFlashcardIds": [
+        "fc0016",
+        "fc0021"
+      ]
+    },
+    {
+      "id": "q0024",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-01"
+      ],
+      "difficulty": "入门",
+      "type": "代码填空",
+      "title": "严格高于门槛的商品",
+      "context": "使用课程中小型商品数据练习严格高于门槛的商品。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "补全代码中的一个空位，使完整SQL满足以下要求。可输入具有相同语义的片段，提交后按完整代码执行结果核对。\n商品售价严格大于45，输出 product_id、price，按编号升序。\n输出列名称及顺序：product_id, price。按题设排序；参考排序键：product_id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0024-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "products"
+      ],
+      "initialCode": "SELECT product_id,price FROM products WHERE {{blank1}} ORDER BY product_id",
+      "options": [],
+      "acceptedBlanks": [
+        {
+          "id": "blank1",
+          "referenceText": "price>45",
+          "acceptedForms": [
+            "price>45",
+            "NOT (price<=45)"
+          ]
+        }
+      ],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "product_id",
+          "price"
+        ],
+        "rows": [
+          [
+            2,
+            89
+          ],
+          [
+            4,
+            65
+          ]
+        ],
+        "rowCount": 2
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT product_id,price FROM products WHERE price>45 ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,price FROM products WHERE price>45 ORDER BY product_id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT product_id,price FROM products WHERE NOT (price<=45) ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,price FROM products WHERE NOT (price<=45) ORDER BY product_id",
+          "explanation": "用反向比较并取 NOT 表达相同三值逻辑。"
+        }
+      ],
+      "hints": [
+        "将题设条件逐项翻译为真假判断，特别注意边界值和括号。",
+        "结合《WHERE 与比较运算》：WHERE 对每行计算条件，只保留真值；比较符包括 =、<>、!=、>、>=、<、<=。",
+        "回想空位所在子句的功能：WHERE 与比较运算；保留周围代码，填入实现题设的表达式。"
+      ],
+      "explanation": "严格大于不包含45，边界应排除。\n执行思路：确认products的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出product_id、price列；遵循题设排序和并列规则。\n公开夹具实际返回 2 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：用反向比较并取 NOT 表达相同三值逻辑。",
+      "commonErrors": [
+        {
+          "sql": "SELECT product_id,price FROM products WHERE price>=45 ORDER BY product_id",
+          "reason": "严格大于不包含45，边界应排除。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0024-public",
+        "q0024-boundary",
+        "q0024-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0024-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0024/q0024-public.json",
+          "sha256": "dfe8e657a863ed657ba7422051dda2927686a3856b6bfde99b2dbb2447850244"
+        },
+        {
+          "id": "q0024-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0024/q0024-boundary.json",
+          "sha256": "de1909b1ddb062a2cccbd9dcc4ca7743f91d41293f401220be41413f496834c1"
+        },
+        {
+          "id": "q0024-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0024/q0024-empty.json",
+          "sha256": "05b605db192bb82b38a43b28673c5b899167922ef9d5f77ff429a9ae3a34ef64"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "WHERE 与比较运算",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0024-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "8aeeab47bca3a3d8d1260636185987a07b1d0c849b694c3d6af043a5c79946b5",
+              "rowCount": 2
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "8aeeab47bca3a3d8d1260636185987a07b1d0c849b694c3d6af043a5c79946b5",
+              "rows": 2
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "731d15336401513867a8e3c31216aab42e0ee253c67dd94aa7bc594d07b30c28",
+              "rows": 3
+            }
+          },
+          {
+            "fixtureId": "q0024-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "e90e0395537b46523bb460fdf6138736c801c4a4ae7dce643aa00fb88cbdd548",
+              "rowCount": 11
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "e90e0395537b46523bb460fdf6138736c801c4a4ae7dce643aa00fb88cbdd548",
+              "rows": 11
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "00e55dbddb2e1ab140aa85bedd96777bf86a306fda1f3c55d6cb7b149497897c",
+              "rows": 13
+            }
+          },
+          {
+            "fixtureId": "q0024-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "a3cda5741886735fb72bf4de410e6e9b87ef5254c2ff9a8a4e68cf8741b576d9",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "a3cda5741886735fb72bf4de410e6e9b87ef5254c2ff9a8a4e68cf8741b576d9",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "a3cda5741886735fb72bf4de410e6e9b87ef5254c2ff9a8a4e68cf8741b576d9",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html",
+        "independentPythonAssertions": [
+          {
+            "fixtureId": "q0024-public",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          },
+          {
+            "fixtureId": "q0024-boundary",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          },
+          {
+            "fixtureId": "q0024-empty",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          }
+        ]
+      },
+      "fillEvaluation": {
+        "method": "插入后完整SQL真实执行；可接受形式不限制等价片段",
+        "referenceReassembled": true
+      },
+      "relatedFlashcardIds": [
+        "fc0014",
+        "fc0015"
+      ]
+    },
+    {
+      "id": "q0025",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-01"
+      ],
+      "difficulty": "入门",
+      "type": "结果预测",
+      "title": "不超过库存警戒数量",
+      "context": "使用课程中小型商品数据练习不超过库存警戒数量。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "不运行下方SQL，手工推算其在公开夹具中的完整返回结果。保留列名和重复行；明确区分NULL、空字符串和数值。\n库存不超过80件，输出 product_id、stock，按编号升序。\n输出列名称及顺序：product_id, stock。按题设排序；参考排序键：product_id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0025-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "products"
+      ],
+      "initialCode": "SELECT product_id,stock FROM products WHERE stock<=80 ORDER BY product_id",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "product_id",
+          "stock"
+        ],
+        "rows": [
+          [
+            2,
+            40
+          ],
+          [
+            5,
+            80
+          ],
+          [
+            6,
+            0
+          ]
+        ],
+        "rowCount": 3
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT product_id,stock FROM products WHERE stock<=80 ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,stock FROM products WHERE stock<=80 ORDER BY product_id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT product_id,stock FROM products WHERE NOT (stock>80) ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,stock FROM products WHERE NOT (stock>80) ORDER BY product_id",
+          "explanation": "用反向比较并取 NOT 表达相同三值逻辑。"
+        }
+      ],
+      "hints": [
+        "将题设条件逐项翻译为真假判断，特别注意边界值和括号。",
+        "结合《WHERE 与比较运算》：WHERE 对每行计算条件，只保留真值；比较符包括 =、<>、!=、>、>=、<、<=。",
+        "逐行标记输入是否命中条件，再根据查询的分组、窗口或投影阶段逐一计算；最后按题设顺序整理结果。"
+      ],
+      "explanation": "不超过包含相等，80件也要纳入。\n执行思路：确认products的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出product_id、stock列；遵循题设排序和并列规则。\n公开夹具实际返回 3 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：用反向比较并取 NOT 表达相同三值逻辑。",
+      "commonErrors": [
+        {
+          "sql": "SELECT product_id,stock FROM products WHERE stock<80 ORDER BY product_id",
+          "reason": "不超过包含相等，80件也要纳入。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0025-public",
+        "q0025-boundary",
+        "q0025-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0025-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0025/q0025-public.json",
+          "sha256": "21ab8c8b8f47eaf30d9a0e32ecd4034c7a98983c85e096703d55dd35af314a4e"
+        },
+        {
+          "id": "q0025-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0025/q0025-boundary.json",
+          "sha256": "e6cd979488bf1c8ceaa1db95a8480f656c2c3ad2c8ea82201bf2e357c49930cd"
+        },
+        {
+          "id": "q0025-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0025/q0025-empty.json",
+          "sha256": "6ea184c0c13256b04a92d204fdf181f72485bfce5cac106d264645f51a5c0d86"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "predict_public_result",
+      "runAllowedBeforeSubmit": false,
+      "hiddenFixturePolicy": "参考逻辑验证；用户只预测公开结果",
+      "interviewTag": "WHERE 与比较运算",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0025-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "82c71616ebef4b0a1748a1d688d3c355a259e9a997cfe12afa8b91fc6b84ea19",
+              "rowCount": 3
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "82c71616ebef4b0a1748a1d688d3c355a259e9a997cfe12afa8b91fc6b84ea19",
+              "rows": 3
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "a23a35525858678305d66ed0ee682716edc6254240a0f2aefc1f3c151a33c4e4",
+              "rows": 2
+            }
+          },
+          {
+            "fixtureId": "q0025-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "8724c5238ccd95f20e84c2c2864891f516eb5f00a51490b065f1e2238814275c",
+              "rowCount": 14
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "8724c5238ccd95f20e84c2c2864891f516eb5f00a51490b065f1e2238814275c",
+              "rows": 14
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "117b99cff913937fe8aefe218db2c7cdf5bd3ece972097e02aac8013829c9225",
+              "rows": 11
+            }
+          },
+          {
+            "fixtureId": "q0025-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5eab6d96c4ab735c0743959fc735aea45e42daa91559af71d7274594564037ba",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5eab6d96c4ab735c0743959fc735aea45e42daa91559af71d7274594564037ba",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5eab6d96c4ab735c0743959fc735aea45e42daa91559af71d7274594564037ba",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html",
+        "independentPythonAssertions": [
+          {
+            "fixtureId": "q0025-public",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          },
+          {
+            "fixtureId": "q0025-boundary",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          },
+          {
+            "fixtureId": "q0025-empty",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          }
+        ]
+      },
+      "relatedFlashcardIds": [
+        "fc0014"
+      ]
+    },
+    {
+      "id": "q0026",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-04"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-04"
+      ],
+      "difficulty": "入门",
+      "type": "独立编写",
+      "title": "百分号字段核查",
+      "context": "使用课程中小型原始导入资料数据练习百分号字段核查。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "原始数据 raw_data.name 中查找名称含字面百分号的记录，输出 id、name，按编号升序；! 为转义字符。\n输出列名称及顺序：id, name。按题设排序；参考排序键：id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0026-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "raw_data"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "id",
+          "name"
+        ],
+        "rows": [],
+        "rowCount": 0
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT id,name FROM raw_data WHERE name LIKE '%!%%' ESCAPE '!' ORDER BY id",
+          "sqliteSql": "SELECT id,name FROM raw_data WHERE name LIKE '%!%%' ESCAPE '!' ORDER BY id"
+        },
+        {
+          "kind": "关系结构等价",
+          "mysqlSql": "SELECT id,name FROM (SELECT * FROM raw_data) AS raw_data WHERE name LIKE '%!%%' ESCAPE '!' ORDER BY id",
+          "sqliteSql": "SELECT id,name FROM (SELECT * FROM raw_data) AS raw_data WHERE name LIKE '%!%%' ESCAPE '!' ORDER BY id",
+          "explanation": "先构造派生输入关系，再执行相同投影、聚合和筛选；保持结果语义。"
+        }
+      ],
+      "hints": [
+        "将题设条件逐项翻译为真假判断，特别注意边界值和括号。",
+        "结合《LIKE、通配符与转义》：% 匹配零个或多个字符；_ 匹配单个字符；ESCAPE 指定转义符。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nSELECT id,name FROM raw_data WHERE name LIKE □□□ ESCAPE '!' ORDER BY id"
+      ],
+      "explanation": "字面百分号需要转义，否则任意文本均可能匹配。\n执行思路：确认raw_data的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出id、name列；遵循题设排序和并列规则。\n公开夹具实际返回 0 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：先构造派生输入关系，再执行相同投影、聚合和筛选；保持结果语义。",
+      "commonErrors": [
+        {
+          "sql": "SELECT id,name FROM raw_data WHERE name LIKE '%%%' ESCAPE '!' ORDER BY id",
+          "reason": "字面百分号需要转义，否则任意文本均可能匹配。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0026-public",
+        "q0026-boundary",
+        "q0026-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0026-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0026/q0026-public.json",
+          "sha256": "a166bf0d83b1295a4d6aa543823d2a1a3267fa066414d43e42d7a3155e37c89d"
+        },
+        {
+          "id": "q0026-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0026/q0026-boundary.json",
+          "sha256": "f359a8c561cdcddcb63a986ce0c16166506854ec75d710e5e5247dd01ff7cd9f"
+        },
+        {
+          "id": "q0026-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0026/q0026-empty.json",
+          "sha256": "43bb49440af4c1234442f88b71036968053f54b394a020957e0fdf04a199ecc3"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "LIKE、通配符与转义",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "关系结构等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0026-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "7a7d15a6526cca536ff608feff0dcd6537b6ad1bbaec8670172851f92deb3f88",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "7a7d15a6526cca536ff608feff0dcd6537b6ad1bbaec8670172851f92deb3f88",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "82bf95cdd1a75ff61c347aa1b5d6bacf02b054cdddd4124aee799299eae39758",
+              "rows": 6
+            }
+          },
+          {
+            "fixtureId": "q0026-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "cbaf3fb8b31709c184d51525a61dbbc5b0394f99da9e079354aecf67435ac9e0",
+              "rowCount": 2
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "cbaf3fb8b31709c184d51525a61dbbc5b0394f99da9e079354aecf67435ac9e0",
+              "rows": 2
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "f97abc725b0009d707416b8519f3a67e6f806dafabd67a200fa349844e7a9067",
+              "rows": 9
+            }
+          },
+          {
+            "fixtureId": "q0026-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "7a7d15a6526cca536ff608feff0dcd6537b6ad1bbaec8670172851f92deb3f88",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "7a7d15a6526cca536ff608feff0dcd6537b6ad1bbaec8670172851f92deb3f88",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "7a7d15a6526cca536ff608feff0dcd6537b6ad1bbaec8670172851f92deb3f88",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0016",
+        "fc0021"
+      ]
+    },
+    {
+      "id": "q0027",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-02"
+      ],
+      "difficulty": "入门",
+      "type": "选择",
+      "title": "AND、OR、NOT 与优先级 · MySQL 中不加括号的条件 a=1 OR b=2 …",
+      "context": "本题考查《AND、OR、NOT 与优先级》中实际使用时容易混淆的规则。",
+      "requirements": "MySQL 中不加括号的条件 a=1 OR b=2 AND c=3，按默认逻辑优先级应如何理解？",
+      "datasetId": null,
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "initialCode": null,
+      "options": [
+        {
+          "id": "A",
+          "text": "a=1 AND (b=2 OR c=3)",
+          "explanation": "连接词和分组均与原式不同。"
+        },
+        {
+          "id": "B",
+          "text": "a=1 OR (b=2 AND c=3)",
+          "explanation": "AND优先级高于OR。"
+        },
+        {
+          "id": "C",
+          "text": "(a=1 AND b=2) OR c=3",
+          "explanation": "原语句未这样组合。"
+        },
+        {
+          "id": "D",
+          "text": "(a=1 OR b=2) AND c=3",
+          "explanation": "这个写法改变了原表达式组合。"
+        }
+      ],
+      "correctOptionId": "B",
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "objective_choice",
+        "correctOptionId": "B"
+      },
+      "referenceSolutions": [
+        {
+          "kind": "choice",
+          "optionId": "B",
+          "answer": "a=1 OR (b=2 AND c=3)",
+          "explanation": "AND优先级高于OR。"
+        }
+      ],
+      "hints": [
+        "比较两个逻辑连接词在不加括号时的求值优先级。",
+        "回想本章《AND、OR、NOT 与优先级》中定义的运算对象和限制，再逐个排除不满足题设的选项。",
+        "将每个候选与题设的明确条件对照，不能把偶然成立的情况当成通用规则。"
+      ],
+      "explanation": "AND优先级高于OR。\nA. 连接词和分组均与原式不同。\nB. AND优先级高于OR。\nC. 原语句未这样组合。\nD. 这个写法改变了原表达式组合。",
+      "commonErrors": [
+        {
+          "optionId": "A",
+          "reason": "连接词和分组均与原式不同。"
+        },
+        {
+          "optionId": "C",
+          "reason": "原语句未这样组合。"
+        },
+        {
+          "optionId": "D",
+          "reason": "这个写法改变了原表达式组合。"
+        }
+      ],
+      "testFixtureIds": [
+        "q0027-key"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0027-key",
+          "visibility": "hidden",
+          "variant": "objective_key",
+          "path": "fixtures/q0027/q0027-key.json",
+          "sha256": "c75fe9541b1e239b1f866597974c60c2e81c33c1c5029986dc6900be90d98e6f"
+        }
+      ],
+      "orderPolicy": "not_applicable",
+      "columnPolicy": "not_applicable",
+      "numericTolerance": null,
+      "requiredAstFeatures": [],
+      "supportStatus": "仅理论",
+      "executionMode": "objective_choice",
+      "interviewTag": "概念辨析",
+      "validationStatus": "客观答案键检查（人工编写事实依据；无原生执行）",
+      "mysqlVerification": "不适用：客观概念题",
+      "validation": {
+        "kind": "objective_key",
+        "options": [
+          {
+            "optionId": "A",
+            "expectedAccepted": false,
+            "passed": true
+          },
+          {
+            "optionId": "B",
+            "expectedAccepted": true,
+            "passed": true
+          },
+          {
+            "optionId": "C",
+            "expectedAccepted": false,
+            "passed": true
+          },
+          {
+            "optionId": "D",
+            "expectedAccepted": false,
+            "passed": true
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html"
+      },
+      "relatedFlashcardIds": [
+        "fc0018",
+        "fc0020",
+        "fc0022"
+      ]
+    },
+    {
+      "id": "q0028",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-01"
+      ],
+      "difficulty": "入门",
+      "type": "独立编写",
+      "title": "找出缺货商品",
+      "context": "使用课程中小型商品数据练习找出缺货商品。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "仅库存等于0的商品，输出 product_id、product_name，按编号升序。\n输出列名称及顺序：product_id, product_name。按题设排序；参考排序键：product_id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0028-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "products"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "product_id",
+          "product_name"
+        ],
+        "rows": [
+          [
+            6,
+            "Soap_1"
+          ]
+        ],
+        "rowCount": 1
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT product_id,product_name FROM products WHERE stock=0 ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,product_name FROM products WHERE stock=0 ORDER BY product_id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT product_id,product_name FROM products WHERE NOT (stock<>0) ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,product_name FROM products WHERE NOT (stock<>0) ORDER BY product_id",
+          "explanation": "用反向比较并取 NOT 表达相同三值逻辑。"
+        }
+      ],
+      "hints": [
+        "将题设条件逐项翻译为真假判断，特别注意边界值和括号。",
+        "结合《WHERE 与比较运算》：WHERE 对每行计算条件，只保留真值；比较符包括 =、<>、!=、>、>=、<、<=。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nSELECT product_id,product_name FROM products WHERE □□□ ORDER BY product_id"
+      ],
+      "explanation": "缺货指数量为0，不是有库存的商品。\n执行思路：确认products的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出product_id、product_name列；遵循题设排序和并列规则。\n公开夹具实际返回 1 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：用反向比较并取 NOT 表达相同三值逻辑。",
+      "commonErrors": [
+        {
+          "sql": "SELECT product_id,product_name FROM products WHERE stock>0 ORDER BY product_id",
+          "reason": "缺货指数量为0，不是有库存的商品。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0028-public",
+        "q0028-boundary",
+        "q0028-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0028-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0028/q0028-public.json",
+          "sha256": "2962accdd5925309cd4e679837493ba0dc3c3bda943aa5010cb35cfc55c7dc55"
+        },
+        {
+          "id": "q0028-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0028/q0028-boundary.json",
+          "sha256": "7a4b0992cd8492e54c97d3d5e179ac301d8b92b2d2b9237cf74bdbbca1f8f25b"
+        },
+        {
+          "id": "q0028-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0028/q0028-empty.json",
+          "sha256": "fd4010da6231bffe3acc5b496883da43f05a12d11b57075f4934a24878417e0a"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "WHERE 与比较运算",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0028-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5873f9e0e628461b8db1c23a3bd3f199587d1f2990fedf1ec8f32819447fb43f",
+              "rowCount": 1
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5873f9e0e628461b8db1c23a3bd3f199587d1f2990fedf1ec8f32819447fb43f",
+              "rows": 1
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "8917d798b21d298f288dba307b5e9748eecfd160ba4b4517f45a6392e48c6a9f",
+              "rows": 5
+            }
+          },
+          {
+            "fixtureId": "q0028-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "3acf4846e5a5f4d1414d9b89e68214fdd03f7f61f6abb75d26c81c47b24c008d",
+              "rowCount": 3
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "3acf4846e5a5f4d1414d9b89e68214fdd03f7f61f6abb75d26c81c47b24c008d",
+              "rows": 3
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "afe4a25b27e6dbdccb577b00ebebe225723d1dd6ac22e63721f8787a7d256607",
+              "rows": 17
+            }
+          },
+          {
+            "fixtureId": "q0028-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "d415d2651e14a7155fe90ca3acbe2d277870f52c78656639832dae72d03d4505",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "d415d2651e14a7155fe90ca3acbe2d277870f52c78656639832dae72d03d4505",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "d415d2651e14a7155fe90ca3acbe2d277870f52c78656639832dae72d03d4505",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html",
+        "independentPythonAssertions": [
+          {
+            "fixtureId": "q0028-public",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          },
+          {
+            "fixtureId": "q0028-boundary",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          },
+          {
+            "fixtureId": "q0028-empty",
+            "description": "使用独立Python迭代、集合或算术规则计算期望结果",
+            "passed": true
+          }
+        ]
+      },
+      "relatedFlashcardIds": [
+        "fc0015"
+      ]
+    },
+    {
+      "id": "q0029",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-02"
+      ],
+      "difficulty": "入门",
+      "type": "独立编写",
+      "title": "低价且有现货",
+      "context": "使用课程中小型商品数据练习低价且有现货。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "找出售价低于40并且库存大于0的商品，返回 product_id，按编号升序。\n输出列名称及顺序：product_id。按题设排序；参考排序键：product_id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0029-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "products"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "product_id"
+        ],
+        "rows": [
+          [
+            1
+          ],
+          [
+            3
+          ]
+        ],
+        "rowCount": 2
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT product_id FROM products WHERE price<40 AND stock>0 ORDER BY product_id",
+          "sqliteSql": "SELECT product_id FROM products WHERE price<40 AND stock>0 ORDER BY product_id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT product_id FROM products WHERE NOT (price>=40) AND stock>0 ORDER BY product_id",
+          "sqliteSql": "SELECT product_id FROM products WHERE NOT (price>=40) AND stock>0 ORDER BY product_id",
+          "explanation": "用反向比较并取 NOT 表达相同三值逻辑。"
+        }
+      ],
+      "hints": [
+        "将题设条件逐项翻译为真假判断，特别注意边界值和括号。",
+        "结合《AND、OR、NOT 与优先级》：NOT 通常先于 AND，AND 先于 OR；括号明确业务条件，避免依赖记忆。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nSELECT product_id FROM products WHERE price<40□□□stock>0 ORDER BY product_id"
+      ],
+      "explanation": "两个条件必须同时成立，不能用 OR。\n执行思路：确认products的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出product_id列；遵循题设排序和并列规则。\n公开夹具实际返回 2 行、1 列；完整结果见 expectedOutput。\n另一种可用写法：用反向比较并取 NOT 表达相同三值逻辑。",
+      "commonErrors": [
+        {
+          "sql": "SELECT product_id FROM products WHERE price<40 OR stock>0 ORDER BY product_id",
+          "reason": "两个条件必须同时成立，不能用 OR。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0029-public",
+        "q0029-boundary",
+        "q0029-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0029-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0029/q0029-public.json",
+          "sha256": "db390a5d95d2d09d7c5bc0a1a483c27f15158f1fa5a6dbc1272d1af5ed361ceb"
+        },
+        {
+          "id": "q0029-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0029/q0029-boundary.json",
+          "sha256": "51eb7bfe72d137925239e10e5fb6a3517fc852e5d2867da680dff5ea8091dedf"
+        },
+        {
+          "id": "q0029-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0029/q0029-empty.json",
+          "sha256": "97cb5bc35490737b1feae616a955ab9e1ea89639bab569838c71f2cf46bb0c30"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "AND、OR、NOT 与优先级",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0029-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "cb788606266c407dbee018aced15579220f32b78eb5fac8115a0d1520e45d853",
+              "rowCount": 2
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "cb788606266c407dbee018aced15579220f32b78eb5fac8115a0d1520e45d853",
+              "rows": 2
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "41202ed96b7b64025d511f83c69d489c7fcc400b92d3704fd71ed3ea3780a78e",
+              "rows": 6
+            }
+          },
+          {
+            "fixtureId": "q0029-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "30e80914add5819c1b620f1aa0856e5b28d09a1eee7ac6aefbb5faabc9852487",
+              "rowCount": 5
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "30e80914add5819c1b620f1aa0856e5b28d09a1eee7ac6aefbb5faabc9852487",
+              "rows": 5
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "fd064fdea299029db5573e9219652a14c987110d9dc209759cff00b8235d5e29",
+              "rows": 18
+            }
+          },
+          {
+            "fixtureId": "q0029-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "05b5a3249bbcbca0bdfe860911c88b1e1aa084d946600f1ac200d63549e18f72",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "05b5a3249bbcbca0bdfe860911c88b1e1aa084d946600f1ac200d63549e18f72",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "05b5a3249bbcbca0bdfe860911c88b1e1aa084d946600f1ac200d63549e18f72",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0018",
+        "fc0020",
+        "fc0022"
+      ]
+    },
+    {
+      "id": "q0030",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-01"
+      ],
+      "difficulty": "入门",
+      "type": "代码纠错",
+      "title": "排除指定类别",
+      "context": "使用课程中小型商品数据练习排除指定类别。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "下面提供的初始代码存在逻辑、语法或结构错误。请修改整段代码，使其满足以下要求。\n筛选 category 非日用品且非NULL的商品，输出 product_id、category，按编号升序。\n输出列名称及顺序：product_id, category。按题设排序；参考排序键：product_id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0030-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "products"
+      ],
+      "initialCode": "SELECT product_id,category FROM products WHERE category='日用品' ORDER BY product_id",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "product_id",
+          "category"
+        ],
+        "rows": [
+          [
+            1,
+            "护肤品"
+          ],
+          [
+            2,
+            "护肤品"
+          ],
+          [
+            3,
+            "护肤品"
+          ],
+          [
+            4,
+            "化妆品"
+          ],
+          [
+            5,
+            "化妆品"
+          ]
+        ],
+        "rowCount": 5
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT product_id,category FROM products WHERE category<>'日用品' ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,category FROM products WHERE category<>'日用品' ORDER BY product_id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT product_id,category FROM products WHERE NOT (category='日用品') ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,category FROM products WHERE NOT (category='日用品') ORDER BY product_id",
+          "explanation": "用反向比较并取 NOT 表达相同三值逻辑。"
+        }
+      ],
+      "hints": [
+        "将题设条件逐项翻译为真假判断，特别注意边界值和括号。",
+        "结合《WHERE 与比较运算》：WHERE 对每行计算条件，只保留真值；比较符包括 =、<>、!=、>、>=、<、<=。",
+        "检查初始代码的 <> 对应的业务规则。不等于比较在NULL上未知，因此不会纳入缺失类别。"
+      ],
+      "explanation": "不等于比较在NULL上未知，因此不会纳入缺失类别。\n执行思路：确认products的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出product_id、category列；遵循题设排序和并列规则。\n公开夹具实际返回 5 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：用反向比较并取 NOT 表达相同三值逻辑。",
+      "commonErrors": [
+        {
+          "sql": "SELECT product_id,category FROM products WHERE category='日用品' ORDER BY product_id",
+          "reason": "不等于比较在NULL上未知，因此不会纳入缺失类别。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0030-public",
+        "q0030-boundary",
+        "q0030-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0030-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0030/q0030-public.json",
+          "sha256": "89c857354bb1c1bef49bc986e2530c3641b01df48bf35d96cf843548c41e9903"
+        },
+        {
+          "id": "q0030-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0030/q0030-boundary.json",
+          "sha256": "267e1a85048d2b1d3c9c71429219cce3f0d0f5a24463961503db2db1b0941b96"
+        },
+        {
+          "id": "q0030-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0030/q0030-empty.json",
+          "sha256": "4fb15627ff4e42177cb38ef9b97505cf6e505589dc167f4836a49c21553065ef"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "WHERE 与比较运算",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0030-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "eb1684297d6f6cd5f69ab29d2fd38655fb78f0c925de7aec3a442094fb09ba52",
+              "rowCount": 5
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "eb1684297d6f6cd5f69ab29d2fd38655fb78f0c925de7aec3a442094fb09ba52",
+              "rows": 5
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "d3f85e9e6538b1e5b8010211e3e2a0c4d1fa8c17f36310f01b99320092b24079",
+              "rows": 1
+            }
+          },
+          {
+            "fixtureId": "q0030-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "90d1775659f301679a5bb3d4ff2205123b92771a3a750099f8d0950a1017f3d0",
+              "rowCount": 16
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "90d1775659f301679a5bb3d4ff2205123b92771a3a750099f8d0950a1017f3d0",
+              "rows": 16
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "4c75a15c6d9a98061a0b95c43abff26e874316b1ac8b28448bdc3d16c8e7aa80",
+              "rows": 5
+            }
+          },
+          {
+            "fixtureId": "q0030-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "9fe5e77e8b008fc0bdb9dcf2ea01922e1fd57a118cb9ee43b3834e29d54467b1",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "9fe5e77e8b008fc0bdb9dcf2ea01922e1fd57a118cb9ee43b3834e29d54467b1",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "9fe5e77e8b008fc0bdb9dcf2ea01922e1fd57a118cb9ee43b3834e29d54467b1",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0014"
+      ]
+    },
+    {
+      "id": "q0031",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-02"
+      ],
+      "difficulty": "入门",
+      "type": "代码纠错",
+      "title": "排除高价或缺货情况",
+      "context": "使用课程中小型商品数据练习排除高价或缺货情况。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "下面提供的初始代码存在逻辑、语法或结构错误。请修改整段代码，使其满足以下要求。\n返回既非售价大于60也非库存为0的商品编号，按编号升序。\n输出列名称及顺序：product_id。按题设排序；参考排序键：product_id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0031-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "products"
+      ],
+      "initialCode": "SELECT product_id FROM products WHERE NOT (price>60 AND stock=0) ORDER BY product_id",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "product_id"
+        ],
+        "rows": [
+          [
+            1
+          ],
+          [
+            3
+          ],
+          [
+            5
+          ]
+        ],
+        "rowCount": 3
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT product_id FROM products WHERE NOT (price>60 OR stock=0) ORDER BY product_id",
+          "sqliteSql": "SELECT product_id FROM products WHERE NOT (price>60 OR stock=0) ORDER BY product_id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT product_id FROM products WHERE NOT (NOT (price<=60) OR stock=0) ORDER BY product_id",
+          "sqliteSql": "SELECT product_id FROM products WHERE NOT (NOT (price<=60) OR stock=0) ORDER BY product_id",
+          "explanation": "用反向比较并取 NOT 表达相同三值逻辑。"
+        }
+      ],
+      "hints": [
+        "将题设条件逐项翻译为真假判断，特别注意边界值和括号。",
+        "结合《AND、OR、NOT 与优先级》：NOT 通常先于 AND，AND 先于 OR；括号明确业务条件，避免依赖记忆。",
+        "检查初始代码的 NOT (price>60 OR stock=0) 对应的业务规则。不满足任一坏条件，等价于两个好条件都成立。"
+      ],
+      "explanation": "不满足任一坏条件，等价于两个好条件都成立。\n执行思路：确认products的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出product_id列；遵循题设排序和并列规则。\n公开夹具实际返回 3 行、1 列；完整结果见 expectedOutput。\n另一种可用写法：用反向比较并取 NOT 表达相同三值逻辑。",
+      "commonErrors": [
+        {
+          "sql": "SELECT product_id FROM products WHERE NOT (price>60 AND stock=0) ORDER BY product_id",
+          "reason": "不满足任一坏条件，等价于两个好条件都成立。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0031-public",
+        "q0031-boundary",
+        "q0031-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0031-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0031/q0031-public.json",
+          "sha256": "c7e85588d5803ff1438ab04d6b754ba656f2d39e4a23d2074875523a22282fe2"
+        },
+        {
+          "id": "q0031-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0031/q0031-boundary.json",
+          "sha256": "af1a25058558a191a8b27c5e4ffdc601a445ec173734ba5d9c4ce0d135d37ec0"
+        },
+        {
+          "id": "q0031-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0031/q0031-empty.json",
+          "sha256": "6f7a4f00a37d93d3c129d00e355622588480fd3445c4444b17e2c0e092b67fc5"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "AND、OR、NOT 与优先级",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0031-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "a0548850a00091833e61306fc8f4a65f88a3d3b0022d50c472d2cba1585556c0",
+              "rowCount": 3
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "a0548850a00091833e61306fc8f4a65f88a3d3b0022d50c472d2cba1585556c0",
+              "rows": 3
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "41202ed96b7b64025d511f83c69d489c7fcc400b92d3704fd71ed3ea3780a78e",
+              "rows": 6
+            }
+          },
+          {
+            "fixtureId": "q0031-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "fd510f206b8593ffdc2fe6808d37cdf64ad75fede9504bee291e7b64f1793048",
+              "rowCount": 11
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "fd510f206b8593ffdc2fe6808d37cdf64ad75fede9504bee291e7b64f1793048",
+              "rows": 11
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "116d6472572b11d148e63d30682031d89ae851f49873fdfad7c1d2995909362d",
+              "rows": 20
+            }
+          },
+          {
+            "fixtureId": "q0031-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "05b5a3249bbcbca0bdfe860911c88b1e1aa084d946600f1ac200d63549e18f72",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "05b5a3249bbcbca0bdfe860911c88b1e1aa084d946600f1ac200d63549e18f72",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "05b5a3249bbcbca0bdfe860911c88b1e1aa084d946600f1ac200d63549e18f72",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0022"
+      ]
+    },
+    {
+      "id": "q0032",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-04"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-04"
+      ],
+      "difficulty": "入门",
+      "type": "代码填空",
+      "title": "指定字符长度模式",
+      "context": "使用课程中小型商品数据练习指定字符长度模式。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "补全代码中的一个空位，使完整SQL满足以下要求。可输入具有相同语义的片段，提交后按完整代码执行结果核对。\n使用 LIKE 匹配恰好四个字符的商品名称，按 product_id 升序输出 product_name。\n输出列名称及顺序：product_name。按题设排序；参考排序键：product_id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0032-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "products"
+      ],
+      "initialCode": "SELECT product_name FROM products WHERE product_name LIKE {{blank1}} ORDER BY product_id",
+      "options": [],
+      "acceptedBlanks": [
+        {
+          "id": "blank1",
+          "referenceText": "'____'",
+          "acceptedForms": [
+            "'____'"
+          ]
+        }
+      ],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "product_name"
+        ],
+        "rows": [
+          [
+            "Mask"
+          ]
+        ],
+        "rowCount": 1
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT product_name FROM products WHERE product_name LIKE '____' ORDER BY product_id",
+          "sqliteSql": "SELECT product_name FROM products WHERE product_name LIKE '____' ORDER BY product_id"
+        },
+        {
+          "kind": "关系结构等价",
+          "mysqlSql": "SELECT product_name FROM (SELECT * FROM products) AS products WHERE product_name LIKE '____' ORDER BY product_id",
+          "sqliteSql": "SELECT product_name FROM (SELECT * FROM products) AS products WHERE product_name LIKE '____' ORDER BY product_id",
+          "explanation": "先构造派生输入关系，再执行相同投影、聚合和筛选；保持结果语义。"
+        }
+      ],
+      "hints": [
+        "将题设条件逐项翻译为真假判断，特别注意边界值和括号。",
+        "结合《LIKE、通配符与转义》：% 匹配零个或多个字符；_ 匹配单个字符；ESCAPE 指定转义符。",
+        "回想空位所在子句的功能：LIKE、通配符与转义；保留周围代码，填入实现题设的表达式。"
+      ],
+      "explanation": "下划线每个匹配一个字符，百分号会接受任意尾部。\n执行思路：确认products的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出product_name列；遵循题设排序和并列规则。\n公开夹具实际返回 1 行、1 列；完整结果见 expectedOutput。\n另一种可用写法：先构造派生输入关系，再执行相同投影、聚合和筛选；保持结果语义。",
+      "commonErrors": [
+        {
+          "sql": "SELECT product_name FROM products WHERE product_name LIKE '___%' ORDER BY product_id",
+          "reason": "下划线每个匹配一个字符，百分号会接受任意尾部。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0032-public",
+        "q0032-boundary",
+        "q0032-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0032-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0032/q0032-public.json",
+          "sha256": "a5bc6cbef8ee102273017f9e6ee23c14995f69b54d22867876cdaa2e74d9b6e8"
+        },
+        {
+          "id": "q0032-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0032/q0032-boundary.json",
+          "sha256": "1b5715f54f89865fec4236873a48375c67fa924dd53e08cde29f8ca8ff201e5f"
+        },
+        {
+          "id": "q0032-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0032/q0032-empty.json",
+          "sha256": "0832554d6dc63ae15dcb0d1810e435afd1fa2bfe7b8aeb237fe74c34f47f6f19"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [
+        {
+          "kind": "like_predicate",
+          "status": "需运行时语法树核查；不以关键词匹配判分",
+          "requirement": "使用 LIKE 匹配恰好四个字符的商品名称，按 product_id 升序输出 product_name。"
+        }
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "LIKE、通配符与转义",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "关系结构等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0032-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "1c04ad2a990c958a18888ff45d97b46f24fb8abd538e2f2f488e59ec4e0d7259",
+              "rowCount": 1
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "1c04ad2a990c958a18888ff45d97b46f24fb8abd538e2f2f488e59ec4e0d7259",
+              "rows": 1
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "386f7087b3d1bc2bd6c1e92c9665aa700fbd63e4f43a99193d05a015262ce32e",
+              "rows": 6
+            }
+          },
+          {
+            "fixtureId": "q0032-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "18af2c67c6b1497c9a7fb973ea4496782a0f3a9171c49bbbbf75575fb001c0c8",
+              "rowCount": 5
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "18af2c67c6b1497c9a7fb973ea4496782a0f3a9171c49bbbbf75575fb001c0c8",
+              "rows": 5
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "488f65a702a3151ad80d7616feb58498b712abc2f29111a8f09e0d2936493b8e",
+              "rows": 19
+            }
+          },
+          {
+            "fixtureId": "q0032-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "83667eeaa52c7d83bd36fcfb5a91b0d3dd3b2f73d2393209a74232b6ea420d95",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "83667eeaa52c7d83bd36fcfb5a91b0d3dd3b2f73d2393209a74232b6ea420d95",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "83667eeaa52c7d83bd36fcfb5a91b0d3dd3b2f73d2393209a74232b6ea420d95",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html",
+        "independentPythonAssertions": []
+      },
+      "fillEvaluation": {
+        "method": "插入后完整SQL真实执行；可接受形式不限制等价片段",
+        "referenceReassembled": true
+      },
+      "relatedFlashcardIds": [
+        "fc0016"
+      ]
+    },
+    {
+      "id": "q0033",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-04"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-04"
+      ],
+      "difficulty": "入门",
+      "type": "独立编写",
+      "title": "名称后缀",
+      "context": "使用课程中小型商品数据练习名称后缀。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "查找名称以 er 结尾的商品，输出 product_name 按名称升序。\n输出列名称及顺序：product_name。按题设排序；参考排序键：product_name。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0033-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "products"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "product_name"
+        ],
+        "rows": [
+          [
+            "Cleanser"
+          ]
+        ],
+        "rowCount": 1
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT product_name FROM products WHERE product_name LIKE '%er' ORDER BY product_name",
+          "sqliteSql": "SELECT product_name FROM products WHERE product_name LIKE '%er' ORDER BY product_name"
+        },
+        {
+          "kind": "关系结构等价",
+          "mysqlSql": "SELECT product_name FROM (SELECT * FROM products) AS products WHERE product_name LIKE '%er' ORDER BY product_name",
+          "sqliteSql": "SELECT product_name FROM (SELECT * FROM products) AS products WHERE product_name LIKE '%er' ORDER BY product_name",
+          "explanation": "先构造派生输入关系，再执行相同投影、聚合和筛选；保持结果语义。"
+        }
+      ],
+      "hints": [
+        "将题设条件逐项翻译为真假判断，特别注意边界值和括号。",
+        "结合《LIKE、通配符与转义》：% 匹配零个或多个字符；_ 匹配单个字符；ESCAPE 指定转义符。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nSELECT product_name FROM products WHERE product_name LIKE □□□ ORDER BY product_name"
+      ],
+      "explanation": "后缀条件应在前方使用任意长度匹配。\n执行思路：确认products的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出product_name列；遵循题设排序和并列规则。\n公开夹具实际返回 1 行、1 列；完整结果见 expectedOutput。\n另一种可用写法：先构造派生输入关系，再执行相同投影、聚合和筛选；保持结果语义。",
+      "commonErrors": [
+        {
+          "sql": "SELECT product_name FROM products WHERE product_name LIKE 'er%' ORDER BY product_name",
+          "reason": "后缀条件应在前方使用任意长度匹配。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0033-public",
+        "q0033-boundary",
+        "q0033-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0033-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0033/q0033-public.json",
+          "sha256": "a9e71c233d8514cf7c3e03d6a65566921942742aab40b7b6e3fe1bae5f37ceda"
+        },
+        {
+          "id": "q0033-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0033/q0033-boundary.json",
+          "sha256": "0a2b56b4f037997799c631f7b1cb09d9ccbfc647e1a06b85ae18b550fb7877fe"
+        },
+        {
+          "id": "q0033-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0033/q0033-empty.json",
+          "sha256": "cefae96cd422599ea4c5f8295e87b13db42297e01b739c9d1dd6dd9377978ebb"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "LIKE、通配符与转义",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "关系结构等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0033-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "6c645191e8f43c42e4f1e38fe7f6107c57ac0be8b3e3eaa19072ef292f624eac",
+              "rowCount": 1
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "6c645191e8f43c42e4f1e38fe7f6107c57ac0be8b3e3eaa19072ef292f624eac",
+              "rows": 1
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "83667eeaa52c7d83bd36fcfb5a91b0d3dd3b2f73d2393209a74232b6ea420d95",
+              "rows": 0
+            }
+          },
+          {
+            "fixtureId": "q0033-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "d1245efc8a9c188faeef95c58975bdbf6100ca2ed38ca6a78ded6fda7f2ba0c6",
+              "rowCount": 2
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "d1245efc8a9c188faeef95c58975bdbf6100ca2ed38ca6a78ded6fda7f2ba0c6",
+              "rows": 2
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "83667eeaa52c7d83bd36fcfb5a91b0d3dd3b2f73d2393209a74232b6ea420d95",
+              "rows": 0
+            }
+          },
+          {
+            "fixtureId": "q0033-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "83667eeaa52c7d83bd36fcfb5a91b0d3dd3b2f73d2393209a74232b6ea420d95",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "83667eeaa52c7d83bd36fcfb5a91b0d3dd3b2f73d2393209a74232b6ea420d95",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "83667eeaa52c7d83bd36fcfb5a91b0d3dd3b2f73d2393209a74232b6ea420d95",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0016"
+      ]
+    },
+    {
+      "id": "q0034",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-03"
+      ],
+      "difficulty": "入门",
+      "type": "独立编写",
+      "title": "库存区间之外",
+      "context": "使用课程中小型商品数据练习库存区间之外。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "返回库存数量不在50至150闭区间的商品编号、库存，按编号升序。\n输出列名称及顺序：product_id, stock。按题设排序；参考排序键：product_id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0034-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "products"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "product_id",
+          "stock"
+        ],
+        "rows": [
+          [
+            2,
+            40
+          ],
+          [
+            3,
+            200
+          ],
+          [
+            4,
+            180
+          ],
+          [
+            6,
+            0
+          ]
+        ],
+        "rowCount": 4
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT product_id,stock FROM products WHERE stock NOT BETWEEN 50 AND 150 ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,stock FROM products WHERE stock NOT BETWEEN 50 AND 150 ORDER BY product_id"
+        },
+        {
+          "kind": "独立方法等价",
+          "mysqlSql": "SELECT product_id,stock FROM products WHERE stock<50 OR stock>150 ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,stock FROM products WHERE stock<50 OR stock>150 ORDER BY product_id",
+          "explanation": "采用另一种关系运算或查询结构计算相同结果。"
+        }
+      ],
+      "hints": [
+        "将题设条件逐项翻译为真假判断，特别注意边界值和括号。",
+        "结合《IN 与 BETWEEN》：IN 判断是否属于集合；BETWEEN 包含上下端点。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nSELECT product_id,stock FROM products WHERE stock □□□ 50 AND 150 ORDER BY product_id"
+      ],
+      "explanation": "区间外为小于50或大于150，端点排除。\n执行思路：确认products的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出product_id、stock列；遵循题设排序和并列规则。\n公开夹具实际返回 4 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：采用另一种关系运算或查询结构计算相同结果。",
+      "commonErrors": [
+        {
+          "sql": "SELECT product_id,stock FROM products WHERE stock BETWEEN 50 AND 150 ORDER BY product_id",
+          "reason": "区间外为小于50或大于150，端点排除。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0034-public",
+        "q0034-boundary",
+        "q0034-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0034-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0034/q0034-public.json",
+          "sha256": "0f0d09cec373176e05123bb2acc5627798246ebac2c2702c2ebeec5168cc0b03"
+        },
+        {
+          "id": "q0034-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0034/q0034-boundary.json",
+          "sha256": "878a5481180a50e6f88a065aeb11fcfb3aa23192106025e2fdcffa130d3718f3"
+        },
+        {
+          "id": "q0034-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0034/q0034-empty.json",
+          "sha256": "6f75fbcf419069567303cf27008e6c93650a317cc649617c9dd6aef22d091ce7"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "IN 与 BETWEEN",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "独立方法等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0034-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "caf77f661478b424c7245e3a8c795f9773a2eba28026d269d17f6cce5e8ebba0",
+              "rowCount": 4
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "caf77f661478b424c7245e3a8c795f9773a2eba28026d269d17f6cce5e8ebba0",
+              "rows": 4
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "442d4796197d10a7b49c66fba56cdf756623b6b35cd0162e8291aa2b48b54596",
+              "rows": 2
+            }
+          },
+          {
+            "fixtureId": "q0034-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "f3bde392e76ac620e06d4ebc89186ff2f9339f178df6d1c13dc3116de429c998",
+              "rowCount": 13
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "f3bde392e76ac620e06d4ebc89186ff2f9339f178df6d1c13dc3116de429c998",
+              "rows": 13
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "e63c7abcfd458c0e7ce58c5da483bde2197f97d04453abde712137b003270bc9",
+              "rows": 7
+            }
+          },
+          {
+            "fixtureId": "q0034-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5eab6d96c4ab735c0743959fc735aea45e42daa91559af71d7274594564037ba",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5eab6d96c4ab735c0743959fc735aea45e42daa91559af71d7274594564037ba",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5eab6d96c4ab735c0743959fc735aea45e42daa91559af71d7274594564037ba",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0017",
+        "fc0019",
+        "fc0023"
+      ]
+    },
+    {
+      "id": "q0035",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-02"
+      ],
+      "difficulty": "简单",
+      "type": "独立编写",
+      "title": "任一促销条件成立",
+      "context": "使用课程中小型商品数据练习任一促销条件成立。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "售价不超过35或库存至少180的商品，返回 product_id、price、stock，按编号升序。\n输出列名称及顺序：product_id, price, stock。按题设排序；参考排序键：product_id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0035-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "products"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "product_id",
+          "price",
+          "stock"
+        ],
+        "rows": [
+          [
+            1,
+            15,
+            150
+          ],
+          [
+            3,
+            35,
+            200
+          ],
+          [
+            4,
+            65,
+            180
+          ],
+          [
+            6,
+            15,
+            0
+          ]
+        ],
+        "rowCount": 4
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT product_id,price,stock FROM products WHERE price<=35 OR stock>=180 ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,price,stock FROM products WHERE price<=35 OR stock>=180 ORDER BY product_id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT product_id,price,stock FROM products WHERE NOT (price>35) OR stock>=180 ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,price,stock FROM products WHERE NOT (price>35) OR stock>=180 ORDER BY product_id",
+          "explanation": "用反向比较并取 NOT 表达相同三值逻辑。"
+        }
+      ],
+      "hints": [
+        "将题设条件逐项翻译为真假判断，特别注意边界值和括号。",
+        "结合《AND、OR、NOT 与优先级》：NOT 通常先于 AND，AND 先于 OR；括号明确业务条件，避免依赖记忆。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nSELECT product_id,price,stock FROM products WHERE price<=35□□□stock>=180 ORDER BY product_id"
+      ],
+      "explanation": "满足任一条件就属于候选商品。\n执行思路：确认products的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出product_id、price、stock列；遵循题设排序和并列规则。\n公开夹具实际返回 4 行、3 列；完整结果见 expectedOutput。\n另一种可用写法：用反向比较并取 NOT 表达相同三值逻辑。",
+      "commonErrors": [
+        {
+          "sql": "SELECT product_id,price,stock FROM products WHERE price<=35 AND stock>=180 ORDER BY product_id",
+          "reason": "满足任一条件就属于候选商品。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0035-public",
+        "q0035-boundary",
+        "q0035-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0035-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0035/q0035-public.json",
+          "sha256": "83968cf52d74815b85f6e8f73ccec745f7c03b7252e36ad229408199ef04e181"
+        },
+        {
+          "id": "q0035-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0035/q0035-boundary.json",
+          "sha256": "cec634608c47c8982b2d1d2ec6b022c9e5b9d7a920458c65cc1f8ca217154ea8"
+        },
+        {
+          "id": "q0035-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0035/q0035-empty.json",
+          "sha256": "b682c7ee357a086c2bc423bc59a02f8aad20571d9dd91ef055e8b55d78fa8b2c"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "AND、OR、NOT 与优先级",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0035-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "4fb8bdc18b84878c016f02ac9fe91c77a92dfb22e173a2927ddad84c7ee4657a",
+              "rowCount": 4
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "4fb8bdc18b84878c016f02ac9fe91c77a92dfb22e173a2927ddad84c7ee4657a",
+              "rows": 4
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "d45cd861cff49b89822407c89520177056d00c8cea5975b4209389022540c999",
+              "rows": 1
+            }
+          },
+          {
+            "fixtureId": "q0035-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "590aa72d39cea41fd02696c6e0e67879d3943dd9010db5d06724af4312cb1a5c",
+              "rowCount": 8
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "590aa72d39cea41fd02696c6e0e67879d3943dd9010db5d06724af4312cb1a5c",
+              "rows": 8
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "4bb811532efed82c8cef8a6be1341aee17ba79600d49494011cfa34f58542e6e",
+              "rows": 1
+            }
+          },
+          {
+            "fixtureId": "q0035-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "c4020c37b6fa9c2843518459b0875e21fa263e74eb8b0323818f8e9c7bb01f0f",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "c4020c37b6fa9c2843518459b0875e21fa263e74eb8b0323818f8e9c7bb01f0f",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "c4020c37b6fa9c2843518459b0875e21fa263e74eb8b0323818f8e9c7bb01f0f",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0018"
+      ]
+    },
+    {
+      "id": "q0036",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-04"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-04"
+      ],
+      "difficulty": "简单",
+      "type": "独立编写",
+      "title": "名称前缀",
+      "context": "使用课程中小型商品数据练习名称前缀。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "查找商品名称以 S 开头的记录（本题英文首字母按夹具给定大小写，输入均为规范英文），输出 product_id、product_name，按编号升序。\n输出列名称及顺序：product_id, product_name。按题设排序；参考排序键：product_id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0036-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "products"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "product_id",
+          "product_name"
+        ],
+        "rows": [
+          [
+            2,
+            "Serum"
+          ],
+          [
+            5,
+            "Sunscreen"
+          ],
+          [
+            6,
+            "Soap_1"
+          ]
+        ],
+        "rowCount": 3
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT product_id,product_name FROM products WHERE product_name LIKE 'S%' ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,product_name FROM products WHERE product_name LIKE 'S%' ORDER BY product_id"
+        },
+        {
+          "kind": "关系结构等价",
+          "mysqlSql": "SELECT product_id,product_name FROM (SELECT * FROM products) AS products WHERE product_name LIKE 'S%' ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,product_name FROM (SELECT * FROM products) AS products WHERE product_name LIKE 'S%' ORDER BY product_id",
+          "explanation": "先构造派生输入关系，再执行相同投影、聚合和筛选；保持结果语义。"
+        }
+      ],
+      "hints": [
+        "将题设条件逐项翻译为真假判断，特别注意边界值和括号。",
+        "结合《LIKE、通配符与转义》：% 匹配零个或多个字符；_ 匹配单个字符；ESCAPE 指定转义符。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nSELECT product_id,product_name FROM products WHERE product_name LIKE □□□ ORDER BY product_id"
+      ],
+      "explanation": "百分号位置决定前缀或后缀匹配。\n执行思路：确认products的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出product_id、product_name列；遵循题设排序和并列规则。\n公开夹具实际返回 3 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：先构造派生输入关系，再执行相同投影、聚合和筛选；保持结果语义。",
+      "commonErrors": [
+        {
+          "sql": "SELECT product_id,product_name FROM products WHERE product_name LIKE '%S' ORDER BY product_id",
+          "reason": "百分号位置决定前缀或后缀匹配。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0036-public",
+        "q0036-boundary",
+        "q0036-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0036-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0036/q0036-public.json",
+          "sha256": "587a61fe1a4be71df92d2f65eb0fd1b048835c7b3b3a9ff34ca9559ffc077ccf"
+        },
+        {
+          "id": "q0036-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0036/q0036-boundary.json",
+          "sha256": "e357727ed33b7f1f8ebad520c6af10441385d592b7a62927f7a69f075b9b1b3a"
+        },
+        {
+          "id": "q0036-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0036/q0036-empty.json",
+          "sha256": "5f4f63e97b9285cdba8a1790cfa3c8e44911cb79f8d76b65f03471f12578538e"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "LIKE、通配符与转义",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "关系结构等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0036-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "66bf5c585cf66a78b2fc65e94309ce96d28972083cb6da0390e3a91c47853b2e",
+              "rowCount": 3
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "66bf5c585cf66a78b2fc65e94309ce96d28972083cb6da0390e3a91c47853b2e",
+              "rows": 3
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "d415d2651e14a7155fe90ca3acbe2d277870f52c78656639832dae72d03d4505",
+              "rows": 0
+            }
+          },
+          {
+            "fixtureId": "q0036-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "94531c6071e781c49f741cda90ca92aea0f27ca335fb80dfd0ccb1103d37dcd5",
+              "rowCount": 7
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "94531c6071e781c49f741cda90ca92aea0f27ca335fb80dfd0ccb1103d37dcd5",
+              "rows": 7
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "d415d2651e14a7155fe90ca3acbe2d277870f52c78656639832dae72d03d4505",
+              "rows": 0
+            }
+          },
+          {
+            "fixtureId": "q0036-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "d415d2651e14a7155fe90ca3acbe2d277870f52c78656639832dae72d03d4505",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "d415d2651e14a7155fe90ca3acbe2d277870f52c78656639832dae72d03d4505",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "d415d2651e14a7155fe90ca3acbe2d277870f52c78656639832dae72d03d4505",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0016"
+      ]
+    },
+    {
+      "id": "q0037",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-03"
+      ],
+      "difficulty": "简单",
+      "type": "代码填空",
+      "title": "排除两个商品类别",
+      "context": "使用课程中小型商品数据练习排除两个商品类别。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "补全代码中的一个空位，使完整SQL满足以下要求。可输入具有相同语义的片段，提交后按完整代码执行结果核对。\n排除护肤品和日用品，输出 product_id、category，按编号升序；空类别不纳入。\n输出列名称及顺序：product_id, category。按题设排序；参考排序键：product_id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0037-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "products"
+      ],
+      "initialCode": "SELECT product_id,category FROM products WHERE category {{blank1}} ('护肤品','日用品') ORDER BY product_id",
+      "options": [],
+      "acceptedBlanks": [
+        {
+          "id": "blank1",
+          "referenceText": "NOT IN",
+          "acceptedForms": [
+            "NOT IN"
+          ]
+        }
+      ],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "product_id",
+          "category"
+        ],
+        "rows": [
+          [
+            4,
+            "化妆品"
+          ],
+          [
+            5,
+            "化妆品"
+          ]
+        ],
+        "rowCount": 2
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT product_id,category FROM products WHERE category NOT IN ('护肤品','日用品') ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,category FROM products WHERE category NOT IN ('护肤品','日用品') ORDER BY product_id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT product_id,category FROM products WHERE (category<>'护肤品' AND category<>'日用品') ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,category FROM products WHERE (category<>'护肤品' AND category<>'日用品') ORDER BY product_id",
+          "explanation": "用逐值相等或不等谓词表示同一成员集合。"
+        }
+      ],
+      "hints": [
+        "将题设条件逐项翻译为真假判断，特别注意边界值和括号。",
+        "结合《IN 与 BETWEEN》：IN 判断是否属于集合；BETWEEN 包含上下端点。",
+        "回想空位所在子句的功能：IN 与 BETWEEN；保留周围代码，填入实现题设的表达式。"
+      ],
+      "explanation": "NOT IN 针对列表中不存在的值，NULL仍为未知。\n执行思路：确认products的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出product_id、category列；遵循题设排序和并列规则。\n公开夹具实际返回 2 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：用逐值相等或不等谓词表示同一成员集合。",
+      "commonErrors": [
+        {
+          "sql": "SELECT product_id,category FROM products WHERE category IN ('护肤品','日用品') ORDER BY product_id",
+          "reason": "NOT IN 针对列表中不存在的值，NULL仍为未知。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0037-public",
+        "q0037-boundary",
+        "q0037-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0037-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0037/q0037-public.json",
+          "sha256": "0476f64ea41c75fae9329668d5a280413fd741d7e7a820d9e26867bcc6344ab1"
+        },
+        {
+          "id": "q0037-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0037/q0037-boundary.json",
+          "sha256": "d464b8be4e8b06eb06f96a256609c1becb4a756e1a3f3963e97110cc72fe5734"
+        },
+        {
+          "id": "q0037-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0037/q0037-empty.json",
+          "sha256": "28a9a08b0163ec30cef37ec95231e6fa78d8ba88354c7c7767cd4853326b954c"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "IN 与 BETWEEN",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0037-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "d62c9cd1af884d866b7ec54555ea71176a6695f86862b0377b96ed2f7f36bfe5",
+              "rowCount": 2
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "d62c9cd1af884d866b7ec54555ea71176a6695f86862b0377b96ed2f7f36bfe5",
+              "rows": 2
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "7005dc6b46e34d1f537c8e318c49e0ac62628a4acc0aa9e0f30f438bcd9004a1",
+              "rows": 4
+            }
+          },
+          {
+            "fixtureId": "q0037-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "be2f08bdbed8603040c36932f7179de51d71a9b0bd9fca9838f29c7d4193c4f0",
+              "rowCount": 9
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "be2f08bdbed8603040c36932f7179de51d71a9b0bd9fca9838f29c7d4193c4f0",
+              "rows": 9
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "f4d6d94df3ff2ab7e2dda14fcfc7612a564c59310e4fcf893006201ed86ae0db",
+              "rows": 12
+            }
+          },
+          {
+            "fixtureId": "q0037-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "9fe5e77e8b008fc0bdb9dcf2ea01922e1fd57a118cb9ee43b3834e29d54467b1",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "9fe5e77e8b008fc0bdb9dcf2ea01922e1fd57a118cb9ee43b3834e29d54467b1",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "9fe5e77e8b008fc0bdb9dcf2ea01922e1fd57a118cb9ee43b3834e29d54467b1",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html",
+        "independentPythonAssertions": []
+      },
+      "fillEvaluation": {
+        "method": "插入后完整SQL真实执行；可接受形式不限制等价片段",
+        "referenceReassembled": true
+      },
+      "relatedFlashcardIds": [
+        "fc0019"
+      ]
+    },
+    {
+      "id": "q0038",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-02"
+      ],
+      "difficulty": "简单",
+      "type": "代码填空",
+      "title": "组合订单核查",
+      "context": "使用课程中小型订单数据练习组合订单核查。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "补全代码中的一个空位，使完整SQL满足以下要求。可输入具有相同语义的片段，提交后按完整代码执行结果核对。\n筛选门店1且销售额大于700，或门店2且销售额至少400的订单编号，按编号升序。\n输出列名称及顺序：id。按题设排序；参考排序键：id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0038-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "orders"
+      ],
+      "initialCode": "SELECT id FROM orders WHERE (store_id=1 AND sales>700) OR (store_id=2 AND {{blank1}}) ORDER BY id",
+      "options": [],
+      "acceptedBlanks": [
+        {
+          "id": "blank1",
+          "referenceText": "sales>=400",
+          "acceptedForms": [
+            "sales>=400"
+          ]
+        }
+      ],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "id"
+        ],
+        "rows": [
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            5
+          ]
+        ],
+        "rowCount": 3
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT id FROM orders WHERE (store_id=1 AND sales>700) OR (store_id=2 AND sales>=400) ORDER BY id",
+          "sqliteSql": "SELECT id FROM orders WHERE (store_id=1 AND sales>700) OR (store_id=2 AND sales>=400) ORDER BY id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT id FROM orders WHERE (NOT (store_id<>1) AND sales>700) OR (store_id=2 AND sales>=400) ORDER BY id",
+          "sqliteSql": "SELECT id FROM orders WHERE (NOT (store_id<>1) AND sales>700) OR (store_id=2 AND sales>=400) ORDER BY id",
+          "explanation": "用反向比较并取 NOT 表达相同三值逻辑。"
+        }
+      ],
+      "hints": [
+        "将题设条件逐项翻译为真假判断，特别注意边界值和括号。",
+        "结合《AND、OR、NOT 与优先级》：NOT 通常先于 AND，AND 先于 OR；括号明确业务条件，避免依赖记忆。",
+        "回想空位所在子句的功能：AND、OR、NOT 与优先级；保留周围代码，填入实现题设的表达式。"
+      ],
+      "explanation": "门店规则不同，且第二条包含边界。\n执行思路：确认orders的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出id列；遵循题设排序和并列规则。\n公开夹具实际返回 3 行、1 列；完整结果见 expectedOutput。\n另一种可用写法：用反向比较并取 NOT 表达相同三值逻辑。",
+      "commonErrors": [
+        {
+          "sql": "SELECT id FROM orders WHERE (store_id=1 AND sales>700) OR (store_id=2 AND sales>400) ORDER BY id",
+          "reason": "门店规则不同，且第二条包含边界。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0038-public",
+        "q0038-boundary",
+        "q0038-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0038-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0038/q0038-public.json",
+          "sha256": "a617d2fe63196cb5f928bb68015e63312839d4919e733b1546b5073719eb2d9f"
+        },
+        {
+          "id": "q0038-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0038/q0038-boundary.json",
+          "sha256": "b5d5feaa056f74cf3ab64cb9d49c115a13d9de97d5a4992b3db3eeed3905d315"
+        },
+        {
+          "id": "q0038-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0038/q0038-empty.json",
+          "sha256": "7b564138f77072a733bf648a8fd2327f888e8ce13ef8193794573498534052db"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "AND、OR、NOT 与优先级",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0038-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "191658d495ad9a538cd591d6a23ca7c179b85ca3314d2ec441165d141080465b",
+              "rowCount": 3
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "191658d495ad9a538cd591d6a23ca7c179b85ca3314d2ec441165d141080465b",
+              "rows": 3
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "bb9dd4c9b34d9a82492fb9b6b41d852a7c8e1defad33cf51a08b7e5118c72825",
+              "rows": 2
+            }
+          },
+          {
+            "fixtureId": "q0038-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "328618c14d68399f11730951fd80fb09009f3bdf572d15362cd6e1029d800c5e",
+              "rowCount": 5
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "328618c14d68399f11730951fd80fb09009f3bdf572d15362cd6e1029d800c5e",
+              "rows": 5
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "ce99edab752672875862bfeafd2459373cc5502ed86fe7a6443590aff2aa33b9",
+              "rows": 4
+            }
+          },
+          {
+            "fixtureId": "q0038-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "0cf668393d85d9f05d3131586209d216006367b32322576670f09ebff2c70de0",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "0cf668393d85d9f05d3131586209d216006367b32322576670f09ebff2c70de0",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "0cf668393d85d9f05d3131586209d216006367b32322576670f09ebff2c70de0",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html",
+        "independentPythonAssertions": []
+      },
+      "fillEvaluation": {
+        "method": "插入后完整SQL真实执行；可接受形式不限制等价片段",
+        "referenceReassembled": true
+      },
+      "relatedFlashcardIds": [
+        "fc0018"
+      ]
+    },
+    {
+      "id": "q0039",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-03"
+      ],
+      "difficulty": "简单",
+      "type": "独立编写",
+      "title": "指定客户编号名单",
+      "context": "使用课程中小型客户数据练习指定客户编号名单。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "从 customers 取编号1、3、4的客户，返回 customer_id、customer_name，按编号升序。\n输出列名称及顺序：customer_id, customer_name。按题设排序；参考排序键：customer_id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0039-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "customers"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "customer_id",
+          "customer_name"
+        ],
+        "rows": [
+          [
+            1,
+            "林"
+          ],
+          [
+            3,
+            "王"
+          ],
+          [
+            4,
+            "李"
+          ]
+        ],
+        "rowCount": 3
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT customer_id,customer_name FROM customers WHERE customer_id IN (1,3,4) ORDER BY customer_id",
+          "sqliteSql": "SELECT customer_id,customer_name FROM customers WHERE customer_id IN (1,3,4) ORDER BY customer_id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT customer_id,customer_name FROM customers WHERE (customer_id=1 OR customer_id=3 OR customer_id=4) ORDER BY customer_id",
+          "sqliteSql": "SELECT customer_id,customer_name FROM customers WHERE (customer_id=1 OR customer_id=3 OR customer_id=4) ORDER BY customer_id",
+          "explanation": "用逐值相等或不等谓词表示同一成员集合。"
+        }
+      ],
+      "hints": [
+        "将题设条件逐项翻译为真假判断，特别注意边界值和括号。",
+        "结合《IN 与 BETWEEN》：IN 判断是否属于集合；BETWEEN 包含上下端点。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nSELECT customer_id,customer_name FROM customers WHERE customer_id □□□ ORDER BY customer_id"
+      ],
+      "explanation": "IN 枚举所有允许值，漏写4就会漏客户。\n执行思路：确认customers的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出customer_id、customer_name列；遵循题设排序和并列规则。\n公开夹具实际返回 3 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：用逐值相等或不等谓词表示同一成员集合。",
+      "commonErrors": [
+        {
+          "sql": "SELECT customer_id,customer_name FROM customers WHERE customer_id IN (1,3) ORDER BY customer_id",
+          "reason": "IN 枚举所有允许值，漏写4就会漏客户。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0039-public",
+        "q0039-boundary",
+        "q0039-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0039-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0039/q0039-public.json",
+          "sha256": "dfc58cc437649c94139deb7ef40b754440d70f11143155f5fb7e103a64508dea"
+        },
+        {
+          "id": "q0039-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0039/q0039-boundary.json",
+          "sha256": "a1a59a37100abb89d7044eb482aeb8b485ce9a3211c89a46cf8d80bae15925e9"
+        },
+        {
+          "id": "q0039-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0039/q0039-empty.json",
+          "sha256": "8f59c21e2e441273e22add946f5bf3794e7859ff2e1a42a6b4076a075e248299"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "IN 与 BETWEEN",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0039-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "e876c4df42cac27ca8920f8d87c2ae329189f2961b34757ebe70ffd44775de0d",
+              "rowCount": 3
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "e876c4df42cac27ca8920f8d87c2ae329189f2961b34757ebe70ffd44775de0d",
+              "rows": 3
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "839e1a0216ef65c3b6259ed19e6159119c4481a0269ba846c3ebde95781933ec",
+              "rows": 2
+            }
+          },
+          {
+            "fixtureId": "q0039-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "7151dc62b892b35060b3f78d26e002e75fc8050e046634058d705adc080f2527",
+              "rowCount": 3
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "7151dc62b892b35060b3f78d26e002e75fc8050e046634058d705adc080f2527",
+              "rows": 3
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "cb4a8d9fefed7595a11e5393c1550dbf4770f35db83729d103f2928a1daef7dc",
+              "rows": 2
+            }
+          },
+          {
+            "fixtureId": "q0039-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "86b12782e0e75e4e329ee9663994b42f6ae6740c2732fcc41b1f7dd4551336fd",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "86b12782e0e75e4e329ee9663994b42f6ae6740c2732fcc41b1f7dd4551336fd",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "86b12782e0e75e4e329ee9663994b42f6ae6740c2732fcc41b1f7dd4551336fd",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0017"
+      ]
+    },
+    {
+      "id": "q0040",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-02"
+      ],
+      "difficulty": "简单",
+      "type": "独立编写",
+      "title": "类别限定下的库存筛选",
+      "context": "使用课程中小型商品数据练习类别限定下的库存筛选。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "护肤品中售价低于40或库存大于180者，返回 product_id，按编号升序。\n输出列名称及顺序：product_id。按题设排序；参考排序键：product_id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0040-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "products"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "product_id"
+        ],
+        "rows": [
+          [
+            1
+          ],
+          [
+            3
+          ]
+        ],
+        "rowCount": 2
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT product_id FROM products WHERE category='护肤品' AND (price<40 OR stock>180) ORDER BY product_id",
+          "sqliteSql": "SELECT product_id FROM products WHERE category='护肤品' AND (price<40 OR stock>180) ORDER BY product_id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT product_id FROM products WHERE NOT (category<>'护肤品') AND (price<40 OR stock>180) ORDER BY product_id",
+          "sqliteSql": "SELECT product_id FROM products WHERE NOT (category<>'护肤品') AND (price<40 OR stock>180) ORDER BY product_id",
+          "explanation": "用反向比较并取 NOT 表达相同三值逻辑。"
+        }
+      ],
+      "hints": [
+        "将题设条件逐项翻译为真假判断，特别注意边界值和括号。",
+        "结合《AND、OR、NOT 与优先级》：NOT 通常先于 AND，AND 先于 OR；括号明确业务条件，避免依赖记忆。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nSELECT product_id FROM products WHERE category='护肤品' □□□ ORDER BY product_id"
+      ],
+      "explanation": "括号让类别限制适用于两种入选原因。\n执行思路：确认products的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出product_id列；遵循题设排序和并列规则。\n公开夹具实际返回 2 行、1 列；完整结果见 expectedOutput。\n另一种可用写法：用反向比较并取 NOT 表达相同三值逻辑。",
+      "commonErrors": [
+        {
+          "sql": "SELECT product_id FROM products WHERE category='护肤品' AND price<40 OR stock>180 ORDER BY product_id",
+          "reason": "括号让类别限制适用于两种入选原因。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0040-public",
+        "q0040-boundary",
+        "q0040-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0040-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0040/q0040-public.json",
+          "sha256": "568ccb6bd8a0e4c7f87055a0ff9e599127bd504436bd2a58467a9c175067d085"
+        },
+        {
+          "id": "q0040-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0040/q0040-boundary.json",
+          "sha256": "5a9d83626b71faa9f2754c8d497273d708662a804050e7aa4db431741e384d41"
+        },
+        {
+          "id": "q0040-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0040/q0040-empty.json",
+          "sha256": "7e204ecf4e0b5caf4842b122ef98f4fa45904f5b604e577678ba2aa81c2bea88"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "AND、OR、NOT 与优先级",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0040-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "cb788606266c407dbee018aced15579220f32b78eb5fac8115a0d1520e45d853",
+              "rowCount": 2
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "cb788606266c407dbee018aced15579220f32b78eb5fac8115a0d1520e45d853",
+              "rows": 2
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "cb788606266c407dbee018aced15579220f32b78eb5fac8115a0d1520e45d853",
+              "rows": 2
+            }
+          },
+          {
+            "fixtureId": "q0040-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "491bfea19ffae9dadcd8be265a1c2615797fd7666449ae7fc4ad1a573f911097",
+              "rowCount": 2
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "491bfea19ffae9dadcd8be265a1c2615797fd7666449ae7fc4ad1a573f911097",
+              "rows": 2
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "b75af9d21df3ba03072d0db5157639ece96efc262eecfb70d0b1a8ef310e03f2",
+              "rows": 4
+            }
+          },
+          {
+            "fixtureId": "q0040-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "05b5a3249bbcbca0bdfe860911c88b1e1aa084d946600f1ac200d63549e18f72",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "05b5a3249bbcbca0bdfe860911c88b1e1aa084d946600f1ac200d63549e18f72",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "05b5a3249bbcbca0bdfe860911c88b1e1aa084d946600f1ac200d63549e18f72",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0020"
+      ]
+    },
+    {
+      "id": "q0041",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-04"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-04"
+      ],
+      "difficulty": "简单",
+      "type": "独立编写",
+      "title": "名称内的字面下划线",
+      "context": "使用课程中小型商品数据练习名称内的字面下划线。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。",
+      "requirements": "查找产品名称含字面下划线的商品，返回 product_id、product_name，按编号升序，指定 ! 为转义字符。\n输出列名称及顺序：product_id, product_name。按题设排序；参考排序键：product_id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0041-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "products"
+      ],
+      "initialCode": "",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "product_id",
+          "product_name"
+        ],
+        "rows": [
+          [
+            6,
+            "Soap_1"
+          ]
+        ],
+        "rowCount": 1
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT product_id,product_name FROM products WHERE product_name LIKE '%!_%' ESCAPE '!' ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,product_name FROM products WHERE product_name LIKE '%!_%' ESCAPE '!' ORDER BY product_id"
+        },
+        {
+          "kind": "关系结构等价",
+          "mysqlSql": "SELECT product_id,product_name FROM (SELECT * FROM products) AS products WHERE product_name LIKE '%!_%' ESCAPE '!' ORDER BY product_id",
+          "sqliteSql": "SELECT product_id,product_name FROM (SELECT * FROM products) AS products WHERE product_name LIKE '%!_%' ESCAPE '!' ORDER BY product_id",
+          "explanation": "先构造派生输入关系，再执行相同投影、聚合和筛选；保持结果语义。"
+        }
+      ],
+      "hints": [
+        "将题设条件逐项翻译为真假判断，特别注意边界值和括号。",
+        "结合《LIKE、通配符与转义》：% 匹配零个或多个字符；_ 匹配单个字符；ESCAPE 指定转义符。",
+        "关注这个局部结构（空缺部分仍需自行完成）：\nSELECT product_id,product_name FROM products WHERE product_name LIKE □□□ ESCAPE '!' ORDER BY product_id"
+      ],
+      "explanation": "不转义的下划线表示任意单个字符而非字面符号。\n执行思路：确认products的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出product_id、product_name列；遵循题设排序和并列规则。\n公开夹具实际返回 1 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：先构造派生输入关系，再执行相同投影、聚合和筛选；保持结果语义。",
+      "commonErrors": [
+        {
+          "sql": "SELECT product_id,product_name FROM products WHERE product_name LIKE '%_%' ESCAPE '!' ORDER BY product_id",
+          "reason": "不转义的下划线表示任意单个字符而非字面符号。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0041-public",
+        "q0041-boundary",
+        "q0041-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0041-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0041/q0041-public.json",
+          "sha256": "d11515bcbbab8b0463727bb598dc3de0e3a65fa97b71e2c2f66c4c651a8ff066"
+        },
+        {
+          "id": "q0041-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0041/q0041-boundary.json",
+          "sha256": "20595e55d9742436a1aa4ecb23939cd1077ddcdc898ff51f5061ab28808f56fa"
+        },
+        {
+          "id": "q0041-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0041/q0041-empty.json",
+          "sha256": "cc4c7b4aab21a27e74f9d4f976288d65206b04ea8d78ab511842553b50e7ef47"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "LIKE、通配符与转义",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "关系结构等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0041-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5873f9e0e628461b8db1c23a3bd3f199587d1f2990fedf1ec8f32819447fb43f",
+              "rowCount": 1
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "5873f9e0e628461b8db1c23a3bd3f199587d1f2990fedf1ec8f32819447fb43f",
+              "rows": 1
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "c47d643326998b8a3a0df2dc59209cd7292f33d70e88dc091c57e50e71635dd9",
+              "rows": 6
+            }
+          },
+          {
+            "fixtureId": "q0041-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "076aad06f9756ac32974159aaafda803cdb8b86c209329fd7657cf31c9869bfd",
+              "rowCount": 2
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "076aad06f9756ac32974159aaafda803cdb8b86c209329fd7657cf31c9869bfd",
+              "rows": 2
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "e6b5ca05b1fb3d94af8bad66424d78ee57cc0c61391ddf7b20b456ac5ba50d62",
+              "rows": 21
+            }
+          },
+          {
+            "fixtureId": "q0041-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "d415d2651e14a7155fe90ca3acbe2d277870f52c78656639832dae72d03d4505",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "d415d2651e14a7155fe90ca3acbe2d277870f52c78656639832dae72d03d4505",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "d415d2651e14a7155fe90ca3acbe2d277870f52c78656639832dae72d03d4505",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0016"
+      ]
+    },
+    {
+      "id": "q0042",
+      "chapterId": "ch03",
+      "knowledgePointIds": [
+        "kp03-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp03-03"
+      ],
+      "difficulty": "中等",
+      "type": "代码纠错",
+      "title": "一月完整订单记录",
+      "context": "使用课程中小型订单数据练习一月完整订单记录。教学表中的金额以模拟元为单位，不使用企业库的整数分口径。 初始代码在公开样本可能碰巧正确，仍需按业务边界纠正。",
+      "requirements": "下面提供的初始代码存在逻辑、语法或结构错误。请修改整段代码，使其满足以下要求。\n返回2026年1月（含1月1日至1月31日）订单编号与日期，按日期、编号升序。\n输出列名称及顺序：id, order_date。按题设排序；参考排序键：order_date,id。 未指定舍入时保留原计算精度；NULL、零、空字符串不同。",
+      "datasetId": "q0042-lesson",
+      "schemaVersion": 3,
+      "contentVersion": "3.0.0",
+      "sourceTables": [
+        "orders"
+      ],
+      "initialCode": "SELECT id,order_date FROM orders WHERE order_date BETWEEN '2026-01-01' AND '2026-02-01' ORDER BY order_date,id",
+      "options": [],
+      "acceptedBlanks": [],
+      "expectedOutput": {
+        "kind": "query",
+        "columns": [
+          "id",
+          "order_date"
+        ],
+        "rows": [
+          [
+            1,
+            "2026-01-03"
+          ],
+          [
+            2,
+            "2026-01-10"
+          ]
+        ],
+        "rowCount": 2
+      },
+      "referenceSolutions": [
+        {
+          "kind": "reference",
+          "mysqlSql": "SELECT id,order_date FROM orders WHERE order_date BETWEEN '2026-01-01' AND '2026-01-31' ORDER BY order_date,id",
+          "sqliteSql": "SELECT id,order_date FROM orders WHERE order_date BETWEEN '2026-01-01' AND '2026-01-31' ORDER BY order_date,id"
+        },
+        {
+          "kind": "代数或函数等价",
+          "mysqlSql": "SELECT id,order_date FROM orders WHERE (order_date>='2026-01-01' AND order_date<='2026-01-31') ORDER BY order_date,id",
+          "sqliteSql": "SELECT id,order_date FROM orders WHERE (order_date>='2026-01-01' AND order_date<='2026-01-31') ORDER BY order_date,id",
+          "explanation": "用闭区间的两个比较（或区间外的 OR）替换 BETWEEN。"
+        }
+      ],
+      "hints": [
+        "将题设条件逐项翻译为真假判断，特别注意边界值和括号。",
+        "结合《IN 与 BETWEEN》：IN 判断是否属于集合；BETWEEN 包含上下端点。",
+        "检查初始代码的 2026-01-31 对应的业务规则。日粒度数据不应跨入二月首日。"
+      ],
+      "explanation": "日粒度数据不应跨入二月首日。\n执行思路：确认orders的输入记录；按筛选条件保留符合要求的记录，并考虑空值；输出id、order_date列；遵循题设排序和并列规则。\n公开夹具实际返回 2 行、2 列；完整结果见 expectedOutput。\n另一种可用写法：用闭区间的两个比较（或区间外的 OR）替换 BETWEEN。",
+      "commonErrors": [
+        {
+          "sql": "SELECT id,order_date FROM orders WHERE order_date BETWEEN '2026-01-01' AND '2026-02-01' ORDER BY order_date,id",
+          "reason": "日粒度数据不应跨入二月首日。",
+          "validation": "典型错误已在至少一组夹具被结果/状态比对拒绝"
+        }
+      ],
+      "testFixtureIds": [
+        "q0042-public",
+        "q0042-boundary",
+        "q0042-empty"
+      ],
+      "testFixtures": [
+        {
+          "id": "q0042-public",
+          "visibility": "public",
+          "variant": "public",
+          "path": "fixtures/q0042/q0042-public.json",
+          "sha256": "ee924ed5334f23b7cc4556a3f560ec49bd0003f944046515308bd4f844c8c3e0"
+        },
+        {
+          "id": "q0042-boundary",
+          "visibility": "hidden",
+          "variant": "boundary",
+          "path": "fixtures/q0042/q0042-boundary.json",
+          "sha256": "a26144501a2dc93f81e4838a6154dec17623e5b70c434cc88287634cb98379b5"
+        },
+        {
+          "id": "q0042-empty",
+          "visibility": "hidden",
+          "variant": "empty",
+          "path": "fixtures/q0042/q0042-empty.json",
+          "sha256": "35cef907ed36f09108ed1d0a1be4d8785cb5a87b24e8385e5ea34489e5e54891"
+        }
+      ],
+      "orderPolicy": "ordered",
+      "columnPolicy": "exact_names_in_order",
+      "numericTolerance": {
+        "absolute": 1e-06,
+        "integerExact": true,
+        "textExact": true,
+        "nullDistinct": true
+      },
+      "requiredAstFeatures": [],
+      "supportStatus": "直接兼容",
+      "compatibility": "当前SQLite真实执行；MySQL 8.4原生验证未执行，词法、类型、排序及严格模式差异需复验。",
+      "executionMode": "query_result",
+      "runAllowedBeforeSubmit": true,
+      "hiddenFixturePolicy": "用户代码独立执行公开与隐藏夹具",
+      "interviewTag": "IN 与 BETWEEN",
+      "validationStatus": "SQLite参考、等价、错误解内容测试通过；非原生或手机验收",
+      "mysqlVerification": "未运行 MySQL 8.4",
+      "validation": {
+        "kind": "query",
+        "equivalentKind": "代数或函数等价",
+        "fixtures": [
+          {
+            "fixtureId": "q0042-public",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "43129190257142d320f31758b33bfe3d03992be81708cbd808e709c9ceb25675",
+              "rowCount": 2
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "43129190257142d320f31758b33bfe3d03992be81708cbd808e709c9ceb25675",
+              "rows": 2
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "43129190257142d320f31758b33bfe3d03992be81708cbd808e709c9ceb25675",
+              "rows": 2
+            }
+          },
+          {
+            "fixtureId": "q0042-boundary",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "2333fb431459aa50405ba7e0d441118de4f0488c6f6bf5b57f5164fafdbeae11",
+              "rowCount": 4
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "2333fb431459aa50405ba7e0d441118de4f0488c6f6bf5b57f5164fafdbeae11",
+              "rows": 4
+            },
+            "wrong": {
+              "ran": true,
+              "match": false,
+              "resultHash": "0e631d180118c01b2cd652ef9ed461c555e5dd14628cdd14b7d245082f68e8ca",
+              "rows": 7
+            }
+          },
+          {
+            "fixtureId": "q0042-empty",
+            "reference": {
+              "ran": true,
+              "match": true,
+              "resultHash": "74e146f757dd07fe91584cfdca88b5067ef733667bab30df829093505459da4c",
+              "rowCount": 0
+            },
+            "equivalent": {
+              "ran": true,
+              "match": true,
+              "resultHash": "74e146f757dd07fe91584cfdca88b5067ef733667bab30df829093505459da4c",
+              "rows": 0
+            },
+            "wrong": {
+              "ran": true,
+              "match": true,
+              "resultHash": "74e146f757dd07fe91584cfdca88b5067ef733667bab30df829093505459da4c",
+              "rows": 0
+            }
+          }
+        ],
+        "source": "https://dev.mysql.com/doc/refman/8.4/en/operator-precedence.html",
+        "independentPythonAssertions": []
+      },
+      "relatedFlashcardIds": [
+        "fc0023"
+      ]
+    }
+  ]
+}

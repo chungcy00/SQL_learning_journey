@@ -1,0 +1,88 @@
+{
+  "projectId": "procurement",
+  "title": "采购、收货、发票三方核对",
+  "context": "采购控制人员识别数量、价格与金额差异。",
+  "requirements": "2025年非取消采购行（截止年底）；输出订购、合格收货、开票数量，开票金额与合格收货按采购单价的金额差；仅数量不等或金额差不为0；未开票也需要呈现。",
+  "grain": "采购行",
+  "commonError": "收货明细与发票明细未经聚合直接连接形成多对多膨胀。",
+  "executionSteps": [
+    "核对采购行预聚合定义",
+    "计算数量及金额差",
+    "保留未开票未收货"
+  ],
+  "difficulty": "困难",
+  "mysqlSql": "SELECT po_item_id,po_id,supplier_id,product_id,quantity_ordered,accepted,billed,billed_cents,accepted*unit_price_cents expected_cents,billed_cents-accepted*unit_price_cents variance_cents FROM v_po_lines WHERE order_date BETWEEN '2025-01-01' AND '2025-12-31' AND (quantity_ordered<>accepted OR accepted<>billed OR billed_cents<>accepted*unit_price_cents) ORDER BY po_item_id",
+  "sqliteSql": "SELECT po_item_id,po_id,supplier_id,product_id,quantity_ordered,accepted,billed,billed_cents,accepted*unit_price_cents expected_cents,billed_cents-accepted*unit_price_cents variance_cents FROM v_po_lines WHERE order_date BETWEEN '2025-01-01' AND '2025-12-31' AND (quantity_ordered<>accepted OR accepted<>billed OR billed_cents<>accepted*unit_price_cents) ORDER BY po_item_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "po_item_id",
+    "po_id",
+    "supplier_id",
+    "product_id",
+    "quantity_ordered",
+    "accepted",
+    "billed",
+    "billed_cents",
+    "expected_cents",
+    "variance_cents"
+  ],
+  "id": "BP28",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-58"
+  ],
+  "datasetId": "procurement-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP28.json",
+  "expectedRowCount": 876,
+  "expectedColumns": [
+    "po_item_id",
+    "po_id",
+    "supplier_id",
+    "product_id",
+    "quantity_ordered",
+    "accepted",
+    "billed",
+    "billed_cents",
+    "expected_cents",
+    "variance_cents"
+  ],
+  "sourceTables": [
+    "v_po_lines"
+  ],
+  "dependencyTables": [
+    "categories",
+    "goods_receipts",
+    "products",
+    "purchase_order_items",
+    "purchase_orders",
+    "supplier_contracts",
+    "supplier_invoice_items",
+    "supplier_invoices",
+    "suppliers",
+    "v_po_lines",
+    "warehouses"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "SELECT po_item_id,po_id,supplier_id,product_id,quantity_ordered,accepted,billed,billed_cents,accepted*unit_price_cents expected_cents,billed_cents-accepted*unit_price_cents variance_cents FROM v_po_lines WHERE order_date BETWEEN '2025-01-01' AND '2025-12-31' AND (quantity_ordered<>accepted OR accepted<>billed OR billed_cents<>accepted*unit_price_cents) ORDER BY po_item_id",
+      "sqliteSql": "SELECT po_item_id,po_id,supplier_id,product_id,quantity_ordered,accepted,billed,billed_cents,accepted*unit_price_cents expected_cents,billed_cents-accepted*unit_price_cents variance_cents FROM v_po_lines WHERE order_date BETWEEN '2025-01-01' AND '2025-12-31' AND (quantity_ordered<>accepted OR accepted<>billed OR billed_cents<>accepted*unit_price_cents) ORDER BY po_item_id"
+    }
+  ],
+  "hints": [
+    "核对采购行预聚合定义",
+    "核对采购行预聚合定义；计算数量及金额差",
+    "重点核对输出粒度：采购行"
+  ],
+  "explanation": "核对采购行预聚合定义；计算数量及金额差；保留未开票未收货。收货明细与发票明细未经聚合直接连接形成多对多膨胀。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 26.1
+}

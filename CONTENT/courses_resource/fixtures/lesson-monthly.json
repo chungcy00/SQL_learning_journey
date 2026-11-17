@@ -1,0 +1,36 @@
+{
+  "id": "lesson-monthly",
+  "table": "monthly",
+  "columns": [
+    {
+      "name": "month",
+      "type": "TEXT",
+      "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+      "sqliteType": "TEXT"
+    },
+    {
+      "name": "sales",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    }
+  ],
+  "rows": [
+    [
+      "2026-01",
+      1000
+    ],
+    [
+      "2026-02",
+      1500
+    ],
+    [
+      "2026-03",
+      1500
+    ],
+    [
+      "2026-04",
+      900
+    ]
+  ]
+}

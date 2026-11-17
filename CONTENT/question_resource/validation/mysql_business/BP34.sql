@@ -1,0 +1,7 @@
+-- 销售毛利与库存投资回报
+-- 原生MySQL 8.4未执行。先从第二部分资源导入对应隔离数据库。
+-- 公开基准参考解；独立执行等价解，不得变动原库。
+WITH a AS (SELECT p.category_id,SUM(s.net_cents-s.cost_cents) gross FROM v_sales_lines s JOIN products p ON p.product_id=s.product_id WHERE s.order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY p.category_id), b AS (SELECT p.category_id,SUM(i.quantity*i.unit_cost_cents)/2.0 avg_stock FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id WHERE i.snapshot_date IN ('2024-12-31','2025-12-31') GROUP BY p.category_id) SELECT c.category_id,COALESCE(a.gross,0) gross_cents,b.avg_stock avg_stock_cents,ROUND(COALESCE(a.gross,0)/NULLIF(b.avg_stock,0),4) gmroi FROM categories c LEFT JOIN a ON a.category_id=c.category_id LEFT JOIN b ON b.category_id=c.category_id ORDER BY gmroi DESC,c.category_id;
+
+-- 等价解（SQLite已验证，MySQL待复验）
+WITH a AS (SELECT p.category_id,SUM(s.net_cents-s.cost_cents) gross FROM v_sales_lines s JOIN products p ON p.product_id=s.product_id WHERE (s.order_date>='2025-01-01' AND s.order_date<='2025-12-31') GROUP BY p.category_id), b AS (SELECT p.category_id,SUM(i.quantity*i.unit_cost_cents)/2.0 avg_stock FROM inventory_snapshots i JOIN products p ON p.product_id=i.product_id WHERE i.snapshot_date IN ('2024-12-31','2025-12-31') GROUP BY p.category_id) SELECT c.category_id,COALESCE(a.gross,0) gross_cents,b.avg_stock avg_stock_cents,ROUND(COALESCE(a.gross,0)/NULLIF(b.avg_stock,0),4) gmroi FROM categories c LEFT JOIN a ON a.category_id=c.category_id LEFT JOIN b ON b.category_id=c.category_id ORDER BY gmroi DESC,c.category_id;

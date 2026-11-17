@@ -1,0 +1,696 @@
+{
+  "chapterId": "ch04",
+  "title": "排序与分页",
+  "count": 6,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "cards": [
+    {
+      "id": "fc0024",
+      "chapterId": "ch04",
+      "knowledgePointIds": [
+        "kp04-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp04-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0045",
+        "q0047",
+        "q0048"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "简单",
+      "front": {
+        "question": "没有 ORDER BY 时，能否把数据库恰好返回的第一行当作最新订单？"
+      },
+      "back": {
+        "answer": "不能。",
+        "explanation": "关系表没有承诺默认行序；索引变化、执行计划或数据写入都可能改变结果。"
+      },
+      "tags": [
+        "ORDER BY 多列排序",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "ORDER BY 多列排序"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0025",
+      "chapterId": "ch04",
+      "knowledgePointIds": [
+        "kp04-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp04-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0043",
+        "q0044",
+        "q0046"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "简单",
+      "front": {
+        "question": "回忆跳过前两行再返回两行的分页语法；按商品编号升序。",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "ORDER BY 排序键 LIMIT 每页数量 OFFSET 跳过数量",
+        "explanation": "OFFSET 从零开始计跳过的行数。分页前应确保排序稳定。",
+        "code": "SELECT id FROM items ORDER BY id LIMIT 2 OFFSET 2",
+        "sqliteCode": "SELECT id FROM items ORDER BY id LIMIT 2 OFFSET 2",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id"
+          ],
+          "rows": [
+            [
+              3
+            ],
+            [
+              4
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "LIMIT 与 OFFSET",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "f24cb873120d751894eda3c6e134ff818fd47b6c1f86fcf67cdee052bd137b70",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0025-demo"
+      ],
+      "fixturePath": "fixtures/fc0025.json",
+      "referenceTopicNames": [
+        "LIMIT 与 OFFSET"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0025.sql"
+    },
+    {
+      "id": "fc0026",
+      "chapterId": "ch04",
+      "knowledgePointIds": [
+        "kp04-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp04-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0045",
+        "q0047"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "简单",
+      "front": {
+        "question": "ORDER BY price DESC, id ASC 与所有排序键都降序有何区别？"
+      },
+      "back": {
+        "answer": "只有价格降序；价格并列时编号升序。",
+        "explanation": "每个排序表达式有自己的方向；显式指定并列规则可固定页面。"
+      },
+      "tags": [
+        "ORDER BY 多列排序",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "ORDER BY 多列排序"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0027",
+      "chapterId": "ch04",
+      "knowledgePointIds": [
+        "kp04-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp04-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0045",
+        "q0047"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "简单",
+      "front": {
+        "question": "价格相同的商品按编号升序，价格本身由高至低；填入第一排序方向。",
+        "code": "SELECT id,price FROM items WHERE price IS NOT NULL ORDER BY price □,id ASC",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "DESC",
+        "explanation": "多列排序先按第一个键分组，再按后续键处理并列。",
+        "acceptedBlanks": [
+          "DESC"
+        ],
+        "code": "SELECT id,price FROM items WHERE price IS NOT NULL ORDER BY price DESC,id ASC",
+        "sqliteCode": "SELECT id,price FROM items WHERE price IS NOT NULL ORDER BY price DESC,id ASC",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "price"
+          ],
+          "rows": [
+            [
+              5,
+              30
+            ],
+            [
+              2,
+              20
+            ],
+            [
+              6,
+              20
+            ],
+            [
+              1,
+              12
+            ],
+            [
+              3,
+              12
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "ORDER BY 多列排序",
+        "代码填空"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "0354fa49fa018bf8c5ebf498c601dcc88c0d81cdea33e45e1035db04366e0c10",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0027-demo"
+      ],
+      "fixturePath": "fixtures/fc0027.json",
+      "referenceTopicNames": [
+        "ORDER BY 多列排序"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0027.sql"
+    },
+    {
+      "id": "fc0028",
+      "chapterId": "ch04",
+      "knowledgePointIds": [
+        "kp04-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp04-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0043",
+        "q0044",
+        "q0049"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "结果预测",
+      "difficulty": "简单",
+      "front": {
+        "question": "按完整顺序取第2至第4行，预测编号。",
+        "code": "SELECT id FROM items ORDER BY id DESC LIMIT 3 OFFSET 1",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "返回以下结果。",
+        "explanation": "先降序得到6、5、4、3、2、1；跳过第1行后取三行。",
+        "code": "SELECT id FROM items ORDER BY id DESC LIMIT 3 OFFSET 1",
+        "sqliteCode": "SELECT id FROM items ORDER BY id DESC LIMIT 3 OFFSET 1",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id"
+          ],
+          "rows": [
+            [
+              5
+            ],
+            [
+              4
+            ],
+            [
+              3
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "LIMIT 与 OFFSET",
+        "结果预测"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "cb1cfb51b0344401fdab3d019a85e1064326208326e222a0ccb0a654083c7229",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0028-demo"
+      ],
+      "fixturePath": "fixtures/fc0028.json",
+      "referenceTopicNames": [
+        "LIMIT 与 OFFSET"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0028.sql"
+    },
+    {
+      "id": "fc0029",
+      "chapterId": "ch04",
+      "knowledgePointIds": [
+        "kp04-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp04-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0043",
+        "q0044",
+        "q0050"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "错误纠正",
+      "difficulty": "简单",
+      "front": {
+        "question": "每页两条，第3页要显示编号5和6。纠正 OFFSET 一页的偏差。",
+        "code": "SELECT id FROM items ORDER BY id LIMIT 2 OFFSET 6",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "改用背面的修正语句。",
+        "explanation": "从第1页计页码时，偏移量=(页码−1)×每页行数。",
+        "code": "SELECT id FROM items ORDER BY id LIMIT 2 OFFSET 4",
+        "sqliteCode": "SELECT id FROM items ORDER BY id LIMIT 2 OFFSET 4",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id"
+          ],
+          "rows": [
+            [
+              5
+            ],
+            [
+              6
+            ]
+          ]
+        },
+        "wrongResult": {
+          "kind": "result",
+          "columns": [
+            "id"
+          ],
+          "rows": []
+        },
+        "correctionReason": "从第1页计页码时，偏移量=(页码−1)×每页行数。"
+      },
+      "tags": [
+        "LIMIT 与 OFFSET",
+        "错误纠正"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "975c0a526d2c8d9fc0f1373ea522b48bba228ded0e879fe843b56199eb2fbb69",
+        "mysqlNative": "未执行",
+        "wrongRejected": true,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0029-demo"
+      ],
+      "fixturePath": "fixtures/fc0029.json",
+      "referenceTopicNames": [
+        "LIMIT 与 OFFSET"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0029.sql"
+    }
+  ]
+}

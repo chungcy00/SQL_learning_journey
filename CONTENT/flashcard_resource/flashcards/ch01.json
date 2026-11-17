@@ -1,0 +1,562 @@
+{
+  "chapterId": "ch01",
+  "title": "数据库基础",
+  "count": 7,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "cards": [
+    {
+      "id": "fc0001",
+      "chapterId": "ch01",
+      "knowledgePointIds": [
+        "kp01-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp01-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0001",
+        "q0006"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "入门",
+      "front": {
+        "question": "读报表之前，为什么必须先确认一行数据代表什么？"
+      },
+      "back": {
+        "answer": "因为统计粒度决定可做的计算。",
+        "explanation": "订单行数、订单数与客户数可能完全不同；连接后也可能改变粒度。先写出“一行=什么”，再选分组和计数键。"
+      },
+      "tags": [
+        "数据库、表、行与列",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "数据库、表、行与列"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0002",
+      "chapterId": "ch01",
+      "knowledgePointIds": [
+        "kp01-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp01-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0003",
+        "q0004",
+        "q0005"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "入门",
+      "front": {
+        "question": "金额精确到两位小数时，为什么常用 DECIMAL，而不是 FLOAT？"
+      },
+      "back": {
+        "answer": "DECIMAL 是精确定点型；FLOAT 是近似浮点型。",
+        "explanation": "财务汇总不应依赖二进制浮点的偶然舍入。企业库另用整数分；SQLite 的 DECIMAL 声明并不保证与 MySQL 相同的精确十进制运算。"
+      },
+      "tags": [
+        "数据类型与数据字典",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 使用定点 DECIMAL；SQLite 采用动态类型与数值亲和性，金额建议整数分。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "数据类型与数据字典"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0003",
+      "chapterId": "ch01",
+      "knowledgePointIds": [
+        "kp01-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp01-03"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0007",
+        "q0008"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "入门",
+      "front": {
+        "question": "写出创建子表时声明外键的基本结构。示例：客户1存在，建订单表并为订单10关联客户1，最后核对关联字段。",
+        "sourceTables": [],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。",
+        "verificationQuery": "SELECT id,client_id FROM child_card ORDER BY id"
+      },
+      "back": {
+        "answer": "FOREIGN KEY (子表字段) REFERENCES 父表(主键字段)",
+        "explanation": "外键约束限定非空引用必须匹配父记录，不能保证子表的客户编号唯一。",
+        "code": "CREATE TABLE parent_card (id INT NOT NULL PRIMARY KEY); CREATE TABLE child_card (id INT NOT NULL PRIMARY KEY, client_id INT, FOREIGN KEY (client_id) REFERENCES parent_card(id)); INSERT INTO parent_card VALUES (1); INSERT INTO child_card VALUES (10,1);",
+        "sqliteCode": "CREATE TABLE parent_card (id INT NOT NULL PRIMARY KEY); CREATE TABLE child_card (id INT NOT NULL PRIMARY KEY, client_id INT, FOREIGN KEY (client_id) REFERENCES parent_card(id)); INSERT INTO parent_card VALUES (1); INSERT INTO child_card VALUES (10,1);",
+        "verificationQuery": "SELECT id,client_id FROM child_card ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "client_id"
+          ],
+          "rows": [
+            [
+              10,
+              1
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "主键、外键和一对多",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本例已启用 SQLite 外键；MySQL 需要支持外键的存储引擎，原生未执行。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "13c366b8f290c15a1c6c3a05178d0094dbb2ee3431cf09db283359f0dadee17c",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0003-demo"
+      ],
+      "fixturePath": "fixtures/fc0003.json",
+      "referenceTopicNames": [
+        "主键、外键和一对多"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0003.sql"
+    },
+    {
+      "id": "fc0004",
+      "chapterId": "ch01",
+      "knowledgePointIds": [
+        "kp01-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp01-03"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0007",
+        "q0008"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "入门",
+      "front": {
+        "question": "订单表里的 order_id 与 customer_id 都是整数，为什么前者适合作主键而后者通常不适合？"
+      },
+      "back": {
+        "answer": "order_id 标识订单；customer_id 通常是引用客户的外键。",
+        "explanation": "一位客户可有多笔订单；将外键加唯一约束会改变一对多业务关系。"
+      },
+      "tags": [
+        "主键、外键和一对多",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "主键、外键和一对多"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0005",
+      "chapterId": "ch01",
+      "knowledgePointIds": [
+        "kp01-04"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp01-04"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0002"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "入门",
+      "front": {
+        "question": "有一行订单但客户编号为 NULL，与根本没有这笔订单，统计时有什么区别？"
+      },
+      "back": {
+        "answer": "前者是已存在且客户未知的记录；后者是不存在的记录。",
+        "explanation": "前者会计入 COUNT(*)，但不会计入 COUNT(customer_id)。无法凭一个 NULL 断定记录不存在。"
+      },
+      "tags": [
+        "NULL 与缺失记录",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "NULL 与缺失记录"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0006",
+      "chapterId": "ch01",
+      "knowledgePointIds": [
+        "kp01-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp01-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0001",
+        "q0006"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "入门",
+      "front": {
+        "question": "从商品表取编号及价格，填入数据来源关键字。",
+        "code": "SELECT id,price □ items ORDER BY id",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "FROM",
+        "explanation": "FROM 决定行来自哪张表，SELECT 决定展示哪些字段。",
+        "acceptedBlanks": [
+          "FROM"
+        ],
+        "code": "SELECT id,price FROM items ORDER BY id",
+        "sqliteCode": "SELECT id,price FROM items ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "price"
+          ],
+          "rows": [
+            [
+              1,
+              12
+            ],
+            [
+              2,
+              20
+            ],
+            [
+              3,
+              12
+            ],
+            [
+              4,
+              null
+            ],
+            [
+              5,
+              30
+            ],
+            [
+              6,
+              20
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "数据库、表、行与列",
+        "代码填空"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "01131400308432833e4baaf1b877b7b366788b54f2f83a819fbff91975739892",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0006-demo"
+      ],
+      "fixturePath": "fixtures/fc0006.json",
+      "referenceTopicNames": [
+        "数据库、表、行与列"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0006.sql"
+    },
+    {
+      "id": "fc0007",
+      "chapterId": "ch01",
+      "knowledgePointIds": [
+        "kp01-01",
+        "kp01-04"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp01-01",
+        "kp01-04"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0001",
+        "q0002",
+        "q0006"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "结果预测",
+      "difficulty": "入门",
+      "front": {
+        "question": "同一数据表中，记录总数与已知价格数分别是多少？",
+        "code": "SELECT COUNT(*) AS rows_n, COUNT(price) AS priced_n FROM items",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "返回以下结果。",
+        "explanation": "六行商品中有一行价格未填写。计数对象不同会改变统计口径。",
+        "code": "SELECT COUNT(*) AS rows_n, COUNT(price) AS priced_n FROM items",
+        "sqliteCode": "SELECT COUNT(*) AS rows_n, COUNT(price) AS priced_n FROM items",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "rows_n",
+            "priced_n"
+          ],
+          "rows": [
+            [
+              6,
+              5
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "数据库、表、行与列",
+        "结果预测"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "677a9c1ea217e2c3f1dc4e29f442f01254654618839ca638e14f6d7353f10234",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0007-demo"
+      ],
+      "fixturePath": "fixtures/fc0007.json",
+      "referenceTopicNames": [
+        "数据库、表、行与列",
+        "NULL 与缺失记录"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0007.sql"
+    }
+  ]
+}

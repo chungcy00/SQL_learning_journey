@@ -1,0 +1,88 @@
+{
+  "projectId": "enterprise",
+  "title": "门店贡献利润与费用",
+  "context": "销售＋财务联合分析：管理层要求以同一企业口径核对业务数据。",
+  "requirements": "2025年线下每门店，净销售-销售成本-归属于门店的费用分录作为贡献利润（未扣人工与总部费用，非净利润）；保留所有门店，输出贡献率。",
+  "grain": "门店",
+  "commonError": "费用不可按销售明细直接连接；贡献利润不是会计净利润。",
+  "executionSteps": [
+    "独立收入成本与费用",
+    "合并门店",
+    "计算利润"
+  ],
+  "difficulty": "困难",
+  "crossGroup": "销售＋财务",
+  "mysqlSql": "WITH a AS (SELECT store_id,SUM(net_cents) net,SUM(cost_cents) cost FROM v_sales_lines WHERE channel='store' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY store_id), b AS (SELECT store_id,SUM(expense_cents) expense FROM v_expenses WHERE entry_date BETWEEN '2025-01-01' AND '2025-12-31' AND store_id IS NOT NULL GROUP BY store_id) SELECT s.store_id,COALESCE(a.net,0) net_cents,COALESCE(a.cost,0) cost_cents,COALESCE(b.expense,0) expense_cents,COALESCE(a.net-a.cost,0)-COALESCE(b.expense,0) contribution_cents,ROUND(100.0*(COALESCE(a.net-a.cost,0)-COALESCE(b.expense,0))/NULLIF(a.net,0),2) contribution_pct FROM stores s LEFT JOIN a ON a.store_id=s.store_id LEFT JOIN b ON b.store_id=s.store_id ORDER BY contribution_cents DESC,s.store_id",
+  "sqliteSql": "WITH a AS (SELECT store_id,SUM(net_cents) net,SUM(cost_cents) cost FROM v_sales_lines WHERE channel='store' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY store_id), b AS (SELECT store_id,SUM(expense_cents) expense FROM v_expenses WHERE entry_date BETWEEN '2025-01-01' AND '2025-12-31' AND store_id IS NOT NULL GROUP BY store_id) SELECT s.store_id,COALESCE(a.net,0) net_cents,COALESCE(a.cost,0) cost_cents,COALESCE(b.expense,0) expense_cents,COALESCE(a.net-a.cost,0)-COALESCE(b.expense,0) contribution_cents,ROUND(100.0*(COALESCE(a.net-a.cost,0)-COALESCE(b.expense,0))/NULLIF(a.net,0),2) contribution_pct FROM stores s LEFT JOIN a ON a.store_id=s.store_id LEFT JOIN b ON b.store_id=s.store_id ORDER BY contribution_cents DESC,s.store_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "store_id",
+    "net_cents",
+    "cost_cents",
+    "expense_cents",
+    "contribution_cents",
+    "contribution_pct"
+  ],
+  "id": "BP38",
+  "chapterId": "ch20",
+  "knowledgePointIds": [
+    "kp20-12"
+  ],
+  "datasetId": "enterprise-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP38.json",
+  "expectedRowCount": 12,
+  "expectedColumns": [
+    "store_id",
+    "net_cents",
+    "cost_cents",
+    "expense_cents",
+    "contribution_cents",
+    "contribution_pct"
+  ],
+  "sourceTables": [
+    "stores",
+    "v_expenses",
+    "v_sales_lines"
+  ],
+  "dependencyTables": [
+    "accounts",
+    "categories",
+    "customer_sessions",
+    "customers",
+    "departments",
+    "journal_entries",
+    "journal_lines",
+    "order_items",
+    "orders",
+    "products",
+    "promotions",
+    "returns",
+    "stores",
+    "traffic_sources",
+    "v_expenses",
+    "v_sales_lines"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH a AS (SELECT store_id,SUM(net_cents) net,SUM(cost_cents) cost FROM v_sales_lines WHERE channel='store' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY store_id), b AS (SELECT store_id,SUM(expense_cents) expense FROM v_expenses WHERE entry_date BETWEEN '2025-01-01' AND '2025-12-31' AND store_id IS NOT NULL GROUP BY store_id) SELECT s.store_id,COALESCE(a.net,0) net_cents,COALESCE(a.cost,0) cost_cents,COALESCE(b.expense,0) expense_cents,COALESCE(a.net-a.cost,0)-COALESCE(b.expense,0) contribution_cents,ROUND(100.0*(COALESCE(a.net-a.cost,0)-COALESCE(b.expense,0))/NULLIF(a.net,0),2) contribution_pct FROM stores s LEFT JOIN a ON a.store_id=s.store_id LEFT JOIN b ON b.store_id=s.store_id ORDER BY contribution_cents DESC,s.store_id",
+      "sqliteSql": "WITH a AS (SELECT store_id,SUM(net_cents) net,SUM(cost_cents) cost FROM v_sales_lines WHERE channel='store' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY store_id), b AS (SELECT store_id,SUM(expense_cents) expense FROM v_expenses WHERE entry_date BETWEEN '2025-01-01' AND '2025-12-31' AND store_id IS NOT NULL GROUP BY store_id) SELECT s.store_id,COALESCE(a.net,0) net_cents,COALESCE(a.cost,0) cost_cents,COALESCE(b.expense,0) expense_cents,COALESCE(a.net-a.cost,0)-COALESCE(b.expense,0) contribution_cents,ROUND(100.0*(COALESCE(a.net-a.cost,0)-COALESCE(b.expense,0))/NULLIF(a.net,0),2) contribution_pct FROM stores s LEFT JOIN a ON a.store_id=s.store_id LEFT JOIN b ON b.store_id=s.store_id ORDER BY contribution_cents DESC,s.store_id"
+    }
+  ],
+  "hints": [
+    "独立收入成本与费用",
+    "独立收入成本与费用；合并门店",
+    "重点核对输出粒度：门店"
+  ],
+  "explanation": "独立收入成本与费用；合并门店；计算利润。费用不可按销售明细直接连接；贡献利润不是会计净利润。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 35.3
+}

@@ -1,0 +1,24 @@
+{
+  "id": "fc0034-demo",
+  "tables": [],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT NULLIF(5,5) AS a,NULLIF(5,0) AS b,COALESCE(NULL,0,7) AS c",
+  "mysqlSql": "SELECT NULLIF(5,5) AS a,NULLIF(5,0) AS b,COALESCE(NULL,0,7) AS c",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      null,
+      5,
+      0
+    ]
+  ],
+  "expectedColumns": [
+    "a",
+    "b",
+    "c"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

@@ -1,0 +1,130 @@
+{
+  "id": "q0297-public",
+  "questionId": "q0297",
+  "visibility": "public",
+  "variant": "public",
+  "kind": "database_delta",
+  "datasetId": "enterprise-v2",
+  "baseDatabase": "databases/enterprise/enterprise.sqlite",
+  "baseSha256": "bc4bd510731d3a3ef45f5bd5227349b37e59535322ba85afb28bcc0a4093ab2e",
+  "patchSql": [],
+  "patchDescription": "不更改上一阶段的正式模拟企业库",
+  "patchRowChanges": 0,
+  "testIsolation": "每次使用全新数据库副本；夹具可故意引入对账差异或改变业务记录，仅用于判题，绝不可写入基准库",
+  "expected": {
+    "columns": [
+      "store_id",
+      "net_cents",
+      "labor_cents",
+      "worked_hours",
+      "sales_per_hour_cents",
+      "labor_pct"
+    ],
+    "rows": [
+      [
+        1,
+        64392595,
+        41472553.0,
+        15806.5,
+        4073.8,
+        64.41
+      ],
+      [
+        2,
+        57324235,
+        14128296.0,
+        6051.0,
+        9473.51,
+        24.65
+      ],
+      [
+        3,
+        52610055,
+        43116909.0,
+        16543.5,
+        3180.1,
+        81.96
+      ],
+      [
+        4,
+        50749810,
+        45892954.0,
+        20393.0,
+        2488.59,
+        90.43
+      ],
+      [
+        5,
+        43368795,
+        57176929.0,
+        26665.0,
+        1626.43,
+        131.84
+      ],
+      [
+        6,
+        43210240,
+        49116832.0,
+        20187.5,
+        2140.45,
+        113.67
+      ],
+      [
+        7,
+        40177935,
+        22595586.0,
+        9926.5,
+        4047.54,
+        56.24
+      ],
+      [
+        8,
+        34450150,
+        33652573.0,
+        14900.5,
+        2312.01,
+        97.68
+      ],
+      [
+        9,
+        26362155,
+        24698965.0,
+        11120.0,
+        2370.7,
+        93.69
+      ],
+      [
+        10,
+        24645075,
+        10905974.0,
+        4554.5,
+        5411.15,
+        44.25
+      ],
+      [
+        11,
+        24326055,
+        22808199.0,
+        7197.0,
+        3380.03,
+        93.76
+      ],
+      [
+        12,
+        18276045,
+        15465001.0,
+        8582.5,
+        2129.45,
+        84.62
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

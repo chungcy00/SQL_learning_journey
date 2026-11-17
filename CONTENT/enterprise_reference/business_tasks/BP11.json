@@ -1,0 +1,79 @@
+{
+  "projectId": "ecommerce",
+  "title": "新老客户净收入及客单价",
+  "context": "营销部门比较首购客户与已有购买历史的客户。",
+  "requirements": "仅线上有效订单。客户首次有效订单以日期、订单编号决胜；2025年按订单是否首购分组，输出客户数、订单数、净收入和平均订单净额（分）。",
+  "grain": "订单所属客户阶段",
+  "commonError": "先筛2025会把已有购买客户误标为新客；客户可在两个组出现。",
+  "executionSteps": [
+    "计算完整历史订单序号",
+    "筛选目标年",
+    "按首购标记汇总"
+  ],
+  "difficulty": "中等",
+  "mysqlSql": "WITH a AS (SELECT *,ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY order_date,order_id) rn FROM v_order_net WHERE channel='online') SELECT CASE WHEN rn=1 THEN 'new' ELSE 'returning' END segment,COUNT(DISTINCT customer_id) customers,COUNT(*) orders,SUM(net_cents) net_cents,ROUND(1.0*SUM(net_cents)/COUNT(*),2) avg_order_cents FROM a WHERE order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY CASE WHEN rn=1 THEN 'new' ELSE 'returning' END ORDER BY segment",
+  "sqliteSql": "WITH a AS (SELECT *,ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY order_date,order_id) rn FROM v_order_net WHERE channel='online') SELECT CASE WHEN rn=1 THEN 'new' ELSE 'returning' END segment,COUNT(DISTINCT customer_id) customers,COUNT(*) orders,SUM(net_cents) net_cents,ROUND(1.0*SUM(net_cents)/COUNT(*),2) avg_order_cents FROM a WHERE order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY CASE WHEN rn=1 THEN 'new' ELSE 'returning' END ORDER BY segment",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "segment",
+    "customers",
+    "orders",
+    "net_cents",
+    "avg_order_cents"
+  ],
+  "id": "BP11",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-41"
+  ],
+  "datasetId": "ecommerce-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP11.json",
+  "expectedRowCount": 2,
+  "expectedColumns": [
+    "segment",
+    "customers",
+    "orders",
+    "net_cents",
+    "avg_order_cents"
+  ],
+  "sourceTables": [
+    "v_order_net"
+  ],
+  "dependencyTables": [
+    "categories",
+    "customer_sessions",
+    "customers",
+    "order_items",
+    "orders",
+    "products",
+    "promotions",
+    "returns",
+    "stores",
+    "traffic_sources",
+    "v_order_net",
+    "v_sales_lines"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH a AS (SELECT *,ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY order_date,order_id) rn FROM v_order_net WHERE channel='online') SELECT CASE WHEN rn=1 THEN 'new' ELSE 'returning' END segment,COUNT(DISTINCT customer_id) customers,COUNT(*) orders,SUM(net_cents) net_cents,ROUND(1.0*SUM(net_cents)/COUNT(*),2) avg_order_cents FROM a WHERE order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY CASE WHEN rn=1 THEN 'new' ELSE 'returning' END ORDER BY segment",
+      "sqliteSql": "WITH a AS (SELECT *,ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY order_date,order_id) rn FROM v_order_net WHERE channel='online') SELECT CASE WHEN rn=1 THEN 'new' ELSE 'returning' END segment,COUNT(DISTINCT customer_id) customers,COUNT(*) orders,SUM(net_cents) net_cents,ROUND(1.0*SUM(net_cents)/COUNT(*),2) avg_order_cents FROM a WHERE order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY CASE WHEN rn=1 THEN 'new' ELSE 'returning' END ORDER BY segment"
+    }
+  ],
+  "hints": [
+    "计算完整历史订单序号",
+    "计算完整历史订单序号；筛选目标年",
+    "重点核对输出粒度：订单所属客户阶段"
+  ],
+  "explanation": "计算完整历史订单序号；筛选目标年；按首购标记汇总。先筛2025会把已有购买客户误标为新客；客户可在两个组出现。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 61.7
+}

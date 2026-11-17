@@ -1,0 +1,33 @@
+{
+  "id": "q0244-key",
+  "questionId": "q0244",
+  "visibility": "hidden",
+  "variant": "objective_key",
+  "kind": "objective_choice",
+  "options": [
+    {
+      "id": "A",
+      "text": "不一定，优化器会根据统计和成本选择",
+      "explanation": "索引存在并不保证访问路径。"
+    },
+    {
+      "id": "B",
+      "text": "只有 SELECT * 时使用索引",
+      "explanation": "投影并不决定是否唯一可用索引。"
+    },
+    {
+      "id": "C",
+      "text": "一定使用，只要有索引",
+      "explanation": "低选择性等因素可能使扫描更便宜。"
+    },
+    {
+      "id": "D",
+      "text": "永远不用，等值条件不能利用索引",
+      "explanation": "等值条件通常是可搜索的索引候选。"
+    }
+  ],
+  "expected": {
+    "correctOptionId": "A"
+  },
+  "verification": "按课程知识及MySQL官方资料编写的客观知识答案；非运行引擎结果"
+}

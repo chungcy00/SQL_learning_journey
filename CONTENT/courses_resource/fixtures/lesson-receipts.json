@@ -1,0 +1,44 @@
+{
+  "id": "lesson-receipts",
+  "table": "receipts",
+  "columns": [
+    {
+      "name": "receipt_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "po_item_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "receipt_date",
+      "type": "TEXT",
+      "mysqlType": "DATE",
+      "sqliteType": "TEXT"
+    },
+    {
+      "name": "quantity_received",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    }
+  ],
+  "rows": [
+    [
+      1,
+      1,
+      "2026-01-10",
+      4
+    ],
+    [
+      2,
+      1,
+      "2026-01-12",
+      5
+    ]
+  ]
+}

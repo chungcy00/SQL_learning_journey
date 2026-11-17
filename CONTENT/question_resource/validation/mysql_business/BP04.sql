@@ -1,0 +1,7 @@
+-- 促销与非促销的日均表现
+-- 原生MySQL 8.4未执行。先从第二部分资源导入对应隔离数据库。
+-- 公开基准参考解；独立执行等价解，不得变动原库。
+WITH d AS (SELECT day,CASE WHEN EXISTS(SELECT 1 FROM promotions p WHERE day BETWEEN p.start_date AND p.end_date) THEN 1 ELSE 0 END promo FROM calendar_days WHERE day BETWEEN '2025-01-01' AND '2025-12-31'), a AS (SELECT order_date,SUM(net_cents) net,SUM(net_qty) qty,SUM(cost_cents) cost FROM v_sales_lines WHERE channel='store' AND order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY order_date) SELECT d.promo,COUNT(*) days,ROUND(1.0*SUM(COALESCE(a.net,0))/COUNT(*),2) daily_net_cents,ROUND(1.0*SUM(COALESCE(a.qty,0))/COUNT(*),2) daily_units,ROUND(100.0*SUM(a.net-a.cost)/NULLIF(SUM(a.net),0),2) margin_pct FROM d LEFT JOIN a ON a.order_date=d.day GROUP BY d.promo ORDER BY d.promo;
+
+-- 等价解（SQLite已验证，MySQL待复验）
+WITH d AS (SELECT day,CASE WHEN EXISTS(SELECT 1 FROM promotions p WHERE day BETWEEN p.start_date AND p.end_date) THEN 1 ELSE 0 END promo FROM calendar_days WHERE (day>='2025-01-01' AND day<='2025-12-31')), a AS (SELECT order_date,SUM(net_cents) net,SUM(net_qty) qty,SUM(cost_cents) cost FROM v_sales_lines WHERE channel='store' AND (order_date>='2025-01-01' AND order_date<='2025-12-31') GROUP BY order_date) SELECT d.promo,COUNT(*) days,ROUND(1.0*SUM(COALESCE(a.net,0))/COUNT(*),2) daily_net_cents,ROUND(1.0*SUM(COALESCE(a.qty,0))/COUNT(*),2) daily_units,ROUND(100.0*SUM(a.net-a.cost)/NULLIF(SUM(a.net),0),2) margin_pct FROM d LEFT JOIN a ON a.order_date=d.day GROUP BY d.promo ORDER BY d.promo;

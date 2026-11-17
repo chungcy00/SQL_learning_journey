@@ -1,0 +1,124 @@
+{
+  "id": "fc0164-demo",
+  "tables": [
+    {
+      "name": "budget_mini",
+      "columns": [
+        {
+          "name": "department_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "account_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "budget_cents",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          1,
+          10000
+        ],
+        [
+          1,
+          2,
+          5000
+        ],
+        [
+          2,
+          1,
+          0
+        ]
+      ],
+      "constraints": ""
+    },
+    {
+      "name": "expense_mini",
+      "columns": [
+        {
+          "name": "department_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "account_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "expense_cents",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          1,
+          8000
+        ],
+        [
+          1,
+          1,
+          3500
+        ],
+        [
+          2,
+          1,
+          1000
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "WITH a AS (SELECT department_id,account_id,SUM(expense_cents) AS actual FROM expense_mini GROUP BY department_id,account_id) SELECT b.department_id,b.account_id,COALESCE(a.actual,0)-b.budget_cents AS variance FROM budget_mini b LEFT JOIN a ON b.department_id=a.department_id AND b.account_id=a.account_id ORDER BY b.department_id,b.account_id",
+  "mysqlSql": "WITH a AS (SELECT department_id,account_id,SUM(expense_cents) AS actual FROM expense_mini GROUP BY department_id,account_id) SELECT b.department_id,b.account_id,COALESCE(a.actual,0)-b.budget_cents AS variance FROM budget_mini b LEFT JOIN a ON b.department_id=a.department_id AND b.account_id=a.account_id ORDER BY b.department_id,b.account_id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      1,
+      1500
+    ],
+    [
+      1,
+      2,
+      -5000
+    ],
+    [
+      2,
+      1,
+      1000
+    ]
+  ],
+  "expectedColumns": [
+    "department_id",
+    "account_id",
+    "variance"
+  ],
+  "wrongSqlite": "WITH a AS (SELECT department_id,account_id,SUM(expense_cents) AS actual FROM expense_mini GROUP BY department_id,account_id) SELECT b.department_id,b.account_id,a.actual-b.budget_cents AS variance FROM budget_mini b JOIN a ON b.department_id=a.department_id AND b.account_id=a.account_id ORDER BY b.department_id,b.account_id",
+  "wrongMysql": "WITH a AS (SELECT department_id,account_id,SUM(expense_cents) AS actual FROM expense_mini GROUP BY department_id,account_id) SELECT b.department_id,b.account_id,a.actual-b.budget_cents AS variance FROM budget_mini b JOIN a ON b.department_id=a.department_id AND b.account_id=a.account_id ORDER BY b.department_id,b.account_id",
+  "wrongResult": {
+    "kind": "result",
+    "columns": [
+      "department_id",
+      "account_id",
+      "variance"
+    ],
+    "rows": [
+      [
+        1,
+        1,
+        1500
+      ],
+      [
+        2,
+        1,
+        1000
+      ]
+    ]
+  },
+  "independentAuthorExpectation": true
+}

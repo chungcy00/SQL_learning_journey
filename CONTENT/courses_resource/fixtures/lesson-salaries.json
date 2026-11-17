@@ -1,0 +1,59 @@
+{
+  "id": "lesson-salaries",
+  "table": "salaries",
+  "columns": [
+    {
+      "name": "salary_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "employee_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "salary_month",
+      "type": "TEXT",
+      "mysqlType": "DATE",
+      "sqliteType": "TEXT"
+    },
+    {
+      "name": "base_salary",
+      "type": "INTEGER",
+      "mysqlType": "DECIMAL(12,2)",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "bonus",
+      "type": "INTEGER",
+      "mysqlType": "DECIMAL(12,2)",
+      "sqliteType": "INTEGER"
+    }
+  ],
+  "rows": [
+    [
+      1,
+      1,
+      "2026-01-01",
+      4000,
+      500
+    ],
+    [
+      2,
+      2,
+      "2026-01-01",
+      3000,
+      0
+    ],
+    [
+      3,
+      3,
+      "2026-02-01",
+      2500,
+      250
+    ]
+  ]
+}

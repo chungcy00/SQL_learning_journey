@@ -1,0 +1,85 @@
+{
+  "projectId": "procurement",
+  "title": "供应商多指标综合评价",
+  "context": "采购部门需要可解释的供应商评分。",
+  "requirements": "2025年到期采购行；至少10行；准时足量率40%、完整率25%、质量合格率20%、合同价格达标率15%（实际采购价≤合同价行数/到期行数）；质量分母为0时评分NULL；输出各指标和总分，按总分降序。",
+  "grain": "供应商",
+  "commonError": "不说明权重、样本门槛和缺失指标处理会使评分不可解释。",
+  "executionSteps": [
+    "计算四项百分比",
+    "保留充足样本",
+    "加权评分",
+    "排序"
+  ],
+  "difficulty": "挑战",
+  "mysqlSql": "WITH a AS (SELECT v.supplier_id,COUNT(*) n,100.0*SUM(CASE WHEN v.on_time>=v.quantity_ordered THEN 1 ELSE 0 END)/COUNT(*) ot,100.0*SUM(CASE WHEN v.accepted>=v.quantity_ordered THEN 1 ELSE 0 END)/COUNT(*) fill,100.0*SUM(accepted)/NULLIF(SUM(received),0) quality,100.0*SUM(CASE WHEN v.unit_price_cents<=c.unit_price_cents THEN 1 ELSE 0 END)/COUNT(*) price_ok FROM v_po_lines v JOIN purchase_order_items i ON i.po_item_id=v.po_item_id JOIN supplier_contracts c ON c.contract_id=i.contract_id WHERE v.promised_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY v.supplier_id) SELECT supplier_id,n due_lines,ROUND(ot,2) ontime_pct,ROUND(fill,2) complete_pct,ROUND(quality,2) quality_pct,ROUND(price_ok,2) contract_pct,ROUND(.4*ot+.25*fill+.2*quality+.15*price_ok,2) score FROM a WHERE n>=10 ORDER BY score DESC,supplier_id",
+  "sqliteSql": "WITH a AS (SELECT v.supplier_id,COUNT(*) n,100.0*SUM(CASE WHEN v.on_time>=v.quantity_ordered THEN 1 ELSE 0 END)/COUNT(*) ot,100.0*SUM(CASE WHEN v.accepted>=v.quantity_ordered THEN 1 ELSE 0 END)/COUNT(*) fill,100.0*SUM(accepted)/NULLIF(SUM(received),0) quality,100.0*SUM(CASE WHEN v.unit_price_cents<=c.unit_price_cents THEN 1 ELSE 0 END)/COUNT(*) price_ok FROM v_po_lines v JOIN purchase_order_items i ON i.po_item_id=v.po_item_id JOIN supplier_contracts c ON c.contract_id=i.contract_id WHERE v.promised_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY v.supplier_id) SELECT supplier_id,n due_lines,ROUND(ot,2) ontime_pct,ROUND(fill,2) complete_pct,ROUND(quality,2) quality_pct,ROUND(price_ok,2) contract_pct,ROUND(.4*ot+.25*fill+.2*quality+.15*price_ok,2) score FROM a WHERE n>=10 ORDER BY score DESC,supplier_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "supplier_id",
+    "due_lines",
+    "ontime_pct",
+    "complete_pct",
+    "quality_pct",
+    "contract_pct",
+    "score"
+  ],
+  "id": "BP30",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-60"
+  ],
+  "datasetId": "procurement-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP30.json",
+  "expectedRowCount": 60,
+  "expectedColumns": [
+    "supplier_id",
+    "due_lines",
+    "ontime_pct",
+    "complete_pct",
+    "quality_pct",
+    "contract_pct",
+    "score"
+  ],
+  "sourceTables": [
+    "purchase_order_items",
+    "supplier_contracts",
+    "v_po_lines"
+  ],
+  "dependencyTables": [
+    "categories",
+    "goods_receipts",
+    "products",
+    "purchase_order_items",
+    "purchase_orders",
+    "supplier_contracts",
+    "supplier_invoice_items",
+    "supplier_invoices",
+    "suppliers",
+    "v_po_lines",
+    "warehouses"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH a AS (SELECT v.supplier_id,COUNT(*) n,100.0*SUM(CASE WHEN v.on_time>=v.quantity_ordered THEN 1 ELSE 0 END)/COUNT(*) ot,100.0*SUM(CASE WHEN v.accepted>=v.quantity_ordered THEN 1 ELSE 0 END)/COUNT(*) fill,100.0*SUM(accepted)/NULLIF(SUM(received),0) quality,100.0*SUM(CASE WHEN v.unit_price_cents<=c.unit_price_cents THEN 1 ELSE 0 END)/COUNT(*) price_ok FROM v_po_lines v JOIN purchase_order_items i ON i.po_item_id=v.po_item_id JOIN supplier_contracts c ON c.contract_id=i.contract_id WHERE v.promised_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY v.supplier_id) SELECT supplier_id,n due_lines,ROUND(ot,2) ontime_pct,ROUND(fill,2) complete_pct,ROUND(quality,2) quality_pct,ROUND(price_ok,2) contract_pct,ROUND(.4*ot+.25*fill+.2*quality+.15*price_ok,2) score FROM a WHERE n>=10 ORDER BY score DESC,supplier_id",
+      "sqliteSql": "WITH a AS (SELECT v.supplier_id,COUNT(*) n,100.0*SUM(CASE WHEN v.on_time>=v.quantity_ordered THEN 1 ELSE 0 END)/COUNT(*) ot,100.0*SUM(CASE WHEN v.accepted>=v.quantity_ordered THEN 1 ELSE 0 END)/COUNT(*) fill,100.0*SUM(accepted)/NULLIF(SUM(received),0) quality,100.0*SUM(CASE WHEN v.unit_price_cents<=c.unit_price_cents THEN 1 ELSE 0 END)/COUNT(*) price_ok FROM v_po_lines v JOIN purchase_order_items i ON i.po_item_id=v.po_item_id JOIN supplier_contracts c ON c.contract_id=i.contract_id WHERE v.promised_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY v.supplier_id) SELECT supplier_id,n due_lines,ROUND(ot,2) ontime_pct,ROUND(fill,2) complete_pct,ROUND(quality,2) quality_pct,ROUND(price_ok,2) contract_pct,ROUND(.4*ot+.25*fill+.2*quality+.15*price_ok,2) score FROM a WHERE n>=10 ORDER BY score DESC,supplier_id"
+    }
+  ],
+  "hints": [
+    "计算四项百分比",
+    "计算四项百分比；保留充足样本",
+    "重点核对输出粒度：供应商"
+  ],
+  "explanation": "计算四项百分比；保留充足样本；加权评分；排序。不说明权重、样本门槛和缺失指标处理会使评分不可解释。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 32.4
+}

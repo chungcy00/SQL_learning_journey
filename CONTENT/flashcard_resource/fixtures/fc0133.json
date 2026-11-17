@@ -1,0 +1,55 @@
+{
+  "id": "fc0133-demo",
+  "tables": [
+    {
+      "name": "stock_log",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "qty",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          8
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "DELETE FROM stock_log WHERE qty=0;",
+  "mysqlSql": "DELETE FROM stock_log WHERE qty=0;",
+  "verificationQuery": "SELECT id,qty FROM stock_log ORDER BY id",
+  "expectedRows": [
+    [
+      1,
+      8
+    ],
+    [
+      3,
+      4
+    ]
+  ],
+  "expectedColumns": [
+    "id",
+    "qty"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

@@ -1,0 +1,90 @@
+{
+  "projectId": "ecommerce",
+  "title": "营销渠道转化与获客成本",
+  "context": "营销负责人希望评估不同渠道效率。",
+  "requirements": "2025年，按访问渠道归因；转化率=有有效订单的不同会话数/会话数；新客数只计历史首次线上有效订单；获客成本=渠道广告支出/新客数；净收入广告回报=净销售/广告支出；零分母NULL。",
+  "grain": "渠道",
+  "commonError": "广告支出不能直接连接订单明细求和；转化分母是会话不是客户。",
+  "executionSteps": [
+    "按渠道汇总会话",
+    "历史首次购买标记",
+    "按渠道汇总转换与收入",
+    "独立汇总广告支出"
+  ],
+  "difficulty": "困难",
+  "mysqlSql": "WITH s AS (SELECT source_id,COUNT(*) sessions FROM customer_sessions WHERE session_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY source_id), o AS (SELECT *,ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY order_date,order_id) rn FROM v_order_net WHERE channel='online'), a AS (SELECT t.source_id,COUNT(DISTINCT o.session_id) converted,SUM(CASE WHEN rn=1 THEN 1 ELSE 0 END) new_customers,SUM(net_cents) net FROM o JOIN customer_sessions t ON t.session_id=o.session_id WHERE o.order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY t.source_id), p AS (SELECT source_id,SUM(spend_cents) spend FROM marketing_campaigns WHERE month_key BETWEEN '2025-01' AND '2025-12' GROUP BY source_id) SELECT t.source_id,s.sessions,COALESCE(a.converted,0) converted,ROUND(100.0*COALESCE(a.converted,0)/NULLIF(s.sessions,0),2) conversion_pct,COALESCE(a.new_customers,0) new_customers,p.spend spend_cents,ROUND(1.0*p.spend/NULLIF(a.new_customers,0),2) cac_cents,ROUND(1.0*a.net/NULLIF(p.spend,0),4) roas FROM traffic_sources t LEFT JOIN s ON s.source_id=t.source_id LEFT JOIN a ON a.source_id=t.source_id LEFT JOIN p ON p.source_id=t.source_id ORDER BY t.source_id",
+  "sqliteSql": "WITH s AS (SELECT source_id,COUNT(*) sessions FROM customer_sessions WHERE session_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY source_id), o AS (SELECT *,ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY order_date,order_id) rn FROM v_order_net WHERE channel='online'), a AS (SELECT t.source_id,COUNT(DISTINCT o.session_id) converted,SUM(CASE WHEN rn=1 THEN 1 ELSE 0 END) new_customers,SUM(net_cents) net FROM o JOIN customer_sessions t ON t.session_id=o.session_id WHERE o.order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY t.source_id), p AS (SELECT source_id,SUM(spend_cents) spend FROM marketing_campaigns WHERE month_key BETWEEN '2025-01' AND '2025-12' GROUP BY source_id) SELECT t.source_id,s.sessions,COALESCE(a.converted,0) converted,ROUND(100.0*COALESCE(a.converted,0)/NULLIF(s.sessions,0),2) conversion_pct,COALESCE(a.new_customers,0) new_customers,p.spend spend_cents,ROUND(1.0*p.spend/NULLIF(a.new_customers,0),2) cac_cents,ROUND(1.0*a.net/NULLIF(p.spend,0),4) roas FROM traffic_sources t LEFT JOIN s ON s.source_id=t.source_id LEFT JOIN a ON a.source_id=t.source_id LEFT JOIN p ON p.source_id=t.source_id ORDER BY t.source_id",
+  "compatibility": "直接兼容（原生待验证）",
+  "columns": [
+    "source_id",
+    "sessions",
+    "converted",
+    "conversion_pct",
+    "new_customers",
+    "spend_cents",
+    "cac_cents",
+    "roas"
+  ],
+  "id": "BP14",
+  "chapterId": "ch19",
+  "knowledgePointIds": [
+    "kp19-44"
+  ],
+  "datasetId": "ecommerce-v2",
+  "type": "业务情景",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
+  "expectedOutputPath": "business_tasks/results/BP14.json",
+  "expectedRowCount": 5,
+  "expectedColumns": [
+    "source_id",
+    "sessions",
+    "converted",
+    "conversion_pct",
+    "new_customers",
+    "spend_cents",
+    "cac_cents",
+    "roas"
+  ],
+  "sourceTables": [
+    "customer_sessions",
+    "marketing_campaigns",
+    "traffic_sources",
+    "v_order_net"
+  ],
+  "dependencyTables": [
+    "categories",
+    "customer_sessions",
+    "customers",
+    "marketing_campaigns",
+    "order_items",
+    "orders",
+    "products",
+    "promotions",
+    "returns",
+    "stores",
+    "traffic_sources",
+    "v_order_net",
+    "v_sales_lines"
+  ],
+  "orderPolicy": "ordered",
+  "numericTolerance": {
+    "integerCents": 0,
+    "decimalAbsolute": 1e-06
+  },
+  "referenceSolutions": [
+    {
+      "mysqlSql": "WITH s AS (SELECT source_id,COUNT(*) sessions FROM customer_sessions WHERE session_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY source_id), o AS (SELECT *,ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY order_date,order_id) rn FROM v_order_net WHERE channel='online'), a AS (SELECT t.source_id,COUNT(DISTINCT o.session_id) converted,SUM(CASE WHEN rn=1 THEN 1 ELSE 0 END) new_customers,SUM(net_cents) net FROM o JOIN customer_sessions t ON t.session_id=o.session_id WHERE o.order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY t.source_id), p AS (SELECT source_id,SUM(spend_cents) spend FROM marketing_campaigns WHERE month_key BETWEEN '2025-01' AND '2025-12' GROUP BY source_id) SELECT t.source_id,s.sessions,COALESCE(a.converted,0) converted,ROUND(100.0*COALESCE(a.converted,0)/NULLIF(s.sessions,0),2) conversion_pct,COALESCE(a.new_customers,0) new_customers,p.spend spend_cents,ROUND(1.0*p.spend/NULLIF(a.new_customers,0),2) cac_cents,ROUND(1.0*a.net/NULLIF(p.spend,0),4) roas FROM traffic_sources t LEFT JOIN s ON s.source_id=t.source_id LEFT JOIN a ON a.source_id=t.source_id LEFT JOIN p ON p.source_id=t.source_id ORDER BY t.source_id",
+      "sqliteSql": "WITH s AS (SELECT source_id,COUNT(*) sessions FROM customer_sessions WHERE session_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY source_id), o AS (SELECT *,ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY order_date,order_id) rn FROM v_order_net WHERE channel='online'), a AS (SELECT t.source_id,COUNT(DISTINCT o.session_id) converted,SUM(CASE WHEN rn=1 THEN 1 ELSE 0 END) new_customers,SUM(net_cents) net FROM o JOIN customer_sessions t ON t.session_id=o.session_id WHERE o.order_date BETWEEN '2025-01-01' AND '2025-12-31' GROUP BY t.source_id), p AS (SELECT source_id,SUM(spend_cents) spend FROM marketing_campaigns WHERE month_key BETWEEN '2025-01' AND '2025-12' GROUP BY source_id) SELECT t.source_id,s.sessions,COALESCE(a.converted,0) converted,ROUND(100.0*COALESCE(a.converted,0)/NULLIF(s.sessions,0),2) conversion_pct,COALESCE(a.new_customers,0) new_customers,p.spend spend_cents,ROUND(1.0*p.spend/NULLIF(a.new_customers,0),2) cac_cents,ROUND(1.0*a.net/NULLIF(p.spend,0),4) roas FROM traffic_sources t LEFT JOIN s ON s.source_id=t.source_id LEFT JOIN a ON a.source_id=t.source_id LEFT JOIN p ON p.source_id=t.source_id ORDER BY t.source_id"
+    }
+  ],
+  "hints": [
+    "按渠道汇总会话",
+    "按渠道汇总会话；历史首次购买标记",
+    "重点核对输出粒度：渠道"
+  ],
+  "explanation": "按渠道汇总会话；历史首次购买标记；按渠道汇总转换与收入；独立汇总广告支出。广告支出不能直接连接订单明细求和；转化分母是会话不是客户。",
+  "testFixtureIds": [],
+  "validationStatus": "公开基准已执行；正式题库隐藏夹具及MySQL待验证",
+  "elapsedMs": 94.9
+}

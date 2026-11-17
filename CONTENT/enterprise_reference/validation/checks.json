@@ -1,0 +1,495 @@
+{
+  "sqliteVersion": "3.46.1",
+  "datasets": [
+    {
+      "dataset": "retail",
+      "integrity": "ok",
+      "foreignKeyViolations": 0,
+      "taskResultsMatchEnterprise": 5
+    },
+    {
+      "dataset": "inventory",
+      "integrity": "ok",
+      "foreignKeyViolations": 0,
+      "taskResultsMatchEnterprise": 5
+    },
+    {
+      "dataset": "ecommerce",
+      "integrity": "ok",
+      "foreignKeyViolations": 0,
+      "taskResultsMatchEnterprise": 5
+    },
+    {
+      "dataset": "finance",
+      "integrity": "ok",
+      "foreignKeyViolations": 0,
+      "taskResultsMatchEnterprise": 5
+    },
+    {
+      "dataset": "hr",
+      "integrity": "ok",
+      "foreignKeyViolations": 0,
+      "taskResultsMatchEnterprise": 5
+    },
+    {
+      "dataset": "procurement",
+      "integrity": "ok",
+      "foreignKeyViolations": 0,
+      "taskResultsMatchEnterprise": 5
+    },
+    {
+      "dataset": "enterprise",
+      "integrity": "ok",
+      "foreignKeyViolations": 0,
+      "taskResultsMatchEnterprise": 20
+    }
+  ],
+  "businessChecks": [
+    {
+      "name": "库存月末与期初流水一致",
+      "sql": "WITH m AS (SELECT warehouse_id,product_id,SUBSTR(movement_date,1,7) m,SUM(quantity_delta) delta FROM stock_movements GROUP BY warehouse_id,product_id,SUBSTR(movement_date,1,7)), a AS (SELECT i.warehouse_id,i.product_id,i.snapshot_date,i.quantity,o.quantity+SUM(COALESCE(m.delta,0)) OVER(PARTITION BY i.warehouse_id,i.product_id ORDER BY i.snapshot_date ROWS UNBOUNDED PRECEDING) expected FROM inventory_snapshots i JOIN inventory_opening o ON o.warehouse_id=i.warehouse_id AND o.product_id=i.product_id LEFT JOIN m ON m.warehouse_id=i.warehouse_id AND m.product_id=i.product_id AND m.m=SUBSTR(i.snapshot_date,1,7)) SELECT COUNT(*) FROM a WHERE quantity<>expected",
+      "violations": 0
+    },
+    {
+      "name": "收货关联采购一致",
+      "sql": "SELECT COUNT(*) FROM goods_receipts g JOIN purchase_order_items i ON i.po_item_id=g.po_item_id JOIN purchase_orders p ON p.po_id=i.po_id WHERE p.status='cancelled' OR g.receipt_date<p.order_date",
+      "violations": 0
+    },
+    {
+      "name": "销售库存出库数量一致",
+      "sql": "WITH a AS (SELECT order_item_id,SUM(-quantity_delta) sold FROM stock_movements WHERE movement_type='sale' GROUP BY order_item_id) SELECT COUNT(*) FROM order_items i JOIN orders o ON o.order_id=i.order_id LEFT JOIN a ON a.order_item_id=i.order_item_id WHERE (o.status='completed' AND COALESCE(a.sold,0)<>i.quantity) OR (o.status<>'completed' AND a.sold IS NOT NULL)",
+      "violations": 0
+    },
+    {
+      "name": "退货数量不超原销售",
+      "sql": "SELECT COUNT(*) FROM (SELECT i.order_item_id,i.quantity,SUM(r.quantity) q FROM order_items i JOIN returns r ON r.order_item_id=i.order_item_id GROUP BY i.order_item_id,i.quantity HAVING SUM(r.quantity)>i.quantity) a",
+      "violations": 0
+    },
+    {
+      "name": "凭证借贷平衡",
+      "sql": "SELECT COUNT(*) FROM (SELECT entry_id FROM journal_lines GROUP BY entry_id HAVING SUM(debit_cents)<>SUM(credit_cents)) a",
+      "violations": 0
+    },
+    {
+      "name": "员工任职区间不重叠",
+      "sql": "SELECT COUNT(*) FROM employment_history a JOIN employment_history b ON a.employee_id=b.employee_id AND a.employment_id<b.employment_id WHERE a.start_date<COALESCE(b.end_date,'9999-12-31') AND b.start_date<COALESCE(a.end_date,'9999-12-31')",
+      "violations": 0
+    },
+    {
+      "name": "线上会话客户日期一致",
+      "sql": "SELECT COUNT(*) FROM orders o JOIN customer_sessions s ON s.session_id=o.session_id WHERE o.customer_id<>s.customer_id OR o.order_date<>s.session_date",
+      "violations": 0
+    },
+    {
+      "name": "合同商品供应商有效期一致",
+      "sql": "SELECT COUNT(*) FROM purchase_order_items i JOIN purchase_orders p ON p.po_id=i.po_id JOIN supplier_contracts s ON s.contract_id=i.contract_id WHERE p.supplier_id<>s.supplier_id OR i.product_id<>s.product_id OR p.order_date NOT BETWEEN s.start_date AND s.end_date",
+      "violations": 0
+    },
+    {
+      "name": "发票明细与采购订单一致",
+      "sql": "SELECT COUNT(*) FROM supplier_invoice_items i JOIN supplier_invoices s ON s.supplier_invoice_id=i.supplier_invoice_id JOIN purchase_order_items p ON p.po_item_id=i.po_item_id WHERE p.po_id<>s.po_id",
+      "violations": 0
+    },
+    {
+      "name": "库存成本历史匹配",
+      "sql": "SELECT COUNT(*) FROM inventory_snapshots i JOIN product_costs p ON p.product_id=i.product_id AND p.effective_date=CONCAT(SUBSTR(i.snapshot_date,1,4),'-01-01') WHERE i.unit_cost_cents<>p.unit_cost_cents",
+      "violations": 0
+    }
+  ],
+  "boundaryTests": [
+    {
+      "name": "删除一笔收货入库后，核对查询必须报告该收货",
+      "taskId": "BP36",
+      "status": "通过",
+      "mutation": [
+        {
+          "sql": "DELETE FROM stock_movements WHERE receipt_id=?",
+          "params": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "增加一分钱付款后足额发票变超额",
+      "taskId": "BP17",
+      "status": "通过",
+      "mutation": [
+        {
+          "sql": "INSERT INTO supplier_payments VALUES(?,?,?,?)",
+          "params": [
+            4077,
+            10,
+            "2025-12-31",
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "减少一分钱结算后产生订单核对差额",
+      "taskId": "BP39",
+      "status": "通过",
+      "mutation": [
+        {
+          "sql": "UPDATE payments SET amount_cents=amount_cents-1 WHERE payment_id=?",
+          "params": [
+            517
+          ]
+        }
+      ]
+    }
+  ],
+  "executions": [
+    {
+      "id": "BP01",
+      "rows": 12,
+      "ms": 33.2,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP02",
+      "rows": 144,
+      "ms": 78.0,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP03",
+      "rows": 3,
+      "ms": 149.2,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP04",
+      "rows": 2,
+      "ms": 34.3,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP05",
+      "rows": 12,
+      "ms": 23.3,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP06",
+      "rows": 823,
+      "ms": 13.5,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP07",
+      "rows": 45,
+      "ms": 56.4,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP08",
+      "rows": 41,
+      "ms": 16.5,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP09",
+      "rows": 1392,
+      "ms": 104.3,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP10",
+      "rows": 68,
+      "ms": 46.9,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP11",
+      "rows": 2,
+      "ms": 61.7,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP12",
+      "rows": 2889,
+      "ms": 52.9,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP13",
+      "rows": 231,
+      "ms": 106.1,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP14",
+      "rows": 5,
+      "ms": 94.9,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP15",
+      "rows": 547,
+      "ms": 57.5,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP16",
+      "rows": 35,
+      "ms": 16.7,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP17",
+      "rows": 4658,
+      "ms": 14.9,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP18",
+      "rows": 197,
+      "ms": 8.5,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP19",
+      "rows": 656,
+      "ms": 34.5,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP20",
+      "rows": 1090,
+      "ms": 78.4,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP21",
+      "rows": 84,
+      "ms": 2.8,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP22",
+      "rows": 84,
+      "ms": 4.4,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP23",
+      "rows": 7,
+      "ms": 72.5,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP24",
+      "rows": 21,
+      "ms": 72.4,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP25",
+      "rows": 62,
+      "ms": 1.3,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP26",
+      "rows": 3129,
+      "ms": 31.5,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP27",
+      "rows": 60,
+      "ms": 28.1,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP28",
+      "rows": 876,
+      "ms": 26.1,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP29",
+      "rows": 900,
+      "ms": 33.3,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP30",
+      "rows": 60,
+      "ms": 32.4,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP31",
+      "rows": 698,
+      "ms": 8.3,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP32",
+      "rows": 500,
+      "ms": 162.0,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP33",
+      "rows": 116,
+      "ms": 32.0,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP34",
+      "rows": 15,
+      "ms": 64.2,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP35",
+      "rows": 32,
+      "ms": 33.7,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP36",
+      "rows": 0,
+      "ms": 30.2,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP37",
+      "rows": 60,
+      "ms": 29.3,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP38",
+      "rows": 12,
+      "ms": 35.3,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP39",
+      "rows": 0,
+      "ms": 115.4,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP40",
+      "rows": 144,
+      "ms": 46.2,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP41",
+      "rows": 60,
+      "ms": 41.5,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP42",
+      "rows": 598,
+      "ms": 45.3,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP43",
+      "rows": 60,
+      "ms": 34.5,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP44",
+      "rows": 5,
+      "ms": 37.5,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP45",
+      "rows": 169,
+      "ms": 113.0,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP46",
+      "rows": 5,
+      "ms": 49.7,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP47",
+      "rows": 12,
+      "ms": 99.7,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP48",
+      "rows": 144,
+      "ms": 44.2,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP49",
+      "rows": 12,
+      "ms": 163.2,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    },
+    {
+      "id": "BP50",
+      "rows": 4,
+      "ms": 202.1,
+      "mysql": "未执行",
+      "sqlite": "通过"
+    }
+  ]
+}

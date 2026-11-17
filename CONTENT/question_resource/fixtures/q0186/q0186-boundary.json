@@ -1,0 +1,64 @@
+{
+  "visibility": "hidden",
+  "variant": "boundary",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "schedule_bounds",
+      "columns": [
+        {
+          "name": "start_day",
+          "type": "INTEGER",
+          "sqliteType": "INTEGER",
+          "mysqlType": "INT"
+        },
+        {
+          "name": "step_days",
+          "type": "INTEGER",
+          "sqliteType": "INTEGER",
+          "mysqlType": "INT"
+        },
+        {
+          "name": "max_day",
+          "type": "INTEGER",
+          "sqliteType": "INTEGER",
+          "mysqlType": "INT"
+        }
+      ],
+      "rows": [
+        [
+          2,
+          4,
+          11
+        ]
+      ]
+    }
+  ],
+  "id": "q0186-boundary",
+  "questionId": "q0186",
+  "datasetId": "q0186-lesson",
+  "expected": {
+    "columns": [
+      "n"
+    ],
+    "rows": [
+      [
+        2
+      ],
+      [
+        6
+      ],
+      [
+        10
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

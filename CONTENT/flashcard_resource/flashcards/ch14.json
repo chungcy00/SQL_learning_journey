@@ -1,0 +1,691 @@
+{
+  "chapterId": "ch14",
+  "title": "公用表表达式",
+  "count": 7,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "cards": [
+    {
+      "id": "fc0103",
+      "chapterId": "ch14",
+      "knowledgePointIds": [
+        "kp14-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp14-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0188",
+        "q0189",
+        "q0194"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "中等",
+      "front": {
+        "question": "为什么不能认定 CTE 一定提高查询性能？"
+      },
+      "back": {
+        "answer": "CTE 是逻辑组织结构，不保证物化或特定执行计划。",
+        "explanation": "优化器可能合并、物化或重复处理，实际成本要通过计划验证。"
+      },
+      "tags": [
+        "WITH 与多个 CTE",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "WITH 与多个 CTE"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0104",
+      "chapterId": "ch14",
+      "knowledgePointIds": [
+        "kp14-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp14-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0188",
+        "q0189",
+        "q0190",
+        "q0195"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "中等",
+      "front": {
+        "question": "回忆命名两个连续 CTE 的写法：先筛有效订单，再统计总额。",
+        "sourceTables": [
+          {
+            "name": "sales",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "client_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "store_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "amount",
+                "type": "INTEGER"
+              },
+              {
+                "name": "day",
+                "type": "TEXT"
+              },
+              {
+                "name": "status",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                1,
+                40,
+                "2025-01-02",
+                "completed"
+              ],
+              [
+                2,
+                1,
+                1,
+                60,
+                "2025-01-15",
+                "completed"
+              ],
+              [
+                3,
+                2,
+                2,
+                30,
+                "2025-02-01",
+                "completed"
+              ],
+              [
+                4,
+                null,
+                2,
+                0,
+                "2025-02-02",
+                "completed"
+              ],
+              [
+                5,
+                3,
+                1,
+                100,
+                "2025-03-01",
+                "cancelled"
+              ],
+              [
+                6,
+                2,
+                1,
+                60,
+                "2025-03-05",
+                "completed"
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "WITH 名1 AS (查询), 名2 AS (查询) SELECT … FROM 名2",
+        "explanation": "同一WITH内多个CTE逗号分隔；后者可引用前者。",
+        "code": "WITH v AS (SELECT amount FROM sales WHERE status='completed'),t AS (SELECT SUM(amount) AS s FROM v) SELECT s FROM t",
+        "sqliteCode": "WITH v AS (SELECT amount FROM sales WHERE status='completed'),t AS (SELECT SUM(amount) AS s FROM v) SELECT s FROM t",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "s"
+          ],
+          "rows": [
+            [
+              190
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "WITH 与多个 CTE",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "889967037709c9ea7f1202d5f35823ec15d929f413f57f6be9041e8ffb168b78",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0104-demo"
+      ],
+      "fixturePath": "fixtures/fc0104.json",
+      "referenceTopicNames": [
+        "WITH 与多个 CTE"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0104.sql"
+    },
+    {
+      "id": "fc0105",
+      "chapterId": "ch14",
+      "knowledgePointIds": [
+        "kp14-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp14-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0184",
+        "q0185",
+        "q0186",
+        "q0187"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "中等",
+      "front": {
+        "question": "回忆递归CTE的两部分及连接方式，从1递增到4。",
+        "sourceTables": [],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "WITH RECURSIVE 名(列) AS (锚点 UNION ALL 递归项) SELECT …",
+        "explanation": "锚点启动递归；递归条件控制有限终止。",
+        "code": "WITH RECURSIVE n(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM n WHERE x<4) SELECT x FROM n ORDER BY x",
+        "sqliteCode": "WITH RECURSIVE n(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM n WHERE x<4) SELECT x FROM n ORDER BY x",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "x"
+          ],
+          "rows": [
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "递归 CTE 与层级",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "0ba75fa0650c4dd5b8f868b44156920e0de0aa174396f5d46cb39c2882f5afd4",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0105-demo"
+      ],
+      "fixturePath": "fixtures/fc0105.json",
+      "referenceTopicNames": [
+        "递归 CTE 与层级"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0105.sql"
+    },
+    {
+      "id": "fc0106",
+      "chapterId": "ch14",
+      "knowledgePointIds": [
+        "kp14-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp14-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0184",
+        "q0185"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "中等",
+      "front": {
+        "question": "递归CTE与普通CTE在引用自身方面有什么区别？"
+      },
+      "back": {
+        "answer": "递归CTE可以在递归项引用自身；普通CTE不能递归引用自身。",
+        "explanation": "递归必须控制终止，图结构还需考虑循环。MySQL 递归深度受系统变量控制。"
+      },
+      "tags": [
+        "递归 CTE 与层级",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "递归 CTE 与层级"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0107",
+      "chapterId": "ch14",
+      "knowledgePointIds": [
+        "kp14-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp14-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0188",
+        "q0189",
+        "q0192"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "中等",
+      "front": {
+        "question": "从命名查询 v 中读取结果，补齐开启命名查询的关键字。",
+        "code": "□ v AS (SELECT id FROM items WHERE stock=0) SELECT id FROM v ORDER BY id",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "WITH",
+        "explanation": "CTE 的作用范围是紧随其后的单条语句。",
+        "acceptedBlanks": [
+          "WITH"
+        ],
+        "code": "WITH v AS (SELECT id FROM items WHERE stock=0) SELECT id FROM v ORDER BY id",
+        "sqliteCode": "WITH v AS (SELECT id FROM items WHERE stock=0) SELECT id FROM v ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id"
+          ],
+          "rows": [
+            [
+              1
+            ],
+            [
+              4
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "WITH 与多个 CTE",
+        "代码填空"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "f956e6d4ffccef9df509c7ebf011906cc9f6728c7de8934e25a45f281d5b2b75",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0107-demo"
+      ],
+      "fixturePath": "fixtures/fc0107.json",
+      "referenceTopicNames": [
+        "WITH 与多个 CTE"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0107.sql"
+    },
+    {
+      "id": "fc0108",
+      "chapterId": "ch14",
+      "knowledgePointIds": [
+        "kp14-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp14-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0184",
+        "q0185",
+        "q0193"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "结果预测",
+      "difficulty": "中等",
+      "front": {
+        "question": "从总部向下递归并计算层级，预测输出。",
+        "code": "WITH RECURSIVE h(id,depth) AS (SELECT id,0 FROM tree WHERE parent_id IS NULL UNION ALL SELECT t.id,h.depth+1 FROM tree t JOIN h ON t.parent_id=h.id) SELECT id,depth FROM h ORDER BY id",
+        "sourceTables": [
+          {
+            "name": "tree",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "parent_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "label",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                null,
+                "总部"
+              ],
+              [
+                2,
+                1,
+                "东区"
+              ],
+              [
+                3,
+                1,
+                "西区"
+              ],
+              [
+                4,
+                2,
+                "分店"
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "返回以下结果。",
+        "explanation": "每向下匹配一层深度加1。此样例无循环。",
+        "code": "WITH RECURSIVE h(id,depth) AS (SELECT id,0 FROM tree WHERE parent_id IS NULL UNION ALL SELECT t.id,h.depth+1 FROM tree t JOIN h ON t.parent_id=h.id) SELECT id,depth FROM h ORDER BY id",
+        "sqliteCode": "WITH RECURSIVE h(id,depth) AS (SELECT id,0 FROM tree WHERE parent_id IS NULL UNION ALL SELECT t.id,h.depth+1 FROM tree t JOIN h ON t.parent_id=h.id) SELECT id,depth FROM h ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "depth"
+          ],
+          "rows": [
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              4,
+              2
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "递归 CTE 与层级",
+        "结果预测"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "994963eecf23dbfda504608f7fd31bce8b4315633409211b242fcefc5520621f",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0108-demo"
+      ],
+      "fixturePath": "fixtures/fc0108.json",
+      "referenceTopicNames": [
+        "递归 CTE 与层级"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0108.sql"
+    },
+    {
+      "id": "fc0109",
+      "chapterId": "ch14",
+      "knowledgePointIds": [
+        "kp14-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp14-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0184",
+        "q0185",
+        "q0191"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "错误纠正",
+      "difficulty": "中等",
+      "front": {
+        "question": "目标：产生1至3。原递归条件多生成一个值，修正终止条件。",
+        "code": "WITH RECURSIVE n(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM n WHERE x<=3) SELECT x FROM n ORDER BY x",
+        "sourceTables": [],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "改用背面的修正语句。",
+        "explanation": "条件检查的是当前值，不是下一轮生成值。当前值3时必须停止。",
+        "code": "WITH RECURSIVE n(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM n WHERE x<3) SELECT x FROM n ORDER BY x",
+        "sqliteCode": "WITH RECURSIVE n(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM n WHERE x<3) SELECT x FROM n ORDER BY x",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "x"
+          ],
+          "rows": [
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ]
+          ]
+        },
+        "wrongResult": {
+          "kind": "result",
+          "columns": [
+            "x"
+          ],
+          "rows": [
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ]
+          ]
+        },
+        "correctionReason": "条件检查的是当前值，不是下一轮生成值。当前值3时必须停止。"
+      },
+      "tags": [
+        "递归 CTE 与层级",
+        "错误纠正"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "c60dc57aaa5d6ba3dde7b1f6e0fcae2ee2eca42c2a25169ac2a0d1e23ee0393e",
+        "mysqlNative": "未执行",
+        "wrongRejected": true,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0109-demo"
+      ],
+      "fixturePath": "fixtures/fc0109.json",
+      "referenceTopicNames": [
+        "递归 CTE 与层级"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0109.sql"
+    }
+  ]
+}

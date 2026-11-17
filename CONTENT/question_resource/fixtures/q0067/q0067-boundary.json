@@ -1,0 +1,212 @@
+{
+  "visibility": "hidden",
+  "variant": "boundary",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "products",
+      "columns": [
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "product_name",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "category",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "price",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "stock",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          11,
+          "S_ale",
+          "护肤品",
+          30,
+          50
+        ],
+        [
+          12,
+          "Serum2",
+          "护肤品",
+          45,
+          150
+        ],
+        [
+          13,
+          "Cream2",
+          "护肤品",
+          60,
+          180
+        ],
+        [
+          14,
+          "Mask50",
+          "化妆品",
+          35,
+          200
+        ],
+        [
+          15,
+          "Sunscreen2",
+          "化妆品",
+          60,
+          80
+        ],
+        [
+          16,
+          "Soap_2",
+          "日用品",
+          15,
+          0
+        ],
+        [
+          17,
+          "A B",
+          "日用品",
+          89,
+          49
+        ],
+        [
+          18,
+          "古晋皂",
+          "日用品",
+          15,
+          10
+        ],
+        [
+          19,
+          "S%",
+          "护肤品",
+          40,
+          0
+        ],
+        [
+          20,
+          "Zero",
+          "日用品",
+          0,
+          100
+        ],
+        [
+          21,
+          "未知",
+          "护肤品",
+          null,
+          null
+        ],
+        [
+          22,
+          "Xer",
+          "化妆品",
+          65,
+          80
+        ],
+        [
+          23,
+          "Soda",
+          "化妆品",
+          60,
+          181
+        ],
+        [
+          24,
+          "Other",
+          "护肤品",
+          15,
+          15
+        ],
+        [
+          25,
+          "Test",
+          "化妆品",
+          89,
+          1
+        ],
+        [
+          26,
+          "Aloe",
+          "护肤品",
+          50,
+          100
+        ],
+        [
+          27,
+          "Brush",
+          "日用品",
+          45,
+          80
+        ],
+        [
+          28,
+          "Axy",
+          "特殊",
+          60,
+          0
+        ],
+        [
+          29,
+          "Solo",
+          "特殊",
+          61,
+          1
+        ],
+        [
+          30,
+          "TieHigh",
+          "化妆品",
+          89,
+          11
+        ],
+        [
+          31,
+          "TieSecond",
+          "化妆品",
+          65,
+          12
+        ]
+      ]
+    }
+  ],
+  "id": "q0067-boundary",
+  "questionId": "q0067",
+  "datasetId": "q0067-lesson",
+  "expected": {
+    "columns": [
+      "price_spread"
+    ],
+    "rows": [
+      [
+        89
+      ]
+    ]
+  },
+  "orderPolicy": "unordered_multiset",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}
