@@ -1,0 +1,8 @@
+{
+  "name": "SQL 学习",
+  "description": "离线手机 SQL 学习应用：包含 20 章 MySQL 8.4 课程、152 个知识点、300 道练习题、200 张 FSRS 闪卡、6 大企业实战项目及内置 SQL 代码实验室。",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
