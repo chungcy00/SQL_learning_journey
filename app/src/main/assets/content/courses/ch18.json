@@ -436,7 +436,7 @@
         }
       ],
       "mysqlSql": "EXPLAIN SELECT product_id FROM products WHERE price=89;",
-      "sqliteSql": null,
+      "sqliteSql": "",
       "executionSteps": [
         "读取访问方式",
         "检查索引信息",

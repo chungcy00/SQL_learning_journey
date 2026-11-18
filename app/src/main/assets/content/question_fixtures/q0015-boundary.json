@@ -1,0 +1,127 @@
+{
+  "visibility": "hidden",
+  "variant": "boundary",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "employees",
+      "columns": [
+        {
+          "name": "employee_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "employee_name",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "manager_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "salary",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "总经理",
+          null,
+          7000
+        ],
+        [
+          2,
+          "主管",
+          1,
+          5000
+        ],
+        [
+          3,
+          "专员",
+          1,
+          5000
+        ],
+        [
+          4,
+          "顾问",
+          2,
+          8000
+        ],
+        [
+          5,
+          "新人",
+          2,
+          3000
+        ],
+        [
+          6,
+          "未知薪资",
+          4,
+          null
+        ],
+        [
+          7,
+          "另一个根",
+          null,
+          5000
+        ]
+      ]
+    }
+  ],
+  "id": "q0015-boundary",
+  "questionId": "q0015",
+  "datasetId": "q0015-lesson",
+  "expected": {
+    "columns": [
+      "employee_id",
+      "employee_name"
+    ],
+    "rows": [
+      [
+        1,
+        "总经理"
+      ],
+      [
+        2,
+        "主管"
+      ],
+      [
+        3,
+        "专员"
+      ],
+      [
+        4,
+        "顾问"
+      ],
+      [
+        5,
+        "新人"
+      ],
+      [
+        6,
+        "未知薪资"
+      ],
+      [
+        7,
+        "另一个根"
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order",
+  "numericTolerance": {
+    "absolute": 1e-06,
+    "integerExact": true,
+    "textExact": true,
+    "nullDistinct": true
+  }
+}

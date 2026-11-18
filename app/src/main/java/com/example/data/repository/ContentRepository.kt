@@ -27,7 +27,11 @@ import java.util.zip.GZIPInputStream
 
 class ContentRepository(private val context: Context) {
 
-    private val json = Json { ignoreUnknownKeys = true; isLenient = true }
+    private val json = Json {
+        ignoreUnknownKeys = true
+        isLenient = true
+        coerceInputValues = true
+    }
     private val loadMutex = Mutex()
     private val extractMutex = Mutex()
     private var loaded = false

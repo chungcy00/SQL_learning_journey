@@ -1,0 +1,360 @@
+{
+  "databaseId": "hr",
+  "version": "v2",
+  "tables": {
+    "calendar_days": {
+      "rowCount": 1096,
+      "columns": [
+        {
+          "name": "day",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "month_key",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "day_index",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": []
+    },
+    "stores": {
+      "rowCount": 12,
+      "columns": [
+        {
+          "name": "store_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "store_name",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "city",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": []
+    },
+    "departments": {
+      "rowCount": 7,
+      "columns": [
+        {
+          "name": "department_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "department_name",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": []
+    },
+    "positions": {
+      "rowCount": 5,
+      "columns": [
+        {
+          "name": "position_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "position_name",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "grade",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": []
+    },
+    "employees": {
+      "rowCount": 250,
+      "columns": [
+        {
+          "name": "employee_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "employee_name",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "hire_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "termination_date",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": []
+    },
+    "employment_history": {
+      "rowCount": 307,
+      "columns": [
+        {
+          "name": "employment_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "employee_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "department_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "position_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "store_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primaryKey": false
+        },
+        {
+          "name": "start_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "end_date",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "employee_id",
+          "targetTable": "employees",
+          "targetColumn": "employee_id"
+        },
+        {
+          "column": "department_id",
+          "targetTable": "departments",
+          "targetColumn": "department_id"
+        },
+        {
+          "column": "position_id",
+          "targetTable": "positions",
+          "targetColumn": "position_id"
+        },
+        {
+          "column": "store_id",
+          "targetTable": "stores",
+          "targetColumn": "store_id"
+        }
+      ]
+    },
+    "salary_history": {
+      "rowCount": 4966,
+      "columns": [
+        {
+          "name": "salary_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "employee_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "employment_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "month_key",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "base_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "bonus_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "employee_id",
+          "targetTable": "employees",
+          "targetColumn": "employee_id"
+        },
+        {
+          "column": "employment_id",
+          "targetTable": "employment_history",
+          "targetColumn": "employment_id"
+        }
+      ]
+    },
+    "attendance": {
+      "rowCount": 104754,
+      "columns": [
+        {
+          "name": "attendance_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "employee_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "attendance_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "status",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "work_minutes",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "overtime_minutes",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "employee_id",
+          "targetTable": "employees",
+          "targetColumn": "employee_id"
+        }
+      ]
+    }
+  },
+  "views": {
+    "v_staff_month": [
+      {
+        "name": "employee_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "month_key",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "department_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "position_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "store_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "base_cents",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "bonus_cents",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "overtime_minutes",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "worked_minutes",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "labor_cents",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      }
+    ]
+  }
+}

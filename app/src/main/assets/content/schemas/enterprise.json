@@ -1,0 +1,1978 @@
+{
+  "databaseId": "enterprise",
+  "version": "v2",
+  "tables": {
+    "calendar_days": {
+      "rowCount": 1096,
+      "columns": [
+        {
+          "name": "day",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "month_key",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "day_index",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": []
+    },
+    "stores": {
+      "rowCount": 12,
+      "columns": [
+        {
+          "name": "store_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "store_name",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "city",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": []
+    },
+    "categories": {
+      "rowCount": 15,
+      "columns": [
+        {
+          "name": "category_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "category_name",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": []
+    },
+    "products": {
+      "rowCount": 500,
+      "columns": [
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "category_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "product_name",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "list_price_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "reorder_level",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "active",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "category_id",
+          "targetTable": "categories",
+          "targetColumn": "category_id"
+        }
+      ]
+    },
+    "customers": {
+      "rowCount": 5000,
+      "columns": [
+        {
+          "name": "customer_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "customer_name",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "signup_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "region",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": []
+    },
+    "suppliers": {
+      "rowCount": 60,
+      "columns": [
+        {
+          "name": "supplier_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "supplier_name",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "region",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": []
+    },
+    "warehouses": {
+      "rowCount": 3,
+      "columns": [
+        {
+          "name": "warehouse_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "warehouse_name",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": []
+    },
+    "departments": {
+      "rowCount": 7,
+      "columns": [
+        {
+          "name": "department_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "department_name",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": []
+    },
+    "product_costs": {
+      "rowCount": 1500,
+      "columns": [
+        {
+          "name": "cost_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "effective_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "unit_cost_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "product_id",
+          "targetTable": "products",
+          "targetColumn": "product_id"
+        }
+      ]
+    },
+    "promotions": {
+      "rowCount": 36,
+      "columns": [
+        {
+          "name": "promotion_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "promotion_name",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "start_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "end_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": []
+    },
+    "traffic_sources": {
+      "rowCount": 5,
+      "columns": [
+        {
+          "name": "source_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "source_name",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": []
+    },
+    "marketing_campaigns": {
+      "rowCount": 180,
+      "columns": [
+        {
+          "name": "campaign_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "source_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "month_key",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "spend_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "source_id",
+          "targetTable": "traffic_sources",
+          "targetColumn": "source_id"
+        }
+      ]
+    },
+    "customer_sessions": {
+      "rowCount": 50000,
+      "columns": [
+        {
+          "name": "session_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "customer_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "source_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "session_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "customer_id",
+          "targetTable": "customers",
+          "targetColumn": "customer_id"
+        },
+        {
+          "column": "source_id",
+          "targetTable": "traffic_sources",
+          "targetColumn": "source_id"
+        }
+      ]
+    },
+    "orders": {
+      "rowCount": 30000,
+      "columns": [
+        {
+          "name": "order_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "store_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primaryKey": false
+        },
+        {
+          "name": "customer_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primaryKey": false
+        },
+        {
+          "name": "session_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primaryKey": false
+        },
+        {
+          "name": "order_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "channel",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "status",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "store_id",
+          "targetTable": "stores",
+          "targetColumn": "store_id"
+        },
+        {
+          "column": "customer_id",
+          "targetTable": "customers",
+          "targetColumn": "customer_id"
+        },
+        {
+          "column": "session_id",
+          "targetTable": "customer_sessions",
+          "targetColumn": "session_id"
+        }
+      ]
+    },
+    "order_items": {
+      "rowCount": 90074,
+      "columns": [
+        {
+          "name": "order_item_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "order_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "promotion_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primaryKey": false
+        },
+        {
+          "name": "quantity",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "unit_price_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "discount_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "unit_cost_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "order_id",
+          "targetTable": "orders",
+          "targetColumn": "order_id"
+        },
+        {
+          "column": "product_id",
+          "targetTable": "products",
+          "targetColumn": "product_id"
+        },
+        {
+          "column": "promotion_id",
+          "targetTable": "promotions",
+          "targetColumn": "promotion_id"
+        }
+      ]
+    },
+    "returns": {
+      "rowCount": 6117,
+      "columns": [
+        {
+          "name": "return_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "order_item_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "return_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "quantity",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "refund_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "order_item_id",
+          "targetTable": "order_items",
+          "targetColumn": "order_item_id"
+        }
+      ]
+    },
+    "payments": {
+      "rowCount": 31521,
+      "columns": [
+        {
+          "name": "payment_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "order_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "payment_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "amount_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "status",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "order_id",
+          "targetTable": "orders",
+          "targetColumn": "order_id"
+        }
+      ]
+    },
+    "sales_targets": {
+      "rowCount": 432,
+      "columns": [
+        {
+          "name": "target_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "store_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "month_key",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "target_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "store_id",
+          "targetTable": "stores",
+          "targetColumn": "store_id"
+        }
+      ]
+    },
+    "supplier_contracts": {
+      "rowCount": 3000,
+      "columns": [
+        {
+          "name": "contract_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "supplier_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "start_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "end_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "unit_price_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "supplier_id",
+          "targetTable": "suppliers",
+          "targetColumn": "supplier_id"
+        },
+        {
+          "column": "product_id",
+          "targetTable": "products",
+          "targetColumn": "product_id"
+        }
+      ]
+    },
+    "purchase_orders": {
+      "rowCount": 5000,
+      "columns": [
+        {
+          "name": "po_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "supplier_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "warehouse_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "order_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "promised_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "status",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "supplier_id",
+          "targetTable": "suppliers",
+          "targetColumn": "supplier_id"
+        },
+        {
+          "column": "warehouse_id",
+          "targetTable": "warehouses",
+          "targetColumn": "warehouse_id"
+        }
+      ]
+    },
+    "purchase_order_items": {
+      "rowCount": 9993,
+      "columns": [
+        {
+          "name": "po_item_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "po_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "contract_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "quantity_ordered",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "unit_price_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "po_id",
+          "targetTable": "purchase_orders",
+          "targetColumn": "po_id"
+        },
+        {
+          "column": "product_id",
+          "targetTable": "products",
+          "targetColumn": "product_id"
+        },
+        {
+          "column": "contract_id",
+          "targetTable": "supplier_contracts",
+          "targetColumn": "contract_id"
+        }
+      ]
+    },
+    "goods_receipts": {
+      "rowCount": 11103,
+      "columns": [
+        {
+          "name": "receipt_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "po_item_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "receipt_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "quantity_received",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "quantity_rejected",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "po_item_id",
+          "targetTable": "purchase_order_items",
+          "targetColumn": "po_item_id"
+        }
+      ]
+    },
+    "supplier_invoices": {
+      "rowCount": 4658,
+      "columns": [
+        {
+          "name": "supplier_invoice_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "po_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "invoice_no",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "invoice_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "due_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "po_id",
+          "targetTable": "purchase_orders",
+          "targetColumn": "po_id"
+        }
+      ]
+    },
+    "supplier_invoice_items": {
+      "rowCount": 9266,
+      "columns": [
+        {
+          "name": "supplier_invoice_item_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "supplier_invoice_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "po_item_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "quantity_billed",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "unit_price_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "supplier_invoice_id",
+          "targetTable": "supplier_invoices",
+          "targetColumn": "supplier_invoice_id"
+        },
+        {
+          "column": "po_item_id",
+          "targetTable": "purchase_order_items",
+          "targetColumn": "po_item_id"
+        }
+      ]
+    },
+    "supplier_payments": {
+      "rowCount": 4076,
+      "columns": [
+        {
+          "name": "supplier_payment_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "supplier_invoice_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "payment_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "amount_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "supplier_invoice_id",
+          "targetTable": "supplier_invoices",
+          "targetColumn": "supplier_invoice_id"
+        }
+      ]
+    },
+    "inventory_opening": {
+      "rowCount": 1500,
+      "columns": [
+        {
+          "name": "opening_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "warehouse_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "quantity",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "warehouse_id",
+          "targetTable": "warehouses",
+          "targetColumn": "warehouse_id"
+        },
+        {
+          "column": "product_id",
+          "targetTable": "products",
+          "targetColumn": "product_id"
+        }
+      ]
+    },
+    "stock_movements": {
+      "rowCount": 99369,
+      "columns": [
+        {
+          "name": "movement_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "warehouse_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "movement_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "movement_type",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "quantity_delta",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "unit_cost_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "order_item_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primaryKey": false
+        },
+        {
+          "name": "receipt_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "warehouse_id",
+          "targetTable": "warehouses",
+          "targetColumn": "warehouse_id"
+        },
+        {
+          "column": "product_id",
+          "targetTable": "products",
+          "targetColumn": "product_id"
+        },
+        {
+          "column": "order_item_id",
+          "targetTable": "order_items",
+          "targetColumn": "order_item_id"
+        },
+        {
+          "column": "receipt_id",
+          "targetTable": "goods_receipts",
+          "targetColumn": "receipt_id"
+        }
+      ]
+    },
+    "inventory_snapshots": {
+      "rowCount": 54000,
+      "columns": [
+        {
+          "name": "snapshot_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "warehouse_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "product_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "snapshot_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "quantity",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "unit_cost_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "warehouse_id",
+          "targetTable": "warehouses",
+          "targetColumn": "warehouse_id"
+        },
+        {
+          "column": "product_id",
+          "targetTable": "products",
+          "targetColumn": "product_id"
+        }
+      ]
+    },
+    "accounts": {
+      "rowCount": 6,
+      "columns": [
+        {
+          "name": "account_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "account_name",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "account_type",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": []
+    },
+    "journal_entries": {
+      "rowCount": 18000,
+      "columns": [
+        {
+          "name": "entry_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "entry_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "department_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "store_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primaryKey": false
+        },
+        {
+          "name": "reference_no",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "department_id",
+          "targetTable": "departments",
+          "targetColumn": "department_id"
+        },
+        {
+          "column": "store_id",
+          "targetTable": "stores",
+          "targetColumn": "store_id"
+        }
+      ]
+    },
+    "journal_lines": {
+      "rowCount": 36000,
+      "columns": [
+        {
+          "name": "line_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "entry_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "account_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "debit_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "credit_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "entry_id",
+          "targetTable": "journal_entries",
+          "targetColumn": "entry_id"
+        },
+        {
+          "column": "account_id",
+          "targetTable": "accounts",
+          "targetColumn": "account_id"
+        }
+      ]
+    },
+    "bank_transactions": {
+      "rowCount": 16868,
+      "columns": [
+        {
+          "name": "bank_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "transaction_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "reference_no",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false
+        },
+        {
+          "name": "amount_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": []
+    },
+    "budgets": {
+      "rowCount": 1260,
+      "columns": [
+        {
+          "name": "budget_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "department_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "account_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "month_key",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "budget_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "department_id",
+          "targetTable": "departments",
+          "targetColumn": "department_id"
+        },
+        {
+          "column": "account_id",
+          "targetTable": "accounts",
+          "targetColumn": "account_id"
+        }
+      ]
+    },
+    "positions": {
+      "rowCount": 5,
+      "columns": [
+        {
+          "name": "position_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "position_name",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "grade",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": []
+    },
+    "employees": {
+      "rowCount": 250,
+      "columns": [
+        {
+          "name": "employee_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "employee_name",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "hire_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "termination_date",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": []
+    },
+    "employment_history": {
+      "rowCount": 307,
+      "columns": [
+        {
+          "name": "employment_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "employee_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "department_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "position_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "store_id",
+          "type": "INTEGER",
+          "nullable": true,
+          "primaryKey": false
+        },
+        {
+          "name": "start_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "end_date",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "employee_id",
+          "targetTable": "employees",
+          "targetColumn": "employee_id"
+        },
+        {
+          "column": "department_id",
+          "targetTable": "departments",
+          "targetColumn": "department_id"
+        },
+        {
+          "column": "position_id",
+          "targetTable": "positions",
+          "targetColumn": "position_id"
+        },
+        {
+          "column": "store_id",
+          "targetTable": "stores",
+          "targetColumn": "store_id"
+        }
+      ]
+    },
+    "salary_history": {
+      "rowCount": 4966,
+      "columns": [
+        {
+          "name": "salary_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "employee_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "employment_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "month_key",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "base_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "bonus_cents",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "employee_id",
+          "targetTable": "employees",
+          "targetColumn": "employee_id"
+        },
+        {
+          "column": "employment_id",
+          "targetTable": "employment_history",
+          "targetColumn": "employment_id"
+        }
+      ]
+    },
+    "attendance": {
+      "rowCount": 104754,
+      "columns": [
+        {
+          "name": "attendance_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "employee_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "attendance_date",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "status",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "work_minutes",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        },
+        {
+          "name": "overtime_minutes",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "employee_id",
+          "targetTable": "employees",
+          "targetColumn": "employee_id"
+        }
+      ]
+    },
+    "raw_order_import": {
+      "rowCount": 400,
+      "columns": [
+        {
+          "name": "raw_id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": true
+        },
+        {
+          "name": "source_ref",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false
+        },
+        {
+          "name": "raw_date",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false
+        },
+        {
+          "name": "raw_customer",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false
+        },
+        {
+          "name": "raw_amount",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false
+        }
+      ],
+      "foreignKeys": []
+    }
+  },
+  "views": {
+    "v_sales_lines": [
+      {
+        "name": "order_item_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "order_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "store_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "customer_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "session_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "channel",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "order_date",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "product_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "promotion_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "net_qty",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "net_cents",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "cost_cents",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "discount_cents",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "refund_cents",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      }
+    ],
+    "v_order_net": [
+      {
+        "name": "order_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "store_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "customer_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "session_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "channel",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "order_date",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "net_cents",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "cost_cents",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      }
+    ],
+    "v_po_lines": [
+      {
+        "name": "po_item_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "po_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "supplier_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "warehouse_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "order_date",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "promised_date",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "product_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "quantity_ordered",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "unit_price_cents",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "ordered_cents",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "received",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "accepted",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "on_time",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "billed",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "billed_cents",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      }
+    ],
+    "v_invoice_balance": [
+      {
+        "name": "supplier_invoice_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "po_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "supplier_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "invoice_no",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "invoice_date",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "due_date",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "billed_cents",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "paid_cents",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "balance_cents",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      }
+    ],
+    "v_expenses": [
+      {
+        "name": "entry_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "entry_date",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "department_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "store_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "reference_no",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "account_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "expense_cents",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      }
+    ],
+    "v_staff_month": [
+      {
+        "name": "employee_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "month_key",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "department_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "position_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "store_id",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "base_cents",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "bonus_cents",
+        "type": "INTEGER",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "overtime_minutes",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "worked_minutes",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      },
+      {
+        "name": "labor_cents",
+        "type": "TEXT",
+        "nullable": true,
+        "primaryKey": false
+      }
+    ]
+  }
+}

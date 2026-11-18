@@ -1,0 +1,44 @@
+{
+  "id": "q0055-empty",
+  "questionId": "q0055",
+  "visibility": "hidden",
+  "variant": "empty",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "nullable_values",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "value",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "note",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        }
+      ],
+      "rows": []
+    }
+  ],
+  "setupSql": null,
+  "verificationQuery": null,
+  "expected": {
+    "columns": [
+      "id",
+      "note"
+    ],
+    "rows": []
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order"
+}

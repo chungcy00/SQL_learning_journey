@@ -1,0 +1,116 @@
+{
+  "id": "q0038-public",
+  "questionId": "q0038",
+  "visibility": "public",
+  "variant": "public",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "orders",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "category",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "sales",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "store_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "order_date",
+          "type": "TEXT",
+          "mysqlType": "DATE",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "customer_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "护肤品",
+          800,
+          1,
+          "2026-01-03",
+          1
+        ],
+        [
+          2,
+          "化妆品",
+          400,
+          2,
+          "2026-01-10",
+          2
+        ],
+        [
+          3,
+          "护肤品",
+          600,
+          1,
+          "2026-02-02",
+          1
+        ],
+        [
+          4,
+          "化妆品",
+          300,
+          2,
+          "2026-02-15",
+          null
+        ],
+        [
+          5,
+          "日用品",
+          1500,
+          1,
+          "2026-02-20",
+          3
+        ]
+      ]
+    }
+  ],
+  "setupSql": null,
+  "verificationQuery": null,
+  "expected": {
+    "columns": [
+      "id",
+      "sales"
+    ],
+    "rows": [
+      [
+        1,
+        800
+      ],
+      [
+        3,
+        600
+      ],
+      [
+        5,
+        1500
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order"
+}
