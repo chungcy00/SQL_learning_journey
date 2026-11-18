@@ -157,7 +157,7 @@ class ContentRepository(private val context: Context) {
             if (outFile.exists() && outFile.length() > 0L) {
                 return@withContext outFile
             }
-            val assetPath = "content/databases/$clean.sqlite.gz"
+            val assetPath = "content/databases/$clean.sqlite.dat"
             runCatching {
                 context.assets.open(assetPath).use { rawIn ->
                     GZIPInputStream(rawIn).use { gzIn ->

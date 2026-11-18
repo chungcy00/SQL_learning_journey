@@ -52,7 +52,7 @@ android {
     }
 
     androidResources {
-        noCompress += listOf("gz")
+        noCompress += listOf("dat")
     }
 
     testOptions {
