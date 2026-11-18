@@ -1,0 +1,135 @@
+{
+  "id": "q0100-public",
+  "questionId": "q0100",
+  "visibility": "public",
+  "variant": "public",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "stores",
+      "columns": [
+        {
+          "name": "store_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "store_name",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "古晋"
+        ],
+        [
+          2,
+          "美里"
+        ],
+        [
+          3,
+          "诗巫"
+        ]
+      ]
+    },
+    {
+      "name": "monthly",
+      "columns": [
+        {
+          "name": "month",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "sales",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          "2026-01",
+          1000
+        ],
+        [
+          "2026-02",
+          1500
+        ],
+        [
+          "2026-03",
+          1500
+        ],
+        [
+          "2026-04",
+          900
+        ]
+      ]
+    }
+  ],
+  "setupSql": null,
+  "verificationQuery": null,
+  "expected": {
+    "columns": [
+      "store_id",
+      "month"
+    ],
+    "rows": [
+      [
+        1,
+        "2026-01"
+      ],
+      [
+        1,
+        "2026-02"
+      ],
+      [
+        1,
+        "2026-03"
+      ],
+      [
+        1,
+        "2026-04"
+      ],
+      [
+        2,
+        "2026-01"
+      ],
+      [
+        2,
+        "2026-02"
+      ],
+      [
+        2,
+        "2026-03"
+      ],
+      [
+        2,
+        "2026-04"
+      ],
+      [
+        3,
+        "2026-01"
+      ],
+      [
+        3,
+        "2026-02"
+      ],
+      [
+        3,
+        "2026-03"
+      ],
+      [
+        3,
+        "2026-04"
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order"
+}

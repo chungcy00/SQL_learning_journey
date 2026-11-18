@@ -54,6 +54,9 @@ def build_databases_and_schemas():
         sqlite_path = tmp_db_dir / f"{db_name}.sqlite"
         gz_out = ASSETS_OUT / "databases" / f"{db_name}.sqlite.gz"
         schema_out_file = ASSETS_OUT / "schemas" / f"{db_name}.json"
+        if not sqlite_path.exists() and gz_out.exists() and schema_out_file.exists() and gz_out.stat().st_size > 1000:
+            with gzip.open(gz_out, "rb") as f_gz, open(sqlite_path, "wb") as f_out:
+                shutil.copyfileobj(f_gz, f_out)
         if sqlite_path.exists() and gz_out.exists() and schema_out_file.exists() and gz_out.stat().st_size > 1000:
             built_dbs[db_name] = sqlite_path
             print(f"  Reusing {db_name}.sqlite.gz ({gz_out.stat().st_size // 1024} KB)")

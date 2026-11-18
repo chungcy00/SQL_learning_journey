@@ -1,0 +1,52 @@
+{
+  "id": "lesson-purchase_orders",
+  "table": "purchase_orders",
+  "columns": [
+    {
+      "name": "po_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "supplier_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "order_date",
+      "type": "TEXT",
+      "mysqlType": "DATE",
+      "sqliteType": "TEXT"
+    },
+    {
+      "name": "promised_date",
+      "type": "TEXT",
+      "mysqlType": "DATE",
+      "sqliteType": "TEXT"
+    },
+    {
+      "name": "status",
+      "type": "TEXT",
+      "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+      "sqliteType": "TEXT"
+    }
+  ],
+  "rows": [
+    [
+      1,
+      1,
+      "2026-01-02",
+      "2026-01-11",
+      "approved"
+    ],
+    [
+      2,
+      2,
+      "2026-01-02",
+      "2026-01-12",
+      "cancelled"
+    ]
+  ]
+}

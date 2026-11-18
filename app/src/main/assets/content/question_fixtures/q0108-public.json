@@ -1,0 +1,92 @@
+{
+  "id": "q0108-public",
+  "questionId": "q0108",
+  "visibility": "public",
+  "variant": "public",
+  "kind": "query",
+  "tables": [
+    {
+      "name": "employees",
+      "columns": [
+        {
+          "name": "employee_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "employee_name",
+          "type": "TEXT",
+          "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+          "sqliteType": "TEXT"
+        },
+        {
+          "name": "manager_id",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        },
+        {
+          "name": "salary",
+          "type": "INTEGER",
+          "mysqlType": "INT",
+          "sqliteType": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "A",
+          null,
+          8000
+        ],
+        [
+          2,
+          "B",
+          1,
+          5000
+        ],
+        [
+          3,
+          "C",
+          1,
+          5000
+        ],
+        [
+          4,
+          "D",
+          2,
+          3000
+        ]
+      ]
+    }
+  ],
+  "setupSql": null,
+  "verificationQuery": null,
+  "expected": {
+    "columns": [
+      "employee_name",
+      "manager_name"
+    ],
+    "rows": [
+      [
+        "A",
+        null
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "C",
+        "A"
+      ],
+      [
+        "D",
+        "B"
+      ]
+    ]
+  },
+  "orderPolicy": "ordered",
+  "columnPolicy": "exact_names_in_order"
+}
