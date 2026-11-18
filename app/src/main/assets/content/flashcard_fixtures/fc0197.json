@@ -1,0 +1,69 @@
+{
+  "id": "fc0197-demo",
+  "tables": [
+    {
+      "name": "labor_metric",
+      "columns": [
+        {
+          "name": "store_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "net_cents",
+          "type": "INTEGER"
+        },
+        {
+          "name": "labor_cents",
+          "type": "INTEGER"
+        },
+        {
+          "name": "worked_minutes",
+          "type": "INTEGER"
+        },
+        {
+          "name": "overtime_minutes",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          60000,
+          12000,
+          300,
+          60
+        ],
+        [
+          2,
+          10000,
+          1000,
+          0,
+          0
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT store_id,60.0*net_cents/NULLIF(worked_minutes+overtime_minutes,0) AS cents_per_hour FROM labor_metric ORDER BY store_id",
+  "mysqlSql": "SELECT store_id,60.0*net_cents/NULLIF(worked_minutes+overtime_minutes,0) AS cents_per_hour FROM labor_metric ORDER BY store_id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      10000.0
+    ],
+    [
+      2,
+      null
+    ]
+  ],
+  "expectedColumns": [
+    "store_id",
+    "cents_per_hour"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

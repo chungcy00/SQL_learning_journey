@@ -1,0 +1,59 @@
+{
+  "id": "fc0134-demo",
+  "tables": [
+    {
+      "name": "stock_log",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "qty",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          8
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "ALTER TABLE stock_log ADD COLUMN status VARCHAR(10) DEFAULT 'active';",
+  "mysqlSql": "ALTER TABLE stock_log ADD COLUMN status VARCHAR(10) DEFAULT 'active';",
+  "verificationQuery": "SELECT id,status FROM stock_log ORDER BY id",
+  "expectedRows": [
+    [
+      1,
+      "active"
+    ],
+    [
+      2,
+      "active"
+    ],
+    [
+      3,
+      "active"
+    ]
+  ],
+  "expectedColumns": [
+    "id",
+    "status"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

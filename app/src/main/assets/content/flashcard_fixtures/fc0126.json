@@ -1,0 +1,84 @@
+{
+  "id": "fc0126-demo",
+  "tables": [
+    {
+      "name": "raw_names",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "label",
+          "type": "TEXT"
+        },
+        {
+          "name": "ref",
+          "type": "TEXT"
+        },
+        {
+          "name": "updated",
+          "type": "TEXT"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "  tea ",
+          "A",
+          "2025-01-01"
+        ],
+        [
+          2,
+          "TEA",
+          "A",
+          "2025-02-01"
+        ],
+        [
+          3,
+          "Rice",
+          "B",
+          "2025-01-01"
+        ],
+        [
+          4,
+          "",
+          "C",
+          "2025-01-01"
+        ],
+        [
+          5,
+          null,
+          "D",
+          "2025-01-01"
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "WITH x AS (SELECT id,ROW_NUMBER() OVER(PARTITION BY ref ORDER BY updated DESC,id DESC) AS rn FROM raw_names) SELECT id FROM x WHERE rn=1 ORDER BY id",
+  "mysqlSql": "WITH x AS (SELECT id,ROW_NUMBER() OVER(PARTITION BY ref ORDER BY updated DESC,id DESC) AS rn FROM raw_names) SELECT id FROM x WHERE rn=1 ORDER BY id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      2
+    ],
+    [
+      3
+    ],
+    [
+      4
+    ],
+    [
+      5
+    ]
+  ],
+  "expectedColumns": [
+    "id"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

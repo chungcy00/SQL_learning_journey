@@ -1,0 +1,81 @@
+{
+  "id": "fc0199-demo",
+  "tables": [
+    {
+      "name": "report_mini",
+      "columns": [
+        {
+          "name": "month_key",
+          "type": "TEXT"
+        },
+        {
+          "name": "profit_cents",
+          "type": "INTEGER"
+        },
+        {
+          "name": "expense_cents",
+          "type": "INTEGER"
+        },
+        {
+          "name": "labor_cents",
+          "type": "INTEGER"
+        },
+        {
+          "name": "spend_cents",
+          "type": "INTEGER"
+        },
+        {
+          "name": "ordered_cents",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          "2025-01",
+          50000,
+          10000,
+          15000,
+          6000,
+          30000
+        ],
+        [
+          "2025-02",
+          20000,
+          8000,
+          15000,
+          4000,
+          10000
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT month_key,profit_cents-expense_cents-labor_cents AS operating_contribution,spend_cents,ordered_cents FROM report_mini ORDER BY month_key",
+  "mysqlSql": "SELECT month_key,profit_cents-expense_cents-labor_cents AS operating_contribution,spend_cents,ordered_cents FROM report_mini ORDER BY month_key",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      "2025-01",
+      25000,
+      6000,
+      30000
+    ],
+    [
+      "2025-02",
+      -3000,
+      4000,
+      10000
+    ]
+  ],
+  "expectedColumns": [
+    "month_key",
+    "operating_contribution",
+    "spend_cents",
+    "ordered_cents"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

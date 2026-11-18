@@ -1,0 +1,75 @@
+{
+  "id": "fc0169-demo",
+  "tables": [
+    {
+      "name": "job_mini",
+      "columns": [
+        {
+          "name": "employee_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "department_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "start_date",
+          "type": "TEXT"
+        },
+        {
+          "name": "end_date",
+          "type": "TEXT"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          1,
+          "2024-01-01",
+          "2025-12-31"
+        ],
+        [
+          1,
+          2,
+          "2025-12-31",
+          null
+        ],
+        [
+          2,
+          1,
+          "2025-01-01",
+          null
+        ],
+        [
+          3,
+          2,
+          "2026-01-01",
+          null
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT employee_id,department_id FROM job_mini WHERE start_date<='2025-12-31' AND (end_date IS NULL OR end_date > '2025-12-31') ORDER BY employee_id",
+  "mysqlSql": "SELECT employee_id,department_id FROM job_mini WHERE start_date<='2025-12-31' AND (end_date IS NULL OR end_date > '2025-12-31') ORDER BY employee_id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      1
+    ]
+  ],
+  "expectedColumns": [
+    "employee_id",
+    "department_id"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

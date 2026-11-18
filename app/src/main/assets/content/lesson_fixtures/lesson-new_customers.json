@@ -1,0 +1,23 @@
+{
+  "id": "lesson-new_customers",
+  "table": "new_customers",
+  "columns": [
+    {
+      "name": "customer_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    }
+  ],
+  "rows": [
+    [
+      2
+    ],
+    [
+      3
+    ],
+    [
+      4
+    ]
+  ]
+}

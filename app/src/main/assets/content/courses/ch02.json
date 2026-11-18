@@ -1,0 +1,537 @@
+{
+  "id": "ch02",
+  "number": 2,
+  "title": "基础查询",
+  "stage": "入门",
+  "objective": "独立选择字段、创建别名及去重。",
+  "prerequisites": [
+    "ch01"
+  ],
+  "knowledgePoints": [
+    {
+      "id": "kp02-01",
+      "chapterId": "ch02",
+      "title": "SELECT 与 FROM",
+      "learningObjective": "能够运用本节知识完成：生成商品价目表",
+      "prerequisites": [
+        "ch01"
+      ],
+      "concept": "SELECT 指定输出表达式，FROM 指定输入关系；查询不修改源表。",
+      "syntax": "SELECT col1, col2 FROM table;",
+      "parameters": {
+        "SELECT": "输出字段",
+        "FROM": "输入表"
+      },
+      "fixtureIds": [
+        "lesson-products"
+      ],
+      "sourceTables": [
+        {
+          "name": "products",
+          "columns": [
+            {
+              "name": "product_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "product_name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "price",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "stock",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "Mask",
+              "护肤品",
+              15,
+              150
+            ],
+            [
+              2,
+              "Serum",
+              "护肤品",
+              89,
+              40
+            ],
+            [
+              3,
+              "Cleanser",
+              "护肤品",
+              35,
+              200
+            ],
+            [
+              4,
+              "Cream",
+              "化妆品",
+              65,
+              180
+            ],
+            [
+              5,
+              "Sunscreen",
+              "化妆品",
+              45,
+              80
+            ],
+            [
+              6,
+              "Soap_1",
+              "日用品",
+              15,
+              0
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT product_name, price FROM products ORDER BY product_id;",
+      "sqliteSql": "SELECT product_name, price FROM products ORDER BY product_id;",
+      "executionSteps": [
+        "读取商品表",
+        "选择名称和价格",
+        "按编号排序"
+      ],
+      "useCase": "生成商品价目表",
+      "comparison": "SELECT * 适合探索，正式报表明确列名。",
+      "commonError": {
+        "example": "SELECT price products",
+        "correction": "SELECT price FROM products"
+      },
+      "notes": "未加 ORDER BY 不保证输出顺序。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0011",
+        "q0013",
+        "q0014",
+        "q0015"
+      ],
+      "relatedFlashcardIds": [
+        "fc0008",
+        "fc0009"
+      ],
+      "relatedKnowledgePointIds": [],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "product_name",
+          "price"
+        ],
+        "rows": [
+          [
+            "Mask",
+            15
+          ],
+          [
+            "Serum",
+            89
+          ],
+          [
+            "Cleanser",
+            35
+          ],
+          [
+            "Cream",
+            65
+          ],
+          [
+            "Sunscreen",
+            45
+          ],
+          [
+            "Soap_1",
+            15
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp02-01.sql",
+      "primaryQuestionIds": [
+        "q0011",
+        "q0013",
+        "q0014",
+        "q0015"
+      ],
+      "primaryFlashcardIds": [
+        "fc0008",
+        "fc0009"
+      ]
+    },
+    {
+      "id": "kp02-02",
+      "chapterId": "ch02",
+      "title": "DISTINCT 去重",
+      "learningObjective": "能够运用本节知识完成：列出各门店经营类别",
+      "prerequisites": [
+        "kp02-01"
+      ],
+      "concept": "DISTINCT 对整个输出元组去重，不是仅针对紧随其后的一个字段。",
+      "syntax": "SELECT DISTINCT col1, col2 FROM table;",
+      "parameters": {
+        "DISTINCT": "移除重复结果行"
+      },
+      "fixtureIds": [
+        "lesson-orders"
+      ],
+      "sourceTables": [
+        {
+          "name": "orders",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "sales",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "store_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "order_date",
+              "type": "TEXT",
+              "mysqlType": "DATE",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "护肤品",
+              800,
+              1,
+              "2026-01-03",
+              1
+            ],
+            [
+              2,
+              "化妆品",
+              400,
+              2,
+              "2026-01-10",
+              2
+            ],
+            [
+              3,
+              "护肤品",
+              600,
+              1,
+              "2026-02-02",
+              1
+            ],
+            [
+              4,
+              "化妆品",
+              300,
+              2,
+              "2026-02-15",
+              null
+            ],
+            [
+              5,
+              "日用品",
+              1500,
+              1,
+              "2026-02-20",
+              3
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT DISTINCT store_id, category FROM orders ORDER BY store_id, category;",
+      "sqliteSql": "SELECT DISTINCT store_id, category FROM orders ORDER BY store_id, category;",
+      "executionSteps": [
+        "取门店与类别组合",
+        "消除重复组合",
+        "排序"
+      ],
+      "useCase": "列出各门店经营类别",
+      "comparison": "GROUP BY 可以聚合；DISTINCT 不计算指标。",
+      "commonError": {
+        "example": "SELECT DISTINCT(category), sales FROM orders 期待每类别一行",
+        "correction": "SELECT DISTINCT category FROM orders"
+      },
+      "notes": "不同排序规则可能改变文本去重结果；本例无大小写冲突。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0009",
+        "q0012",
+        "q0016"
+      ],
+      "relatedFlashcardIds": [
+        "fc0010",
+        "fc0012"
+      ],
+      "relatedKnowledgePointIds": [],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "store_id",
+          "category"
+        ],
+        "rows": [
+          [
+            1,
+            "护肤品"
+          ],
+          [
+            1,
+            "日用品"
+          ],
+          [
+            2,
+            "化妆品"
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp02-02.sql",
+      "primaryQuestionIds": [
+        "q0009",
+        "q0012",
+        "q0016"
+      ],
+      "primaryFlashcardIds": [
+        "fc0010",
+        "fc0012"
+      ]
+    },
+    {
+      "id": "kp02-03",
+      "chapterId": "ch02",
+      "title": "表达式与 AS 别名",
+      "learningObjective": "能够运用本节知识完成：估算按售价计算的库存价值",
+      "prerequisites": [
+        "kp02-02"
+      ],
+      "concept": "可在查询时计算派生字段；AS 为输出列命名，不更改数据表定义。",
+      "syntax": "SELECT expression AS alias FROM table;",
+      "parameters": {
+        "expression": "运算表达式",
+        "alias": "结果列名称"
+      },
+      "fixtureIds": [
+        "lesson-products"
+      ],
+      "sourceTables": [
+        {
+          "name": "products",
+          "columns": [
+            {
+              "name": "product_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "product_name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "price",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "stock",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "Mask",
+              "护肤品",
+              15,
+              150
+            ],
+            [
+              2,
+              "Serum",
+              "护肤品",
+              89,
+              40
+            ],
+            [
+              3,
+              "Cleanser",
+              "护肤品",
+              35,
+              200
+            ],
+            [
+              4,
+              "Cream",
+              "化妆品",
+              65,
+              180
+            ],
+            [
+              5,
+              "Sunscreen",
+              "化妆品",
+              45,
+              80
+            ],
+            [
+              6,
+              "Soap_1",
+              "日用品",
+              15,
+              0
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT product_id, price * stock AS stock_value FROM products ORDER BY product_id;",
+      "sqliteSql": "SELECT product_id, price * stock AS stock_value FROM products ORDER BY product_id;",
+      "executionSteps": [
+        "逐行读取价格和库存",
+        "相乘",
+        "命名结果"
+      ],
+      "useCase": "估算按售价计算的库存价值",
+      "comparison": "售价库存值不同于按成本计算的库存金额。",
+      "commonError": {
+        "example": "WHERE stock_value > 1000（同层 WHERE 引用 SELECT 别名）",
+        "correction": "WHERE price * stock > 1000"
+      },
+      "notes": "别名可用于 ORDER BY；MySQL 还允许部分 GROUP BY/HAVING 用法。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0010",
+        "q0017",
+        "q0018",
+        "q0019",
+        "q0020"
+      ],
+      "relatedFlashcardIds": [
+        "fc0009",
+        "fc0011",
+        "fc0013"
+      ],
+      "relatedKnowledgePointIds": [],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "product_id",
+          "stock_value"
+        ],
+        "rows": [
+          [
+            1,
+            2250
+          ],
+          [
+            2,
+            3560
+          ],
+          [
+            3,
+            7000
+          ],
+          [
+            4,
+            11700
+          ],
+          [
+            5,
+            3600
+          ],
+          [
+            6,
+            0
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp02-03.sql",
+      "primaryQuestionIds": [
+        "q0010",
+        "q0017",
+        "q0018",
+        "q0019",
+        "q0020"
+      ],
+      "primaryFlashcardIds": [
+        "fc0009",
+        "fc0011",
+        "fc0013"
+      ]
+    }
+  ],
+  "plannedQuestionCount": 12,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "dialect": "MySQL 8.4",
+  "summary": "完成本章后：独立选择字段、创建别名及去重。",
+  "sources": [
+    "https://dev.mysql.com/doc/refman/8.4/en/",
+    "https://dev.mysql.com/doc/refman/8.4/en/functions.html"
+  ],
+  "knowledgePointCount": 3
+}

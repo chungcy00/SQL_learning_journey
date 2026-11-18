@@ -1,0 +1,66 @@
+{
+  "id": "fc0182-demo",
+  "tables": [
+    {
+      "name": "share_mini",
+      "columns": [
+        {
+          "name": "product_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "net_cents",
+          "type": "INTEGER"
+        },
+        {
+          "name": "stock_value_cents",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          6000,
+          1000
+        ],
+        [
+          2,
+          3000,
+          6000
+        ],
+        [
+          3,
+          1000,
+          3000
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT product_id,100.0*stock_value_cents/NULLIF(SUM(stock_value_cents) OVER(),0) AS inventory_pct FROM share_mini ORDER BY product_id",
+  "mysqlSql": "SELECT product_id,100.0*stock_value_cents/NULLIF(SUM(stock_value_cents) OVER(),0) AS inventory_pct FROM share_mini ORDER BY product_id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      10.0
+    ],
+    [
+      2,
+      60.0
+    ],
+    [
+      3,
+      30.0
+    ]
+  ],
+  "expectedColumns": [
+    "product_id",
+    "inventory_pct"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

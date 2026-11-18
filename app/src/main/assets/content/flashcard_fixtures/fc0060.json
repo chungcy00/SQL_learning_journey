@@ -1,0 +1,108 @@
+{
+  "id": "fc0060-demo",
+  "tables": [
+    {
+      "name": "lines",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "order_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "quantity",
+          "type": "INTEGER"
+        },
+        {
+          "name": "amount",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          1,
+          2,
+          30
+        ],
+        [
+          2,
+          1,
+          1,
+          10
+        ],
+        [
+          3,
+          2,
+          3,
+          60
+        ],
+        [
+          4,
+          3,
+          1,
+          30
+        ]
+      ],
+      "constraints": ""
+    },
+    {
+      "name": "receipts",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "order_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "paid",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          1,
+          15
+        ],
+        [
+          2,
+          1,
+          25
+        ],
+        [
+          3,
+          2,
+          60
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "WITH l AS (SELECT order_id,SUM(amount) AS s FROM lines GROUP BY order_id),p AS (SELECT order_id,SUM(paid) AS p FROM receipts GROUP BY order_id) SELECT l.order_id,l.s,p.p FROM l JOIN p ON l.order_id=p.order_id WHERE l.order_id=1",
+  "mysqlSql": "WITH l AS (SELECT order_id,SUM(amount) AS s FROM lines GROUP BY order_id),p AS (SELECT order_id,SUM(paid) AS p FROM receipts GROUP BY order_id) SELECT l.order_id,l.s,p.p FROM l JOIN p ON l.order_id=p.order_id WHERE l.order_id=1",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      40,
+      40
+    ]
+  ],
+  "expectedColumns": [
+    "order_id",
+    "s",
+    "p"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

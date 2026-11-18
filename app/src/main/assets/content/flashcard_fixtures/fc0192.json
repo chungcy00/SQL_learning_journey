@@ -1,0 +1,81 @@
+{
+  "id": "fc0192-demo",
+  "tables": [
+    {
+      "name": "invoice_risk",
+      "columns": [
+        {
+          "name": "invoice_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "billed_cents",
+          "type": "INTEGER"
+        },
+        {
+          "name": "accepted_cents",
+          "type": "INTEGER"
+        },
+        {
+          "name": "paid_cents",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          10000,
+          8000,
+          9000
+        ],
+        [
+          2,
+          10000,
+          8000,
+          0
+        ],
+        [
+          3,
+          5000,
+          5000,
+          5000
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT invoice_id,paid_cents-accepted_cents AS excess FROM invoice_risk WHERE ABS(billed_cents-accepted_cents)>100 AND paid_cents>0 ORDER BY invoice_id",
+  "mysqlSql": "SELECT invoice_id,paid_cents-accepted_cents AS excess FROM invoice_risk WHERE ABS(billed_cents-accepted_cents)>100 AND paid_cents>0 ORDER BY invoice_id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      1000
+    ]
+  ],
+  "expectedColumns": [
+    "invoice_id",
+    "excess"
+  ],
+  "wrongSqlite": "SELECT invoice_id,paid_cents-accepted_cents AS excess FROM invoice_risk WHERE ABS(billed_cents-accepted_cents)>100 ORDER BY invoice_id",
+  "wrongMysql": "SELECT invoice_id,paid_cents-accepted_cents AS excess FROM invoice_risk WHERE ABS(billed_cents-accepted_cents)>100 ORDER BY invoice_id",
+  "wrongResult": {
+    "kind": "result",
+    "columns": [
+      "invoice_id",
+      "excess"
+    ],
+    "rows": [
+      [
+        1,
+        1000
+      ],
+      [
+        2,
+        -8000
+      ]
+    ]
+  },
+  "independentAuthorExpectation": true
+}

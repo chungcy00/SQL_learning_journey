@@ -1,0 +1,75 @@
+{
+  "id": "fc0190-demo",
+  "tables": [
+    {
+      "name": "cost_series",
+      "columns": [
+        {
+          "name": "month_key",
+          "type": "TEXT"
+        },
+        {
+          "name": "net_cents",
+          "type": "INTEGER"
+        },
+        {
+          "name": "expense_cents",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          "2025-01",
+          10000,
+          1000
+        ],
+        [
+          "2025-02",
+          1000,
+          500
+        ],
+        [
+          "2025-03",
+          10000,
+          2000
+        ],
+        [
+          "2025-04",
+          10000,
+          3000
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT month_key,CASE WHEN COUNT(*) OVER(ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)=3 THEN ROUND(100.0*SUM(expense_cents) OVER(ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)/NULLIF(SUM(net_cents) OVER(ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW),0),2) END AS pct FROM cost_series ORDER BY month_key",
+  "mysqlSql": "SELECT month_key,CASE WHEN COUNT(*) OVER(ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)=3 THEN ROUND(100.0*SUM(expense_cents) OVER(ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)/NULLIF(SUM(net_cents) OVER(ORDER BY month_key ROWS BETWEEN 2 PRECEDING AND CURRENT ROW),0),2) END AS pct FROM cost_series ORDER BY month_key",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      "2025-01",
+      null
+    ],
+    [
+      "2025-02",
+      null
+    ],
+    [
+      "2025-03",
+      16.67
+    ],
+    [
+      "2025-04",
+      26.19
+    ]
+  ],
+  "expectedColumns": [
+    "month_key",
+    "pct"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

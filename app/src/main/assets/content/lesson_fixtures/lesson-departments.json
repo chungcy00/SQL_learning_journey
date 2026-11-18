@@ -1,0 +1,28 @@
+{
+  "id": "lesson-departments",
+  "table": "departments",
+  "columns": [
+    {
+      "name": "department_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "department_name",
+      "type": "TEXT",
+      "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+      "sqliteType": "TEXT"
+    }
+  ],
+  "rows": [
+    [
+      1,
+      "销售部"
+    ],
+    [
+      2,
+      "采购部"
+    ]
+  ]
+}

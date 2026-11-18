@@ -1,0 +1,95 @@
+{
+  "id": "fc0186-demo",
+  "tables": [
+    {
+      "name": "receipt_ledger",
+      "columns": [
+        {
+          "name": "receipt_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "accepted",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          4,
+          3
+        ]
+      ],
+      "constraints": ""
+    },
+    {
+      "name": "movement_ledger",
+      "columns": [
+        {
+          "name": "receipt_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "qty",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT r.receipt_id,r.accepted-COALESCE(m.qty,0) AS gap FROM receipt_ledger r LEFT JOIN movement_ledger m ON r.receipt_id=m.receipt_id WHERE r.accepted-COALESCE(m.qty,0)<>0 ORDER BY r.receipt_id",
+  "mysqlSql": "SELECT r.receipt_id,r.accepted-COALESCE(m.qty,0) AS gap FROM receipt_ledger r LEFT JOIN movement_ledger m ON r.receipt_id=m.receipt_id WHERE r.accepted-COALESCE(m.qty,0)<>0 ORDER BY r.receipt_id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      2,
+      2
+    ],
+    [
+      4,
+      3
+    ]
+  ],
+  "expectedColumns": [
+    "receipt_id",
+    "gap"
+  ],
+  "wrongSqlite": "SELECT r.receipt_id,r.accepted-m.qty AS gap FROM receipt_ledger r JOIN movement_ledger m ON r.receipt_id=m.receipt_id WHERE r.accepted-m.qty<>0 ORDER BY r.receipt_id",
+  "wrongMysql": "SELECT r.receipt_id,r.accepted-m.qty AS gap FROM receipt_ledger r JOIN movement_ledger m ON r.receipt_id=m.receipt_id WHERE r.accepted-m.qty<>0 ORDER BY r.receipt_id",
+  "wrongResult": {
+    "kind": "result",
+    "columns": [
+      "receipt_id",
+      "gap"
+    ],
+    "rows": [
+      [
+        2,
+        2
+      ]
+    ]
+  },
+  "independentAuthorExpectation": true
+}

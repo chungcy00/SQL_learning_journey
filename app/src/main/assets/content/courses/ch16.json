@@ -1,0 +1,509 @@
+{
+  "id": "ch16",
+  "number": 16,
+  "title": "数据清洗",
+  "stage": "进阶",
+  "objective": "识别重复、缺失、异常和格式不一致。",
+  "prerequisites": [
+    "ch15"
+  ],
+  "knowledgePoints": [
+    {
+      "id": "kp16-01",
+      "chapterId": "ch16",
+      "title": "识别重复与去重规则",
+      "learningObjective": "能够运用本节知识完成：发现重复导入数据",
+      "prerequisites": [
+        "ch15"
+      ],
+      "concept": "重复记录由业务键决定，不是任意字段相同就删除；先报告重复，再确定保留规则。",
+      "syntax": "GROUP BY business_key HAVING COUNT(*)>1",
+      "parameters": {
+        "business_key": "定义同一业务对象的字段"
+      },
+      "fixtureIds": [
+        "lesson-raw_data"
+      ],
+      "sourceTables": [
+        {
+          "name": "raw_data",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "amount",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "  Mask ",
+              "15",
+              "SKIN"
+            ],
+            [
+              2,
+              "Mask",
+              "15",
+              "skin"
+            ],
+            [
+              3,
+              "Serum",
+              null,
+              "Skin"
+            ],
+            [
+              4,
+              "Soap",
+              "-5",
+              "HOME"
+            ],
+            [
+              5,
+              "Cream",
+              "0",
+              "makeup"
+            ],
+            [
+              6,
+              "",
+              "20",
+              "HOME"
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT TRIM(name) AS clean_name,amount,LOWER(category) AS clean_category,COUNT(*) AS duplicate_count FROM raw_data GROUP BY TRIM(name),amount,LOWER(category) HAVING COUNT(*)>1;",
+      "sqliteSql": "SELECT TRIM(name) AS clean_name,amount,LOWER(category) AS clean_category,COUNT(*) AS duplicate_count FROM raw_data GROUP BY TRIM(name),amount,LOWER(category) HAVING COUNT(*)>1;",
+      "executionSteps": [
+        "统一名称与分类",
+        "按名称、金额及类别分组",
+        "标记重复组"
+      ],
+      "useCase": "发现重复导入数据",
+      "comparison": "DISTINCT 能去掉投影后的重复行，但不能决定保留哪一条业务记录。",
+      "commonError": {
+        "example": "直接 DELETE 相同金额的记录",
+        "correction": "先定义业务键与保留顺序"
+      },
+      "notes": "相同商品和金额可能是合法交易；本例只标记疑似重复。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0221",
+        "q0227",
+        "q0228",
+        "q0229"
+      ],
+      "relatedFlashcardIds": [
+        "fc0121",
+        "fc0122",
+        "fc0126"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp05-01",
+        "kp09-01",
+        "kp11-01",
+        "kp15-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "clean_name",
+          "amount",
+          "clean_category",
+          "duplicate_count"
+        ],
+        "rows": [
+          [
+            "Mask",
+            "15",
+            "skin",
+            2
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp16-01.sql",
+      "primaryQuestionIds": [
+        "q0221",
+        "q0227",
+        "q0228",
+        "q0229"
+      ],
+      "primaryFlashcardIds": [
+        "fc0121",
+        "fc0122",
+        "fc0126"
+      ]
+    },
+    {
+      "id": "kp16-02",
+      "chapterId": "ch16",
+      "title": "缺失与异常检测",
+      "learningObjective": "能够运用本节知识完成：生成数据质量检查报告",
+      "prerequisites": [
+        "kp16-01"
+      ],
+      "concept": "先定义规则，再标记异常；空字符串、NULL、负值及零值有不同含义。",
+      "syntax": "CASE WHEN condition THEN label ... END",
+      "parameters": {
+        "condition": "数据质量规则"
+      },
+      "fixtureIds": [
+        "lesson-raw_data"
+      ],
+      "sourceTables": [
+        {
+          "name": "raw_data",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "amount",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "  Mask ",
+              "15",
+              "SKIN"
+            ],
+            [
+              2,
+              "Mask",
+              "15",
+              "skin"
+            ],
+            [
+              3,
+              "Serum",
+              null,
+              "Skin"
+            ],
+            [
+              4,
+              "Soap",
+              "-5",
+              "HOME"
+            ],
+            [
+              5,
+              "Cream",
+              "0",
+              "makeup"
+            ],
+            [
+              6,
+              "",
+              "20",
+              "HOME"
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT id,CASE WHEN name IS NULL OR TRIM(name)='' THEN '名称缺失' WHEN amount IS NULL THEN '金额缺失' WHEN CAST(amount AS DECIMAL(12,2))<0 THEN '负金额待核' ELSE '通过' END AS quality FROM raw_data ORDER BY id;",
+      "sqliteSql": "SELECT id,CASE WHEN name IS NULL OR TRIM(name)='' THEN '名称缺失' WHEN amount IS NULL THEN '金额缺失' WHEN CAST(amount AS DECIMAL(12,2))<0 THEN '负金额待核' ELSE '通过' END AS quality FROM raw_data ORDER BY id;",
+      "executionSteps": [
+        "先检查名称",
+        "检查金额缺失",
+        "在已知合法数字文本中识别负值"
+      ],
+      "useCase": "生成数据质量检查报告",
+      "comparison": "异常值不是必然错误，例如退款可以为负数。",
+      "commonError": {
+        "example": "所有负金额直接改为0",
+        "correction": "保留原值并按业务核实"
+      },
+      "notes": "样例金额文本已知合法；实际导入必须先验证数字格式。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0222",
+        "q0223",
+        "q0225"
+      ],
+      "relatedFlashcardIds": [
+        "fc0123",
+        "fc0127"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp05-01",
+        "kp09-01",
+        "kp11-01",
+        "kp15-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "id",
+          "quality"
+        ],
+        "rows": [
+          [
+            1,
+            "通过"
+          ],
+          [
+            2,
+            "通过"
+          ],
+          [
+            3,
+            "金额缺失"
+          ],
+          [
+            4,
+            "负金额待核"
+          ],
+          [
+            5,
+            "通过"
+          ],
+          [
+            6,
+            "名称缺失"
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp16-02.sql",
+      "primaryQuestionIds": [
+        "q0222",
+        "q0223",
+        "q0225"
+      ],
+      "primaryFlashcardIds": [
+        "fc0123",
+        "fc0127"
+      ]
+    },
+    {
+      "id": "kp16-03",
+      "chapterId": "ch16",
+      "title": "CAST 与分类标准化",
+      "learningObjective": "能够运用本节知识完成：将原始数据整理成分析字段",
+      "prerequisites": [
+        "kp16-02"
+      ],
+      "concept": "CAST 显式转换类型；先清理空白和格式，再验证合法性并转换，最后统一类别。",
+      "syntax": "CAST(expr AS DECIMAL(12,2))",
+      "parameters": {
+        "expr": "经过验证的数值文本"
+      },
+      "fixtureIds": [
+        "lesson-raw_data"
+      ],
+      "sourceTables": [
+        {
+          "name": "raw_data",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "amount",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "  Mask ",
+              "15",
+              "SKIN"
+            ],
+            [
+              2,
+              "Mask",
+              "15",
+              "skin"
+            ],
+            [
+              3,
+              "Serum",
+              null,
+              "Skin"
+            ],
+            [
+              4,
+              "Soap",
+              "-5",
+              "HOME"
+            ],
+            [
+              5,
+              "Cream",
+              "0",
+              "makeup"
+            ],
+            [
+              6,
+              "",
+              "20",
+              "HOME"
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT id,CAST(amount AS DECIMAL(12,2)) AS numeric_amount,CASE WHEN LOWER(TRIM(category))='skin' THEN '护肤品' WHEN LOWER(TRIM(category))='home' THEN '日用品' WHEN LOWER(TRIM(category))='makeup' THEN '化妆品' ELSE '待分类' END AS clean_category FROM raw_data ORDER BY id;",
+      "sqliteSql": "SELECT id,CAST(amount AS DECIMAL(12,2)) AS numeric_amount,CASE WHEN LOWER(TRIM(category))='skin' THEN '护肤品' WHEN LOWER(TRIM(category))='home' THEN '日用品' WHEN LOWER(TRIM(category))='makeup' THEN '化妆品' ELSE '待分类' END AS clean_category FROM raw_data ORDER BY id;",
+      "executionSteps": [
+        "确认输入为数字文本或NULL",
+        "转换数值",
+        "按映射统一类别"
+      ],
+      "useCase": "将原始数据整理成分析字段",
+      "comparison": "CAST 改变表达式类型，不代表已修改源数据。",
+      "commonError": {
+        "example": "CAST 任意字符串并认为一定有效",
+        "correction": "先验证格式并隔离非法输入"
+      },
+      "notes": "本例数字为整数；SQLite DECIMAL 不提供 MySQL 精确十进制保障。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0224",
+        "q0226",
+        "q0230"
+      ],
+      "relatedFlashcardIds": [
+        "fc0124",
+        "fc0125"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp05-01",
+        "kp09-01",
+        "kp11-01",
+        "kp15-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "id",
+          "numeric_amount",
+          "clean_category"
+        ],
+        "rows": [
+          [
+            1,
+            15,
+            "护肤品"
+          ],
+          [
+            2,
+            15,
+            "护肤品"
+          ],
+          [
+            3,
+            null,
+            "护肤品"
+          ],
+          [
+            4,
+            -5,
+            "日用品"
+          ],
+          [
+            5,
+            0,
+            "化妆品"
+          ],
+          [
+            6,
+            20,
+            "日用品"
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "mysqlVerificationScript": "validation/mysql/kp16-03.sql",
+      "primaryQuestionIds": [
+        "q0224",
+        "q0226",
+        "q0230"
+      ],
+      "primaryFlashcardIds": [
+        "fc0124",
+        "fc0125"
+      ]
+    }
+  ],
+  "plannedQuestionCount": 10,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "dialect": "MySQL 8.4",
+  "summary": "完成本章后：识别重复、缺失、异常和格式不一致。",
+  "sources": [
+    "https://dev.mysql.com/doc/refman/8.4/en/",
+    "https://dev.mysql.com/doc/refman/8.4/en/functions.html"
+  ],
+  "knowledgePointCount": 3
+}

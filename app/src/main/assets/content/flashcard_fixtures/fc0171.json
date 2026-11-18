@@ -1,0 +1,79 @@
+{
+  "id": "fc0171-demo",
+  "tables": [
+    {
+      "name": "salary_mini",
+      "columns": [
+        {
+          "name": "employee_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "department_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "position_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "base_cents",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          1,
+          1,
+          100000
+        ],
+        [
+          2,
+          1,
+          1,
+          120000
+        ],
+        [
+          3,
+          1,
+          1,
+          140000
+        ],
+        [
+          4,
+          1,
+          2,
+          300000
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT employee_id,AVG(base_cents) OVER(PARTITION BY department_id,position_id) AS group_mean FROM salary_mini WHERE department_id=1 AND position_id=1 ORDER BY employee_id",
+  "mysqlSql": "SELECT employee_id,AVG(base_cents) OVER(PARTITION BY department_id,position_id) AS group_mean FROM salary_mini WHERE department_id=1 AND position_id=1 ORDER BY employee_id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      120000.0
+    ],
+    [
+      2,
+      120000.0
+    ],
+    [
+      3,
+      120000.0
+    ]
+  ],
+  "expectedColumns": [
+    "employee_id",
+    "group_mean"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

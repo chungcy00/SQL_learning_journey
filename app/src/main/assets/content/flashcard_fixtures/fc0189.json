@@ -1,0 +1,104 @@
+{
+  "id": "fc0189-demo",
+  "tables": [
+    {
+      "name": "order_net_mini",
+      "columns": [
+        {
+          "name": "order_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "net_cents",
+          "type": "INTEGER"
+        },
+        {
+          "name": "refund_cents",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          9000,
+          1000
+        ],
+        [
+          2,
+          5000,
+          0
+        ]
+      ],
+      "constraints": ""
+    },
+    {
+      "name": "settle_mini",
+      "columns": [
+        {
+          "name": "order_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "status",
+          "type": "TEXT"
+        },
+        {
+          "name": "amount_cents",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "settled",
+          10000
+        ],
+        [
+          1,
+          "failed",
+          10000
+        ],
+        [
+          2,
+          "settled",
+          4000
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "WITH p AS (SELECT order_id,SUM(amount_cents) AS paid FROM settle_mini WHERE status='settled' GROUP BY order_id) SELECT o.order_id,COALESCE(p.paid,0)-o.refund_cents-o.net_cents AS gap FROM order_net_mini o LEFT JOIN p ON o.order_id=p.order_id WHERE COALESCE(p.paid,0)-o.refund_cents-o.net_cents<>0 ORDER BY o.order_id",
+  "mysqlSql": "WITH p AS (SELECT order_id,SUM(amount_cents) AS paid FROM settle_mini WHERE status='settled' GROUP BY order_id) SELECT o.order_id,COALESCE(p.paid,0)-o.refund_cents-o.net_cents AS gap FROM order_net_mini o LEFT JOIN p ON o.order_id=p.order_id WHERE COALESCE(p.paid,0)-o.refund_cents-o.net_cents<>0 ORDER BY o.order_id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      2,
+      -1000
+    ]
+  ],
+  "expectedColumns": [
+    "order_id",
+    "gap"
+  ],
+  "wrongSqlite": "WITH p AS (SELECT order_id,SUM(amount_cents) AS paid FROM settle_mini GROUP BY order_id) SELECT o.order_id,COALESCE(p.paid,0)-o.refund_cents-o.net_cents AS gap FROM order_net_mini o LEFT JOIN p ON o.order_id=p.order_id WHERE COALESCE(p.paid,0)-o.refund_cents-o.net_cents<>0 ORDER BY o.order_id",
+  "wrongMysql": "WITH p AS (SELECT order_id,SUM(amount_cents) AS paid FROM settle_mini GROUP BY order_id) SELECT o.order_id,COALESCE(p.paid,0)-o.refund_cents-o.net_cents AS gap FROM order_net_mini o LEFT JOIN p ON o.order_id=p.order_id WHERE COALESCE(p.paid,0)-o.refund_cents-o.net_cents<>0 ORDER BY o.order_id",
+  "wrongResult": {
+    "kind": "result",
+    "columns": [
+      "order_id",
+      "gap"
+    ],
+    "rows": [
+      [
+        1,
+        10000
+      ],
+      [
+        2,
+        -1000
+      ]
+    ]
+  },
+  "independentAuthorExpectation": true
+}

@@ -1,0 +1,93 @@
+{
+  "id": "fc0083-demo",
+  "tables": [
+    {
+      "name": "raw_names",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "label",
+          "type": "TEXT"
+        },
+        {
+          "name": "ref",
+          "type": "TEXT"
+        },
+        {
+          "name": "updated",
+          "type": "TEXT"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "  tea ",
+          "A",
+          "2025-01-01"
+        ],
+        [
+          2,
+          "TEA",
+          "A",
+          "2025-02-01"
+        ],
+        [
+          3,
+          "Rice",
+          "B",
+          "2025-01-01"
+        ],
+        [
+          4,
+          "",
+          "C",
+          "2025-01-01"
+        ],
+        [
+          5,
+          null,
+          "D",
+          "2025-01-01"
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT id,LOWER(TRIM(label)) AS normalized FROM raw_names ORDER BY id",
+  "mysqlSql": "SELECT id,LOWER(TRIM(label)) AS normalized FROM raw_names ORDER BY id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      "tea"
+    ],
+    [
+      2,
+      "tea"
+    ],
+    [
+      3,
+      "rice"
+    ],
+    [
+      4,
+      ""
+    ],
+    [
+      5,
+      null
+    ]
+  ],
+  "expectedColumns": [
+    "id",
+    "normalized"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

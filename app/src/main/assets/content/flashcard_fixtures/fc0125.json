@@ -1,0 +1,20 @@
+{
+  "id": "fc0125-demo",
+  "tables": [],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT CAST('0042' AS INTEGER) AS n",
+  "mysqlSql": "SELECT CAST('0042' AS SIGNED) AS n",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      42
+    ]
+  ],
+  "expectedColumns": [
+    "n"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

@@ -1,0 +1,45 @@
+{
+  "id": "fc0109-demo",
+  "tables": [],
+  "dialect": "SQLite",
+  "sqliteSql": "WITH RECURSIVE n(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM n WHERE x<3) SELECT x FROM n ORDER BY x",
+  "mysqlSql": "WITH RECURSIVE n(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM n WHERE x<3) SELECT x FROM n ORDER BY x",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1
+    ],
+    [
+      2
+    ],
+    [
+      3
+    ]
+  ],
+  "expectedColumns": [
+    "x"
+  ],
+  "wrongSqlite": "WITH RECURSIVE n(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM n WHERE x<=3) SELECT x FROM n ORDER BY x",
+  "wrongMysql": "WITH RECURSIVE n(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM n WHERE x<=3) SELECT x FROM n ORDER BY x",
+  "wrongResult": {
+    "kind": "result",
+    "columns": [
+      "x"
+    ],
+    "rows": [
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        3
+      ],
+      [
+        4
+      ]
+    ]
+  },
+  "independentAuthorExpectation": true
+}

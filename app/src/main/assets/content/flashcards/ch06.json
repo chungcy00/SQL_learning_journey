@@ -1,0 +1,917 @@
+{
+  "chapterId": "ch06",
+  "title": "聚合函数",
+  "count": 8,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "cards": [
+    {
+      "id": "fc0036",
+      "chapterId": "ch06",
+      "knowledgePointIds": [
+        "kp06-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp06-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0061",
+        "q0065",
+        "q0070",
+        "q0074"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "中等",
+      "front": {
+        "question": "COUNT(*)、COUNT(字段)、COUNT(DISTINCT 字段) 分别在数什么？"
+      },
+      "back": {
+        "answer": "行数、非空字段的行数、非空不同字段值的个数。",
+        "explanation": "先确定业务分母。例如订单数、已登记客户订单数和独立客户数不是同一指标。"
+      },
+      "tags": [
+        "COUNT 的三个形式",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "COUNT 的三个形式"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0037",
+      "chapterId": "ch06",
+      "knowledgePointIds": [
+        "kp06-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp06-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0062",
+        "q0066",
+        "q0068"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "中等",
+      "front": {
+        "question": "回忆汇总和平均的基本写法，展示价格总和与平均值。",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "SUM(数值字段), AVG(数值字段)",
+        "explanation": "NULL 价格不参与求和，也不计入 AVG 分母。",
+        "code": "SELECT SUM(price) AS total,AVG(price) AS avg_price FROM items",
+        "sqliteCode": "SELECT SUM(price) AS total,AVG(price) AS avg_price FROM items",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "total",
+            "avg_price"
+          ],
+          "rows": [
+            [
+              94,
+              18.8
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "SUM 与 AVG",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "129e0942cdd9ee6c81d7c94f5bd9ea7dba129ea9ec8386c9b8fae49f796934f6",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0037-demo"
+      ],
+      "fixturePath": "fixtures/fc0037.json",
+      "referenceTopicNames": [
+        "SUM 与 AVG"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0037.sql"
+    },
+    {
+      "id": "fc0038",
+      "chapterId": "ch06",
+      "knowledgePointIds": [
+        "kp06-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp06-03"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0063",
+        "q0064",
+        "q0067",
+        "q0073"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "中等",
+      "front": {
+        "question": "用一条查询取得已知价格的上下界。回忆相应聚合函数。",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "MIN(字段), MAX(字段)",
+        "explanation": "聚合最小和最大值，不等于返回拥有极值的整行商品。",
+        "code": "SELECT MIN(price) AS lo,MAX(price) AS hi FROM items",
+        "sqliteCode": "SELECT MIN(price) AS lo,MAX(price) AS hi FROM items",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "lo",
+            "hi"
+          ],
+          "rows": [
+            [
+              12,
+              30
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "MIN 与 MAX",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "cd329728ecaf451be0c20972d330e612d038f26f3b5d43d1874b01329a75f843",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0038-demo"
+      ],
+      "fixturePath": "fixtures/fc0038.json",
+      "referenceTopicNames": [
+        "MIN 与 MAX"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0038.sql"
+    },
+    {
+      "id": "fc0039",
+      "chapterId": "ch06",
+      "knowledgePointIds": [
+        "kp06-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp06-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0062",
+        "q0066",
+        "q0071",
+        "q0075"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "中等",
+      "front": {
+        "question": "AVG(price) 和 SUM(price)/COUNT(*) 什么时候不同？"
+      },
+      "back": {
+        "answer": "有 NULL 价格时，AVG 排除 NULL，而后者把全部记录数作为分母。",
+        "explanation": "若业务确实要把缺失当作零，应明确缺失填零规则；不要无意改变分母。"
+      },
+      "tags": [
+        "SUM 与 AVG",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL / 对整数可能返回小数；SQLite 整数除法可能截断，须显式转为实数。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "SUM 与 AVG"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0040",
+      "chapterId": "ch06",
+      "knowledgePointIds": [
+        "kp06-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp06-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0061",
+        "q0065",
+        "q0069"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "中等",
+      "front": {
+        "question": "有效订单的不同已知客户数：填入去重计数的参数。",
+        "code": "SELECT COUNT(□) AS n FROM sales WHERE status='completed'",
+        "sourceTables": [
+          {
+            "name": "sales",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "client_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "store_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "amount",
+                "type": "INTEGER"
+              },
+              {
+                "name": "day",
+                "type": "TEXT"
+              },
+              {
+                "name": "status",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                1,
+                40,
+                "2025-01-02",
+                "completed"
+              ],
+              [
+                2,
+                1,
+                1,
+                60,
+                "2025-01-15",
+                "completed"
+              ],
+              [
+                3,
+                2,
+                2,
+                30,
+                "2025-02-01",
+                "completed"
+              ],
+              [
+                4,
+                null,
+                2,
+                0,
+                "2025-02-02",
+                "completed"
+              ],
+              [
+                5,
+                3,
+                1,
+                100,
+                "2025-03-01",
+                "cancelled"
+              ],
+              [
+                6,
+                2,
+                1,
+                60,
+                "2025-03-05",
+                "completed"
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "DISTINCT client_id",
+        "explanation": "客户1与2均有重复订单；匿名订单的 NULL 客户编号不会计数。",
+        "acceptedBlanks": [
+          "DISTINCT client_id"
+        ],
+        "code": "SELECT COUNT(DISTINCT client_id) AS n FROM sales WHERE status='completed'",
+        "sqliteCode": "SELECT COUNT(DISTINCT client_id) AS n FROM sales WHERE status='completed'",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "n"
+          ],
+          "rows": [
+            [
+              2
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "COUNT 的三个形式",
+        "代码填空"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "b3cbe9f3e197bf4514cd3eddb1b9a2b71844bf4ee6f862603cbbb11eb530a54f",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0040-demo"
+      ],
+      "fixturePath": "fixtures/fc0040.json",
+      "referenceTopicNames": [
+        "COUNT 的三个形式"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0040.sql"
+    },
+    {
+      "id": "fc0041",
+      "chapterId": "ch06",
+      "knowledgePointIds": [
+        "kp06-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp06-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0062",
+        "q0066",
+        "q0072"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "结果预测",
+      "difficulty": "中等",
+      "front": {
+        "question": "在空表上执行这三个聚合函数，预测返回行。",
+        "code": "SELECT COUNT(*) AS n,SUM(value) AS s,AVG(value) AS a FROM empty_values",
+        "sourceTables": [
+          {
+            "name": "empty_values",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "value",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "返回以下结果。",
+        "explanation": "无 GROUP BY 的聚合在空输入仍返回一行：计数0，和及均值未知。",
+        "code": "SELECT COUNT(*) AS n,SUM(value) AS s,AVG(value) AS a FROM empty_values",
+        "sqliteCode": "SELECT COUNT(*) AS n,SUM(value) AS s,AVG(value) AS a FROM empty_values",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "n",
+            "s",
+            "a"
+          ],
+          "rows": [
+            [
+              0,
+              null,
+              null
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "SUM 与 AVG",
+        "结果预测"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "fc80eed2850d4acd6beee49a3a0d211f5352f9ff8faa33727a814298f1848710",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0041-demo"
+      ],
+      "fixturePath": "fixtures/fc0041.json",
+      "referenceTopicNames": [
+        "SUM 与 AVG"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0041.sql"
+    },
+    {
+      "id": "fc0042",
+      "chapterId": "ch06",
+      "knowledgePointIds": [
+        "kp06-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp06-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0061",
+        "q0065"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "结果预测",
+      "difficulty": "中等",
+      "front": {
+        "question": "保留已知库存中的零，预测两个计数值。",
+        "code": "SELECT COUNT(stock) AS filled,COUNT(DISTINCT stock) AS unique_n FROM items",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "返回以下结果。",
+        "explanation": "库存值0、8、3、0、6均非空，去重后为0、8、3、6。",
+        "code": "SELECT COUNT(stock) AS filled,COUNT(DISTINCT stock) AS unique_n FROM items",
+        "sqliteCode": "SELECT COUNT(stock) AS filled,COUNT(DISTINCT stock) AS unique_n FROM items",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "filled",
+            "unique_n"
+          ],
+          "rows": [
+            [
+              5,
+              4
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "COUNT 的三个形式",
+        "结果预测"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "d493b77dc69043862afd4f4ca690921ee9c097aee861b5b9fb2ed5ab127061fd",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0042-demo"
+      ],
+      "fixturePath": "fixtures/fc0042.json",
+      "referenceTopicNames": [
+        "COUNT 的三个形式"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0042.sql"
+    },
+    {
+      "id": "fc0043",
+      "chapterId": "ch06",
+      "knowledgePointIds": [
+        "kp06-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp06-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0062",
+        "q0066"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "错误纠正",
+      "difficulty": "中等",
+      "front": {
+        "question": "公司只想计算已填价格商品的平均价格。修正错误分母。",
+        "code": "SELECT SUM(price)*1.0/COUNT(*) AS mean FROM items",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "改用背面的修正语句。",
+        "explanation": "使用总行数会把缺失价格隐式当成零；正确分母是非空价格的数量。",
+        "code": "SELECT AVG(price) AS mean FROM items",
+        "sqliteCode": "SELECT AVG(price) AS mean FROM items",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "mean"
+          ],
+          "rows": [
+            [
+              18.8
+            ]
+          ]
+        },
+        "wrongResult": {
+          "kind": "result",
+          "columns": [
+            "mean"
+          ],
+          "rows": [
+            [
+              15.666666666666666
+            ]
+          ]
+        },
+        "correctionReason": "使用总行数会把缺失价格隐式当成零；正确分母是非空价格的数量。"
+      },
+      "tags": [
+        "SUM 与 AVG",
+        "错误纠正"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "49b93e6a5e3d71c09b420c08c7f55466bddd78ae925bb61d4b7bb0c85640e9e2",
+        "mysqlNative": "未执行",
+        "wrongRejected": true,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0043-demo"
+      ],
+      "fixturePath": "fixtures/fc0043.json",
+      "referenceTopicNames": [
+        "SUM 与 AVG"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0043.sql"
+    }
+  ]
+}

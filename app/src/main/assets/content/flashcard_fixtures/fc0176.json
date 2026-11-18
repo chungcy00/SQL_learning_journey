@@ -1,0 +1,163 @@
+{
+  "id": "fc0176-demo",
+  "tables": [
+    {
+      "name": "po_mini",
+      "columns": [
+        {
+          "name": "po_item_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "quantity_ordered",
+          "type": "INTEGER"
+        },
+        {
+          "name": "unit_price_cents",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          10,
+          100
+        ],
+        [
+          2,
+          4,
+          200
+        ]
+      ],
+      "constraints": ""
+    },
+    {
+      "name": "delivery_mini",
+      "columns": [
+        {
+          "name": "receipt_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "po_item_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "quantity_received",
+          "type": "INTEGER"
+        },
+        {
+          "name": "quantity_rejected",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          1,
+          4,
+          0
+        ],
+        [
+          2,
+          1,
+          5,
+          1
+        ],
+        [
+          3,
+          2,
+          4,
+          0
+        ]
+      ],
+      "constraints": ""
+    },
+    {
+      "name": "bill_mini",
+      "columns": [
+        {
+          "name": "bill_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "po_item_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "quantity_billed",
+          "type": "INTEGER"
+        },
+        {
+          "name": "unit_price_cents",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          1,
+          3,
+          100
+        ],
+        [
+          2,
+          1,
+          5,
+          110
+        ],
+        [
+          3,
+          2,
+          4,
+          200
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "WITH r AS (SELECT po_item_id,SUM(quantity_received-quantity_rejected) AS accepted FROM delivery_mini GROUP BY po_item_id),b AS (SELECT po_item_id,SUM(quantity_billed) AS billed FROM bill_mini GROUP BY po_item_id) SELECT p.po_item_id,COALESCE(r.accepted,0) AS accepted,COALESCE(b.billed,0) AS billed FROM po_mini p LEFT JOIN r ON r.po_item_id=p.po_item_id LEFT JOIN b ON b.po_item_id=p.po_item_id ORDER BY p.po_item_id",
+  "mysqlSql": "WITH r AS (SELECT po_item_id,SUM(quantity_received-quantity_rejected) AS accepted FROM delivery_mini GROUP BY po_item_id),b AS (SELECT po_item_id,SUM(quantity_billed) AS billed FROM bill_mini GROUP BY po_item_id) SELECT p.po_item_id,COALESCE(r.accepted,0) AS accepted,COALESCE(b.billed,0) AS billed FROM po_mini p LEFT JOIN r ON r.po_item_id=p.po_item_id LEFT JOIN b ON b.po_item_id=p.po_item_id ORDER BY p.po_item_id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      8,
+      8
+    ],
+    [
+      2,
+      4,
+      4
+    ]
+  ],
+  "expectedColumns": [
+    "po_item_id",
+    "accepted",
+    "billed"
+  ],
+  "wrongSqlite": "SELECT p.po_item_id,SUM(r.quantity_received-r.quantity_rejected) AS accepted,SUM(b.quantity_billed) AS billed FROM po_mini p LEFT JOIN delivery_mini r ON r.po_item_id=p.po_item_id LEFT JOIN bill_mini b ON b.po_item_id=p.po_item_id GROUP BY p.po_item_id ORDER BY p.po_item_id",
+  "wrongMysql": "SELECT p.po_item_id,SUM(r.quantity_received-r.quantity_rejected) AS accepted,SUM(b.quantity_billed) AS billed FROM po_mini p LEFT JOIN delivery_mini r ON r.po_item_id=p.po_item_id LEFT JOIN bill_mini b ON b.po_item_id=p.po_item_id GROUP BY p.po_item_id ORDER BY p.po_item_id",
+  "wrongResult": {
+    "kind": "result",
+    "columns": [
+      "po_item_id",
+      "accepted",
+      "billed"
+    ],
+    "rows": [
+      [
+        1,
+        16,
+        16
+      ],
+      [
+        2,
+        4,
+        4
+      ]
+    ]
+  },
+  "independentAuthorExpectation": true
+}

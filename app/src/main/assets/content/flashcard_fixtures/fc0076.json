@@ -1,0 +1,129 @@
+{
+  "id": "fc0076-demo",
+  "tables": [
+    {
+      "name": "stores",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "name",
+          "type": "TEXT"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "甲店"
+        ],
+        [
+          2,
+          "乙店"
+        ],
+        [
+          3,
+          "丙店"
+        ]
+      ],
+      "constraints": ""
+    },
+    {
+      "name": "sales",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "client_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "store_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "amount",
+          "type": "INTEGER"
+        },
+        {
+          "name": "day",
+          "type": "TEXT"
+        },
+        {
+          "name": "status",
+          "type": "TEXT"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          1,
+          1,
+          40,
+          "2025-01-02",
+          "completed"
+        ],
+        [
+          2,
+          1,
+          1,
+          60,
+          "2025-01-15",
+          "completed"
+        ],
+        [
+          3,
+          2,
+          2,
+          30,
+          "2025-02-01",
+          "completed"
+        ],
+        [
+          4,
+          null,
+          2,
+          0,
+          "2025-02-02",
+          "completed"
+        ],
+        [
+          5,
+          3,
+          1,
+          100,
+          "2025-03-01",
+          "cancelled"
+        ],
+        [
+          6,
+          2,
+          1,
+          60,
+          "2025-03-05",
+          "completed"
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT t.id FROM stores t WHERE NOT EXISTS (SELECT 1 FROM sales s WHERE s.store_id=t.id AND s.status='completed') ORDER BY t.id",
+  "mysqlSql": "SELECT t.id FROM stores t WHERE NOT EXISTS (SELECT 1 FROM sales s WHERE s.store_id=t.id AND s.status='completed') ORDER BY t.id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      3
+    ]
+  ],
+  "expectedColumns": [
+    "id"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

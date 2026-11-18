@@ -1,0 +1,1231 @@
+{
+  "chapterId": "ch15",
+  "title": "窗口函数",
+  "count": 11,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "cards": [
+    {
+      "id": "fc0110",
+      "chapterId": "ch15",
+      "knowledgePointIds": [
+        "kp15-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp15-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0199",
+        "q0200",
+        "q0204"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "困难",
+      "front": {
+        "question": "窗口函数与 GROUP BY 的根本差别是什么？"
+      },
+      "back": {
+        "answer": "窗口计算保留输入行；GROUP BY 聚合后改变行粒度。",
+        "explanation": "例如同时展示每张订单金额与部门总额，可使用窗口聚合而不压缩为部门一行。"
+      },
+      "tags": [
+        "OVER 与 PARTITION BY",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "OVER 与 PARTITION BY"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0111",
+      "chapterId": "ch15",
+      "knowledgePointIds": [
+        "kp15-05"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp15-05"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0203",
+        "q0214",
+        "q0215"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "困难",
+      "front": {
+        "question": "移动平均中“过去3行”是否必然等于过去3个月？"
+      },
+      "back": {
+        "answer": "不必然。",
+        "explanation": "若月份缺失，一行不等于连续月份。先补齐月份轴，再定义窗口边界及最小样本数。"
+      },
+      "tags": [
+        "移动平均与环比",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "移动平均与环比"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0112",
+      "chapterId": "ch15",
+      "knowledgePointIds": [
+        "kp15-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp15-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0199",
+        "q0200",
+        "q0201"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "困难",
+      "front": {
+        "question": "回忆按类别计算平均价格并保留每条商品的窗口语法，只展示商品1、2、3前先计算全部类别均值。",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "聚合函数(字段) OVER (PARTITION BY 分区键)",
+        "explanation": "窗口在筛选显示范围之前计算，可避免显示过滤意外改变总体。",
+        "code": "WITH x AS (SELECT id,AVG(price) OVER(PARTITION BY category) AS avg_p FROM items) SELECT id,ROUND(avg_p,2) AS avg_p FROM x WHERE id<=3 ORDER BY id",
+        "sqliteCode": "WITH x AS (SELECT id,AVG(price) OVER(PARTITION BY category) AS avg_p FROM items) SELECT id,ROUND(avg_p,2) AS avg_p FROM x WHERE id<=3 ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "avg_p"
+          ],
+          "rows": [
+            [
+              1,
+              17.33
+            ],
+            [
+              2,
+              17.33
+            ],
+            [
+              3,
+              12.0
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "OVER 与 PARTITION BY",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "c0c5530a2046fee2c8405d931f1addb4bd869dd995ae4fa8e3c7f15038ccc95e",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0112-demo"
+      ],
+      "fixturePath": "fixtures/fc0112.json",
+      "referenceTopicNames": [
+        "OVER 与 PARTITION BY"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0112.sql"
+    },
+    {
+      "id": "fc0113",
+      "chapterId": "ch15",
+      "knowledgePointIds": [
+        "kp15-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp15-03"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0197",
+        "q0198",
+        "q0209"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "困难",
+      "front": {
+        "question": "回忆读取同分区前一行值的窗口语法；按连续月份读取前一月金额。",
+        "sourceTables": [
+          {
+            "name": "monthly",
+            "columns": [
+              {
+                "name": "month",
+                "type": "TEXT"
+              },
+              {
+                "name": "amount",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                "2025-01",
+                100
+              ],
+              [
+                "2025-02",
+                0
+              ],
+              [
+                "2025-03",
+                150
+              ],
+              [
+                "2025-04",
+                150
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "LAG(字段, 偏移量) OVER (ORDER BY 排序键)",
+        "explanation": "第一行没有前值，默认NULL。",
+        "code": "SELECT month,amount,LAG(amount,1) OVER(ORDER BY month) AS previous FROM monthly ORDER BY month",
+        "sqliteCode": "SELECT month,amount,LAG(amount,1) OVER(ORDER BY month) AS previous FROM monthly ORDER BY month",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "month",
+            "amount",
+            "previous"
+          ],
+          "rows": [
+            [
+              "2025-01",
+              100,
+              null
+            ],
+            [
+              "2025-02",
+              0,
+              100
+            ],
+            [
+              "2025-03",
+              150,
+              0
+            ],
+            [
+              "2025-04",
+              150,
+              150
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "LAG 与 LEAD",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "225fc73cd548a707484729972c6c0a78467254976f4022b2c4f90bf6c271dac1",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0113-demo"
+      ],
+      "fixturePath": "fixtures/fc0113.json",
+      "referenceTopicNames": [
+        "LAG 与 LEAD"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0113.sql"
+    },
+    {
+      "id": "fc0114",
+      "chapterId": "ch15",
+      "knowledgePointIds": [
+        "kp15-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp15-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0196",
+        "q0206",
+        "q0216",
+        "q0217",
+        "q0219"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "困难",
+      "front": {
+        "question": "三个分数90、90、70，RANK和DENSE_RANK会怎么处理第三个分数？"
+      },
+      "back": {
+        "answer": "RANK为3，DENSE_RANK为2。",
+        "explanation": "RANK 跳过并列占用的名次，DENSE_RANK 不跳号；ROW_NUMBER 强制逐行编号。"
+      },
+      "tags": [
+        "ROW_NUMBER、RANK、DENSE_RANK",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "ROW_NUMBER、RANK、DENSE_RANK"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0115",
+      "chapterId": "ch15",
+      "knowledgePointIds": [
+        "kp15-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp15-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0196",
+        "q0206",
+        "q0207",
+        "q0218"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "困难",
+      "front": {
+        "question": "每个队伍严格选择一名最高分得主，按编号打破并列；填入窗口排名函数。",
+        "code": "WITH x AS (SELECT id,team,□() OVER(PARTITION BY team ORDER BY score DESC,id) AS rn FROM scores) SELECT id FROM x WHERE rn=1 ORDER BY id",
+        "sourceTables": [
+          {
+            "name": "scores",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "team",
+                "type": "TEXT"
+              },
+              {
+                "name": "score",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "A",
+                90
+              ],
+              [
+                2,
+                "A",
+                90
+              ],
+              [
+                3,
+                "A",
+                70
+              ],
+              [
+                4,
+                "A",
+                60
+              ],
+              [
+                5,
+                "B",
+                80
+              ],
+              [
+                6,
+                "B",
+                60
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "ROW_NUMBER",
+        "explanation": "严格一人需要唯一的排序规则；不能仅凭RANK在分数并列时保证一行。",
+        "acceptedBlanks": [
+          "ROW_NUMBER"
+        ],
+        "code": "WITH x AS (SELECT id,team,ROW_NUMBER() OVER(PARTITION BY team ORDER BY score DESC,id) AS rn FROM scores) SELECT id FROM x WHERE rn=1 ORDER BY id",
+        "sqliteCode": "WITH x AS (SELECT id,team,ROW_NUMBER() OVER(PARTITION BY team ORDER BY score DESC,id) AS rn FROM scores) SELECT id FROM x WHERE rn=1 ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id"
+          ],
+          "rows": [
+            [
+              1
+            ],
+            [
+              5
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "ROW_NUMBER、RANK、DENSE_RANK",
+        "代码填空"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "ddf17780e1d0c4cdc632b07ee9922ac668d28551d2fef759223c18463e9d95ab",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0115-demo"
+      ],
+      "fixturePath": "fixtures/fc0115.json",
+      "referenceTopicNames": [
+        "ROW_NUMBER、RANK、DENSE_RANK"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0115.sql"
+    },
+    {
+      "id": "fc0116",
+      "chapterId": "ch15",
+      "knowledgePointIds": [
+        "kp15-04"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp15-04"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0205",
+        "q0208",
+        "q0210",
+        "q0211"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "困难",
+      "front": {
+        "question": "计算从分区起点到当前行的逐行累计，填入窗口边界。",
+        "code": "SELECT id,SUM(value) OVER(ORDER BY day,id ROWS BETWEEN □ AND CURRENT ROW) AS running FROM events ORDER BY id",
+        "sourceTables": [
+          {
+            "name": "events",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "day",
+                "type": "TEXT"
+              },
+              {
+                "name": "value",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "2025-01-01",
+                10
+              ],
+              [
+                2,
+                "2025-01-01",
+                20
+              ],
+              [
+                3,
+                "2025-01-02",
+                30
+              ],
+              [
+                4,
+                "2025-01-03",
+                40
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "UNBOUNDED PRECEDING",
+        "explanation": "加入唯一编号打破日期并列，ROWS累计逐行增加。",
+        "acceptedBlanks": [
+          "UNBOUNDED PRECEDING"
+        ],
+        "code": "SELECT id,SUM(value) OVER(ORDER BY day,id ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running FROM events ORDER BY id",
+        "sqliteCode": "SELECT id,SUM(value) OVER(ORDER BY day,id ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running FROM events ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "running"
+          ],
+          "rows": [
+            [
+              1,
+              10
+            ],
+            [
+              2,
+              30
+            ],
+            [
+              3,
+              60
+            ],
+            [
+              4,
+              100
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "ROWS、RANGE 与累计",
+        "代码填空"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "aaf74ea9f0d3d2366cf42dc04f99e22844fed283b741f10e9f03c782ea11d296",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0116-demo"
+      ],
+      "fixturePath": "fixtures/fc0116.json",
+      "referenceTopicNames": [
+        "ROWS、RANGE 与累计"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0116.sql"
+    },
+    {
+      "id": "fc0117",
+      "chapterId": "ch15",
+      "knowledgePointIds": [
+        "kp15-06"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp15-06"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0212",
+        "q0213"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "结果预测",
+      "difficulty": "困难",
+      "front": {
+        "question": "日期并列时，预测 RANGE 累计总和。",
+        "code": "SELECT id,SUM(value) OVER(ORDER BY day RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS total FROM events ORDER BY id",
+        "sourceTables": [
+          {
+            "name": "events",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "day",
+                "type": "TEXT"
+              },
+              {
+                "name": "value",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "2025-01-01",
+                10
+              ],
+              [
+                2,
+                "2025-01-01",
+                20
+              ],
+              [
+                3,
+                "2025-01-02",
+                30
+              ],
+              [
+                4,
+                "2025-01-03",
+                40
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "返回以下结果。",
+        "explanation": "RANGE 把相同排序值的同行集纳入同一边界，两条1月1日事件累计值相同。",
+        "code": "SELECT id,SUM(value) OVER(ORDER BY day RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS total FROM events ORDER BY id",
+        "sqliteCode": "SELECT id,SUM(value) OVER(ORDER BY day RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS total FROM events ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "total"
+          ],
+          "rows": [
+            [
+              1,
+              30
+            ],
+            [
+              2,
+              30
+            ],
+            [
+              3,
+              60
+            ],
+            [
+              4,
+              100
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "RANGE 与 ROWS 的并列效应",
+        "结果预测"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "d8c2caa717ae980cff43046fda2d8d5871acdb331c9d2f4fa608f404213db0d2",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0117-demo"
+      ],
+      "fixturePath": "fixtures/fc0117.json",
+      "referenceTopicNames": [
+        "RANGE 与 ROWS 的并列效应"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0117.sql"
+    },
+    {
+      "id": "fc0118",
+      "chapterId": "ch15",
+      "knowledgePointIds": [
+        "kp15-05"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp15-05"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0203",
+        "q0214",
+        "q0220"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "结果预测",
+      "difficulty": "困难",
+      "front": {
+        "question": "预测相邻两行移动平均，保留首行不完整窗口。",
+        "code": "SELECT month,AVG(amount) OVER(ORDER BY month ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS moving FROM monthly ORDER BY month",
+        "sourceTables": [
+          {
+            "name": "monthly",
+            "columns": [
+              {
+                "name": "month",
+                "type": "TEXT"
+              },
+              {
+                "name": "amount",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                "2025-01",
+                100
+              ],
+              [
+                "2025-02",
+                0
+              ],
+              [
+                "2025-03",
+                150
+              ],
+              [
+                "2025-04",
+                150
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "返回以下结果。",
+        "explanation": "首行只有一个样本；若报告必须满两期，应再加窗内计数。",
+        "code": "SELECT month,AVG(amount) OVER(ORDER BY month ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS moving FROM monthly ORDER BY month",
+        "sqliteCode": "SELECT month,AVG(amount) OVER(ORDER BY month ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS moving FROM monthly ORDER BY month",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "month",
+            "moving"
+          ],
+          "rows": [
+            [
+              "2025-01",
+              100.0
+            ],
+            [
+              "2025-02",
+              50.0
+            ],
+            [
+              "2025-03",
+              75.0
+            ],
+            [
+              "2025-04",
+              150.0
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "移动平均与环比",
+        "结果预测"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "d1b2b0405523b66cdad0c38655fb8396c4860c7b715561cfd78b80e3642faaa6",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0118-demo"
+      ],
+      "fixturePath": "fixtures/fc0118.json",
+      "referenceTopicNames": [
+        "移动平均与环比"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0118.sql"
+    },
+    {
+      "id": "fc0119",
+      "chapterId": "ch15",
+      "knowledgePointIds": [
+        "kp15-01",
+        "kp15-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp15-01",
+        "kp15-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0196",
+        "q0199",
+        "q0200",
+        "q0206"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "错误纠正",
+      "difficulty": "困难",
+      "front": {
+        "question": "目标：各队前三名（含并列），为何不能在同层 WHERE 使用窗口函数？",
+        "code": "SELECT id,RANK() OVER(PARTITION BY team ORDER BY score DESC) AS r FROM scores WHERE RANK() OVER(PARTITION BY team ORDER BY score DESC)<=3 ORDER BY id",
+        "sourceTables": [
+          {
+            "name": "scores",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "team",
+                "type": "TEXT"
+              },
+              {
+                "name": "score",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "A",
+                90
+              ],
+              [
+                2,
+                "A",
+                90
+              ],
+              [
+                3,
+                "A",
+                70
+              ],
+              [
+                4,
+                "A",
+                60
+              ],
+              [
+                5,
+                "B",
+                80
+              ],
+              [
+                6,
+                "B",
+                60
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "改用背面的修正语句。",
+        "explanation": "窗口计算在WHERE之后，需用外层查询或CTE过滤名次。",
+        "code": "WITH x AS (SELECT id,RANK() OVER(PARTITION BY team ORDER BY score DESC) AS r FROM scores) SELECT id,r FROM x WHERE r<=3 ORDER BY id",
+        "sqliteCode": "WITH x AS (SELECT id,RANK() OVER(PARTITION BY team ORDER BY score DESC) AS r FROM scores) SELECT id,r FROM x WHERE r<=3 ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "r"
+          ],
+          "rows": [
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              6,
+              2
+            ]
+          ]
+        },
+        "wrongResult": {
+          "kind": "error",
+          "message": "misuse of window function RANK()"
+        },
+        "correctionReason": "窗口计算在WHERE之后，需用外层查询或CTE过滤名次。"
+      },
+      "tags": [
+        "OVER 与 PARTITION BY",
+        "错误纠正"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "d4b6375a3b5f33f9edbd458561f1c62264bb1506a5da1cf7cdb5f8d0c7727d6f",
+        "mysqlNative": "未执行",
+        "wrongRejected": true,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0119-demo"
+      ],
+      "fixturePath": "fixtures/fc0119.json",
+      "referenceTopicNames": [
+        "OVER 与 PARTITION BY",
+        "ROW_NUMBER、RANK、DENSE_RANK"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0119.sql"
+    },
+    {
+      "id": "fc0120",
+      "chapterId": "ch15",
+      "knowledgePointIds": [
+        "kp15-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp15-03"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0197",
+        "q0198",
+        "q0202"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "错误纠正",
+      "difficulty": "困难",
+      "front": {
+        "question": "要求读取各团队内部上一编号的分数，纠正忘记分区的写法。",
+        "code": "SELECT id,LAG(score) OVER(ORDER BY id) AS prev FROM scores ORDER BY id",
+        "sourceTables": [
+          {
+            "name": "scores",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "team",
+                "type": "TEXT"
+              },
+              {
+                "name": "score",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "A",
+                90
+              ],
+              [
+                2,
+                "A",
+                90
+              ],
+              [
+                3,
+                "A",
+                70
+              ],
+              [
+                4,
+                "A",
+                60
+              ],
+              [
+                5,
+                "B",
+                80
+              ],
+              [
+                6,
+                "B",
+                60
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "改用背面的修正语句。",
+        "explanation": "分区缺失让另一团队的最后一行成为新团队的上一行。",
+        "code": "SELECT id,LAG(score) OVER(PARTITION BY team ORDER BY id) AS prev FROM scores ORDER BY id",
+        "sqliteCode": "SELECT id,LAG(score) OVER(PARTITION BY team ORDER BY id) AS prev FROM scores ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "prev"
+          ],
+          "rows": [
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              90
+            ],
+            [
+              3,
+              90
+            ],
+            [
+              4,
+              70
+            ],
+            [
+              5,
+              null
+            ],
+            [
+              6,
+              80
+            ]
+          ]
+        },
+        "wrongResult": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "prev"
+          ],
+          "rows": [
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              90
+            ],
+            [
+              3,
+              90
+            ],
+            [
+              4,
+              70
+            ],
+            [
+              5,
+              60
+            ],
+            [
+              6,
+              80
+            ]
+          ]
+        },
+        "correctionReason": "分区缺失让另一团队的最后一行成为新团队的上一行。"
+      },
+      "tags": [
+        "LAG 与 LEAD",
+        "错误纠正"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "dd613173f3386a0d1fb84f3b7bcb094e3dce5ea9d5347eb14f1e30b930c2e828",
+        "mysqlNative": "未执行",
+        "wrongRejected": true,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0120-demo"
+      ],
+      "fixturePath": "fixtures/fc0120.json",
+      "referenceTopicNames": [
+        "LAG 与 LEAD"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0120.sql"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "id": "fc0150-demo",
+  "tables": [
+    {
+      "name": "store_month",
+      "columns": [
+        {
+          "name": "month_key",
+          "type": "TEXT"
+        },
+        {
+          "name": "net_cents",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          "2025-01",
+          10000
+        ],
+        [
+          "2025-02",
+          0
+        ],
+        [
+          "2025-03",
+          20000
+        ],
+        [
+          "2025-04",
+          15000
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT month_key,amount_prev FROM (SELECT month_key,LAG(net_cents) OVER(ORDER BY month_key) AS amount_prev FROM store_month) m ORDER BY month_key",
+  "mysqlSql": "SELECT month_key,amount_prev FROM (SELECT month_key,LAG(net_cents) OVER(ORDER BY month_key) AS amount_prev FROM store_month) m ORDER BY month_key",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      "2025-01",
+      null
+    ],
+    [
+      "2025-02",
+      10000
+    ],
+    [
+      "2025-03",
+      0
+    ],
+    [
+      "2025-04",
+      20000
+    ]
+  ],
+  "expectedColumns": [
+    "month_key",
+    "amount_prev"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

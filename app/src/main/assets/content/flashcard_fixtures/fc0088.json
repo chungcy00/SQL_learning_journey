@@ -1,0 +1,63 @@
+{
+  "id": "fc0088-demo",
+  "tables": [
+    {
+      "name": "date_demo",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "day",
+          "type": "TEXT"
+        },
+        {
+          "name": "ts",
+          "type": "TEXT"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "2025-01-31",
+          "2025-01-31 23:59:59"
+        ],
+        [
+          2,
+          "2025-02-01",
+          "2025-02-01 00:00:00"
+        ],
+        [
+          3,
+          "2025-02-28",
+          "2025-02-28 23:59:59"
+        ],
+        [
+          4,
+          "2025-03-01",
+          "2025-03-01 00:00:00"
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT CAST(strftime('%Y',day) AS INTEGER) AS y,CAST(strftime('%m',day) AS INTEGER) AS m FROM date_demo WHERE id=2",
+  "mysqlSql": "SELECT YEAR(day) AS y,MONTH(day) AS m FROM date_demo WHERE id=2",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      2025,
+      2
+    ]
+  ],
+  "expectedColumns": [
+    "y",
+    "m"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

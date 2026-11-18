@@ -1,0 +1,1607 @@
+{
+  "id": "ch08",
+  "number": 8,
+  "title": "多表连接",
+  "stage": "核心",
+  "objective": "理解匹配、保留行及连接膨胀。",
+  "prerequisites": [
+    "ch07"
+  ],
+  "knowledgePoints": [
+    {
+      "id": "kp08-01",
+      "chapterId": "ch08",
+      "title": "INNER JOIN 与 ON",
+      "learningObjective": "能够运用本节知识完成：补充订单客户名称",
+      "prerequisites": [
+        "ch07"
+      ],
+      "concept": "内连接仅返回满足连接条件的行对；一个父记录匹配多个子记录会产生多行。",
+      "syntax": "FROM a INNER JOIN b ON a.key=b.key",
+      "parameters": {
+        "ON": "连接谓词",
+        "a,b": "表或别名"
+      },
+      "fixtureIds": [
+        "lesson-orders",
+        "lesson-customers"
+      ],
+      "sourceTables": [
+        {
+          "name": "orders",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "sales",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "store_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "order_date",
+              "type": "TEXT",
+              "mysqlType": "DATE",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "护肤品",
+              800,
+              1,
+              "2026-01-03",
+              1
+            ],
+            [
+              2,
+              "化妆品",
+              400,
+              2,
+              "2026-01-10",
+              2
+            ],
+            [
+              3,
+              "护肤品",
+              600,
+              1,
+              "2026-02-02",
+              1
+            ],
+            [
+              4,
+              "化妆品",
+              300,
+              2,
+              "2026-02-15",
+              null
+            ],
+            [
+              5,
+              "日用品",
+              1500,
+              1,
+              "2026-02-20",
+              3
+            ]
+          ]
+        },
+        {
+          "name": "customers",
+          "columns": [
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "customer_name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "林"
+            ],
+            [
+              2,
+              "陈"
+            ],
+            [
+              3,
+              "王"
+            ],
+            [
+              4,
+              "李"
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT o.id, c.customer_name FROM orders o INNER JOIN customers c ON o.customer_id=c.customer_id ORDER BY o.id;",
+      "sqliteSql": "SELECT o.id, c.customer_name FROM orders o INNER JOIN customers c ON o.customer_id=c.customer_id ORDER BY o.id;",
+      "executionSteps": [
+        "按客户编号配对",
+        "无客户的订单不返回",
+        "投影编号与名称"
+      ],
+      "useCase": "补充订单客户名称",
+      "comparison": "JOIN 默认内连接；不是把两张表按行位置拼接。",
+      "commonError": {
+        "example": "JOIN customers c ON o.id=c.customer_id",
+        "correction": "ON o.customer_id=c.customer_id"
+      },
+      "notes": "连接前确认主外键和粒度。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0097",
+        "q0098",
+        "q0105",
+        "q0106"
+      ],
+      "relatedFlashcardIds": [
+        "fc0051",
+        "fc0053"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp01-01",
+        "kp03-01",
+        "kp07-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "id",
+          "customer_name"
+        ],
+        "rows": [
+          [
+            1,
+            "林"
+          ],
+          [
+            2,
+            "陈"
+          ],
+          [
+            3,
+            "林"
+          ],
+          [
+            5,
+            "王"
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "visualization": {
+        "kind": "stepFlow",
+        "steps": [
+          {
+            "id": "1",
+            "label": "按客户编号配对"
+          },
+          {
+            "id": "2",
+            "label": "无客户的订单不返回"
+          },
+          {
+            "id": "3",
+            "label": "投影编号与名称"
+          }
+        ],
+        "sourceFixtureIds": [
+          "lesson-orders",
+          "lesson-customers"
+        ],
+        "resultColumns": [
+          "id",
+          "customer_name"
+        ]
+      },
+      "mysqlVerificationScript": "validation/mysql/kp08-01.sql",
+      "primaryQuestionIds": [
+        "q0097",
+        "q0098",
+        "q0105",
+        "q0106"
+      ],
+      "primaryFlashcardIds": [
+        "fc0051",
+        "fc0053"
+      ]
+    },
+    {
+      "id": "kp08-02",
+      "chapterId": "ch08",
+      "title": "LEFT JOIN 与 RIGHT JOIN",
+      "learningObjective": "能够运用本节知识完成：列出包括未购买客户的订单关系",
+      "prerequisites": [
+        "kp08-01"
+      ],
+      "concept": "左连接保留左表全部行，右表无匹配时补 NULL；右连接反向保留。",
+      "syntax": "FROM a LEFT JOIN b ON a.key=b.key",
+      "parameters": {
+        "a": "保留侧",
+        "b": "匹配侧"
+      },
+      "fixtureIds": [
+        "lesson-customers",
+        "lesson-orders"
+      ],
+      "sourceTables": [
+        {
+          "name": "customers",
+          "columns": [
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "customer_name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "林"
+            ],
+            [
+              2,
+              "陈"
+            ],
+            [
+              3,
+              "王"
+            ],
+            [
+              4,
+              "李"
+            ]
+          ]
+        },
+        {
+          "name": "orders",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "sales",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "store_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "order_date",
+              "type": "TEXT",
+              "mysqlType": "DATE",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "护肤品",
+              800,
+              1,
+              "2026-01-03",
+              1
+            ],
+            [
+              2,
+              "化妆品",
+              400,
+              2,
+              "2026-01-10",
+              2
+            ],
+            [
+              3,
+              "护肤品",
+              600,
+              1,
+              "2026-02-02",
+              1
+            ],
+            [
+              4,
+              "化妆品",
+              300,
+              2,
+              "2026-02-15",
+              null
+            ],
+            [
+              5,
+              "日用品",
+              1500,
+              1,
+              "2026-02-20",
+              3
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT c.customer_id, o.id AS order_id FROM customers c LEFT JOIN orders o ON c.customer_id=o.customer_id ORDER BY c.customer_id,o.id;",
+      "sqliteSql": "SELECT c.customer_id, o.id AS order_id FROM customers c LEFT JOIN orders o ON c.customer_id=o.customer_id ORDER BY c.customer_id,o.id;",
+      "executionSteps": [
+        "客户1匹配两笔",
+        "客户2和3各一笔",
+        "客户4没有匹配，补NULL"
+      ],
+      "useCase": "列出包括未购买客户的订单关系",
+      "comparison": "RIGHT JOIN 可交换两表写成 LEFT JOIN；输出列须明确。",
+      "commonError": {
+        "example": "INNER JOIN 后寻找未下单客户",
+        "correction": "LEFT JOIN ... WHERE o.id IS NULL"
+      },
+      "notes": "不要用可空业务字段判断是否匹配；使用非空主键。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0094",
+        "q0099",
+        "q0101",
+        "q0107",
+        "q0109"
+      ],
+      "relatedFlashcardIds": [
+        "fc0054"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp01-01",
+        "kp03-01",
+        "kp07-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "customer_id",
+          "order_id"
+        ],
+        "rows": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            null
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "visualization": {
+        "kind": "stepFlow",
+        "steps": [
+          {
+            "id": "1",
+            "label": "客户1匹配两笔"
+          },
+          {
+            "id": "2",
+            "label": "客户2和3各一笔"
+          },
+          {
+            "id": "3",
+            "label": "客户4没有匹配，补NULL"
+          }
+        ],
+        "sourceFixtureIds": [
+          "lesson-customers",
+          "lesson-orders"
+        ],
+        "resultColumns": [
+          "customer_id",
+          "order_id"
+        ]
+      },
+      "mysqlVerificationScript": "validation/mysql/kp08-02.sql",
+      "primaryQuestionIds": [
+        "q0094",
+        "q0099",
+        "q0101",
+        "q0107",
+        "q0109"
+      ],
+      "primaryFlashcardIds": [
+        "fc0054"
+      ]
+    },
+    {
+      "id": "kp08-03",
+      "chapterId": "ch08",
+      "title": "外连接的 ON 与 WHERE",
+      "learningObjective": "能够运用本节知识完成：统计每个客户的2月订单数，包括零单客户",
+      "prerequisites": [
+        "kp08-02"
+      ],
+      "concept": "ON 决定匹配，WHERE 在连接完成后筛结果；对右侧字段的 WHERE 条件可能移除补 NULL 的行。",
+      "syntax": "LEFT JOIN b ON a.key=b.key AND b.flag=... ",
+      "parameters": {
+        "ON": "匹配限制",
+        "WHERE": "结果过滤"
+      },
+      "fixtureIds": [
+        "lesson-customers",
+        "lesson-orders"
+      ],
+      "sourceTables": [
+        {
+          "name": "customers",
+          "columns": [
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "customer_name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "林"
+            ],
+            [
+              2,
+              "陈"
+            ],
+            [
+              3,
+              "王"
+            ],
+            [
+              4,
+              "李"
+            ]
+          ]
+        },
+        {
+          "name": "orders",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "sales",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "store_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "order_date",
+              "type": "TEXT",
+              "mysqlType": "DATE",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "护肤品",
+              800,
+              1,
+              "2026-01-03",
+              1
+            ],
+            [
+              2,
+              "化妆品",
+              400,
+              2,
+              "2026-01-10",
+              2
+            ],
+            [
+              3,
+              "护肤品",
+              600,
+              1,
+              "2026-02-02",
+              1
+            ],
+            [
+              4,
+              "化妆品",
+              300,
+              2,
+              "2026-02-15",
+              null
+            ],
+            [
+              5,
+              "日用品",
+              1500,
+              1,
+              "2026-02-20",
+              3
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT c.customer_id, COUNT(o.id) AS feb_orders FROM customers c LEFT JOIN orders o ON c.customer_id=o.customer_id AND o.order_date >= '2026-02-01' AND o.order_date < '2026-03-01' GROUP BY c.customer_id ORDER BY c.customer_id;",
+      "sqliteSql": "SELECT c.customer_id, COUNT(o.id) AS feb_orders FROM customers c LEFT JOIN orders o ON c.customer_id=o.customer_id AND o.order_date >= '2026-02-01' AND o.order_date < '2026-03-01' GROUP BY c.customer_id ORDER BY c.customer_id;",
+      "executionSteps": [
+        "先限制可匹配的2月订单",
+        "保留全部客户",
+        "统计非空订单编号"
+      ],
+      "useCase": "统计每个客户的2月订单数，包括零单客户",
+      "comparison": "同条件放 WHERE 时，无2月订单的客户可能被删除。",
+      "commonError": {
+        "example": "LEFT JOIN ... WHERE o.order_date >= '2026-02-01'",
+        "correction": "日期条件放 ON"
+      },
+      "notes": "COUNT(*) 会把补齐行计为1。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0112",
+        "q0113",
+        "q0115"
+      ],
+      "relatedFlashcardIds": [
+        "fc0055",
+        "fc0061"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp01-01",
+        "kp03-01",
+        "kp07-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "customer_id",
+          "feb_orders"
+        ],
+        "rows": [
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            4,
+            0
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "visualization": {
+        "kind": "stepFlow",
+        "steps": [
+          {
+            "id": "1",
+            "label": "先限制可匹配的2月订单"
+          },
+          {
+            "id": "2",
+            "label": "保留全部客户"
+          },
+          {
+            "id": "3",
+            "label": "统计非空订单编号"
+          }
+        ],
+        "sourceFixtureIds": [
+          "lesson-customers",
+          "lesson-orders"
+        ],
+        "resultColumns": [
+          "customer_id",
+          "feb_orders"
+        ]
+      },
+      "mysqlVerificationScript": "validation/mysql/kp08-03.sql",
+      "primaryQuestionIds": [
+        "q0112",
+        "q0113",
+        "q0115"
+      ],
+      "primaryFlashcardIds": [
+        "fc0055",
+        "fc0061"
+      ]
+    },
+    {
+      "id": "kp08-04",
+      "chapterId": "ch08",
+      "title": "CROSS JOIN 与自连接",
+      "learningObjective": "能够运用本节知识完成：展示员工汇报关系",
+      "prerequisites": [
+        "kp08-03"
+      ],
+      "concept": "交叉连接形成两表笛卡尔积；自连接使用同一表的不同别名表示不同角色。",
+      "syntax": "FROM employees e LEFT JOIN employees m ON e.manager_id=m.employee_id",
+      "parameters": {
+        "e": "员工角色",
+        "m": "主管角色"
+      },
+      "fixtureIds": [
+        "lesson-employees"
+      ],
+      "sourceTables": [
+        {
+          "name": "employees",
+          "columns": [
+            {
+              "name": "employee_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "employee_name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "manager_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "salary",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "A",
+              null,
+              8000
+            ],
+            [
+              2,
+              "B",
+              1,
+              5000
+            ],
+            [
+              3,
+              "C",
+              1,
+              5000
+            ],
+            [
+              4,
+              "D",
+              2,
+              3000
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT e.employee_name, m.employee_name AS manager FROM employees e LEFT JOIN employees m ON e.manager_id=m.employee_id ORDER BY e.employee_id;",
+      "sqliteSql": "SELECT e.employee_name, m.employee_name AS manager FROM employees e LEFT JOIN employees m ON e.manager_id=m.employee_id ORDER BY e.employee_id;",
+      "executionSteps": [
+        "为员工表创建两个逻辑角色",
+        "匹配主管编号",
+        "顶层主管为空"
+      ],
+      "useCase": "展示员工汇报关系",
+      "comparison": "CROSS JOIN 不需要匹配条件；自连接通常需要角色关联。",
+      "commonError": {
+        "example": "SELECT employee_name FROM employees CROSS JOIN employees",
+        "correction": "使用不同别名与明确 ON"
+      },
+      "notes": "若交叉连接两个分别有4行和3行的表，得到12行。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0108",
+        "q0110",
+        "q0111"
+      ],
+      "relatedFlashcardIds": [
+        "fc0058",
+        "fc0059"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp01-01",
+        "kp03-01",
+        "kp07-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "employee_name",
+          "manager"
+        ],
+        "rows": [
+          [
+            "A",
+            null
+          ],
+          [
+            "B",
+            "A"
+          ],
+          [
+            "C",
+            "A"
+          ],
+          [
+            "D",
+            "B"
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "visualization": {
+        "kind": "stepFlow",
+        "steps": [
+          {
+            "id": "1",
+            "label": "为员工表创建两个逻辑角色"
+          },
+          {
+            "id": "2",
+            "label": "匹配主管编号"
+          },
+          {
+            "id": "3",
+            "label": "顶层主管为空"
+          }
+        ],
+        "sourceFixtureIds": [
+          "lesson-employees"
+        ],
+        "resultColumns": [
+          "employee_name",
+          "manager"
+        ]
+      },
+      "mysqlVerificationScript": "validation/mysql/kp08-04.sql",
+      "primaryQuestionIds": [
+        "q0108",
+        "q0110",
+        "q0111"
+      ],
+      "primaryFlashcardIds": [
+        "fc0058",
+        "fc0059"
+      ]
+    },
+    {
+      "id": "kp08-05",
+      "chapterId": "ch08",
+      "title": "连接膨胀与预聚合",
+      "learningObjective": "能够运用本节知识完成：在多明细报表中控制粒度",
+      "prerequisites": [
+        "kp08-04"
+      ],
+      "concept": "订单与两个一对多明细直接相连，会形成明细组合，导致金额重复；先按共同键汇总再连接。",
+      "syntax": "WITH totals AS (...) SELECT ... FROM parent LEFT JOIN totals ...",
+      "parameters": {
+        "totals": "每个父键唯一的汇总结果"
+      },
+      "fixtureIds": [
+        "lesson-customers",
+        "lesson-orders"
+      ],
+      "sourceTables": [
+        {
+          "name": "customers",
+          "columns": [
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "customer_name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "林"
+            ],
+            [
+              2,
+              "陈"
+            ],
+            [
+              3,
+              "王"
+            ],
+            [
+              4,
+              "李"
+            ]
+          ]
+        },
+        {
+          "name": "orders",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "sales",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "store_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "order_date",
+              "type": "TEXT",
+              "mysqlType": "DATE",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "护肤品",
+              800,
+              1,
+              "2026-01-03",
+              1
+            ],
+            [
+              2,
+              "化妆品",
+              400,
+              2,
+              "2026-01-10",
+              2
+            ],
+            [
+              3,
+              "护肤品",
+              600,
+              1,
+              "2026-02-02",
+              1
+            ],
+            [
+              4,
+              "化妆品",
+              300,
+              2,
+              "2026-02-15",
+              null
+            ],
+            [
+              5,
+              "日用品",
+              1500,
+              1,
+              "2026-02-20",
+              3
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "WITH totals AS (SELECT customer_id,SUM(sales) AS total FROM orders WHERE customer_id IS NOT NULL GROUP BY customer_id) SELECT c.customer_id,COALESCE(t.total,0) AS total FROM customers c LEFT JOIN totals t ON c.customer_id=t.customer_id ORDER BY c.customer_id;",
+      "sqliteSql": "WITH totals AS (SELECT customer_id,SUM(sales) AS total FROM orders WHERE customer_id IS NOT NULL GROUP BY customer_id) SELECT c.customer_id,COALESCE(t.total,0) AS total FROM customers c LEFT JOIN totals t ON c.customer_id=t.customer_id ORDER BY c.customer_id;",
+      "executionSteps": [
+        "按客户聚合订单",
+        "确保每客户一个汇总行",
+        "连接客户表"
+      ],
+      "useCase": "在多明细报表中控制粒度",
+      "comparison": "DISTINCT 金额会错误合并不同交易的相同金额。",
+      "commonError": {
+        "example": "SUM(DISTINCT sales) 用于修复连接重复",
+        "correction": "先按正确业务键聚合，检查连接基数"
+      },
+      "notes": "缺订单是否可视为0须由业务定义。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0095",
+        "q0114",
+        "q0116",
+        "q0117",
+        "q0118"
+      ],
+      "relatedFlashcardIds": [
+        "fc0056",
+        "fc0060"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp01-01",
+        "kp03-01",
+        "kp07-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "customer_id",
+          "total"
+        ],
+        "rows": [
+          [
+            1,
+            1400
+          ],
+          [
+            2,
+            400
+          ],
+          [
+            3,
+            1500
+          ],
+          [
+            4,
+            0
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "visualization": {
+        "kind": "stepFlow",
+        "steps": [
+          {
+            "id": "1",
+            "label": "按客户聚合订单"
+          },
+          {
+            "id": "2",
+            "label": "确保每客户一个汇总行"
+          },
+          {
+            "id": "3",
+            "label": "连接客户表"
+          }
+        ],
+        "sourceFixtureIds": [
+          "lesson-customers",
+          "lesson-orders"
+        ],
+        "resultColumns": [
+          "customer_id",
+          "total"
+        ]
+      },
+      "mysqlVerificationScript": "validation/mysql/kp08-05.sql",
+      "primaryQuestionIds": [
+        "q0095",
+        "q0114",
+        "q0116",
+        "q0117",
+        "q0118"
+      ],
+      "primaryFlashcardIds": [
+        "fc0056",
+        "fc0060"
+      ]
+    },
+    {
+      "id": "kp08-06",
+      "chapterId": "ch08",
+      "title": "RIGHT JOIN 与 CROSS JOIN 实操",
+      "learningObjective": "能够运用本节知识完成：补齐包括未下单客户在内的购买记录",
+      "prerequisites": [
+        "kp08-05"
+      ],
+      "concept": "右连接保留右侧全部记录；交叉连接产生所有组合。应先判断希望保留哪侧以及目标结果粒度。",
+      "syntax": "FROM a RIGHT JOIN b ON a.id=b.id; FROM a CROSS JOIN b",
+      "parameters": {
+        "RIGHT JOIN": "右表为保留侧",
+        "CROSS JOIN": "全部行组合"
+      },
+      "fixtureIds": [
+        "lesson-orders",
+        "lesson-customers",
+        "lesson-stores"
+      ],
+      "sourceTables": [
+        {
+          "name": "orders",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "sales",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "store_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "order_date",
+              "type": "TEXT",
+              "mysqlType": "DATE",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "护肤品",
+              800,
+              1,
+              "2026-01-03",
+              1
+            ],
+            [
+              2,
+              "化妆品",
+              400,
+              2,
+              "2026-01-10",
+              2
+            ],
+            [
+              3,
+              "护肤品",
+              600,
+              1,
+              "2026-02-02",
+              1
+            ],
+            [
+              4,
+              "化妆品",
+              300,
+              2,
+              "2026-02-15",
+              null
+            ],
+            [
+              5,
+              "日用品",
+              1500,
+              1,
+              "2026-02-20",
+              3
+            ]
+          ]
+        },
+        {
+          "name": "customers",
+          "columns": [
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "customer_name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "林"
+            ],
+            [
+              2,
+              "陈"
+            ],
+            [
+              3,
+              "王"
+            ],
+            [
+              4,
+              "李"
+            ]
+          ]
+        },
+        {
+          "name": "stores",
+          "columns": [
+            {
+              "name": "store_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "store_name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "古晋"
+            ],
+            [
+              2,
+              "美里"
+            ],
+            [
+              3,
+              "诗巫"
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT c.customer_id,COUNT(o.id) AS matched_orders FROM orders o RIGHT JOIN customers c ON o.customer_id=c.customer_id GROUP BY c.customer_id ORDER BY c.customer_id;",
+      "sqliteSql": "SELECT c.customer_id,COUNT(o.id) AS matched_orders FROM orders o RIGHT JOIN customers c ON o.customer_id=c.customer_id GROUP BY c.customer_id ORDER BY c.customer_id;",
+      "executionSteps": [
+        "右侧四位客户都保留",
+        "客户1匹配2单",
+        "客户4无订单，计数0"
+      ],
+      "useCase": "补齐包括未下单客户在内的购买记录",
+      "comparison": "把 RIGHT JOIN 的两表互换可改写为 LEFT JOIN；CROSS JOIN 则不按相等条件匹配。",
+      "commonError": {
+        "example": "RIGHT JOIN 后使用 WHERE o.id IS NOT NULL，误删未匹配客户",
+        "correction": "保留无订单客户时移除该条件，或将业务过滤移入 ON"
+      },
+      "notes": "交叉连接用于月份与门店等完整维度组合，必须警惕行数相乘。SQLite 3.39及以上支持 RIGHT JOIN。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0102",
+        "q0104"
+      ],
+      "relatedFlashcardIds": [
+        "fc0057"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp01-01",
+        "kp03-01",
+        "kp07-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "customer_id",
+          "matched_orders"
+        ],
+        "rows": [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            4,
+            0
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "visualization": {
+        "kind": "stepFlow",
+        "steps": [
+          {
+            "id": "1",
+            "label": "右侧四位客户都保留"
+          },
+          {
+            "id": "2",
+            "label": "客户1匹配2单"
+          },
+          {
+            "id": "3",
+            "label": "客户4无订单，计数0"
+          }
+        ],
+        "sourceFixtureIds": [
+          "lesson-orders",
+          "lesson-customers",
+          "lesson-stores"
+        ],
+        "resultColumns": [
+          "customer_id",
+          "matched_orders"
+        ]
+      },
+      "mysqlVerificationScript": "validation/mysql/kp08-06.sql",
+      "primaryQuestionIds": [
+        "q0102",
+        "q0104"
+      ],
+      "primaryFlashcardIds": [
+        "fc0057"
+      ]
+    },
+    {
+      "id": "kp08-07",
+      "chapterId": "ch08",
+      "title": "笛卡尔积与完整维度",
+      "learningObjective": "能够运用本节知识完成：生成完整门店月份报表骨架",
+      "prerequisites": [
+        "kp08-06"
+      ],
+      "concept": "CROSS JOIN 可构建所有维度组合，例如每个月份与每家门店；再左连接真实销售数据可补齐无交易组合。",
+      "syntax": "SELECT ... FROM a CROSS JOIN b",
+      "parameters": {
+        "a,b": "需要组合的两组维度"
+      },
+      "fixtureIds": [
+        "lesson-stores",
+        "lesson-monthly"
+      ],
+      "sourceTables": [
+        {
+          "name": "stores",
+          "columns": [
+            {
+              "name": "store_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "store_name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "古晋"
+            ],
+            [
+              2,
+              "美里"
+            ],
+            [
+              3,
+              "诗巫"
+            ]
+          ]
+        },
+        {
+          "name": "monthly",
+          "columns": [
+            {
+              "name": "month",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "sales",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              "2026-01",
+              1000
+            ],
+            [
+              "2026-02",
+              1500
+            ],
+            [
+              "2026-03",
+              1500
+            ],
+            [
+              "2026-04",
+              900
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "SELECT s.store_id,m.month FROM stores s CROSS JOIN monthly m ORDER BY s.store_id,m.month;",
+      "sqliteSql": "SELECT s.store_id,m.month FROM stores s CROSS JOIN monthly m ORDER BY s.store_id,m.month;",
+      "executionSteps": [
+        "取3个门店",
+        "为每个门店生成4个月份",
+        "共12行"
+      ],
+      "useCase": "生成完整门店月份报表骨架",
+      "comparison": "INNER JOIN 根据键匹配；CROSS JOIN 在无条件时生成全部组合。",
+      "commonError": {
+        "example": "在事实表之间无连接键直接 CROSS JOIN",
+        "correction": "仅在确实需要全部维度组合时使用"
+      },
+      "notes": "大表交叉连接可能消耗大量内存；手机执行引擎必须限制输出规模。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0096",
+        "q0100",
+        "q0103"
+      ],
+      "relatedFlashcardIds": [
+        "fc0052",
+        "fc0058"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp01-01",
+        "kp03-01",
+        "kp07-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "store_id",
+          "month"
+        ],
+        "rows": [
+          [
+            1,
+            "2026-01"
+          ],
+          [
+            1,
+            "2026-02"
+          ],
+          [
+            1,
+            "2026-03"
+          ],
+          [
+            1,
+            "2026-04"
+          ],
+          [
+            2,
+            "2026-01"
+          ],
+          [
+            2,
+            "2026-02"
+          ],
+          [
+            2,
+            "2026-03"
+          ],
+          [
+            2,
+            "2026-04"
+          ],
+          [
+            3,
+            "2026-01"
+          ],
+          [
+            3,
+            "2026-02"
+          ],
+          [
+            3,
+            "2026-03"
+          ],
+          [
+            3,
+            "2026-04"
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "visualization": {
+        "kind": "stepFlow",
+        "steps": [
+          {
+            "id": "1",
+            "label": "取3个门店"
+          },
+          {
+            "id": "2",
+            "label": "为每个门店生成4个月份"
+          },
+          {
+            "id": "3",
+            "label": "共12行"
+          }
+        ],
+        "sourceFixtureIds": [
+          "lesson-stores",
+          "lesson-monthly"
+        ],
+        "resultColumns": [
+          "store_id",
+          "month"
+        ]
+      },
+      "mysqlVerificationScript": "validation/mysql/kp08-07.sql",
+      "primaryQuestionIds": [
+        "q0096",
+        "q0100",
+        "q0103"
+      ],
+      "primaryFlashcardIds": [
+        "fc0052",
+        "fc0058"
+      ]
+    }
+  ],
+  "plannedQuestionCount": 25,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "dialect": "MySQL 8.4",
+  "summary": "完成本章后：理解匹配、保留行及连接膨胀。",
+  "sources": [
+    "https://dev.mysql.com/doc/refman/8.4/en/",
+    "https://dev.mysql.com/doc/refman/8.4/en/functions.html"
+  ],
+  "knowledgePointCount": 7
+}

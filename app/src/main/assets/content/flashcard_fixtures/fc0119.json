@@ -1,0 +1,92 @@
+{
+  "id": "fc0119-demo",
+  "tables": [
+    {
+      "name": "scores",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "team",
+          "type": "TEXT"
+        },
+        {
+          "name": "score",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "A",
+          90
+        ],
+        [
+          2,
+          "A",
+          90
+        ],
+        [
+          3,
+          "A",
+          70
+        ],
+        [
+          4,
+          "A",
+          60
+        ],
+        [
+          5,
+          "B",
+          80
+        ],
+        [
+          6,
+          "B",
+          60
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "WITH x AS (SELECT id,RANK() OVER(PARTITION BY team ORDER BY score DESC) AS r FROM scores) SELECT id,r FROM x WHERE r<=3 ORDER BY id",
+  "mysqlSql": "WITH x AS (SELECT id,RANK() OVER(PARTITION BY team ORDER BY score DESC) AS r FROM scores) SELECT id,r FROM x WHERE r<=3 ORDER BY id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      1
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      5,
+      1
+    ],
+    [
+      6,
+      2
+    ]
+  ],
+  "expectedColumns": [
+    "id",
+    "r"
+  ],
+  "wrongSqlite": "SELECT id,RANK() OVER(PARTITION BY team ORDER BY score DESC) AS r FROM scores WHERE RANK() OVER(PARTITION BY team ORDER BY score DESC)<=3 ORDER BY id",
+  "wrongMysql": "SELECT id,RANK() OVER(PARTITION BY team ORDER BY score DESC) AS r FROM scores WHERE RANK() OVER(PARTITION BY team ORDER BY score DESC)<=3 ORDER BY id",
+  "wrongResult": {
+    "kind": "error",
+    "message": "misuse of window function RANK()"
+  },
+  "independentAuthorExpectation": true
+}

@@ -1,0 +1,67 @@
+{
+  "id": "fc0118-demo",
+  "tables": [
+    {
+      "name": "monthly",
+      "columns": [
+        {
+          "name": "month",
+          "type": "TEXT"
+        },
+        {
+          "name": "amount",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          "2025-01",
+          100
+        ],
+        [
+          "2025-02",
+          0
+        ],
+        [
+          "2025-03",
+          150
+        ],
+        [
+          "2025-04",
+          150
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT month,AVG(amount) OVER(ORDER BY month ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS moving FROM monthly ORDER BY month",
+  "mysqlSql": "SELECT month,AVG(amount) OVER(ORDER BY month ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS moving FROM monthly ORDER BY month",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      "2025-01",
+      100.0
+    ],
+    [
+      "2025-02",
+      50.0
+    ],
+    [
+      "2025-03",
+      75.0
+    ],
+    [
+      "2025-04",
+      150.0
+    ]
+  ],
+  "expectedColumns": [
+    "month",
+    "moving"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

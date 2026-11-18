@@ -1,0 +1,44 @@
+{
+  "id": "lesson-budgets",
+  "table": "budgets",
+  "columns": [
+    {
+      "name": "budget_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "account_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "budget_month",
+      "type": "TEXT",
+      "mysqlType": "DATE",
+      "sqliteType": "TEXT"
+    },
+    {
+      "name": "budget_amount",
+      "type": "INTEGER",
+      "mysqlType": "DECIMAL(12,2)",
+      "sqliteType": "INTEGER"
+    }
+  ],
+  "rows": [
+    [
+      1,
+      1,
+      "2026-01-01",
+      350
+    ],
+    [
+      2,
+      3,
+      "2026-01-01",
+      100
+    ]
+  ]
+}

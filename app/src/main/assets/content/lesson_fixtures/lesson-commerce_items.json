@@ -1,0 +1,76 @@
+{
+  "id": "lesson-commerce_items",
+  "table": "commerce_items",
+  "columns": [
+    {
+      "name": "order_item_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "order_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "product_id",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "quantity",
+      "type": "INTEGER",
+      "mysqlType": "INT",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "unit_price",
+      "type": "INTEGER",
+      "mysqlType": "DECIMAL(12,2)",
+      "sqliteType": "INTEGER"
+    },
+    {
+      "name": "discount_amount",
+      "type": "INTEGER",
+      "mysqlType": "DECIMAL(12,2)",
+      "sqliteType": "INTEGER"
+    }
+  ],
+  "rows": [
+    [
+      1,
+      1,
+      1,
+      1,
+      100,
+      0
+    ],
+    [
+      2,
+      2,
+      1,
+      2,
+      100,
+      10
+    ],
+    [
+      3,
+      3,
+      2,
+      1,
+      50,
+      0
+    ],
+    [
+      4,
+      4,
+      2,
+      1,
+      50,
+      0
+    ]
+  ]
+}

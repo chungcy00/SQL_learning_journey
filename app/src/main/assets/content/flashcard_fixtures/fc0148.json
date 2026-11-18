@@ -1,0 +1,93 @@
+{
+  "id": "fc0148-demo",
+  "tables": [
+    {
+      "name": "stock_last",
+      "columns": [
+        {
+          "name": "product_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "quantity",
+          "type": "INTEGER"
+        },
+        {
+          "name": "unit_cost_cents",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          12,
+          1000
+        ],
+        [
+          2,
+          6,
+          2000
+        ],
+        [
+          3,
+          5,
+          500
+        ]
+      ],
+      "constraints": ""
+    },
+    {
+      "name": "sale_qty",
+      "columns": [
+        {
+          "name": "product_id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "qty",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          7
+        ],
+        [
+          3,
+          0
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT s.product_id FROM stock_last s LEFT JOIN sale_qty q ON s.product_id=q.product_id WHERE s.quantity>0 AND COALESCE(q.qty,0)=0 ORDER BY s.product_id",
+  "mysqlSql": "SELECT s.product_id FROM stock_last s LEFT JOIN sale_qty q ON s.product_id=q.product_id WHERE s.quantity>0 AND COALESCE(q.qty,0)=0 ORDER BY s.product_id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      2
+    ],
+    [
+      3
+    ]
+  ],
+  "expectedColumns": [
+    "product_id"
+  ],
+  "wrongSqlite": "SELECT s.product_id FROM stock_last s LEFT JOIN sale_qty q ON s.product_id=q.product_id WHERE s.quantity>0 AND q.qty=0 ORDER BY s.product_id",
+  "wrongMysql": "SELECT s.product_id FROM stock_last s LEFT JOIN sale_qty q ON s.product_id=q.product_id WHERE s.quantity>0 AND q.qty=0 ORDER BY s.product_id",
+  "wrongResult": {
+    "kind": "result",
+    "columns": [
+      "product_id"
+    ],
+    "rows": [
+      [
+        3
+      ]
+    ]
+  },
+  "independentAuthorExpectation": true
+}

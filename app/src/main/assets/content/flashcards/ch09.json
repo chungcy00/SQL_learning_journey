@@ -1,0 +1,930 @@
+{
+  "chapterId": "ch09",
+  "title": "条件表达式",
+  "count": 8,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "cards": [
+    {
+      "id": "fc0062",
+      "chapterId": "ch09",
+      "knowledgePointIds": [
+        "kp09-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp09-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0120",
+        "q0123"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "概念记忆",
+      "difficulty": "中等",
+      "front": {
+        "question": "CASE WHEN 有多个条件同时成立时，选哪个分支？"
+      },
+      "back": {
+        "answer": "从上到下第一个为真的 WHEN 分支。",
+        "explanation": "阈值顺序很重要；没有匹配且省略 ELSE 时返回NULL。"
+      },
+      "tags": [
+        "CASE WHEN 分类",
+        "概念记忆"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "CASE WHEN 分类"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0063",
+      "chapterId": "ch09",
+      "knowledgePointIds": [
+        "kp09-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp09-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0120",
+        "q0123",
+        "q0125",
+        "q0129"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "中等",
+      "front": {
+        "question": "回忆搜索式 CASE 语法。用商品库存将记录分为零、未知、其他。",
+        "sourceTables": [
+          {
+            "name": "items",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "name",
+                "type": "TEXT"
+              },
+              {
+                "name": "category",
+                "type": "TEXT"
+              },
+              {
+                "name": "price",
+                "type": "INTEGER"
+              },
+              {
+                "name": "stock",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "Tea",
+                "A",
+                12,
+                0
+              ],
+              [
+                2,
+                "Rice",
+                "A",
+                20,
+                8
+              ],
+              [
+                3,
+                "Soap",
+                "B",
+                12,
+                3
+              ],
+              [
+                4,
+                "Milk",
+                "B",
+                null,
+                0
+              ],
+              [
+                5,
+                "Bag",
+                "C",
+                30,
+                null
+              ],
+              [
+                6,
+                "Tea_2",
+                "A",
+                20,
+                6
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "CASE WHEN 条件 THEN 值 … ELSE 默认值 END",
+        "explanation": "条件顺序与缺失分支都应明确。",
+        "code": "SELECT id,CASE WHEN stock=0 THEN '零' WHEN stock IS NULL THEN '未知' ELSE '其他' END AS label FROM items ORDER BY id",
+        "sqliteCode": "SELECT id,CASE WHEN stock=0 THEN '零' WHEN stock IS NULL THEN '未知' ELSE '其他' END AS label FROM items ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "label"
+          ],
+          "rows": [
+            [
+              1,
+              "零"
+            ],
+            [
+              2,
+              "其他"
+            ],
+            [
+              3,
+              "其他"
+            ],
+            [
+              4,
+              "零"
+            ],
+            [
+              5,
+              "未知"
+            ],
+            [
+              6,
+              "其他"
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "CASE WHEN 分类",
+        "语法结构"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "fe054eccf96ffefa035bef6aab70311885846417c190308b524b023c067e41f1",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0063-demo"
+      ],
+      "fixturePath": "fixtures/fc0063.json",
+      "referenceTopicNames": [
+        "CASE WHEN 分类"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0063.sql"
+    },
+    {
+      "id": "fc0064",
+      "chapterId": "ch09",
+      "knowledgePointIds": [
+        "kp09-04"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp09-04"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0122",
+        "q0124"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "语法结构",
+      "difficulty": "中等",
+      "front": {
+        "question": "回忆 MySQL IF 二选一。将订单状态映射为1或0，统计编号5。",
+        "sourceTables": [
+          {
+            "name": "sales",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "client_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "store_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "amount",
+                "type": "INTEGER"
+              },
+              {
+                "name": "day",
+                "type": "TEXT"
+              },
+              {
+                "name": "status",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                1,
+                40,
+                "2025-01-02",
+                "completed"
+              ],
+              [
+                2,
+                1,
+                1,
+                60,
+                "2025-01-15",
+                "completed"
+              ],
+              [
+                3,
+                2,
+                2,
+                30,
+                "2025-02-01",
+                "completed"
+              ],
+              [
+                4,
+                null,
+                2,
+                0,
+                "2025-02-02",
+                "completed"
+              ],
+              [
+                5,
+                3,
+                1,
+                100,
+                "2025-03-01",
+                "cancelled"
+              ],
+              [
+                6,
+                2,
+                1,
+                60,
+                "2025-03-05",
+                "completed"
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "IF(条件, 为真结果, 否则结果)",
+        "explanation": "MySQL IF 的未知条件按非真分支处理；离线用CASE等价。",
+        "code": "SELECT IF(status='completed',1,0) AS valid FROM sales WHERE id=5",
+        "sqliteCode": "SELECT CASE WHEN status='completed' THEN 1 ELSE 0 END AS valid FROM sales WHERE id=5",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "valid"
+          ],
+          "rows": [
+            [
+              0
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "IF 二选一",
+        "语法结构"
+      ],
+      "supportStatus": "转换执行",
+      "compatibility": "本示例使用SQLite对应写法或注册兼容函数；MySQL 8.4原生尚未执行。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "a8cb5c3c0d959b5647cb9d3675e300aaed9ce8470f5631d0d7936d6acfcadc61",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0064-demo"
+      ],
+      "fixturePath": "fixtures/fc0064.json",
+      "referenceTopicNames": [
+        "IF 二选一"
+      ],
+      "supportStatusLabel": "使用本地等价转换",
+      "mysqlVerificationScript": "validation/mysql/fc0064.sql"
+    },
+    {
+      "id": "fc0065",
+      "chapterId": "ch09",
+      "knowledgePointIds": [
+        "kp09-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp09-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0126",
+        "q0127",
+        "q0130"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "用法辨析",
+      "difficulty": "中等",
+      "front": {
+        "question": "SUM(CASE WHEN 条件 THEN amount ELSE 0 END) 与 COUNT(CASE WHEN 条件 THEN 1 END) 的指标有何不同？"
+      },
+      "back": {
+        "answer": "前者统计满足条件的金额，后者统计满足条件的行数。",
+        "explanation": "不能把金额与次数相互替代；COUNT忽略NULL。"
+      },
+      "tags": [
+        "IF 与条件聚合",
+        "用法辨析"
+      ],
+      "supportStatus": "仅理论",
+      "compatibility": "MySQL 8.4 教学口径；若涉及本地执行，须按兼容层验证。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "conceptual",
+        "status": "人工编写答案；未执行SQL",
+        "mysqlNative": "未执行"
+      },
+      "referenceTopicNames": [
+        "IF 与条件聚合"
+      ],
+      "supportStatusLabel": "概念或业务口径；无需执行"
+    },
+    {
+      "id": "fc0066",
+      "chapterId": "ch09",
+      "knowledgePointIds": [
+        "kp09-02"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp09-02"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0126",
+        "q0127"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "中等",
+      "front": {
+        "question": "按全表统计有效订单金额，填入不满足条件时的数值。",
+        "code": "SELECT SUM(CASE WHEN status='completed' THEN amount ELSE □ END) AS total FROM sales",
+        "sourceTables": [
+          {
+            "name": "sales",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "client_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "store_id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "amount",
+                "type": "INTEGER"
+              },
+              {
+                "name": "day",
+                "type": "TEXT"
+              },
+              {
+                "name": "status",
+                "type": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                1,
+                1,
+                40,
+                "2025-01-02",
+                "completed"
+              ],
+              [
+                2,
+                1,
+                1,
+                60,
+                "2025-01-15",
+                "completed"
+              ],
+              [
+                3,
+                2,
+                2,
+                30,
+                "2025-02-01",
+                "completed"
+              ],
+              [
+                4,
+                null,
+                2,
+                0,
+                "2025-02-02",
+                "completed"
+              ],
+              [
+                5,
+                3,
+                1,
+                100,
+                "2025-03-01",
+                "cancelled"
+              ],
+              [
+                6,
+                2,
+                1,
+                60,
+                "2025-03-05",
+                "completed"
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "0",
+        "explanation": "条件聚合不必删除其他行，未命中分支贡献零。",
+        "acceptedBlanks": [
+          "0"
+        ],
+        "code": "SELECT SUM(CASE WHEN status='completed' THEN amount ELSE 0 END) AS total FROM sales",
+        "sqliteCode": "SELECT SUM(CASE WHEN status='completed' THEN amount ELSE 0 END) AS total FROM sales",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "total"
+          ],
+          "rows": [
+            [
+              190
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "IF 与条件聚合",
+        "代码填空"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "631b76e3bc37c23c0b367ab450a1225f2d5f05dfc167ccc4cb0521725acef2de",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0066-demo"
+      ],
+      "fixturePath": "fixtures/fc0066.json",
+      "referenceTopicNames": [
+        "IF 与条件聚合"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0066.sql"
+    },
+    {
+      "id": "fc0067",
+      "chapterId": "ch09",
+      "knowledgePointIds": [
+        "kp09-03"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp09-03"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0119",
+        "q0121"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "代码填空",
+      "difficulty": "中等",
+      "front": {
+        "question": "除数为零时返回NULL，填入保护函数。",
+        "code": "SELECT id,1.0*x/□(y,0) AS ratio FROM amounts ORDER BY id",
+        "sourceTables": [
+          {
+            "name": "amounts",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "x",
+                "type": "INTEGER"
+              },
+              {
+                "name": "y",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                7,
+                2
+              ],
+              [
+                2,
+                -7,
+                2
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                4,
+                8,
+                4
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "NULLIF",
+        "explanation": "NULLIF 把零分母变成NULL，避免依赖除零错误行为。",
+        "acceptedBlanks": [
+          "NULLIF"
+        ],
+        "code": "SELECT id,1.0*x/NULLIF(y,0) AS ratio FROM amounts ORDER BY id",
+        "sqliteCode": "SELECT id,1.0*x/NULLIF(y,0) AS ratio FROM amounts ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "ratio"
+          ],
+          "rows": [
+            [
+              1,
+              3.5
+            ],
+            [
+              2,
+              -3.5
+            ],
+            [
+              3,
+              null
+            ],
+            [
+              4,
+              2.0
+            ]
+          ]
+        },
+        "blankPolicy": "背面给出标准填法；关键词大小写及无意义空白变化可接受。其他语义等价写法可由学习者自检；闪卡采用自评，不当作300题自动判题。"
+      },
+      "tags": [
+        "NULLIF 与安全除法",
+        "代码填空"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "811f03d0d78625a2dc0df68ac5af1483bb8397d6048017aa5da673f87693fcd2",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0067-demo"
+      ],
+      "fixturePath": "fixtures/fc0067.json",
+      "referenceTopicNames": [
+        "NULLIF 与安全除法"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0067.sql"
+    },
+    {
+      "id": "fc0068",
+      "chapterId": "ch09",
+      "knowledgePointIds": [
+        "kp09-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp09-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0120",
+        "q0123"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "结果预测",
+      "difficulty": "中等",
+      "front": {
+        "question": "预测区间条件重叠时的标签。",
+        "code": "SELECT CASE WHEN 85>=60 THEN '及格' WHEN 85>=80 THEN '良好' ELSE '未及格' END AS label",
+        "sourceTables": [],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "返回以下结果。",
+        "explanation": "第一条已为真，后续分支不会再决定输出。",
+        "code": "SELECT CASE WHEN 85>=60 THEN '及格' WHEN 85>=80 THEN '良好' ELSE '未及格' END AS label",
+        "sqliteCode": "SELECT CASE WHEN 85>=60 THEN '及格' WHEN 85>=80 THEN '良好' ELSE '未及格' END AS label",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "label"
+          ],
+          "rows": [
+            [
+              "及格"
+            ]
+          ]
+        }
+      },
+      "tags": [
+        "CASE WHEN 分类",
+        "结果预测"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "e3e2d283383ef8321660b32bf6adfadd6e80f987bbc8d698e2e269f6e964a520",
+        "mysqlNative": "未执行",
+        "wrongRejected": null,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0068-demo"
+      ],
+      "fixturePath": "fixtures/fc0068.json",
+      "referenceTopicNames": [
+        "CASE WHEN 分类"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0068.sql"
+    },
+    {
+      "id": "fc0069",
+      "chapterId": "ch09",
+      "knowledgePointIds": [
+        "kp09-01"
+      ],
+      "primaryKnowledgePointIds": [
+        "kp09-01"
+      ],
+      "relatedKnowledgePointIds": [],
+      "relatedQuestionIds": [
+        "q0120",
+        "q0123",
+        "q0128"
+      ],
+      "questionLinkPolicy": "通过共享课程知识点关联正式题库；业务卡额外保留对应BP任务编号。关联不表示题目与卡片完全相同。",
+      "type": "错误纠正",
+      "difficulty": "中等",
+      "front": {
+        "question": "目标：80分以上为良好，60至79分为及格。修正分支优先顺序。",
+        "code": "SELECT id,CASE WHEN score>=60 THEN '及格' WHEN score>=80 THEN '良好' ELSE '未及格' END AS label FROM scores ORDER BY id",
+        "sourceTables": [
+          {
+            "name": "scores",
+            "columns": [
+              {
+                "name": "id",
+                "type": "INTEGER"
+              },
+              {
+                "name": "team",
+                "type": "TEXT"
+              },
+              {
+                "name": "score",
+                "type": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                1,
+                "A",
+                90
+              ],
+              [
+                2,
+                "A",
+                90
+              ],
+              [
+                3,
+                "A",
+                70
+              ],
+              [
+                4,
+                "A",
+                60
+              ],
+              [
+                5,
+                "B",
+                80
+              ],
+              [
+                6,
+                "B",
+                60
+              ]
+            ],
+            "constraints": ""
+          }
+        ],
+        "dataNote": "本卡独立教学数据；只以列出的记录为准。"
+      },
+      "back": {
+        "answer": "改用背面的修正语句。",
+        "explanation": "上限较高的条件必须先判断，否则良好分支被及格分支截获。",
+        "code": "SELECT id,CASE WHEN score>=80 THEN '良好' WHEN score>=60 THEN '及格' ELSE '未及格' END AS label FROM scores ORDER BY id",
+        "sqliteCode": "SELECT id,CASE WHEN score>=80 THEN '良好' WHEN score>=60 THEN '及格' ELSE '未及格' END AS label FROM scores ORDER BY id",
+        "result": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "label"
+          ],
+          "rows": [
+            [
+              1,
+              "良好"
+            ],
+            [
+              2,
+              "良好"
+            ],
+            [
+              3,
+              "及格"
+            ],
+            [
+              4,
+              "及格"
+            ],
+            [
+              5,
+              "良好"
+            ],
+            [
+              6,
+              "及格"
+            ]
+          ]
+        },
+        "wrongResult": {
+          "kind": "result",
+          "columns": [
+            "id",
+            "label"
+          ],
+          "rows": [
+            [
+              1,
+              "及格"
+            ],
+            [
+              2,
+              "及格"
+            ],
+            [
+              3,
+              "及格"
+            ],
+            [
+              4,
+              "及格"
+            ],
+            [
+              5,
+              "及格"
+            ],
+            [
+              6,
+              "及格"
+            ]
+          ]
+        },
+        "correctionReason": "上限较高的条件必须先判断，否则良好分支被及格分支截获。"
+      },
+      "tags": [
+        "CASE WHEN 分类",
+        "错误纠正"
+      ],
+      "supportStatus": "直接兼容",
+      "compatibility": "本示例在SQLite实际通过；MySQL 8.4原生尚未执行，类型、排序、严格模式仍需复验。",
+      "contentVersion": "1.0.0",
+      "schemaVersion": 1,
+      "dialect": "MySQL 8.4",
+      "validation": {
+        "kind": "query_or_state",
+        "status": "SQLite执行结果与预先编写的结果断言一致",
+        "sqliteVersion": "3.46.1",
+        "fixtureSha256": "72557fe2ea5acff83e55e5906ef0eb019ec375d50d3e6aaabf7e1615fab56e0a",
+        "mysqlNative": "未执行",
+        "wrongRejected": true,
+        "orderPolicy": "按展示的查询顺序；无ORDER BY且多行时仅用于说明当前结果，不承诺顺序。"
+      },
+      "fixtureIds": [
+        "fc0069-demo"
+      ],
+      "fixturePath": "fixtures/fc0069.json",
+      "referenceTopicNames": [
+        "CASE WHEN 分类"
+      ],
+      "supportStatusLabel": "本示例直接执行",
+      "mysqlVerificationScript": "validation/mysql/fc0069.sql"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "fc0085-demo",
+  "tables": [],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT TRIM('  红 茶  ') AS label",
+  "mysqlSql": "SELECT TRIM('  红 茶  ') AS label",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      "红 茶"
+    ]
+  ],
+  "expectedColumns": [
+    "label"
+  ],
+  "wrongSqlite": "SELECT REPLACE('  红 茶  ',' ','') AS label",
+  "wrongMysql": "SELECT REPLACE('  红 茶  ',' ','') AS label",
+  "wrongResult": {
+    "kind": "result",
+    "columns": [
+      "label"
+    ],
+    "rows": [
+      [
+        "红茶"
+      ]
+    ]
+  },
+  "independentAuthorExpectation": true
+}

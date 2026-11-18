@@ -1,0 +1,75 @@
+{
+  "id": "fc0067-demo",
+  "tables": [
+    {
+      "name": "amounts",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "x",
+          "type": "INTEGER"
+        },
+        {
+          "name": "y",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          7,
+          2
+        ],
+        [
+          2,
+          -7,
+          2
+        ],
+        [
+          3,
+          0,
+          0
+        ],
+        [
+          4,
+          8,
+          4
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT id,1.0*x/NULLIF(y,0) AS ratio FROM amounts ORDER BY id",
+  "mysqlSql": "SELECT id,1.0*x/NULLIF(y,0) AS ratio FROM amounts ORDER BY id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1,
+      3.5
+    ],
+    [
+      2,
+      -3.5
+    ],
+    [
+      3,
+      null
+    ],
+    [
+      4,
+      2.0
+    ]
+  ],
+  "expectedColumns": [
+    "id",
+    "ratio"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

@@ -1,0 +1,69 @@
+{
+  "id": "fc0100-demo",
+  "tables": [
+    {
+      "name": "list_a",
+      "columns": [
+        {
+          "name": "value",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          null
+        ]
+      ],
+      "constraints": ""
+    },
+    {
+      "name": "list_b",
+      "columns": [
+        {
+          "name": "value",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [
+        [
+          1
+        ],
+        [
+          3
+        ],
+        [
+          null
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT value FROM list_a INTERSECT SELECT value FROM list_b ORDER BY value",
+  "mysqlSql": "SELECT value FROM list_a INTERSECT SELECT value FROM list_b ORDER BY value",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      null
+    ],
+    [
+      1
+    ]
+  ],
+  "expectedColumns": [
+    "value"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

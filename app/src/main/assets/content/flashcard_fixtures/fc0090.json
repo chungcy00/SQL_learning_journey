@@ -1,0 +1,61 @@
+{
+  "id": "fc0090-demo",
+  "tables": [
+    {
+      "name": "date_demo",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "day",
+          "type": "TEXT"
+        },
+        {
+          "name": "ts",
+          "type": "TEXT"
+        }
+      ],
+      "rows": [
+        [
+          1,
+          "2025-01-31",
+          "2025-01-31 23:59:59"
+        ],
+        [
+          2,
+          "2025-02-01",
+          "2025-02-01 00:00:00"
+        ],
+        [
+          3,
+          "2025-02-28",
+          "2025-02-28 23:59:59"
+        ],
+        [
+          4,
+          "2025-03-01",
+          "2025-03-01 00:00:00"
+        ]
+      ],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT id FROM date_demo WHERE ts>='2025-01-01' AND ts<'2025-02-01' ORDER BY id",
+  "mysqlSql": "SELECT id FROM date_demo WHERE ts>='2025-01-01' AND ts<'2025-02-01' ORDER BY id",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      1
+    ]
+  ],
+  "expectedColumns": [
+    "id"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

@@ -1,0 +1,40 @@
+{
+  "id": "fc0041-demo",
+  "tables": [
+    {
+      "name": "empty_values",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "name": "value",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": [],
+      "constraints": ""
+    }
+  ],
+  "dialect": "SQLite",
+  "sqliteSql": "SELECT COUNT(*) AS n,SUM(value) AS s,AVG(value) AS a FROM empty_values",
+  "mysqlSql": "SELECT COUNT(*) AS n,SUM(value) AS s,AVG(value) AS a FROM empty_values",
+  "verificationQuery": null,
+  "expectedRows": [
+    [
+      0,
+      null,
+      null
+    ]
+  ],
+  "expectedColumns": [
+    "n",
+    "s",
+    "a"
+  ],
+  "wrongSqlite": null,
+  "wrongMysql": null,
+  "wrongResult": null,
+  "independentAuthorExpectation": true
+}

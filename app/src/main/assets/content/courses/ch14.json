@@ -1,0 +1,399 @@
+{
+  "id": "ch14",
+  "number": 14,
+  "title": "公用表表达式",
+  "stage": "进阶",
+  "objective": "利用 WITH 拆分多步骤查询与递归层级。",
+  "prerequisites": [
+    "ch13"
+  ],
+  "knowledgePoints": [
+    {
+      "id": "kp14-01",
+      "chapterId": "ch14",
+      "title": "WITH 与多个 CTE",
+      "learningObjective": "能够运用本节知识完成：拆解复杂报表查询",
+      "prerequisites": [
+        "ch13"
+      ],
+      "concept": "公用表表达式为当前语句中的具名查询结果，可在后续查询引用；多表达式用逗号连接。",
+      "syntax": "WITH a AS (SELECT ...), b AS (SELECT ... FROM a) SELECT ... FROM b;",
+      "parameters": {
+        "a,b": "表达式名称"
+      },
+      "fixtureIds": [
+        "lesson-orders"
+      ],
+      "sourceTables": [
+        {
+          "name": "orders",
+          "columns": [
+            {
+              "name": "id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "category",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "sales",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "store_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "order_date",
+              "type": "TEXT",
+              "mysqlType": "DATE",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "customer_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "护肤品",
+              800,
+              1,
+              "2026-01-03",
+              1
+            ],
+            [
+              2,
+              "化妆品",
+              400,
+              2,
+              "2026-01-10",
+              2
+            ],
+            [
+              3,
+              "护肤品",
+              600,
+              1,
+              "2026-02-02",
+              1
+            ],
+            [
+              4,
+              "化妆品",
+              300,
+              2,
+              "2026-02-15",
+              null
+            ],
+            [
+              5,
+              "日用品",
+              1500,
+              1,
+              "2026-02-20",
+              3
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "WITH totals AS (SELECT category,SUM(sales) AS total FROM orders GROUP BY category), qualified AS (SELECT category,total FROM totals WHERE total>1000) SELECT * FROM qualified ORDER BY total DESC;",
+      "sqliteSql": "WITH totals AS (SELECT category,SUM(sales) AS total FROM orders GROUP BY category), qualified AS (SELECT category,total FROM totals WHERE total>1000) SELECT * FROM qualified ORDER BY total DESC;",
+      "executionSteps": [
+        "先汇总类别",
+        "再筛高销售类别",
+        "最后输出"
+      ],
+      "useCase": "拆解复杂报表查询",
+      "comparison": "CTE 不是永久表，也不保证物化。",
+      "commonError": {
+        "example": "WITH a AS (...) WITH b AS (...)",
+        "correction": "WITH a AS (...), b AS (...) SELECT ..."
+      },
+      "notes": "避免 CTE 名称与真实表混淆；优化器可合并或物化。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0188",
+        "q0189",
+        "q0190",
+        "q0192",
+        "q0194",
+        "q0195"
+      ],
+      "relatedFlashcardIds": [
+        "fc0103",
+        "fc0104",
+        "fc0107"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp08-01",
+        "kp10-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "category",
+          "total"
+        ],
+        "rows": [
+          [
+            "日用品",
+            1500
+          ],
+          [
+            "护肤品",
+            1400
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "visualization": {
+        "kind": "stepFlow",
+        "steps": [
+          {
+            "id": "1",
+            "label": "先汇总类别"
+          },
+          {
+            "id": "2",
+            "label": "再筛高销售类别"
+          },
+          {
+            "id": "3",
+            "label": "最后输出"
+          }
+        ],
+        "sourceFixtureIds": [
+          "lesson-orders"
+        ],
+        "resultColumns": [
+          "category",
+          "total"
+        ]
+      },
+      "mysqlVerificationScript": "validation/mysql/kp14-01.sql",
+      "primaryQuestionIds": [
+        "q0188",
+        "q0189",
+        "q0190",
+        "q0192",
+        "q0194",
+        "q0195"
+      ],
+      "primaryFlashcardIds": [
+        "fc0103",
+        "fc0104",
+        "fc0107"
+      ]
+    },
+    {
+      "id": "kp14-02",
+      "chapterId": "ch14",
+      "title": "递归 CTE 与层级",
+      "learningObjective": "能够运用本节知识完成：展示组织层级",
+      "prerequisites": [
+        "kp14-01"
+      ],
+      "concept": "递归表达式包含起始查询与递归查询；通过终止条件避免无限展开。",
+      "syntax": "WITH RECURSIVE tree AS (anchor UNION ALL recursive) SELECT ... FROM tree;",
+      "parameters": {
+        "anchor": "起始行",
+        "recursive": "依赖上一轮的查询"
+      },
+      "fixtureIds": [
+        "lesson-employees"
+      ],
+      "sourceTables": [
+        {
+          "name": "employees",
+          "columns": [
+            {
+              "name": "employee_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "employee_name",
+              "type": "TEXT",
+              "mysqlType": "VARCHAR(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin",
+              "sqliteType": "TEXT"
+            },
+            {
+              "name": "manager_id",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            },
+            {
+              "name": "salary",
+              "type": "INTEGER",
+              "mysqlType": "INT",
+              "sqliteType": "INTEGER"
+            }
+          ],
+          "rows": [
+            [
+              1,
+              "A",
+              null,
+              8000
+            ],
+            [
+              2,
+              "B",
+              1,
+              5000
+            ],
+            [
+              3,
+              "C",
+              1,
+              5000
+            ],
+            [
+              4,
+              "D",
+              2,
+              3000
+            ]
+          ]
+        }
+      ],
+      "mysqlSql": "WITH RECURSIVE tree AS (SELECT employee_id,employee_name,0 AS depth FROM employees WHERE manager_id IS NULL UNION ALL SELECT e.employee_id,e.employee_name,t.depth+1 FROM employees e JOIN tree t ON e.manager_id=t.employee_id WHERE t.depth<5) SELECT * FROM tree ORDER BY depth,employee_id;",
+      "sqliteSql": "WITH RECURSIVE tree AS (SELECT employee_id,employee_name,0 AS depth FROM employees WHERE manager_id IS NULL UNION ALL SELECT e.employee_id,e.employee_name,t.depth+1 FROM employees e JOIN tree t ON e.manager_id=t.employee_id WHERE t.depth<5) SELECT * FROM tree ORDER BY depth,employee_id;",
+      "executionSteps": [
+        "找到顶层员工",
+        "每轮加入直接下属",
+        "达到无匹配或深度限制停止"
+      ],
+      "useCase": "展示组织层级",
+      "comparison": "普通 CTE 不引用自身；递归 CTE 可以逐层扩展。",
+      "commonError": {
+        "example": "递归分支没有终止限制且数据可能成环",
+        "correction": "限制深度并在复杂图中检测已访问节点"
+      },
+      "notes": "MySQL 递归 CTE 列类型取起始部分；拼接路径时预留足够长度。",
+      "compatibility": {
+        "status": "直接兼容",
+        "detail": "仅在本示例数据与语义范围验证；不代表全部 MySQL 语法兼容。"
+      },
+      "relatedQuestionIds": [
+        "q0184",
+        "q0185",
+        "q0186",
+        "q0187",
+        "q0191",
+        "q0193"
+      ],
+      "relatedFlashcardIds": [
+        "fc0105",
+        "fc0106",
+        "fc0108",
+        "fc0109"
+      ],
+      "relatedKnowledgePointIds": [
+        "kp08-01",
+        "kp10-01"
+      ],
+      "mysqlVerification": "未运行原生 MySQL 8.4",
+      "result": {
+        "columns": [
+          "employee_id",
+          "employee_name",
+          "depth"
+        ],
+        "rows": [
+          [
+            1,
+            "A",
+            0
+          ],
+          [
+            2,
+            "B",
+            1
+          ],
+          [
+            3,
+            "C",
+            1
+          ],
+          [
+            4,
+            "D",
+            2
+          ]
+        ],
+        "status": "SQLite实际执行",
+        "orderGuaranteed": false
+      },
+      "visualization": {
+        "kind": "stepFlow",
+        "steps": [
+          {
+            "id": "1",
+            "label": "找到顶层员工"
+          },
+          {
+            "id": "2",
+            "label": "每轮加入直接下属"
+          },
+          {
+            "id": "3",
+            "label": "达到无匹配或深度限制停止"
+          }
+        ],
+        "sourceFixtureIds": [
+          "lesson-employees"
+        ],
+        "resultColumns": [
+          "employee_id",
+          "employee_name",
+          "depth"
+        ]
+      },
+      "mysqlVerificationScript": "validation/mysql/kp14-02.sql",
+      "primaryQuestionIds": [
+        "q0184",
+        "q0185",
+        "q0186",
+        "q0187",
+        "q0191",
+        "q0193"
+      ],
+      "primaryFlashcardIds": [
+        "fc0105",
+        "fc0106",
+        "fc0108",
+        "fc0109"
+      ]
+    }
+  ],
+  "plannedQuestionCount": 12,
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "dialect": "MySQL 8.4",
+  "summary": "完成本章后：利用 WITH 拆分多步骤查询与递归层级。",
+  "sources": [
+    "https://dev.mysql.com/doc/refman/8.4/en/",
+    "https://dev.mysql.com/doc/refman/8.4/en/functions.html"
+  ],
+  "knowledgePointCount": 2
+}
